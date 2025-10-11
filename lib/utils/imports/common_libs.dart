@@ -9,6 +9,7 @@ export 'package:flutter/services.dart';
 
 // Localization
 export 'package:flutter_localizations/flutter_localizations.dart';
+export '/utils/extensions/context_extensions.dart';
 
 // UI & Styling
 export 'package:google_fonts/google_fonts.dart';
