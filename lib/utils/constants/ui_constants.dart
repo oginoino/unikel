@@ -89,6 +89,11 @@ class UIConstants {
   double appBarTitleFontSize = 22.0;
   double appBarToolbarFontSize = 16.0;
 
+  // Button
+  double buttonPaddingHorizontal = 16.0;
+  double buttonPaddingVertical = 8.0;
+  double buttonHeight = 48.0;
+
   // ==========================================================================
   // LIGHT THEME COLORS - GREEN & CYAN
   // ==========================================================================

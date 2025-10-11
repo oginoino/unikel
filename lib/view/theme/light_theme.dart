@@ -241,10 +241,38 @@ TooltipThemeData _lightTooltipTheme = TooltipThemeData(
   showDuration: Duration(milliseconds: uiConstants.tooltipShowDurationMs),
 );
 
+FilledButtonThemeData _lightFilledButtonTheme = FilledButtonThemeData(
+  style: ButtonStyle(
+    backgroundColor: WidgetStateProperty.all(_lightColorScheme.primary),
+    foregroundColor: WidgetStateProperty.all(_lightColorScheme.onPrimary),
+    padding: WidgetStateProperty.all(
+      EdgeInsets.symmetric(
+        horizontal: uiConstants.buttonPaddingHorizontal,
+        vertical: uiConstants.buttonPaddingVertical,
+      ),
+    ),
+    minimumSize: WidgetStateProperty.all(
+      Size.fromHeight(uiConstants.buttonHeight),
+    ),
+    shape: WidgetStateProperty.all(
+      RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(uiConstants.radius8),
+      ),
+    ),
+    elevation: WidgetStateProperty.all(
+      uiConstants.elevation2,
+    ), // Improved with slight elevation
+    overlayColor: WidgetStateProperty.all(
+      _lightColorScheme.primary.withValues(alpha: 0.1),
+    ), // Improved hover effect
+  ),
+);
+
 ThemeData customLightTheme = ThemeData(
   useMaterial3: true,
   colorScheme: _lightColorScheme,
   textTheme: _lightTextTheme,
   appBarTheme: _lightAppBarTheme,
   tooltipTheme: _lightTooltipTheme,
+  filledButtonTheme: _lightFilledButtonTheme,
 );

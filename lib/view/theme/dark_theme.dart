@@ -239,10 +239,36 @@ TooltipThemeData _darkTooltipTheme = TooltipThemeData(
   showDuration: Duration(milliseconds: uiConstants.tooltipShowDurationMs),
 );
 
+FilledButtonThemeData _darkFilledButtonTheme = FilledButtonThemeData(
+  style: ButtonStyle(
+    backgroundColor: WidgetStateProperty.all(_darkColorScheme.primary),
+    foregroundColor: WidgetStateProperty.all(_darkColorScheme.onPrimary),
+    padding: WidgetStateProperty.all(
+      EdgeInsets.symmetric(
+        horizontal: uiConstants.buttonPaddingHorizontal,
+        vertical: uiConstants.buttonPaddingVertical,
+      ),
+    ),
+    minimumSize: WidgetStateProperty.all(
+      Size.fromHeight(uiConstants.buttonHeight),
+    ),
+    shape: WidgetStateProperty.all(
+      RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(uiConstants.radius8),
+      ),
+    ),
+    elevation: WidgetStateProperty.all(uiConstants.elevation2),
+    overlayColor: WidgetStateProperty.all(
+      _darkColorScheme.primary.withValues(alpha: 0.1),
+    ),
+  ),
+);
+
 ThemeData customDarkTheme = ThemeData(
   useMaterial3: true,
   colorScheme: _darkColorScheme,
   textTheme: _darkTextTheme,
   appBarTheme: _darkAppBarTheme,
   tooltipTheme: _darkTooltipTheme,
+  filledButtonTheme: _darkFilledButtonTheme,
 );
