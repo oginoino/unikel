@@ -1,4 +1,3 @@
-import '../../providers/onboarding_provider.dart';
 import '../../utils/imports/common_libs.dart';
 
 class HandleRedirect {
@@ -15,7 +14,10 @@ class HandleRedirect {
     return _redirectToOnboardingIfNeeded(context, state);
   }
 
-  String? _redirectToOnboardingIfNeeded(BuildContext context, GoRouterState state) {
+  String? _redirectToOnboardingIfNeeded(
+    BuildContext context,
+    GoRouterState state,
+  ) {
     final isOnboardingComplete = context
         .read<OnboardingProvider>()
         .isOnboardingComplete;

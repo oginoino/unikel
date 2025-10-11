@@ -1,5 +1,4 @@
 import '../utils/imports/common_libs.dart';
-import 'onboarding_provider.dart';
 
 class RegisterProvider {
   RegisterProvider._();

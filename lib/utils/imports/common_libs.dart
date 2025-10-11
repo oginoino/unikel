@@ -43,6 +43,7 @@ export '../../config/locale_config.dart';
 export '../../providers/register_provider.dart';
 export '../../providers/theme_provider.dart';
 export '../../providers/locale_provider.dart';
+export '../../providers/onboarding_provider.dart';
 
 // =============================================================================
 // ROUTING

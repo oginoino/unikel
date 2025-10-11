@@ -1,4 +1,3 @@
-import '../../providers/onboarding_provider.dart';
 import '../../utils/imports/common_libs.dart';
 
 class OnboardingPage extends StatelessWidget {
