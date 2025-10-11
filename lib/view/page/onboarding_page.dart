@@ -1,3 +1,4 @@
+import '../../providers/onboarding_provider.dart';
 import '../../utils/imports/common_libs.dart';
 
 class OnboardingPage extends StatelessWidget {
@@ -5,6 +6,14 @@ class OnboardingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(child: Text('Onboarding Page'));
+    return Center(
+      child: FilledButton(
+        onPressed: () {
+          context.read<OnboardingProvider>().setOnboardingComplete(true);
+          context.go(Routes.home);
+        },
+        child: Text('Next'),
+      ),
+    );
   }
 }

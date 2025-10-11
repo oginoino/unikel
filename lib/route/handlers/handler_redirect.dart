@@ -12,13 +12,20 @@ class HandleRedirect {
   }
 
   String? _redirectBasedOnState(GoRouterState state, BuildContext context) {
-    return _redirectToOnboardingIfNeeded(context);
+    return _redirectToOnboardingIfNeeded(context, state);
   }
 
-  String? _redirectToOnboardingIfNeeded(BuildContext context) {
+  String? _redirectToOnboardingIfNeeded(BuildContext context, GoRouterState state) {
     final isOnboardingComplete = context
         .read<OnboardingProvider>()
         .isOnboardingComplete;
-    return isOnboardingComplete ? Routes.home : Routes.onboarding;
+    final path = state.uri.path;
+    if (!isOnboardingComplete && path != Routes.onboarding) {
+      return Routes.onboarding;
+    }
+    if (isOnboardingComplete && path == Routes.onboarding) {
+      return Routes.home;
+    }
+    return null;
   }
 }
