@@ -3,5 +3,11 @@
   "languageSelection": "Select Language",
   "lightMode": "Light Mode",
   "darkMode": "Dark Mode",
-  "proceed": "Proceed"
+  "proceed": "Proceed",
+  "languageNamePortuguese": "Portuguese",
+  "languageNameEnglish": "English",
+  "languageNameSpanish": "Spanish",
+  "languageTooltipPortugueseBrazil": "Portuguese (Brazil)",
+  "languageTooltipEnglishUnitedStates": "English (United States)",
+  "languageTooltipSpanishMexico": "Spanish (Mexico)"
 }

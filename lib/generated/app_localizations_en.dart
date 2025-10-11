@@ -19,6 +19,24 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get proceed => 'Proceed';
+
+  @override
+  String get languageNamePortuguese => 'Portuguese';
+
+  @override
+  String get languageNameEnglish => 'English';
+
+  @override
+  String get languageNameSpanish => 'Spanish';
+
+  @override
+  String get languageTooltipPortugueseBrazil => 'Portuguese (Brazil)';
+
+  @override
+  String get languageTooltipEnglishUnitedStates => 'English (United States)';
+
+  @override
+  String get languageTooltipSpanishMexico => 'Spanish (Mexico)';
 }
 
 /// The translations for English, as used in the United States (`en_US`).
@@ -36,4 +54,22 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get proceed => 'Proceed';
+
+  @override
+  String get languageNamePortuguese => 'Portuguese';
+
+  @override
+  String get languageNameEnglish => 'English';
+
+  @override
+  String get languageNameSpanish => 'Spanish';
+
+  @override
+  String get languageTooltipPortugueseBrazil => 'Portuguese (Brazil)';
+
+  @override
+  String get languageTooltipEnglishUnitedStates => 'English (United States)';
+
+  @override
+  String get languageTooltipSpanishMexico => 'Spanish (Mexico)';
 }

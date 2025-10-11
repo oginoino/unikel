@@ -19,6 +19,24 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get proceed => 'Prosseguir';
+
+  @override
+  String get languageNamePortuguese => 'Português';
+
+  @override
+  String get languageNameEnglish => 'Inglês';
+
+  @override
+  String get languageNameSpanish => 'Espanhol';
+
+  @override
+  String get languageTooltipPortugueseBrazil => 'Português (Brasil)';
+
+  @override
+  String get languageTooltipEnglishUnitedStates => 'Inglês (Estados Unidos)';
+
+  @override
+  String get languageTooltipSpanishMexico => 'Espanhol (México)';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).
@@ -36,4 +54,22 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get proceed => 'Prosseguir';
+
+  @override
+  String get languageNamePortuguese => 'Português';
+
+  @override
+  String get languageNameEnglish => 'Inglês';
+
+  @override
+  String get languageNameSpanish => 'Espanhol';
+
+  @override
+  String get languageTooltipPortugueseBrazil => 'Português (Brasil)';
+
+  @override
+  String get languageTooltipEnglishUnitedStates => 'Inglês (Estados Unidos)';
+
+  @override
+  String get languageTooltipSpanishMexico => 'Espanhol (México)';
 }

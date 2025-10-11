@@ -68,7 +68,6 @@ export '../../model/locale_data.dart';
 export '/utils/constants/app_constants.dart';
 export '/utils/constants/ui_constants.dart';
 export '/utils/constants/locale_constants.dart';
-export '/utils/constants/string_constants.dart';
 
 // =============================================================================
 // UI COMPONENTS

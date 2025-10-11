@@ -51,7 +51,7 @@ class LanguageSelector extends StatelessWidget {
                         Text(localeData.flag, style: theme.textTheme.bodyLarge),
                         SizedBox(width: uiConstants.spacing2),
                         Text(
-                          localeData.displayName,
+                          localeData.getDisplayName(context),
                           style: theme.textTheme.bodyMedium?.copyWith(
                             color:
                                 localeProvider.currentLocale ==

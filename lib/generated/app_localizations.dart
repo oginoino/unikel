@@ -100,7 +100,6 @@ abstract class AppLocalizations {
     Locale('es', 'MX'),
     Locale('en'),
     Locale('es'),
-    Locale('es', 'ES'),
     Locale('pt'),
   ];
 
@@ -127,6 +126,42 @@ abstract class AppLocalizations {
   /// In en_US, this message translates to:
   /// **'Proceed'**
   String get proceed;
+
+  /// No description provided for @languageNamePortuguese.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Portuguese'**
+  String get languageNamePortuguese;
+
+  /// No description provided for @languageNameEnglish.
+  ///
+  /// In en_US, this message translates to:
+  /// **'English'**
+  String get languageNameEnglish;
+
+  /// No description provided for @languageNameSpanish.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Spanish'**
+  String get languageNameSpanish;
+
+  /// No description provided for @languageTooltipPortugueseBrazil.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Portuguese (Brazil)'**
+  String get languageTooltipPortugueseBrazil;
+
+  /// No description provided for @languageTooltipEnglishUnitedStates.
+  ///
+  /// In en_US, this message translates to:
+  /// **'English (United States)'**
+  String get languageTooltipEnglishUnitedStates;
+
+  /// No description provided for @languageTooltipSpanishMexico.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Spanish (Mexico)'**
+  String get languageTooltipSpanishMexico;
 }
 
 class _AppLocalizationsDelegate
@@ -160,8 +195,8 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
     case 'es':
       {
         switch (locale.countryCode) {
-          case 'ES':
-            return AppLocalizationsEsEs();
+          case 'MX':
+            return AppLocalizationsEsMx();
         }
         break;
       }

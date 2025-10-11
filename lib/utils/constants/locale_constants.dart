@@ -18,7 +18,5 @@ class LocaleConstants {
       .map((entry) => LocaleData.fromLocale(entry.key, entry.value))
       .toList();
 
-  static String get languageSelectionTooltip => StringConstants.languageSelection;
-  static String get lightModeTooltip => StringConstants.lightMode;
-  static String get darkModeTooltip => StringConstants.darkMode;
+  // Removed unused tooltips, now using l10n directly in widgets
 }

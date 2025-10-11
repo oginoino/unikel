@@ -19,11 +19,29 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get proceed => 'Proceder';
+
+  @override
+  String get languageNamePortuguese => 'Portugués';
+
+  @override
+  String get languageNameEnglish => 'Inglés';
+
+  @override
+  String get languageNameSpanish => 'Español';
+
+  @override
+  String get languageTooltipPortugueseBrazil => 'Portugués (Brasil)';
+
+  @override
+  String get languageTooltipEnglishUnitedStates => 'Inglés (Estados Unidos)';
+
+  @override
+  String get languageTooltipSpanishMexico => 'Español (México)';
 }
 
-/// The translations for Spanish Castilian, as used in Spain (`es_ES`).
-class AppLocalizationsEsEs extends AppLocalizationsEs {
-  AppLocalizationsEsEs() : super('es_ES');
+/// The translations for Spanish Castilian, as used in Mexico (`es_MX`).
+class AppLocalizationsEsMx extends AppLocalizationsEs {
+  AppLocalizationsEsMx() : super('es_MX');
 
   @override
   String get languageSelection => 'Seleccionar Idioma';
@@ -36,4 +54,22 @@ class AppLocalizationsEsEs extends AppLocalizationsEs {
 
   @override
   String get proceed => 'Proceder';
+
+  @override
+  String get languageNamePortuguese => 'Portugués';
+
+  @override
+  String get languageNameEnglish => 'Inglés';
+
+  @override
+  String get languageNameSpanish => 'Español';
+
+  @override
+  String get languageTooltipPortugueseBrazil => 'Portugués (Brasil)';
+
+  @override
+  String get languageTooltipEnglishUnitedStates => 'Inglés (Estados Unidos)';
+
+  @override
+  String get languageTooltipSpanishMexico => 'Español (México)';
 }
