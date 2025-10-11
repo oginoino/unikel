@@ -65,95 +65,95 @@ ColorScheme _lightColorScheme = ColorScheme.light(
 TextTheme _lightTextTheme = TextTheme(
   // Display styles
   displayLarge: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 57,
     fontWeight: FontWeight.w400,
     color: _lightColorScheme.onSurface,
   ),
   displayMedium: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 45,
     fontWeight: FontWeight.w400,
     color: _lightColorScheme.onSurface,
   ),
   displaySmall: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 36,
     fontWeight: FontWeight.w400,
     color: _lightColorScheme.onSurface,
   ),
   // Headline styles
   headlineLarge: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 32,
     fontWeight: FontWeight.w400,
     color: _lightColorScheme.onSurface,
   ),
   headlineMedium: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 28,
     fontWeight: FontWeight.w400,
     color: _lightColorScheme.onSurface,
   ),
   headlineSmall: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 24,
     fontWeight: FontWeight.w400,
     color: _lightColorScheme.onSurface,
   ),
   // Title styles
   titleLarge: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 22,
     fontWeight: FontWeight.w400,
     color: _lightColorScheme.onSurface,
   ),
   titleMedium: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 16,
     fontWeight: FontWeight.w500,
     color: _lightColorScheme.onSurface,
   ),
   titleSmall: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 14,
     fontWeight: FontWeight.w500,
     color: _lightColorScheme.onSurface,
   ),
   // Body styles
   bodyLarge: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 16,
     fontWeight: FontWeight.w400,
     color: _lightColorScheme.onSurface,
   ),
   bodyMedium: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 14,
     fontWeight: FontWeight.w400,
     color: _lightColorScheme.onSurface,
   ),
   bodySmall: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 12,
     fontWeight: FontWeight.w400,
     color: _lightColorScheme.onSurface,
   ),
   // Label styles
   labelLarge: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 14,
     fontWeight: FontWeight.w500,
     color: _lightColorScheme.onSurface,
   ),
   labelMedium: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 12,
     fontWeight: FontWeight.w500,
     color: _lightColorScheme.onSurface,
   ),
   labelSmall: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 11,
     fontWeight: FontWeight.w500,
     color: _lightColorScheme.onSurface,
@@ -181,13 +181,13 @@ AppBarTheme _lightAppBarTheme = AppBarTheme(
   toolbarHeight: uiConstants.appBarToolbarHeight,
   leadingWidth: uiConstants.appBarLeadingWidth,
   titleTextStyle: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: uiConstants.appBarTitleFontSize,
     fontWeight: FontWeight.w600,
     color: _lightColorScheme.onSurface,
   ),
   toolbarTextStyle: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: uiConstants.appBarToolbarFontSize,
     fontWeight: FontWeight.w400,
     color: _lightColorScheme.onSurface,
@@ -230,7 +230,7 @@ TooltipThemeData _lightTooltipTheme = TooltipThemeData(
     ],
   ),
   textStyle: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: uiConstants.tooltipFontSize,
     fontWeight: FontWeight.w500,
     color: _lightColorScheme.onInverseSurface,
@@ -256,15 +256,13 @@ FilledButtonThemeData _lightFilledButtonTheme = FilledButtonThemeData(
     ),
     shape: WidgetStateProperty.all(
       RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(uiConstants.radius8),
+        borderRadius: BorderRadius.circular(16.0), // Increased from 8 to 16
       ),
     ),
-    elevation: WidgetStateProperty.all(
-      uiConstants.elevation2,
-    ), // Improved with slight elevation
+    elevation: WidgetStateProperty.all(uiConstants.elevation2),
     overlayColor: WidgetStateProperty.all(
-      _lightColorScheme.primary.withValues(alpha: 0.1),
-    ), // Improved hover effect
+      _lightColorScheme.primary.withOpacity(0.1),
+    ),
   ),
 );
 

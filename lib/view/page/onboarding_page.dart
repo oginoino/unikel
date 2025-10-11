@@ -11,7 +11,7 @@ class OnboardingPage extends StatelessWidget {
         child: FilledButton.icon(
           iconAlignment: IconAlignment.end,
           icon: Icon(Icons.arrow_forward_ios_rounded),
-          label: Text('Next'),
+          label: Text('Prosseguir'),
           onPressed: () {
             context.read<OnboardingProvider>().setOnboardingComplete(true);
             context.go(Routes.home);

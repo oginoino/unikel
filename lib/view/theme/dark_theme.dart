@@ -254,12 +254,12 @@ FilledButtonThemeData _darkFilledButtonTheme = FilledButtonThemeData(
     ),
     shape: WidgetStateProperty.all(
       RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(uiConstants.radius8),
+        borderRadius: BorderRadius.circular(16.0), // Increased from 8 to 16
       ),
     ),
     elevation: WidgetStateProperty.all(uiConstants.elevation2),
     overlayColor: WidgetStateProperty.all(
-      _darkColorScheme.primary.withValues(alpha: 0.1),
+      _darkColorScheme.primary.withOpacity(0.1),
     ),
   ),
 );
