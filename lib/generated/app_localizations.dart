@@ -121,6 +121,12 @@ abstract class AppLocalizations {
   /// In en_US, this message translates to:
   /// **'Dark Mode'**
   String get darkMode;
+
+  /// No description provided for @proceed.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Proceed'**
+  String get proceed;
 }
 
 class _AppLocalizationsDelegate

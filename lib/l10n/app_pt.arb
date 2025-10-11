@@ -2,5 +2,6 @@
   "@@locale": "pt",
   "languageSelection": "Selecionar Idioma",
   "lightMode": "Modo Claro",
-  "darkMode": "Modo Escuro"
+  "darkMode": "Modo Escuro",
+  "proceed": "Prosseguir"
 }

@@ -16,6 +16,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get darkMode => 'Modo Oscuro';
+
+  @override
+  String get proceed => 'Proceder';
 }
 
 /// The translations for Spanish Castilian, as used in Spain (`es_ES`).
@@ -30,4 +33,7 @@ class AppLocalizationsEsEs extends AppLocalizationsEs {
 
   @override
   String get darkMode => 'Modo Oscuro';
+
+  @override
+  String get proceed => 'Proceder';
 }
