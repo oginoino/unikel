@@ -65,95 +65,95 @@ ColorScheme _darkColorScheme = ColorScheme.dark(
 TextTheme _darkTextTheme = TextTheme(
   // Display styles
   displayLarge: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 57,
     fontWeight: FontWeight.w400,
     color: _darkColorScheme.onSurface,
   ),
   displayMedium: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 45,
     fontWeight: FontWeight.w400,
     color: _darkColorScheme.onSurface,
   ),
   displaySmall: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 36,
     fontWeight: FontWeight.w400,
     color: _darkColorScheme.onSurface,
   ),
   // Headline styles
   headlineLarge: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 32,
     fontWeight: FontWeight.w400,
     color: _darkColorScheme.onSurface,
   ),
   headlineMedium: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 28,
     fontWeight: FontWeight.w400,
     color: _darkColorScheme.onSurface,
   ),
   headlineSmall: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 24,
     fontWeight: FontWeight.w400,
     color: _darkColorScheme.onSurface,
   ),
   // Title styles
   titleLarge: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 22,
     fontWeight: FontWeight.w400,
     color: _darkColorScheme.onSurface,
   ),
   titleMedium: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 16,
     fontWeight: FontWeight.w500,
     color: _darkColorScheme.onSurface,
   ),
   titleSmall: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 14,
     fontWeight: FontWeight.w500,
     color: _darkColorScheme.onSurface,
   ),
   // Body styles
   bodyLarge: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 16,
     fontWeight: FontWeight.w400,
     color: _darkColorScheme.onSurface,
   ),
   bodyMedium: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 14,
     fontWeight: FontWeight.w400,
     color: _darkColorScheme.onSurface,
   ),
   bodySmall: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 12,
     fontWeight: FontWeight.w400,
     color: _darkColorScheme.onSurface,
   ),
   // Label styles
   labelLarge: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 14,
     fontWeight: FontWeight.w500,
     color: _darkColorScheme.onSurface,
   ),
   labelMedium: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 12,
     fontWeight: FontWeight.w500,
     color: _darkColorScheme.onSurface,
   ),
   labelSmall: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 11,
     fontWeight: FontWeight.w500,
     color: _darkColorScheme.onSurface,
@@ -181,13 +181,13 @@ AppBarTheme _darkAppBarTheme = AppBarTheme(
   toolbarHeight: uiConstants.appBarToolbarHeight,
   leadingWidth: uiConstants.appBarLeadingWidth,
   titleTextStyle: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: uiConstants.appBarTitleFontSize,
     fontWeight: FontWeight.w600,
     color: _darkColorScheme.onSurface,
   ),
   toolbarTextStyle: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: uiConstants.appBarToolbarFontSize,
     fontWeight: FontWeight.w400,
     color: _darkColorScheme.onSurface,
@@ -228,7 +228,7 @@ TooltipThemeData _darkTooltipTheme = TooltipThemeData(
     ],
   ),
   textStyle: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: uiConstants.tooltipFontSize,
     fontWeight: FontWeight.w500,
     color: _darkColorScheme.onInverseSurface,
