@@ -259,7 +259,7 @@ FilledButtonThemeData _darkFilledButtonTheme = FilledButtonThemeData(
     ),
     elevation: WidgetStateProperty.all(uiConstants.elevation2),
     overlayColor: WidgetStateProperty.all(
-      _darkColorScheme.primary.withOpacity(0.1),
+      _darkColorScheme.primary.withValues(alpha: 0.1),
     ),
   ),
 );
