@@ -1,4 +1,5 @@
 import '../utils/imports/common_libs.dart';
+import 'onboarding_provider.dart';
 
 class RegisterProvider {
   RegisterProvider._();
@@ -7,6 +8,7 @@ class RegisterProvider {
     return [
       ChangeNotifierProvider(create: (context) => ThemeProvider()),
       ChangeNotifierProvider(create: (context) => LocaleProvider()),
+      ChangeNotifierProvider(create: (context) => OnboardingProvider()),
     ];
   }
 }
