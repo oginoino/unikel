@@ -271,7 +271,7 @@ FilledButtonThemeData _lightFilledButtonTheme = FilledButtonThemeData(
       Size.fromHeight(uiConstants.buttonHeight),
     ),
     shape: WidgetStateProperty.all(
-      RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
+      RoundedRectangleBorder(borderRadius: BorderRadius.circular(uiConstants.radius16)),
     ),
     elevation: WidgetStateProperty.resolveWith<double>((
       Set<WidgetState> states,
@@ -343,7 +343,7 @@ ElevatedButtonThemeData _lightElevatedButtonTheme = ElevatedButtonThemeData(
       Size.fromHeight(uiConstants.buttonHeight),
     ),
     shape: WidgetStateProperty.all(
-      RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
+      RoundedRectangleBorder(borderRadius: BorderRadius.circular(uiConstants.radius16)),
     ),
     elevation: WidgetStateProperty.resolveWith<double>((
       Set<WidgetState> states,
@@ -412,7 +412,7 @@ OutlinedButtonThemeData _lightOutlinedButtonTheme = OutlinedButtonThemeData(
       Size.fromHeight(uiConstants.buttonHeight),
     ),
     shape: WidgetStateProperty.all(
-      RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
+      RoundedRectangleBorder(borderRadius: BorderRadius.circular(uiConstants.radius16)),
     ),
     side: WidgetStateProperty.resolveWith<BorderSide>((
       Set<WidgetState> states,
@@ -486,7 +486,7 @@ TextButtonThemeData _lightTextButtonTheme = TextButtonThemeData(
       Size.fromHeight(uiConstants.buttonHeight),
     ),
     shape: WidgetStateProperty.all(
-      RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
+      RoundedRectangleBorder(borderRadius: BorderRadius.circular(uiConstants.radius16)),
     ),
     overlayColor: WidgetStateProperty.resolveWith<Color?>((
       Set<WidgetState> states,
