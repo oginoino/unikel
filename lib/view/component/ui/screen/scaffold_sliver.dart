@@ -7,14 +7,17 @@ class ScaffoldSliver extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: [
-        CustomSliverAppBar(),
-        const SliverToBoxAdapter(),
-        SliverFillRemaining(
-          child: Scaffold(body: Center(child: child)),
-        ),
-      ],
+    return Scaffold(
+      body: CustomScrollView(
+        slivers: [
+          CustomSliverAppBar(),
+
+          const SliverToBoxAdapter(),
+          SliverFillRemaining(
+            child: Scaffold(body: Center(child: child)),
+          ),
+        ],
+      ),
     );
   }
 }

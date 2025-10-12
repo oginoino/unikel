@@ -159,10 +159,12 @@ AppBarTheme _lightAppBarTheme = AppBarTheme(
   backgroundColor: _lightColorScheme.surface,
   foregroundColor: _lightColorScheme.onSurface,
   elevation: 0,
-  scrolledUnderElevation: uiConstants.elevation4,
+  scrolledUnderElevation: 0,
   shadowColor: _lightColorScheme.shadow,
   surfaceTintColor: _lightColorScheme.surfaceTint,
-  shape: null,
+  shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.vertical(bottom: Radius.zero),
+  ),
   iconTheme: IconThemeData(
     color: _lightColorScheme.onSurface,
     size: uiConstants.appBarIconSize,
@@ -210,10 +212,12 @@ TooltipThemeData _lightTooltipTheme = TooltipThemeData(
   preferBelow: true,
   excludeFromSemantics: false,
   enableFeedback: true,
-  decoration: BoxDecoration(
+  decoration: ShapeDecoration(
     color: _lightColorScheme.inverseSurface,
-    borderRadius: BorderRadius.circular(uiConstants.radius8),
-    boxShadow: [
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(uiConstants.radius8),
+    ),
+    shadows: [
       BoxShadow(
         color: _lightColorScheme.shadow.withValues(
           alpha: uiConstants.opacity20,
@@ -238,7 +242,7 @@ TooltipThemeData _lightTooltipTheme = TooltipThemeData(
 
 // Botão Filled melhorado com estados interativos
 FilledButtonThemeData _lightFilledButtonTheme = FilledButtonThemeData(
-  style: ButtonStyle(
+  style: _lightButtonBaseStyle.copyWith(
     backgroundColor: WidgetStateProperty.resolveWith<Color>((
       Set<WidgetState> states,
     ) {
@@ -261,18 +265,6 @@ FilledButtonThemeData _lightFilledButtonTheme = FilledButtonThemeData(
       }
       return _lightColorScheme.onPrimary;
     }),
-    padding: WidgetStateProperty.all(
-      EdgeInsets.symmetric(
-        horizontal: uiConstants.buttonPaddingHorizontal,
-        vertical: uiConstants.buttonPaddingVertical,
-      ),
-    ),
-    minimumSize: WidgetStateProperty.all(
-      Size.fromHeight(uiConstants.buttonHeight),
-    ),
-    shape: WidgetStateProperty.all(
-      RoundedRectangleBorder(borderRadius: BorderRadius.circular(uiConstants.radius16)),
-    ),
     elevation: WidgetStateProperty.resolveWith<double>((
       Set<WidgetState> states,
     ) {
@@ -296,21 +288,38 @@ FilledButtonThemeData _lightFilledButtonTheme = FilledButtonThemeData(
       }
       return null;
     }),
-    textStyle: WidgetStateProperty.all(
-      TextStyle(
-        fontFamily: GoogleFonts.nunito().fontFamily,
-        fontSize: uiConstants.buttonFontSize,
-        fontWeight: FontWeight.w600,
-        letterSpacing: uiConstants.buttonLetterSpacing,
-      ),
-    ),
-    iconSize: WidgetStateProperty.all(uiConstants.buttonIconSize),
   ),
+);
+
+final _lightButtonBaseStyle = ButtonStyle(
+  padding: WidgetStateProperty.all(
+    EdgeInsets.symmetric(
+      horizontal: uiConstants.buttonPaddingHorizontal,
+      vertical: uiConstants.buttonPaddingVertical,
+    ),
+  ),
+  minimumSize: WidgetStateProperty.all(
+    Size.fromHeight(uiConstants.buttonHeight),
+  ),
+  shape: WidgetStateProperty.all(
+    RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(uiConstants.radius16),
+    ),
+  ),
+  textStyle: WidgetStateProperty.all(
+    TextStyle(
+      fontFamily: GoogleFonts.nunito().fontFamily,
+      fontSize: uiConstants.buttonFontSize,
+      fontWeight: FontWeight.w600,
+      letterSpacing: uiConstants.buttonLetterSpacing,
+    ),
+  ),
+  iconSize: WidgetStateProperty.all(uiConstants.buttonIconSize),
 );
 
 // Botão Elevated melhorado com estados interativos
 ElevatedButtonThemeData _lightElevatedButtonTheme = ElevatedButtonThemeData(
-  style: ButtonStyle(
+  style: _lightButtonBaseStyle.copyWith(
     backgroundColor: WidgetStateProperty.resolveWith<Color>((
       Set<WidgetState> states,
     ) {
@@ -333,18 +342,6 @@ ElevatedButtonThemeData _lightElevatedButtonTheme = ElevatedButtonThemeData(
       }
       return _lightColorScheme.onPrimary;
     }),
-    padding: WidgetStateProperty.all(
-      EdgeInsets.symmetric(
-        horizontal: uiConstants.buttonPaddingHorizontal,
-        vertical: uiConstants.buttonPaddingVertical,
-      ),
-    ),
-    minimumSize: WidgetStateProperty.all(
-      Size.fromHeight(uiConstants.buttonHeight),
-    ),
-    shape: WidgetStateProperty.all(
-      RoundedRectangleBorder(borderRadius: BorderRadius.circular(uiConstants.radius16)),
-    ),
     elevation: WidgetStateProperty.resolveWith<double>((
       Set<WidgetState> states,
     ) {
@@ -368,21 +365,12 @@ ElevatedButtonThemeData _lightElevatedButtonTheme = ElevatedButtonThemeData(
       }
       return null;
     }),
-    textStyle: WidgetStateProperty.all(
-      TextStyle(
-        fontFamily: GoogleFonts.nunito().fontFamily,
-        fontSize: uiConstants.buttonFontSize,
-        fontWeight: FontWeight.w600,
-        letterSpacing: uiConstants.buttonLetterSpacing,
-      ),
-    ),
-    iconSize: WidgetStateProperty.all(uiConstants.buttonIconSize),
   ),
 );
 
 // Botão Outlined melhorado com estados interativos
 OutlinedButtonThemeData _lightOutlinedButtonTheme = OutlinedButtonThemeData(
-  style: ButtonStyle(
+  style: _lightButtonBaseStyle.copyWith(
     backgroundColor: WidgetStateProperty.resolveWith<Color>((
       Set<WidgetState> states,
     ) {
@@ -402,18 +390,6 @@ OutlinedButtonThemeData _lightOutlinedButtonTheme = OutlinedButtonThemeData(
       }
       return _lightColorScheme.primary;
     }),
-    padding: WidgetStateProperty.all(
-      EdgeInsets.symmetric(
-        horizontal: uiConstants.buttonPaddingHorizontal,
-        vertical: uiConstants.buttonPaddingVertical,
-      ),
-    ),
-    minimumSize: WidgetStateProperty.all(
-      Size.fromHeight(uiConstants.buttonHeight),
-    ),
-    shape: WidgetStateProperty.all(
-      RoundedRectangleBorder(borderRadius: BorderRadius.circular(uiConstants.radius16)),
-    ),
     side: WidgetStateProperty.resolveWith<BorderSide>((
       Set<WidgetState> states,
     ) {
@@ -442,21 +418,12 @@ OutlinedButtonThemeData _lightOutlinedButtonTheme = OutlinedButtonThemeData(
       }
       return null;
     }),
-    textStyle: WidgetStateProperty.all(
-      TextStyle(
-        fontFamily: GoogleFonts.nunito().fontFamily,
-        fontSize: uiConstants.buttonFontSize,
-        fontWeight: FontWeight.w600,
-        letterSpacing: uiConstants.buttonLetterSpacing,
-      ),
-    ),
-    iconSize: WidgetStateProperty.all(uiConstants.buttonIconSize),
   ),
 );
 
 // Botão Text melhorado com estados interativos
 TextButtonThemeData _lightTextButtonTheme = TextButtonThemeData(
-  style: ButtonStyle(
+  style: _lightButtonBaseStyle.copyWith(
     backgroundColor: WidgetStateProperty.resolveWith<Color>((
       Set<WidgetState> states,
     ) {
@@ -476,18 +443,6 @@ TextButtonThemeData _lightTextButtonTheme = TextButtonThemeData(
       }
       return _lightColorScheme.primary;
     }),
-    padding: WidgetStateProperty.all(
-      EdgeInsets.symmetric(
-        horizontal: uiConstants.buttonPaddingHorizontal,
-        vertical: uiConstants.buttonPaddingVertical,
-      ),
-    ),
-    minimumSize: WidgetStateProperty.all(
-      Size.fromHeight(uiConstants.buttonHeight),
-    ),
-    shape: WidgetStateProperty.all(
-      RoundedRectangleBorder(borderRadius: BorderRadius.circular(uiConstants.radius16)),
-    ),
     overlayColor: WidgetStateProperty.resolveWith<Color?>((
       Set<WidgetState> states,
     ) {
@@ -502,15 +457,6 @@ TextButtonThemeData _lightTextButtonTheme = TextButtonThemeData(
       }
       return null;
     }),
-    textStyle: WidgetStateProperty.all(
-      TextStyle(
-        fontFamily: GoogleFonts.nunito().fontFamily,
-        fontSize: uiConstants.buttonFontSize,
-        fontWeight: FontWeight.w600,
-        letterSpacing: uiConstants.buttonLetterSpacing,
-      ),
-    ),
-    iconSize: WidgetStateProperty.all(uiConstants.buttonIconSize),
   ),
 );
 
