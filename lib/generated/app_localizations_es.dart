@@ -37,6 +37,10 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get languageTooltipSpanishMexico => 'Español (México)';
+
+  @override
+  String get onboarding_subtitle =>
+      'Bienvenido a OOO! Ayudamos a que comiences a usar nuestra app.';
 }
 
 /// The translations for Spanish Castilian, as used in Mexico (`es_MX`).
@@ -72,4 +76,8 @@ class AppLocalizationsEsMx extends AppLocalizationsEs {
 
   @override
   String get languageTooltipSpanishMexico => 'Español (México)';
+
+  @override
+  String get onboarding_subtitle =>
+      'Bienvenido a OOO! Te ayudamos a comenzar con nuestra app.';
 }

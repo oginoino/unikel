@@ -37,6 +37,10 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get languageTooltipSpanishMexico => 'Espanhol (México)';
+
+  @override
+  String get onboarding_subtitle =>
+      'Bem-vindo ao OOO! Ajudamos você a começar com nossa aplicação.';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).
@@ -72,4 +76,8 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get languageTooltipSpanishMexico => 'Espanhol (México)';
+
+  @override
+  String get onboarding_subtitle =>
+      'Bem-vindo ao OOO! Ajudamos você a começar com nossa aplicação.';
 }

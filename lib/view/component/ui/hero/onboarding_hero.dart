@@ -17,10 +17,7 @@ class OnboardingHero extends StatelessWidget {
             left: MediaQuery.sizeOf(context).width * 0.6 * (0.9),
             child: Transform.rotate(
               angle: 0.5 * math.pi,
-              child: Image.asset(
-                ImagePaths.dollarDynamicColor,
-                width: 100,
-              ),
+              child: Image.asset(ImagePaths.dollarDynamicColor, width: 100),
             ),
           ),
           Positioned(
@@ -28,10 +25,7 @@ class OnboardingHero extends StatelessWidget {
             right: MediaQuery.sizeOf(context).width * 0.1 * (0.2),
             child: Transform.rotate(
               angle: 0.5 * math.pi,
-              child: Image.asset(
-                ImagePaths.dollarIsoColor,
-                width: 120,
-              ),
+              child: Image.asset(ImagePaths.dollarIsoColor, width: 120),
             ),
           ),
           Positioned(
@@ -39,10 +33,7 @@ class OnboardingHero extends StatelessWidget {
             left: MediaQuery.sizeOf(context).width * 0.5 * (0.6),
             child: Transform.rotate(
               angle: 0.8 * math.pi,
-              child: Image.asset(
-                ImagePaths.dollarFrontColor,
-                width: 80,
-              ),
+              child: Image.asset(ImagePaths.dollarFrontColor, width: 80),
             ),
           ),
           Positioned(
@@ -50,10 +41,7 @@ class OnboardingHero extends StatelessWidget {
             left: MediaQuery.sizeOf(context).width * 0.1 * (0.6),
             child: Transform.rotate(
               angle: 0.3 * math.pi,
-              child: Image.asset(
-                ImagePaths.dollarDynamicColor,
-                width: 60,
-              ),
+              child: Image.asset(ImagePaths.dollarDynamicColor, width: 60),
             ),
           ),
         ],

@@ -162,6 +162,12 @@ abstract class AppLocalizations {
   /// In en_US, this message translates to:
   /// **'Spanish (Mexico)'**
   String get languageTooltipSpanishMexico;
+
+  /// No description provided for @onboarding_subtitle.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Welcome to OOO! We help you get started with our app.'**
+  String get onboarding_subtitle;
 }
 
 class _AppLocalizationsDelegate

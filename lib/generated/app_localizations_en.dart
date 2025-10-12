@@ -37,6 +37,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get languageTooltipSpanishMexico => 'Spanish (Mexico)';
+
+  @override
+  String get onboarding_subtitle =>
+      'Manage your finances with ease and confidence.';
 }
 
 /// The translations for English, as used in the United States (`en_US`).
@@ -72,4 +76,8 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get languageTooltipSpanishMexico => 'Spanish (Mexico)';
+
+  @override
+  String get onboarding_subtitle =>
+      'Welcome to OOO! We help you get started with our app.';
 }

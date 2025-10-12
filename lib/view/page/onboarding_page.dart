@@ -15,6 +15,10 @@ class OnboardingPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           OnboardingHero(),
+          Text(
+            context.l10n.onboarding_subtitle,
+            style: Theme.of(context).textTheme.headlineLarge,
+          ),
           Center(
             child: CustomCTAButton(
               variant: ButtonVariant.primary,
