@@ -263,6 +263,15 @@ FilledButtonThemeData _lightFilledButtonTheme = FilledButtonThemeData(
     overlayColor: WidgetStateProperty.all(
       _lightColorScheme.primary.withValues(alpha: 0.1),
     ),
+    textStyle: WidgetStateProperty.all(
+      TextStyle(
+        fontFamily: GoogleFonts.nunito().fontFamily,
+        fontSize: uiConstants.buttonFontSize,
+        fontWeight: FontWeight.w600,
+        letterSpacing: uiConstants.buttonLetterSpacing,
+      ),
+    ),
+    iconSize: WidgetStateProperty.all(uiConstants.buttonIconSize),
   ),
 );
 
