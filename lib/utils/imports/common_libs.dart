@@ -98,4 +98,4 @@ export '../../view/component/ui/pop_up_menu/language_selector.dart';
 // Buttons
 export '../../view/component/ui/button/theme_toggle_button.dart';
 // Hero
-export '../../view/component/onboarding_hero.dart';
+export '../../view/component/ui/hero/onboarding_hero.dart';

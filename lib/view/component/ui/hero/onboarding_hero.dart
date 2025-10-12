@@ -1,6 +1,6 @@
 import 'dart:math' as math;
 
-import '../../utils/imports/common_libs.dart';
+import '../../../../utils/imports/common_libs.dart';
 
 class OnboardingHero extends StatelessWidget {
   const OnboardingHero({super.key});
