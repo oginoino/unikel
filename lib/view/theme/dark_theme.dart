@@ -163,9 +163,7 @@ AppBarTheme _darkAppBarTheme = AppBarTheme(
   shadowColor: _darkColorScheme.shadow,
   surfaceTintColor: _darkColorScheme.surfaceTint,
   shape: RoundedRectangleBorder(
-    borderRadius: BorderRadius.vertical(
-      bottom: Radius.circular(uiConstants.radius16),
-    ),
+    borderRadius: BorderRadius.vertical(bottom: Radius.zero),
   ),
   iconTheme: IconThemeData(
     color: _darkColorScheme.onSurface,
@@ -221,9 +219,7 @@ TooltipThemeData _darkTooltipTheme = TooltipThemeData(
     ),
     shadows: [
       BoxShadow(
-        color: _darkColorScheme.shadow.withValues(
-          alpha: uiConstants.opacity20,
-        ),
+        color: _darkColorScheme.shadow.withValues(alpha: uiConstants.opacity20),
         offset: const Offset(0, 2),
         blurRadius: uiConstants.elevation4,
         spreadRadius: 0,
@@ -253,7 +249,9 @@ final _darkButtonBaseStyle = ButtonStyle(
     Size.fromHeight(uiConstants.buttonHeight),
   ),
   shape: WidgetStateProperty.all(
-    RoundedRectangleBorder(borderRadius: BorderRadius.circular(uiConstants.radius16)),
+    RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(uiConstants.radius16),
+    ),
   ),
   textStyle: WidgetStateProperty.all(
     TextStyle(

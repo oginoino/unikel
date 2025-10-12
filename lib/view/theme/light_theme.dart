@@ -161,10 +161,9 @@ AppBarTheme _lightAppBarTheme = AppBarTheme(
   elevation: 0,
   scrolledUnderElevation: uiConstants.elevation4,
   shadowColor: _lightColorScheme.shadow,
-  surfaceTintColor: _lightColorScheme.surfaceTint, shape: RoundedRectangleBorder(
-    borderRadius: BorderRadius.vertical(
-      bottom: Radius.circular(uiConstants.radius16),
-    ),
+  surfaceTintColor: _lightColorScheme.surfaceTint,
+  shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.vertical(bottom: Radius.zero),
   ),
   iconTheme: IconThemeData(
     color: _lightColorScheme.onSurface,
@@ -303,7 +302,9 @@ final _lightButtonBaseStyle = ButtonStyle(
     Size.fromHeight(uiConstants.buttonHeight),
   ),
   shape: WidgetStateProperty.all(
-    RoundedRectangleBorder(borderRadius: BorderRadius.circular(uiConstants.radius16)),
+    RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(uiConstants.radius16),
+    ),
   ),
   textStyle: WidgetStateProperty.all(
     TextStyle(
@@ -403,7 +404,7 @@ OutlinedButtonThemeData _lightOutlinedButtonTheme = OutlinedButtonThemeData(
       }
       return BorderSide(color: _lightColorScheme.primary, width: 1.0);
     }),
-    overlayColor: WidgetStateProperty.resolveWith<Color?>(( 
+    overlayColor: WidgetStateProperty.resolveWith<Color?>((
       Set<WidgetState> states,
     ) {
       if (states.contains(WidgetState.hovered)) {
