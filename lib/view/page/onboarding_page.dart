@@ -10,7 +10,7 @@ class OnboardingPage extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: uiConstants.spacing4),
       child: Center(
         child: CustomButton(
-          variant: ButtonVariant.secondary,
+          variant: ButtonVariant.primary,
           iconAlignment: IconAlignment.end,
           icon: Icon(Icons.arrow_forward_ios_rounded),
           label: context.l10n.proceed,

@@ -1,6 +1,6 @@
 import '../../../../utils/imports/common_libs.dart';
 
-enum ButtonVariant { primary, secondary, outline }
+enum ButtonVariant { primary, secondary }
 
 class CustomButton extends StatelessWidget {
   const CustomButton({
@@ -69,18 +69,13 @@ class CustomButton extends StatelessWidget {
         // Customize style based on theme and variant
         switch (variant) {
           case ButtonVariant.primary:
-            return FilledButton(
-              onPressed: isLoading ? null : onPressed,
-              style: style,
-              child: buttonChild,
-            );
-          case ButtonVariant.secondary:
             return ElevatedButton(
               onPressed: isLoading ? null : onPressed,
               style: style,
               child: buttonChild,
             );
-          case ButtonVariant.outline:
+
+          case ButtonVariant.secondary:
             return OutlinedButton(
               onPressed: isLoading ? null : onPressed,
               style: style,
