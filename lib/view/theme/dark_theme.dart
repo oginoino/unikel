@@ -273,6 +273,79 @@ FilledButtonThemeData _darkFilledButtonTheme = FilledButtonThemeData(
   ),
 );
 
+ElevatedButtonThemeData _darkElevatedButtonTheme = ElevatedButtonThemeData(
+  style: ButtonStyle(
+    backgroundColor: WidgetStateProperty.all(_darkColorScheme.secondary),
+    foregroundColor: WidgetStateProperty.all(_darkColorScheme.onSecondary),
+    padding: WidgetStateProperty.all(
+      EdgeInsets.symmetric(
+        horizontal: uiConstants.buttonPaddingHorizontal,
+        vertical: uiConstants.buttonPaddingVertical,
+      ),
+    ),
+    minimumSize: WidgetStateProperty.all(
+      Size.fromHeight(uiConstants.buttonHeight),
+    ),
+    shape: WidgetStateProperty.all(
+      RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16.0), // Increased from 8 to 16
+      ),
+    ),
+    elevation: WidgetStateProperty.all(uiConstants.elevation2),
+    overlayColor: WidgetStateProperty.all(
+      _darkColorScheme.secondary.withValues(alpha: 0.1),
+    ),
+    textStyle: WidgetStateProperty.all(
+      TextStyle(
+        fontFamily: GoogleFonts.nunito().fontFamily,
+        fontSize: uiConstants.buttonFontSize,
+        fontWeight: FontWeight.w600,
+        letterSpacing: uiConstants.buttonLetterSpacing,
+      ),
+    ),
+    iconSize: WidgetStateProperty.all(uiConstants.buttonIconSize),
+  ),
+);
+
+OutlinedButtonThemeData _darkOutlinedButtonTheme = OutlinedButtonThemeData(
+  style: ButtonStyle(
+    backgroundColor: WidgetStateProperty.all(uiConstants.transparent),
+    foregroundColor: WidgetStateProperty.all(_darkColorScheme.secondary),
+    padding: WidgetStateProperty.all(
+      EdgeInsets.symmetric(
+        horizontal: uiConstants.buttonPaddingHorizontal,
+        vertical: uiConstants.buttonPaddingVertical,
+      ),
+    ),
+    minimumSize: WidgetStateProperty.all(
+      Size.fromHeight(uiConstants.buttonHeight),
+    ),
+    shape: WidgetStateProperty.all(
+      RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16.0), // Increased from 8 to 16
+      ),
+    ),
+    side: WidgetStateProperty.all(
+      BorderSide(
+        color: _darkColorScheme.secondary,
+        width: uiConstants.spacing0,
+      ),
+    ),
+    overlayColor: WidgetStateProperty.all(
+      _darkColorScheme.secondary.withValues(alpha: 0.1),
+    ),
+    textStyle: WidgetStateProperty.all(
+      TextStyle(
+        fontFamily: GoogleFonts.nunito().fontFamily,
+        fontSize: uiConstants.buttonFontSize,
+        fontWeight: FontWeight.w600,
+        letterSpacing: uiConstants.buttonLetterSpacing,
+      ),
+    ),
+    iconSize: WidgetStateProperty.all(uiConstants.buttonIconSize),
+  ),
+);
+
 ThemeData customDarkTheme = ThemeData(
   useMaterial3: true,
   colorScheme: _darkColorScheme,
@@ -280,4 +353,6 @@ ThemeData customDarkTheme = ThemeData(
   appBarTheme: _darkAppBarTheme,
   tooltipTheme: _darkTooltipTheme,
   filledButtonTheme: _darkFilledButtonTheme,
+  elevatedButtonTheme: _darkElevatedButtonTheme,
+  outlinedButtonTheme: _darkOutlinedButtonTheme,
 );
