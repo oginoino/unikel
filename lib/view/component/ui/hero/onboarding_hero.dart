@@ -8,44 +8,53 @@ class OnboardingHero extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.sizeOf(context).height * 0.3,
-      child: Stack(
-        children: [
-          Positioned(
-            top: MediaQuery.sizeOf(context).height * 0.05 * (0.5),
-            left: MediaQuery.sizeOf(context).width * 0.6 * (0.9),
-            child: Transform.rotate(
-              angle: 0.5 * math.pi,
-              child: Image.asset(ImagePaths.dollarDynamicColor, width: 100),
-            ),
+    return Column(
+      spacing: uiConstants.spacing16,
+      children: [
+        SizedBox(
+          height: MediaQuery.sizeOf(context).height * 0.3,
+          child: Stack(
+            children: [
+              Positioned(
+                top: MediaQuery.sizeOf(context).height * 0.05 * (0.5),
+                left: MediaQuery.sizeOf(context).width * 0.6 * (0.9),
+                child: Transform.rotate(
+                  angle: 0.5 * math.pi,
+                  child: Image.asset(ImagePaths.dollarDynamicColor, width: 100),
+                ),
+              ),
+              Positioned(
+                top: MediaQuery.sizeOf(context).height * 0.2 * (0.8),
+                right: MediaQuery.sizeOf(context).width * 0.1 * (0.2),
+                child: Transform.rotate(
+                  angle: 0.5 * math.pi,
+                  child: Image.asset(ImagePaths.dollarIsoColor, width: 120),
+                ),
+              ),
+              Positioned(
+                bottom: MediaQuery.sizeOf(context).height * 0.2 * (0.3),
+                left: MediaQuery.sizeOf(context).width * 0.5 * (0.6),
+                child: Transform.rotate(
+                  angle: 0.8 * math.pi,
+                  child: Image.asset(ImagePaths.dollarFrontColor, width: 80),
+                ),
+              ),
+              Positioned(
+                bottom: MediaQuery.sizeOf(context).height * 0.2 * (0.6),
+                left: MediaQuery.sizeOf(context).width * 0.1 * (0.6),
+                child: Transform.rotate(
+                  angle: 0.3 * math.pi,
+                  child: Image.asset(ImagePaths.dollarDynamicColor, width: 60),
+                ),
+              ),
+            ],
           ),
-          Positioned(
-            top: MediaQuery.sizeOf(context).height * 0.2 * (0.8),
-            right: MediaQuery.sizeOf(context).width * 0.1 * (0.2),
-            child: Transform.rotate(
-              angle: 0.5 * math.pi,
-              child: Image.asset(ImagePaths.dollarIsoColor, width: 120),
-            ),
-          ),
-          Positioned(
-            bottom: MediaQuery.sizeOf(context).height * 0.2 * (0.3),
-            left: MediaQuery.sizeOf(context).width * 0.5 * (0.6),
-            child: Transform.rotate(
-              angle: 0.8 * math.pi,
-              child: Image.asset(ImagePaths.dollarFrontColor, width: 80),
-            ),
-          ),
-          Positioned(
-            bottom: MediaQuery.sizeOf(context).height * 0.2 * (0.6),
-            left: MediaQuery.sizeOf(context).width * 0.1 * (0.6),
-            child: Transform.rotate(
-              angle: 0.3 * math.pi,
-              child: Image.asset(ImagePaths.dollarDynamicColor, width: 60),
-            ),
-          ),
-        ],
-      ),
+        ),
+        Text(
+          context.l10n.onboarding_subtitle,
+          style: Theme.of(context).textTheme.headlineLarge,
+        ),
+      ],
     );
   }
 }
