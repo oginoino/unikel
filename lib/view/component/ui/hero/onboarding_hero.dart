@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import '../../../../utils/imports/common_libs.dart';
+import '../../../../utils/constants/image_paths.dart';
 
 class OnboardingHero extends StatelessWidget {
   const OnboardingHero({super.key});
@@ -17,7 +18,7 @@ class OnboardingHero extends StatelessWidget {
             child: Transform.rotate(
               angle: 0.5 * math.pi,
               child: Image.asset(
-                'assets/images/3dicons-dollar-dynamic-color.png',
+                ImagePaths.dollarDynamicColor,
                 width: 100,
               ),
             ),
@@ -28,7 +29,7 @@ class OnboardingHero extends StatelessWidget {
             child: Transform.rotate(
               angle: 0.5 * math.pi,
               child: Image.asset(
-                'assets/images/3dicons-dollar-iso-color.png',
+                ImagePaths.dollarIsoColor,
                 width: 120,
               ),
             ),
@@ -39,7 +40,7 @@ class OnboardingHero extends StatelessWidget {
             child: Transform.rotate(
               angle: 0.8 * math.pi,
               child: Image.asset(
-                'assets/images/3dicons-dollar-front-color.png',
+                ImagePaths.dollarFrontColor,
                 width: 80,
               ),
             ),
@@ -50,7 +51,7 @@ class OnboardingHero extends StatelessWidget {
             child: Transform.rotate(
               angle: 0.3 * math.pi,
               child: Image.asset(
-                'assets/images/3dicons-dollar-dynamic-color.png',
+                ImagePaths.dollarDynamicColor,
                 width: 60,
               ),
             ),
