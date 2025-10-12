@@ -5,6 +5,7 @@ import '../../../../utils/imports/common_libs.dart';
 import '../../../../utils/constants/image_paths.dart';
 import '../button/custom_cta_button.dart';
 import '../page_indicator/page_indicator.dart';
+import '../responsive_padding.dart';
 
 class OnboardingHero extends StatefulWidget {
   const OnboardingHero({super.key});
@@ -123,30 +124,35 @@ class _OnboardingHeroState extends State<OnboardingHero> {
             },
           ),
         ),
-        SizedBox(height: uiConstants.spacing16),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: uiConstants.spacing4),
-          child: Text(
-            onboardingData[_currentPage]['text']!,
-            style: Theme.of(context).textTheme.headlineLarge,
-          ),
-        ),
-        SizedBox(height: uiConstants.spacing16),
-        PageIndicator(
-          currentPage: _currentPage,
-          itemCount: onboardingData.length,
-        ),
-        SizedBox(height: uiConstants.spacing16),
-        Center(
-          child: CustomCTAButton(
-            variant: ButtonVariant.primary,
-            iconAlignment: IconAlignment.end,
-            icon: Icon(Icons.arrow_forward_ios_rounded),
-            label: context.l10n.proceed,
-            onPressed: () {
-              context.read<OnboardingProvider>().setOnboardingComplete(true);
-              context.go(Routes.home);
-            },
+        ResponsivePadding(
+          child: Column(
+            children: [
+              SizedBox(height: uiConstants.spacing16),
+              Text(
+                onboardingData[_currentPage]['text']!,
+                style: Theme.of(context).textTheme.headlineLarge,
+              ),
+              SizedBox(height: uiConstants.spacing16),
+              PageIndicator(
+                currentPage: _currentPage,
+                itemCount: onboardingData.length,
+              ),
+              SizedBox(height: uiConstants.spacing16),
+              Center(
+                child: CustomCTAButton(
+                  variant: ButtonVariant.primary,
+                  iconAlignment: IconAlignment.end,
+                  icon: Icon(Icons.arrow_forward_ios_rounded),
+                  label: context.l10n.proceed,
+                  onPressed: () {
+                    context.read<OnboardingProvider>().setOnboardingComplete(
+                      true,
+                    );
+                    context.go(Routes.home);
+                  },
+                ),
+              ),
+            ],
           ),
         ),
       ],
