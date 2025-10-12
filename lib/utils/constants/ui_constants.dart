@@ -222,6 +222,11 @@ class UIConstants {
   final Color transparent = Colors.transparent;
 
   // ==========================================================================
+  // COMMON VALUES
+  // ==========================================================================
+  final int _animationDurationDefault = 300;
+
+  // ==========================================================================
   // UTILITY METHODS
   // ==========================================================================
 
@@ -254,4 +259,6 @@ class UIConstants {
   double? get buttonLetterSpacing => _buttonLetterSpacing;
 
   double? get buttonIconSize => _buttonIconSize;
+
+  int get animationDurationDefault => _animationDurationDefault;
 }

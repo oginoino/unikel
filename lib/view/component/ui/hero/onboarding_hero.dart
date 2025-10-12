@@ -28,7 +28,7 @@ class _OnboardingHeroState extends State<OnboardingHero> {
       }
       _pageController.animateToPage(
         _currentPage,
-        duration: const Duration(milliseconds: 350),
+        duration: Duration(milliseconds: uiConstants.animationDurationDefault),
         curve: Curves.easeIn,
       );
     });

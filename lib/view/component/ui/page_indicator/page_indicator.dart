@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import '../../../../utils/imports/common_libs.dart';
 
 class PageIndicator extends StatelessWidget {
   const PageIndicator({
@@ -17,16 +17,20 @@ class PageIndicator extends StatelessWidget {
       children: List.generate(
         itemCount,
         (index) => AnimatedContainer(
-          duration: const Duration(milliseconds: 300),
+          duration: Duration(
+            milliseconds: uiConstants.animationDurationDefault,
+          ),
           curve: Curves.easeInOut,
-          margin: const EdgeInsets.symmetric(horizontal: 4.0),
-          height: 8.0,
-          width: currentPage == index ? 24.0 : 8.0,
+          margin: EdgeInsets.symmetric(horizontal: uiConstants.spacing1),
+          height: uiConstants.spacing2,
+          width: currentPage == index
+              ? uiConstants.spacing6
+              : uiConstants.spacing2,
           decoration: BoxDecoration(
             color: currentPage == index
                 ? Theme.of(context).colorScheme.primary
                 : Theme.of(context).colorScheme.primary.withValues(alpha: 0.3),
-            borderRadius: BorderRadius.circular(4.0),
+            borderRadius: BorderRadius.circular(uiConstants.radius4),
           ),
         ),
       ),
