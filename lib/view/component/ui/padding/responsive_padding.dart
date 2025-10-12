@@ -1,4 +1,4 @@
-import '../../../utils/imports/common_libs.dart';
+import '../../../../utils/imports/common_libs.dart';
 
 class ResponsivePadding extends StatelessWidget {
   const ResponsivePadding({super.key, required this.child});
