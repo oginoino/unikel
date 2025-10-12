@@ -2,7 +2,7 @@ import '../utils/imports/common_libs.dart';
 
 class LocaleData {
   final Locale locale;
-  final String flag;
+  final String flag; // Changed from IconData to String
 
   const LocaleData({required this.locale, required this.flag});
 
