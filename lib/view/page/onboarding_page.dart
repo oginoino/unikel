@@ -7,10 +7,7 @@ class OnboardingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: uiConstants.spacing4,
-        vertical: uiConstants.spacing8,
-      ),
+      padding: EdgeInsets.symmetric(vertical: uiConstants.spacing8),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

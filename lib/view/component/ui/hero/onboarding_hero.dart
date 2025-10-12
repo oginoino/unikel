@@ -124,9 +124,12 @@ class _OnboardingHeroState extends State<OnboardingHero> {
           ),
         ),
 
-        Text(
-          onboardingData[_currentPage]['text']!,
-          style: Theme.of(context).textTheme.headlineLarge,
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: uiConstants.spacing4),
+          child: Text(
+            onboardingData[_currentPage]['text']!,
+            style: Theme.of(context).textTheme.headlineLarge,
+          ),
         ),
         PageIndicator(
           currentPage: _currentPage,
