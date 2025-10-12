@@ -22,74 +22,77 @@ class CustomCTAButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ThemeProvider>(
-      builder: (context, themeProvider, child) {
-        final isDark = themeProvider.isDarkMode;
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: uiConstants.spacing4),
+      child: Consumer<ThemeProvider>(
+        builder: (context, themeProvider, child) {
+          final isDark = themeProvider.isDarkMode;
 
-        // Custom loading widget
-        Widget loadingWidget = SizedBox(
-          width: uiConstants.spacing4,
-          height: uiConstants.spacing4,
-          child: CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(
-              isDark
-                  ? themeProvider.currentTheme.colorScheme.onSurface
-                  : themeProvider.currentTheme.colorScheme.primary,
+          // Custom loading widget
+          Widget loadingWidget = SizedBox(
+            width: uiConstants.spacing4,
+            height: uiConstants.spacing4,
+            child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(
+                isDark
+                    ? themeProvider.currentTheme.colorScheme.onSurface
+                    : themeProvider.currentTheme.colorScheme.primary,
+              ),
             ),
-          ),
-        );
+          );
 
-        Widget buttonLabel = isLoading ? loadingWidget : Text(label);
+          Widget buttonLabel = isLoading ? loadingWidget : Text(label);
 
-        List<Widget> children = [];
-        if (icon != null) {
-          if (iconAlignment == IconAlignment.start) {
-            children = [
-              icon!,
-              SizedBox(width: uiConstants.spacing2),
-              buttonLabel,
-            ];
+          List<Widget> children = [];
+          if (icon != null) {
+            if (iconAlignment == IconAlignment.start) {
+              children = [
+                icon!,
+                SizedBox(width: uiConstants.spacing2),
+                buttonLabel,
+              ];
+            } else {
+              children = [
+                buttonLabel,
+                SizedBox(width: uiConstants.spacing2),
+                icon!,
+              ];
+            }
           } else {
-            children = [
-              buttonLabel,
-              SizedBox(width: uiConstants.spacing2),
-              icon!,
-            ];
+            children = [buttonLabel];
           }
-        } else {
-          children = [buttonLabel];
-        }
 
-        Widget buttonChild = Row(
-          mainAxisSize: MainAxisSize.min,
-          children: children,
-        );
+          Widget buttonChild = Row(
+            mainAxisSize: MainAxisSize.min,
+            children: children,
+          );
 
-        ButtonStyle? style;
-        // Customize style based on theme and variant
-        switch (variant) {
-          case ButtonVariant.primary:
-            return ElevatedButton(
-              onPressed: isLoading ? null : onPressed,
-              style: style,
-              child: buttonChild,
-            );
+          ButtonStyle? style;
+          // Customize style based on theme and variant
+          switch (variant) {
+            case ButtonVariant.primary:
+              return ElevatedButton(
+                onPressed: isLoading ? null : onPressed,
+                style: style,
+                child: buttonChild,
+              );
 
-          case ButtonVariant.secondary:
-            return OutlinedButton(
-              onPressed: isLoading ? null : onPressed,
-              style: style,
-              child: buttonChild,
-            );
+            case ButtonVariant.secondary:
+              return OutlinedButton(
+                onPressed: isLoading ? null : onPressed,
+                style: style,
+                child: buttonChild,
+              );
 
-          case ButtonVariant.text:
-            return TextButton(
-              onPressed: isLoading ? null : onPressed,
-              style: style,
-              child: buttonChild,
-            );
-        }
-      },
+            case ButtonVariant.text:
+              return TextButton(
+                onPressed: isLoading ? null : onPressed,
+                style: style,
+                child: buttonChild,
+              );
+          }
+        },
+      ),
     );
   }
 }

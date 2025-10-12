@@ -37,6 +37,18 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get languageTooltipSpanishMexico => 'Spanish (Mexico)';
+
+  @override
+  String get onboarding_subtitle => 'Your financial journey, simplified.';
+
+  @override
+  String get onboarding_subtitle_1 => 'Your financial journey, simplified.';
+
+  @override
+  String get onboarding_subtitle_2 => 'Track your expenses with ease.';
+
+  @override
+  String get onboarding_subtitle_3 => 'Achieve your financial goals.';
 }
 
 /// The translations for English, as used in the United States (`en_US`).
@@ -72,4 +84,16 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get languageTooltipSpanishMexico => 'Spanish (Mexico)';
+
+  @override
+  String get onboarding_subtitle => 'Your financial journey, simplified.';
+
+  @override
+  String get onboarding_subtitle_1 => 'Your financial journey, simplified.';
+
+  @override
+  String get onboarding_subtitle_2 => 'Track your expenses with ease.';
+
+  @override
+  String get onboarding_subtitle_3 => 'Achieve your financial goals.';
 }

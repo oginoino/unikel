@@ -162,6 +162,30 @@ abstract class AppLocalizations {
   /// In en_US, this message translates to:
   /// **'Spanish (Mexico)'**
   String get languageTooltipSpanishMexico;
+
+  /// No description provided for @onboarding_subtitle.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Your financial journey, simplified.'**
+  String get onboarding_subtitle;
+
+  /// No description provided for @onboarding_subtitle_1.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Your financial journey, simplified.'**
+  String get onboarding_subtitle_1;
+
+  /// No description provided for @onboarding_subtitle_2.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Track your expenses with ease.'**
+  String get onboarding_subtitle_2;
+
+  /// No description provided for @onboarding_subtitle_3.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Achieve your financial goals.'**
+  String get onboarding_subtitle_3;
 }
 
 class _AppLocalizationsDelegate

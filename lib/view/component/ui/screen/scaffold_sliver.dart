@@ -13,9 +13,7 @@ class ScaffoldSliver extends StatelessWidget {
           CustomSliverAppBar(),
 
           const SliverToBoxAdapter(),
-          SliverFillRemaining(
-            child: Scaffold(body: Center(child: child)),
-          ),
+          SliverFillRemaining(child: child),
         ],
       ),
     );
