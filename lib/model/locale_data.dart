@@ -7,14 +7,13 @@ class LocaleData {
   const LocaleData({required this.locale, required this.flag});
 
   String getDisplayName(BuildContext context) {
-    final l10n = context.l10n;
     switch (locale.toString()) {
       case 'pt_BR':
-        return l10n.languageNamePortuguese;
+        return 'Português (Brasil)';
       case 'en_US':
-        return l10n.languageNameEnglish;
+        return 'English (United States)';
       case 'es_MX':
-        return l10n.languageNameSpanish;
+        return 'Español (México)';
       default:
         return locale.languageCode;
     }
