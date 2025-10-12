@@ -9,7 +9,7 @@ class ResponsivePadding extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: MediaQuery.of(context).orientation == Orientation.landscape
-          ? EdgeInsets.symmetric(horizontal: uiConstants.spacing24)
+          ? EdgeInsets.symmetric(horizontal: uiConstants.spacing36)
           : EdgeInsets.symmetric(horizontal: uiConstants.spacing4),
       child: child,
     );
