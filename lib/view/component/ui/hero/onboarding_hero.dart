@@ -123,7 +123,7 @@ class _OnboardingHeroState extends State<OnboardingHero> {
             },
           ),
         ),
-
+        SizedBox(height: uiConstants.spacing16),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: uiConstants.spacing4),
           child: Text(
