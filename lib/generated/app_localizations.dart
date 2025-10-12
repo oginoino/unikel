@@ -166,8 +166,26 @@ abstract class AppLocalizations {
   /// No description provided for @onboarding_subtitle.
   ///
   /// In en_US, this message translates to:
-  /// **'Welcome to OOO! We help you get started with our app.'**
+  /// **'Your financial journey, simplified.'**
   String get onboarding_subtitle;
+
+  /// No description provided for @onboarding_subtitle_1.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Your financial journey, simplified.'**
+  String get onboarding_subtitle_1;
+
+  /// No description provided for @onboarding_subtitle_2.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Track your expenses with ease.'**
+  String get onboarding_subtitle_2;
+
+  /// No description provided for @onboarding_subtitle_3.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Achieve your financial goals.'**
+  String get onboarding_subtitle_3;
 }
 
 class _AppLocalizationsDelegate
