@@ -12,13 +12,15 @@ class LanguageSelector extends StatelessWidget {
       builder: (context, localeProvider, child) {
         return PopupMenuButton<Locale>(
           icon: Icon(Icons.language, color: colorScheme.onSurface),
-          tooltip: LocaleConstants.languageSelectionTooltip,
+          tooltip: context.l10n.languageSelection,
           color: colorScheme.surface,
           elevation: uiConstants.elevation8,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(uiConstants.radius12),
             side: BorderSide(
-              color: colorScheme.outline.withValues(alpha: uiConstants.opacity20),
+              color: colorScheme.outline.withValues(
+                alpha: uiConstants.opacity20,
+              ),
               width: uiConstants.borderWidth1,
             ),
           ),
@@ -38,7 +40,9 @@ class LanguageSelector extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(uiConstants.radius8),
                       color: localeProvider.currentLocale == localeData.locale
-                          ? colorScheme.primary.withValues(alpha: uiConstants.opacity10)
+                          ? colorScheme.primary.withValues(
+                              alpha: uiConstants.opacity10,
+                            )
                           : Colors.transparent,
                     ),
                     padding: EdgeInsets.all(uiConstants.spacing2),
@@ -47,7 +51,7 @@ class LanguageSelector extends StatelessWidget {
                         Text(localeData.flag, style: theme.textTheme.bodyLarge),
                         SizedBox(width: uiConstants.spacing2),
                         Text(
-                          localeData.displayName,
+                          localeData.getDisplayName(context),
                           style: theme.textTheme.bodyMedium?.copyWith(
                             color:
                                 localeProvider.currentLocale ==

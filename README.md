@@ -1,4 +1,4 @@
-# Montreal
+# Unikel
 
 🚀 **Template Flutter Profissional** - Um projeto base completo para acelerar o desenvolvimento de aplicações Flutter com arquitetura sólida e decisões técnicas bem fundamentadas.
 
@@ -19,7 +19,7 @@ Veja exemplos práticos de como este template pode ser usado em projetos reais:
 ### **Reelex - App de Delivery**
 🔗 **Repositório**: [https://github.com/GinoCodeSpace/reelex](https://github.com/GinoCodeSpace/reelex)
 
-O **Reelex** é uma implementação completa do template Montreal, demonstrando como construir um aplicativo de delivery de comida com todas as funcionalidades essenciais:
+O **Reelex** é uma implementação completa do template Unikel, demonstrando como construir um aplicativo de delivery de comida com todas as funcionalidades essenciais:
 
 **Funcionalidades Implementadas:**
 - 🏪 **Catálogo de Restaurantes**: Navegação por restaurantes e cardápios
@@ -36,7 +36,7 @@ O **Reelex** é uma implementação completa do template Montreal, demonstrando 
 - 📱 **Responsive Design**: Adaptação automática para diferentes dispositivos
 - 🌙 **Theme Switching**: Alternância dinâmica entre temas
 
-> 💡 **Use como referência**: O Reelex demonstra na prática como aplicar os padrões arquiteturais do Montreal em um projeto real e completo.
+> 💡 **Use como referência**: O Reelex demonstra na prática como aplicar os padrões arquiteturais do Unikel em um projeto real e completo.
 
 ## 📁 Estrutura do Projeto
 
@@ -49,7 +49,7 @@ assets/                 # 📁 Recursos estáticos da aplicação
 
 lib/
 ├── app/                 # 🏗️ Configuração principal da aplicação
-│   └── montreal_app.dart
+│   └── unikel_app.dart
 ├── config/             # ⚙️ Configurações centralizadas
 │   ├── bootstrap.dart   # Inicialização da app
 │   ├── di.dart         # Injeção de dependência
@@ -200,7 +200,7 @@ Organização modular que separa claramente responsabilidades:
 ```bash
 # 1. Clone ou use como template
 git clone <repository-url>
-cd montreal
+cd unikel
 
 # 2. Instale as dependências
 flutter pub get
@@ -361,7 +361,7 @@ A fonte **San Francisco Pro** incluída neste template é propriedade da Apple I
 
 ## 📄 Licença
 
-Este projeto está licenciado sob a **MIT License** - veja o arquivo <mcfile name="LICENSE" path="c:\Users\ginal\projects\montreal\LICENSE"></mcfile> para detalhes.
+Este projeto está licenciado sob a **MIT License** - veja o arquivo <mcfile name="LICENSE" path="c:\Users\ginal\projects\unikel\LICENSE"></mcfile> para detalhes.
 
 ### **O que isso significa?**
 - ✅ **Uso comercial**: Pode usar em projetos comerciais

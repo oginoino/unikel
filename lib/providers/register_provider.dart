@@ -7,6 +7,7 @@ class RegisterProvider {
     return [
       ChangeNotifierProvider(create: (context) => ThemeProvider()),
       ChangeNotifierProvider(create: (context) => LocaleProvider()),
+      ChangeNotifierProvider(create: (context) => OnboardingProvider()),
     ];
   }
 }

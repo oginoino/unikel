@@ -6,10 +6,10 @@ ColorScheme _darkColorScheme = ColorScheme.dark(
   onPrimary: uiConstants.darkOnPrimary,
   primaryContainer: uiConstants.darkPrimaryContainer,
   onPrimaryContainer: uiConstants.darkOnPrimaryContainer,
-  primaryFixed: uiConstants.darkOnPrimaryContainer,
+  primaryFixed: uiConstants.darkPrimaryContainer,
   primaryFixedDim: uiConstants.darkPrimaryFixedDim,
   onPrimaryFixed: uiConstants.darkOnPrimaryContainer,
-  onPrimaryFixedVariant: uiConstants.darkOnPrimaryFixedVariant,
+  onPrimaryFixedVariant: uiConstants.darkPrimary,
 
   // Secondary colors
   secondary: uiConstants.darkSecondary,
@@ -18,15 +18,15 @@ ColorScheme _darkColorScheme = ColorScheme.dark(
   onSecondaryContainer: uiConstants.darkOnSecondaryContainer,
   secondaryFixed: uiConstants.darkOnSecondaryContainer,
   secondaryFixedDim: uiConstants.darkSecondaryFixedDim,
-  onSecondaryFixed: uiConstants.darkOnSecondary,
-  onSecondaryFixedVariant: uiConstants.darkOutlineVariant,
+  onSecondaryFixed: uiConstants.darkOnSecondaryContainer,
+  onSecondaryFixedVariant: uiConstants.darkOnSurfaceVariant,
 
   // Tertiary colors
   tertiary: uiConstants.darkTertiary,
   onTertiary: uiConstants.darkOnTertiary,
   tertiaryContainer: uiConstants.darkTertiaryContainer,
   onTertiaryContainer: uiConstants.darkOnTertiaryContainer,
-  tertiaryFixed: uiConstants.darkOnTertiaryContainer,
+  tertiaryFixed: uiConstants.darkTertiaryContainer,
   tertiaryFixedDim: uiConstants.darkTertiaryFixedDim,
   onTertiaryFixed: uiConstants.darkOnTertiaryContainer,
   onTertiaryFixedVariant: uiConstants.darkOnTertiaryFixedVariant,
@@ -63,97 +63,92 @@ ColorScheme _darkColorScheme = ColorScheme.dark(
 );
 
 TextTheme _darkTextTheme = TextTheme(
-  // Display styles
   displayLarge: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 57,
     fontWeight: FontWeight.w400,
     color: _darkColorScheme.onSurface,
   ),
   displayMedium: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 45,
     fontWeight: FontWeight.w400,
     color: _darkColorScheme.onSurface,
   ),
   displaySmall: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 36,
     fontWeight: FontWeight.w400,
     color: _darkColorScheme.onSurface,
   ),
-  // Headline styles
   headlineLarge: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 32,
     fontWeight: FontWeight.w400,
     color: _darkColorScheme.onSurface,
   ),
   headlineMedium: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 28,
     fontWeight: FontWeight.w400,
     color: _darkColorScheme.onSurface,
   ),
   headlineSmall: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 24,
     fontWeight: FontWeight.w400,
     color: _darkColorScheme.onSurface,
   ),
-  // Title styles
   titleLarge: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 22,
     fontWeight: FontWeight.w400,
     color: _darkColorScheme.onSurface,
   ),
   titleMedium: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 16,
     fontWeight: FontWeight.w500,
     color: _darkColorScheme.onSurface,
   ),
   titleSmall: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 14,
     fontWeight: FontWeight.w500,
     color: _darkColorScheme.onSurface,
   ),
-  // Body styles
   bodyLarge: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 16,
     fontWeight: FontWeight.w400,
     color: _darkColorScheme.onSurface,
   ),
   bodyMedium: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 14,
     fontWeight: FontWeight.w400,
     color: _darkColorScheme.onSurface,
   ),
   bodySmall: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 12,
     fontWeight: FontWeight.w400,
     color: _darkColorScheme.onSurface,
   ),
-  // Label styles
   labelLarge: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 14,
     fontWeight: FontWeight.w500,
     color: _darkColorScheme.onSurface,
   ),
   labelMedium: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 12,
     fontWeight: FontWeight.w500,
     color: _darkColorScheme.onSurface,
   ),
   labelSmall: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 11,
     fontWeight: FontWeight.w500,
     color: _darkColorScheme.onSurface,
@@ -181,13 +176,13 @@ AppBarTheme _darkAppBarTheme = AppBarTheme(
   toolbarHeight: uiConstants.appBarToolbarHeight,
   leadingWidth: uiConstants.appBarLeadingWidth,
   titleTextStyle: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: uiConstants.appBarTitleFontSize,
     fontWeight: FontWeight.w600,
     color: _darkColorScheme.onSurface,
   ),
   toolbarTextStyle: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: uiConstants.appBarToolbarFontSize,
     fontWeight: FontWeight.w400,
     color: _darkColorScheme.onSurface,
@@ -220,15 +215,17 @@ TooltipThemeData _darkTooltipTheme = TooltipThemeData(
     borderRadius: BorderRadius.circular(uiConstants.radius8),
     boxShadow: [
       BoxShadow(
-        color: _darkColorScheme.shadow.withValues(alpha: uiConstants.opacity30),
+        color: _darkColorScheme.shadow.withValues(
+          alpha: uiConstants.opacity20,
+        ),
         offset: const Offset(0, 2),
-        blurRadius: uiConstants.elevation6,
+        blurRadius: uiConstants.elevation4,
         spreadRadius: 0,
       ),
     ],
   ),
   textStyle: TextStyle(
-    fontFamily: 'SanFranciscoPro',
+    fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: uiConstants.tooltipFontSize,
     fontWeight: FontWeight.w500,
     color: _darkColorScheme.onInverseSurface,
@@ -239,10 +236,293 @@ TooltipThemeData _darkTooltipTheme = TooltipThemeData(
   showDuration: Duration(milliseconds: uiConstants.tooltipShowDurationMs),
 );
 
+// Botão Filled melhorado com estados interativos
+FilledButtonThemeData _darkFilledButtonTheme = FilledButtonThemeData(
+  style: ButtonStyle(
+    backgroundColor: WidgetStateProperty.resolveWith<Color>((
+      Set<WidgetState> states,
+    ) {
+      if (states.contains(WidgetState.disabled)) {
+        return _darkColorScheme.primary.withValues(alpha: 0.38);
+      }
+      if (states.contains(WidgetState.pressed)) {
+        return _darkColorScheme.primary.withValues(alpha: 0.9);
+      }
+      if (states.contains(WidgetState.hovered)) {
+        return _darkColorScheme.primary.withValues(alpha: 0.92);
+      }
+      return _darkColorScheme.primary;
+    }),
+    foregroundColor: WidgetStateProperty.resolveWith<Color>((
+      Set<WidgetState> states,
+    ) {
+      if (states.contains(WidgetState.disabled)) {
+        return _darkColorScheme.onPrimary.withValues(alpha: 0.38);
+      }
+      return _darkColorScheme.onPrimary;
+    }),
+    padding: WidgetStateProperty.all(
+      EdgeInsets.symmetric(
+        horizontal: uiConstants.buttonPaddingHorizontal,
+        vertical: uiConstants.buttonPaddingVertical,
+      ),
+    ),
+    minimumSize: WidgetStateProperty.all(
+      Size.fromHeight(uiConstants.buttonHeight),
+    ),
+    shape: WidgetStateProperty.all(
+      RoundedRectangleBorder(borderRadius: BorderRadius.circular(uiConstants.radius16)),
+    ),
+    elevation: WidgetStateProperty.resolveWith<double>((
+      Set<WidgetState> states,
+    ) {
+      if (states.contains(WidgetState.disabled)) return 0;
+      if (states.contains(WidgetState.pressed)) return uiConstants.elevation2;
+      if (states.contains(WidgetState.hovered)) return uiConstants.elevation4;
+      return uiConstants.elevation2;
+    }),
+    shadowColor: WidgetStateProperty.all(_darkColorScheme.shadow),
+    overlayColor: WidgetStateProperty.resolveWith<Color?>((
+      Set<WidgetState> states,
+    ) {
+      if (states.contains(WidgetState.hovered)) {
+        return _darkColorScheme.primary.withValues(alpha: 0.08);
+      }
+      if (states.contains(WidgetState.focused)) {
+        return _darkColorScheme.primary.withValues(alpha: 0.12);
+      }
+      if (states.contains(WidgetState.pressed)) {
+        return _darkColorScheme.primary.withValues(alpha: 0.12);
+      }
+      return null;
+    }),
+    textStyle: WidgetStateProperty.all(
+      TextStyle(
+        fontFamily: GoogleFonts.nunito().fontFamily,
+        fontSize: uiConstants.buttonFontSize,
+        fontWeight: FontWeight.w600,
+        letterSpacing: uiConstants.buttonLetterSpacing,
+      ),
+    ),
+    iconSize: WidgetStateProperty.all(uiConstants.buttonIconSize),
+  ),
+);
+
+// Botão Elevated melhorado com estados interativos
+ElevatedButtonThemeData _darkElevatedButtonTheme = ElevatedButtonThemeData(
+  style: ButtonStyle(
+    backgroundColor: WidgetStateProperty.resolveWith<Color>((
+      Set<WidgetState> states,
+    ) {
+      if (states.contains(WidgetState.disabled)) {
+        return _darkColorScheme.onSurface.withValues(alpha: 0.12);
+      }
+      if (states.contains(WidgetState.pressed)) {
+        return _darkColorScheme.primary;
+      }
+      if (states.contains(WidgetState.hovered)) {
+        return _darkColorScheme.primary.withValues(alpha: 0.95);
+      }
+      return _darkColorScheme.primary;
+    }),
+    foregroundColor: WidgetStateProperty.resolveWith<Color>((
+      Set<WidgetState> states,
+    ) {
+      if (states.contains(WidgetState.disabled)) {
+        return _darkColorScheme.onSurface.withValues(alpha: 0.38);
+      }
+      return _darkColorScheme.onPrimary;
+    }),
+    padding: WidgetStateProperty.all(
+      EdgeInsets.symmetric(
+        horizontal: uiConstants.buttonPaddingHorizontal,
+        vertical: uiConstants.buttonPaddingVertical,
+      ),
+    ),
+    minimumSize: WidgetStateProperty.all(
+      Size.fromHeight(uiConstants.buttonHeight),
+    ),
+    shape: WidgetStateProperty.all(
+      RoundedRectangleBorder(borderRadius: BorderRadius.circular(uiConstants.radius16)),
+    ),
+    elevation: WidgetStateProperty.resolveWith<double>((
+      Set<WidgetState> states,
+    ) {
+      if (states.contains(WidgetState.disabled)) return 0;
+      if (states.contains(WidgetState.pressed)) return uiConstants.elevation2;
+      if (states.contains(WidgetState.hovered)) return uiConstants.elevation8;
+      return uiConstants.elevation4;
+    }),
+    shadowColor: WidgetStateProperty.all(_darkColorScheme.shadow),
+    overlayColor: WidgetStateProperty.resolveWith<Color?>((
+      Set<WidgetState> states,
+    ) {
+      if (states.contains(WidgetState.hovered)) {
+        return _darkColorScheme.onPrimary.withValues(alpha: 0.08);
+      }
+      if (states.contains(WidgetState.focused)) {
+        return _darkColorScheme.onPrimary.withValues(alpha: 0.12);
+      }
+      if (states.contains(WidgetState.pressed)) {
+        return _darkColorScheme.onPrimary.withValues(alpha: 0.12);
+      }
+      return null;
+    }),
+    textStyle: WidgetStateProperty.all(
+      TextStyle(
+        fontFamily: GoogleFonts.nunito().fontFamily,
+        fontSize: uiConstants.buttonFontSize,
+        fontWeight: FontWeight.w600,
+        letterSpacing: uiConstants.buttonLetterSpacing,
+      ),
+    ),
+    iconSize: WidgetStateProperty.all(uiConstants.buttonIconSize),
+  ),
+);
+
+// Botão Outlined melhorado com estados interativos
+OutlinedButtonThemeData _darkOutlinedButtonTheme = OutlinedButtonThemeData(
+  style: ButtonStyle(
+    backgroundColor: WidgetStateProperty.resolveWith<Color>((
+      Set<WidgetState> states,
+    ) {
+      if (states.contains(WidgetState.hovered)) {
+        return _darkColorScheme.primary.withValues(alpha: 0.08);
+      }
+      if (states.contains(WidgetState.pressed)) {
+        return _darkColorScheme.primary.withValues(alpha: 0.12);
+      }
+      return Colors.transparent;
+    }),
+    foregroundColor: WidgetStateProperty.resolveWith<Color>((
+      Set<WidgetState> states,
+    ) {
+      if (states.contains(WidgetState.disabled)) {
+        return _darkColorScheme.onSurface.withValues(alpha: 0.38);
+      }
+      return _darkColorScheme.primary;
+    }),
+    padding: WidgetStateProperty.all(
+      EdgeInsets.symmetric(
+        horizontal: uiConstants.buttonPaddingHorizontal,
+        vertical: uiConstants.buttonPaddingVertical,
+      ),
+    ),
+    minimumSize: WidgetStateProperty.all(
+      Size.fromHeight(uiConstants.buttonHeight),
+    ),
+    shape: WidgetStateProperty.all(
+      RoundedRectangleBorder(borderRadius: BorderRadius.circular(uiConstants.radius16)),
+    ),
+    side: WidgetStateProperty.resolveWith<BorderSide>((
+      Set<WidgetState> states,
+    ) {
+      if (states.contains(WidgetState.disabled)) {
+        return BorderSide(
+          color: _darkColorScheme.onSurface.withValues(alpha: 0.12),
+          width: 1.0,
+        );
+      }
+      if (states.contains(WidgetState.hovered)) {
+        return BorderSide(color: _darkColorScheme.primary, width: 1.5);
+      }
+      return BorderSide(color: _darkColorScheme.primary, width: 1.0);
+    }),
+    overlayColor: WidgetStateProperty.resolveWith<Color?>(( 
+      Set<WidgetState> states,
+    ) {
+      if (states.contains(WidgetState.hovered)) {
+        return _darkColorScheme.primary.withValues(alpha: 0.04);
+      }
+      if (states.contains(WidgetState.focused)) {
+        return _darkColorScheme.primary.withValues(alpha: 0.08);
+      }
+      if (states.contains(WidgetState.pressed)) {
+        return _darkColorScheme.primary.withValues(alpha: 0.12);
+      }
+      return null;
+    }),
+    textStyle: WidgetStateProperty.all(
+      TextStyle(
+        fontFamily: GoogleFonts.nunito().fontFamily,
+        fontSize: uiConstants.buttonFontSize,
+        fontWeight: FontWeight.w600,
+        letterSpacing: uiConstants.buttonLetterSpacing,
+      ),
+    ),
+    iconSize: WidgetStateProperty.all(uiConstants.buttonIconSize),
+  ),
+);
+
+// Botão Text melhorado com estados interativos
+TextButtonThemeData _darkTextButtonTheme = TextButtonThemeData(
+  style: ButtonStyle(
+    backgroundColor: WidgetStateProperty.resolveWith<Color>((
+      Set<WidgetState> states,
+    ) {
+      if (states.contains(WidgetState.hovered)) {
+        return _darkColorScheme.primary.withValues(alpha: 0.08);
+      }
+      if (states.contains(WidgetState.pressed)) {
+        return _darkColorScheme.primary.withValues(alpha: 0.12);
+      }
+      return Colors.transparent;
+    }),
+    foregroundColor: WidgetStateProperty.resolveWith<Color>((
+      Set<WidgetState> states,
+    ) {
+      if (states.contains(WidgetState.disabled)) {
+        return _darkColorScheme.onSurface.withValues(alpha: 0.38);
+      }
+      return _darkColorScheme.primary;
+    }),
+    padding: WidgetStateProperty.all(
+      EdgeInsets.symmetric(
+        horizontal: uiConstants.buttonPaddingHorizontal,
+        vertical: uiConstants.buttonPaddingVertical,
+      ),
+    ),
+    minimumSize: WidgetStateProperty.all(
+      Size.fromHeight(uiConstants.buttonHeight),
+    ),
+    shape: WidgetStateProperty.all(
+      RoundedRectangleBorder(borderRadius: BorderRadius.circular(uiConstants.radius16)),
+    ),
+    overlayColor: WidgetStateProperty.resolveWith<Color?>(( 
+      Set<WidgetState> states,
+    ) {
+      if (states.contains(WidgetState.hovered)) {
+        return _darkColorScheme.primary.withValues(alpha: 0.08);
+      }
+      if (states.contains(WidgetState.focused)) {
+        return _darkColorScheme.primary.withValues(alpha: 0.12);
+      }
+      if (states.contains(WidgetState.pressed)) {
+        return _darkColorScheme.primary.withValues(alpha: 0.12);
+      }
+      return null;
+    }),
+    textStyle: WidgetStateProperty.all(
+      TextStyle(
+        fontFamily: GoogleFonts.nunito().fontFamily,
+        fontSize: uiConstants.buttonFontSize,
+        fontWeight: FontWeight.w600,
+        letterSpacing: uiConstants.buttonLetterSpacing,
+      ),
+    ),
+    iconSize: WidgetStateProperty.all(uiConstants.buttonIconSize),
+  ),
+);
+
 ThemeData customDarkTheme = ThemeData(
   useMaterial3: true,
   colorScheme: _darkColorScheme,
   textTheme: _darkTextTheme,
   appBarTheme: _darkAppBarTheme,
   tooltipTheme: _darkTooltipTheme,
+  filledButtonTheme: _darkFilledButtonTheme,
+  elevatedButtonTheme: _darkElevatedButtonTheme,
+  outlinedButtonTheme: _darkOutlinedButtonTheme,
+  textButtonTheme: _darkTextButtonTheme,
+  platform: TargetPlatform.android,
 );

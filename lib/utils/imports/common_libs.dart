@@ -9,6 +9,7 @@ export 'package:flutter/services.dart';
 
 // Localization
 export 'package:flutter_localizations/flutter_localizations.dart';
+export '/utils/extensions/context_extensions.dart';
 
 // UI & Styling
 export 'package:google_fonts/google_fonts.dart';
@@ -43,6 +44,7 @@ export '../../config/locale_config.dart';
 export '../../providers/register_provider.dart';
 export '../../providers/theme_provider.dart';
 export '../../providers/locale_provider.dart';
+export '../../providers/onboarding_provider.dart';
 
 // =============================================================================
 // ROUTING
@@ -66,7 +68,6 @@ export '../../model/locale_data.dart';
 export '/utils/constants/app_constants.dart';
 export '/utils/constants/ui_constants.dart';
 export '/utils/constants/locale_constants.dart';
-export '/utils/constants/string_constants.dart';
 
 // =============================================================================
 // UI COMPONENTS

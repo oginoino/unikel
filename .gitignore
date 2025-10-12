@@ -187,3 +187,4 @@ docs/build/
 *.db
 *.sqlite
 *.sqlite3
+devtools_options.yaml

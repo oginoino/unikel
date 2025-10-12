@@ -6,7 +6,10 @@ class RouteInfo {
 }
 
 class Routes {
-  static const List<RouteInfo> routes = [RouteInfo(name: 'Home', path: '/')];
+  static const List<RouteInfo> routes = [
+    RouteInfo(name: 'Home', path: '/'),
+    RouteInfo(name: 'Onboarding', path: '/onboarding'),
+  ];
 
   // Helper method to get route by name
   static String getPathByName(String name) {
@@ -20,4 +23,6 @@ class Routes {
   // Convenience getters for easy access
   static String get home =>
       routes.firstWhere((route) => route.name == 'Home').path;
+  static String get onboarding =>
+      routes.firstWhere((route) => route.name == 'Onboarding').path;
 }

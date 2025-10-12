@@ -1,7 +1,7 @@
 import '../utils/imports/common_libs.dart';
 
-class MontrealApp extends StatelessWidget {
-  const MontrealApp({super.key});
+class UnikelApp extends StatelessWidget {
+  const UnikelApp({super.key});
 
   @override
   Widget build(BuildContext context) {
