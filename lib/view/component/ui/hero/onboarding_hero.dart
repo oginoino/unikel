@@ -3,6 +3,7 @@ import 'dart:math' as math;
 
 import '../../../../utils/imports/common_libs.dart';
 import '../../../../utils/constants/image_paths.dart';
+import '../button/custom_cta_button.dart';
 import '../page_indicator/page_indicator.dart';
 
 class OnboardingHero extends StatefulWidget {
@@ -58,8 +59,7 @@ class _OnboardingHeroState extends State<OnboardingHero> {
       },
     ];
 
-    return Column(
-      spacing: uiConstants.spacing16,
+    return SliverList.list(
       children: [
         SizedBox(
           height: MediaQuery.sizeOf(context).height * 0.3,
@@ -131,9 +131,23 @@ class _OnboardingHeroState extends State<OnboardingHero> {
             style: Theme.of(context).textTheme.headlineLarge,
           ),
         ),
+        SizedBox(height: uiConstants.spacing16),
         PageIndicator(
           currentPage: _currentPage,
           itemCount: onboardingData.length,
+        ),
+        SizedBox(height: uiConstants.spacing16),
+        Center(
+          child: CustomCTAButton(
+            variant: ButtonVariant.primary,
+            iconAlignment: IconAlignment.end,
+            icon: Icon(Icons.arrow_forward_ios_rounded),
+            label: context.l10n.proceed,
+            onPressed: () {
+              context.read<OnboardingProvider>().setOnboardingComplete(true);
+              context.go(Routes.home);
+            },
+          ),
         ),
       ],
     );
