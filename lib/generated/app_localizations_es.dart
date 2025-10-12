@@ -37,6 +37,18 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get languageTooltipSpanishMexico => 'Español (México)';
+
+  @override
+  String get onboarding_subtitle => 'Tu viaje financiero, simplificado.';
+
+  @override
+  String get onboarding_subtitle_1 => 'Tu viaje financiero, simplificado.';
+
+  @override
+  String get onboarding_subtitle_2 => 'Controla tus gastos con facilidad.';
+
+  @override
+  String get onboarding_subtitle_3 => 'Alcanza tus metas financieras.';
 }
 
 /// The translations for Spanish Castilian, as used in Mexico (`es_MX`).
@@ -72,4 +84,16 @@ class AppLocalizationsEsMx extends AppLocalizationsEs {
 
   @override
   String get languageTooltipSpanishMexico => 'Español (México)';
+
+  @override
+  String get onboarding_subtitle => 'Tu viaje financiero, simplificado.';
+
+  @override
+  String get onboarding_subtitle_1 => 'Tu viaje financiero, simplificado.';
+
+  @override
+  String get onboarding_subtitle_2 => 'Controla tus gastos con facilidad.';
+
+  @override
+  String get onboarding_subtitle_3 => 'Alcanza tus metas financieras.';
 }

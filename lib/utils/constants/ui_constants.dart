@@ -23,6 +23,7 @@ class UIConstants {
   final double spacing16 = 64.0; // 8 * 8
   final double spacing20 = 80.0; // 8 * 10
   final double spacing24 = 96.0; // 8 * 12
+  final double _spacing36 = 144.0; // 8 * 18
 
   // ==========================================================================
   // OPACITY SCALE
@@ -222,6 +223,11 @@ class UIConstants {
   final Color transparent = Colors.transparent;
 
   // ==========================================================================
+  // COMMON VALUES
+  // ==========================================================================
+  final int _animationDurationDefault = 300;
+
+  // ==========================================================================
   // UTILITY METHODS
   // ==========================================================================
 
@@ -254,4 +260,8 @@ class UIConstants {
   double? get buttonLetterSpacing => _buttonLetterSpacing;
 
   double? get buttonIconSize => _buttonIconSize;
+
+  int get animationDurationDefault => _animationDurationDefault;
+
+  double get spacing36 => _spacing36;
 }

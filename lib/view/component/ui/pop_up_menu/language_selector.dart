@@ -10,8 +10,15 @@ class LanguageSelector extends StatelessWidget {
 
     return Consumer<LocaleProvider>(
       builder: (context, localeProvider, child) {
+        final currentLocaleData = LocaleConstants.supportedLocales.firstWhere(
+          (data) => data.locale == localeProvider.currentLocale,
+          orElse: () => LocaleData(locale: localeProvider.currentLocale, flag: '🌐'), // Fallback to a globe emoji
+        );
         return PopupMenuButton<Locale>(
-          icon: Icon(Icons.language, color: colorScheme.onSurface),
+          icon: Text(
+            currentLocaleData.flag,
+            style: theme.textTheme.headlineSmall,
+          ), // Display the flag
           tooltip: context.l10n.languageSelection,
           color: colorScheme.surface,
           elevation: uiConstants.elevation8,
@@ -48,7 +55,10 @@ class LanguageSelector extends StatelessWidget {
                     padding: EdgeInsets.all(uiConstants.spacing2),
                     child: Row(
                       children: [
-                        Text(localeData.flag, style: theme.textTheme.bodyLarge),
+                        Text(
+                          localeData.flag,
+                          style: theme.textTheme.bodyLarge,
+                        ), // Display the flag
                         SizedBox(width: uiConstants.spacing2),
                         Text(
                           localeData.getDisplayName(context),

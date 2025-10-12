@@ -37,6 +37,18 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get languageTooltipSpanishMexico => 'Espanhol (México)';
+
+  @override
+  String get onboarding_subtitle => 'Sua jornada financeira, simplificada.';
+
+  @override
+  String get onboarding_subtitle_1 => 'Sua jornada financeira, simplificada.';
+
+  @override
+  String get onboarding_subtitle_2 => 'Controle seus gastos com facilidade.';
+
+  @override
+  String get onboarding_subtitle_3 => 'Alcance seus objetivos financeiros.';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).
@@ -72,4 +84,16 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get languageTooltipSpanishMexico => 'Espanhol (México)';
+
+  @override
+  String get onboarding_subtitle => 'Sua jornada financeira, simplificada.';
+
+  @override
+  String get onboarding_subtitle_1 => 'Sua jornada financeira, simplificada.';
+
+  @override
+  String get onboarding_subtitle_2 => 'Controle seus gastos com facilidade.';
+
+  @override
+  String get onboarding_subtitle_3 => 'Alcance seus objetivos financeiros.';
 }
