@@ -24,6 +24,12 @@ export 'package:get_it/get_it.dart';
 // Navigation
 export 'package:go_router/go_router.dart';
 
+// Math
+export 'dart:math';
+
+// Animation
+export 'package:flutter/animation.dart';
+
 // =============================================================================
 // APPLICATION CORE
 // =============================================================================
@@ -91,3 +97,5 @@ export '../../view/component/ui/app_bar/custom_sliver_app_bar.dart';
 export '../../view/component/ui/pop_up_menu/language_selector.dart';
 // Buttons
 export '../../view/component/ui/button/theme_toggle_button.dart';
+// Hero
+export '../../view/component/onboarding_hero.dart';
