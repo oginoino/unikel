@@ -78,7 +78,10 @@ class _OnboardingHeroState extends State<OnboardingHero> {
                     left: MediaQuery.sizeOf(context).width * 0.6 * (0.9),
                     child: Transform.rotate(
                       angle: 0.5 * math.pi,
-                      child: Image.asset(onboardingData[index]['image']!, width: 100),
+                      child: Image.asset(
+                        onboardingData[index]['image']!,
+                        width: 100,
+                      ),
                     ),
                   ),
                   Positioned(
@@ -86,7 +89,10 @@ class _OnboardingHeroState extends State<OnboardingHero> {
                     right: MediaQuery.sizeOf(context).width * 0.1 * (0.2),
                     child: Transform.rotate(
                       angle: 0.5 * math.pi,
-                      child: Image.asset(onboardingData[index]['image']!, width: 120),
+                      child: Image.asset(
+                        onboardingData[index]['image']!,
+                        width: 120,
+                      ),
                     ),
                   ),
                   Positioned(
@@ -94,7 +100,10 @@ class _OnboardingHeroState extends State<OnboardingHero> {
                     left: MediaQuery.sizeOf(context).width * 0.5 * (0.6),
                     child: Transform.rotate(
                       angle: 0.8 * math.pi,
-                      child: Image.asset(onboardingData[index]['image']!, width: 80),
+                      child: Image.asset(
+                        onboardingData[index]['image']!,
+                        width: 80,
+                      ),
                     ),
                   ),
                   Positioned(
@@ -102,7 +111,10 @@ class _OnboardingHeroState extends State<OnboardingHero> {
                     left: MediaQuery.sizeOf(context).width * 0.1 * (0.6),
                     child: Transform.rotate(
                       angle: 0.3 * math.pi,
-                      child: Image.asset(onboardingData[index]['image']!, width: 60),
+                      child: Image.asset(
+                        onboardingData[index]['image']!,
+                        width: 60,
+                      ),
                     ),
                   ),
                 ],
@@ -110,9 +122,29 @@ class _OnboardingHeroState extends State<OnboardingHero> {
             },
           ),
         ),
+
         Text(
           onboardingData[_currentPage]['text']!,
           style: Theme.of(context).textTheme.headlineLarge,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: List.generate(
+            onboardingData.length,
+            (index) => AnimatedContainer(
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeInOut,
+              margin: const EdgeInsets.symmetric(horizontal: 4.0),
+              height: 8.0,
+              width: _currentPage == index ? 24.0 : 8.0,
+              decoration: BoxDecoration(
+                color: _currentPage == index
+                    ? Theme.of(context).colorScheme.primary
+                    : Theme.of(context).colorScheme.primary.withOpacity(0.3),
+                borderRadius: BorderRadius.circular(4.0),
+              ),
+            ),
+          ),
         ),
       ],
     );
