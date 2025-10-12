@@ -6,7 +6,7 @@ Future<void> main() async {
     runApp(
       MultiProvider(
         providers: RegisterProvider.registerProviders(),
-        child: const MontrealApp(),
+        child: const UnikelApp(),
       ),
     );
   } catch (error) {

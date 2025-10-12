@@ -1,0 +1,13 @@
+{
+  "@@locale": "es_MX",
+  "languageSelection": "Seleccionar Idioma",
+  "lightMode": "Modo Claro",
+  "darkMode": "Modo Oscuro",
+  "proceed": "Proceder",
+  "languageNamePortuguese": "Portugués",
+  "languageNameEnglish": "Inglés",
+  "languageNameSpanish": "Español",
+  "languageTooltipPortugueseBrazil": "Portugués (Brasil)",
+  "languageTooltipEnglishUnitedStates": "Inglés (Estados Unidos)",
+  "languageTooltipSpanishMexico": "Español (México)"
+}
