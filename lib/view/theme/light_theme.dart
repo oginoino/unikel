@@ -63,7 +63,6 @@ ColorScheme _lightColorScheme = ColorScheme.light(
 );
 
 TextTheme _lightTextTheme = TextTheme(
-  // Display styles
   displayLarge: TextStyle(
     fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 57,
@@ -82,7 +81,6 @@ TextTheme _lightTextTheme = TextTheme(
     fontWeight: FontWeight.w400,
     color: _lightColorScheme.onSurface,
   ),
-  // Headline styles
   headlineLarge: TextStyle(
     fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 32,
@@ -101,7 +99,6 @@ TextTheme _lightTextTheme = TextTheme(
     fontWeight: FontWeight.w400,
     color: _lightColorScheme.onSurface,
   ),
-  // Title styles
   titleLarge: TextStyle(
     fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 22,
@@ -120,7 +117,6 @@ TextTheme _lightTextTheme = TextTheme(
     fontWeight: FontWeight.w500,
     color: _lightColorScheme.onSurface,
   ),
-  // Body styles
   bodyLarge: TextStyle(
     fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 16,
@@ -139,7 +135,6 @@ TextTheme _lightTextTheme = TextTheme(
     fontWeight: FontWeight.w400,
     color: _lightColorScheme.onSurface,
   ),
-  // Label styles
   labelLarge: TextStyle(
     fontFamily: GoogleFonts.nunito().fontFamily,
     fontSize: 14,
@@ -241,10 +236,31 @@ TooltipThemeData _lightTooltipTheme = TooltipThemeData(
   showDuration: Duration(milliseconds: uiConstants.tooltipShowDurationMs),
 );
 
+// Botão Filled melhorado com estados interativos
 FilledButtonThemeData _lightFilledButtonTheme = FilledButtonThemeData(
   style: ButtonStyle(
-    backgroundColor: WidgetStateProperty.all(_lightColorScheme.primary),
-    foregroundColor: WidgetStateProperty.all(_lightColorScheme.onPrimary),
+    backgroundColor: WidgetStateProperty.resolveWith<Color>((
+      Set<WidgetState> states,
+    ) {
+      if (states.contains(WidgetState.disabled)) {
+        return _lightColorScheme.primary.withValues(alpha: 0.38);
+      }
+      if (states.contains(WidgetState.pressed)) {
+        return _lightColorScheme.primary.withValues(alpha: 0.9);
+      }
+      if (states.contains(WidgetState.hovered)) {
+        return _lightColorScheme.primary.withValues(alpha: 0.92);
+      }
+      return _lightColorScheme.primary;
+    }),
+    foregroundColor: WidgetStateProperty.resolveWith<Color>((
+      Set<WidgetState> states,
+    ) {
+      if (states.contains(WidgetState.disabled)) {
+        return _lightColorScheme.onPrimary.withValues(alpha: 0.38);
+      }
+      return _lightColorScheme.onPrimary;
+    }),
     padding: WidgetStateProperty.all(
       EdgeInsets.symmetric(
         horizontal: uiConstants.buttonPaddingHorizontal,
@@ -255,14 +271,31 @@ FilledButtonThemeData _lightFilledButtonTheme = FilledButtonThemeData(
       Size.fromHeight(uiConstants.buttonHeight),
     ),
     shape: WidgetStateProperty.all(
-      RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16.0), // Increased from 8 to 16
-      ),
+      RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
     ),
-    elevation: WidgetStateProperty.all(uiConstants.elevation2),
-    overlayColor: WidgetStateProperty.all(
-      _lightColorScheme.primary.withValues(alpha: 0.1),
-    ),
+    elevation: WidgetStateProperty.resolveWith<double>((
+      Set<WidgetState> states,
+    ) {
+      if (states.contains(WidgetState.disabled)) return 0;
+      if (states.contains(WidgetState.pressed)) return uiConstants.elevation2;
+      if (states.contains(WidgetState.hovered)) return uiConstants.elevation4;
+      return uiConstants.elevation2;
+    }),
+    shadowColor: WidgetStateProperty.all(_lightColorScheme.shadow),
+    overlayColor: WidgetStateProperty.resolveWith<Color?>((
+      Set<WidgetState> states,
+    ) {
+      if (states.contains(WidgetState.hovered)) {
+        return _lightColorScheme.primary.withValues(alpha: 0.08);
+      }
+      if (states.contains(WidgetState.focused)) {
+        return _lightColorScheme.primary.withValues(alpha: 0.12);
+      }
+      if (states.contains(WidgetState.pressed)) {
+        return _lightColorScheme.primary.withValues(alpha: 0.12);
+      }
+      return null;
+    }),
     textStyle: WidgetStateProperty.all(
       TextStyle(
         fontFamily: GoogleFonts.nunito().fontFamily,
@@ -275,10 +308,31 @@ FilledButtonThemeData _lightFilledButtonTheme = FilledButtonThemeData(
   ),
 );
 
+// Botão Elevated melhorado com estados interativos
 ElevatedButtonThemeData _lightElevatedButtonTheme = ElevatedButtonThemeData(
   style: ButtonStyle(
-    backgroundColor: WidgetStateProperty.all(_lightColorScheme.primary),
-    foregroundColor: WidgetStateProperty.all(_lightColorScheme.onPrimary),
+    backgroundColor: WidgetStateProperty.resolveWith<Color>((
+      Set<WidgetState> states,
+    ) {
+      if (states.contains(WidgetState.disabled)) {
+        return _lightColorScheme.onSurface.withValues(alpha: 0.12);
+      }
+      if (states.contains(WidgetState.pressed)) {
+        return _lightColorScheme.primary;
+      }
+      if (states.contains(WidgetState.hovered)) {
+        return _lightColorScheme.primary.withValues(alpha: 0.95);
+      }
+      return _lightColorScheme.primary;
+    }),
+    foregroundColor: WidgetStateProperty.resolveWith<Color>((
+      Set<WidgetState> states,
+    ) {
+      if (states.contains(WidgetState.disabled)) {
+        return _lightColorScheme.onSurface.withValues(alpha: 0.38);
+      }
+      return _lightColorScheme.onPrimary;
+    }),
     padding: WidgetStateProperty.all(
       EdgeInsets.symmetric(
         horizontal: uiConstants.buttonPaddingHorizontal,
@@ -289,14 +343,31 @@ ElevatedButtonThemeData _lightElevatedButtonTheme = ElevatedButtonThemeData(
       Size.fromHeight(uiConstants.buttonHeight),
     ),
     shape: WidgetStateProperty.all(
-      RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16.0), // Increased from 8 to 16
-      ),
+      RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
     ),
-    elevation: WidgetStateProperty.all(uiConstants.elevation2),
-    overlayColor: WidgetStateProperty.all(
-      _lightColorScheme.primary.withValues(alpha: 0.1),
-    ),
+    elevation: WidgetStateProperty.resolveWith<double>((
+      Set<WidgetState> states,
+    ) {
+      if (states.contains(WidgetState.disabled)) return 0;
+      if (states.contains(WidgetState.pressed)) return uiConstants.elevation2;
+      if (states.contains(WidgetState.hovered)) return uiConstants.elevation8;
+      return uiConstants.elevation4;
+    }),
+    shadowColor: WidgetStateProperty.all(_lightColorScheme.shadow),
+    overlayColor: WidgetStateProperty.resolveWith<Color?>((
+      Set<WidgetState> states,
+    ) {
+      if (states.contains(WidgetState.hovered)) {
+        return _lightColorScheme.onPrimary.withValues(alpha: 0.08);
+      }
+      if (states.contains(WidgetState.focused)) {
+        return _lightColorScheme.onPrimary.withValues(alpha: 0.12);
+      }
+      if (states.contains(WidgetState.pressed)) {
+        return _lightColorScheme.onPrimary.withValues(alpha: 0.12);
+      }
+      return null;
+    }),
     textStyle: WidgetStateProperty.all(
       TextStyle(
         fontFamily: GoogleFonts.nunito().fontFamily,
@@ -309,10 +380,28 @@ ElevatedButtonThemeData _lightElevatedButtonTheme = ElevatedButtonThemeData(
   ),
 );
 
+// Botão Outlined melhorado com estados interativos
 OutlinedButtonThemeData _lightOutlinedButtonTheme = OutlinedButtonThemeData(
   style: ButtonStyle(
-    backgroundColor: WidgetStateProperty.all(_lightColorScheme.surface),
-    foregroundColor: WidgetStateProperty.all(_lightColorScheme.primary),
+    backgroundColor: WidgetStateProperty.resolveWith<Color>((
+      Set<WidgetState> states,
+    ) {
+      if (states.contains(WidgetState.hovered)) {
+        return _lightColorScheme.primary.withValues(alpha: 0.08);
+      }
+      if (states.contains(WidgetState.pressed)) {
+        return _lightColorScheme.primary.withValues(alpha: 0.12);
+      }
+      return Colors.transparent;
+    }),
+    foregroundColor: WidgetStateProperty.resolveWith<Color>((
+      Set<WidgetState> states,
+    ) {
+      if (states.contains(WidgetState.disabled)) {
+        return _lightColorScheme.onSurface.withValues(alpha: 0.38);
+      }
+      return _lightColorScheme.primary;
+    }),
     padding: WidgetStateProperty.all(
       EdgeInsets.symmetric(
         horizontal: uiConstants.buttonPaddingHorizontal,
@@ -323,16 +412,36 @@ OutlinedButtonThemeData _lightOutlinedButtonTheme = OutlinedButtonThemeData(
       Size.fromHeight(uiConstants.buttonHeight),
     ),
     shape: WidgetStateProperty.all(
-      RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16.0), // Increased from 8 to 16
-      ),
+      RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
     ),
-    side: WidgetStateProperty.all(
-      BorderSide(color: _lightColorScheme.primary, width: uiConstants.spacing0),
-    ),
-    overlayColor: WidgetStateProperty.all(
-      _lightColorScheme.primary.withValues(alpha: 0.1),
-    ),
+    side: WidgetStateProperty.resolveWith<BorderSide>((
+      Set<WidgetState> states,
+    ) {
+      if (states.contains(WidgetState.disabled)) {
+        return BorderSide(
+          color: _lightColorScheme.onSurface.withValues(alpha: 0.12),
+          width: 1.0,
+        );
+      }
+      if (states.contains(WidgetState.hovered)) {
+        return BorderSide(color: _lightColorScheme.primary, width: 1.5);
+      }
+      return BorderSide(color: _lightColorScheme.primary, width: 1.0);
+    }),
+    overlayColor: WidgetStateProperty.resolveWith<Color?>((
+      Set<WidgetState> states,
+    ) {
+      if (states.contains(WidgetState.hovered)) {
+        return _lightColorScheme.primary.withValues(alpha: 0.04);
+      }
+      if (states.contains(WidgetState.focused)) {
+        return _lightColorScheme.primary.withValues(alpha: 0.08);
+      }
+      if (states.contains(WidgetState.pressed)) {
+        return _lightColorScheme.primary.withValues(alpha: 0.12);
+      }
+      return null;
+    }),
     textStyle: WidgetStateProperty.all(
       TextStyle(
         fontFamily: GoogleFonts.nunito().fontFamily,
@@ -345,10 +454,28 @@ OutlinedButtonThemeData _lightOutlinedButtonTheme = OutlinedButtonThemeData(
   ),
 );
 
+// Botão Text melhorado com estados interativos
 TextButtonThemeData _lightTextButtonTheme = TextButtonThemeData(
   style: ButtonStyle(
-    backgroundColor: WidgetStateProperty.all(uiConstants.transparent),
-    foregroundColor: WidgetStateProperty.all(_lightColorScheme.primary),
+    backgroundColor: WidgetStateProperty.resolveWith<Color>((
+      Set<WidgetState> states,
+    ) {
+      if (states.contains(WidgetState.hovered)) {
+        return _lightColorScheme.primary.withValues(alpha: 0.08);
+      }
+      if (states.contains(WidgetState.pressed)) {
+        return _lightColorScheme.primary.withValues(alpha: 0.12);
+      }
+      return Colors.transparent;
+    }),
+    foregroundColor: WidgetStateProperty.resolveWith<Color>((
+      Set<WidgetState> states,
+    ) {
+      if (states.contains(WidgetState.disabled)) {
+        return _lightColorScheme.onSurface.withValues(alpha: 0.38);
+      }
+      return _lightColorScheme.primary;
+    }),
     padding: WidgetStateProperty.all(
       EdgeInsets.symmetric(
         horizontal: uiConstants.buttonPaddingHorizontal,
@@ -359,13 +486,22 @@ TextButtonThemeData _lightTextButtonTheme = TextButtonThemeData(
       Size.fromHeight(uiConstants.buttonHeight),
     ),
     shape: WidgetStateProperty.all(
-      RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16.0), // Increased from 8 to 16
-      ),
+      RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
     ),
-    overlayColor: WidgetStateProperty.all(
-      _lightColorScheme.primary.withValues(alpha: 0.1),
-    ),
+    overlayColor: WidgetStateProperty.resolveWith<Color?>((
+      Set<WidgetState> states,
+    ) {
+      if (states.contains(WidgetState.hovered)) {
+        return _lightColorScheme.primary.withValues(alpha: 0.08);
+      }
+      if (states.contains(WidgetState.focused)) {
+        return _lightColorScheme.primary.withValues(alpha: 0.12);
+      }
+      if (states.contains(WidgetState.pressed)) {
+        return _lightColorScheme.primary.withValues(alpha: 0.12);
+      }
+      return null;
+    }),
     textStyle: WidgetStateProperty.all(
       TextStyle(
         fontFamily: GoogleFonts.nunito().fontFamily,
