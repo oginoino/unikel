@@ -1,6 +1,6 @@
 import '../../../../utils/imports/common_libs.dart';
 
-enum ButtonVariant { primary, secondary }
+enum ButtonVariant { primary, secondary, text }
 
 class CustomCTAButton extends StatelessWidget {
   const CustomCTAButton({
@@ -77,6 +77,13 @@ class CustomCTAButton extends StatelessWidget {
 
           case ButtonVariant.secondary:
             return OutlinedButton(
+              onPressed: isLoading ? null : onPressed,
+              style: style,
+              child: buttonChild,
+            );
+
+          case ButtonVariant.text:
+            return TextButton(
               onPressed: isLoading ? null : onPressed,
               style: style,
               child: buttonChild,
