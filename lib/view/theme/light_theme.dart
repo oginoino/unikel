@@ -345,6 +345,39 @@ OutlinedButtonThemeData _lightOutlinedButtonTheme = OutlinedButtonThemeData(
   ),
 );
 
+TextButtonThemeData _lightTextButtonTheme = TextButtonThemeData(
+  style: ButtonStyle(
+    backgroundColor: WidgetStateProperty.all(uiConstants.transparent),
+    foregroundColor: WidgetStateProperty.all(_lightColorScheme.primary),
+    padding: WidgetStateProperty.all(
+      EdgeInsets.symmetric(
+        horizontal: uiConstants.buttonPaddingHorizontal,
+        vertical: uiConstants.buttonPaddingVertical,
+      ),
+    ),
+    minimumSize: WidgetStateProperty.all(
+      Size.fromHeight(uiConstants.buttonHeight),
+    ),
+    shape: WidgetStateProperty.all(
+      RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16.0), // Increased from 8 to 16
+      ),
+    ),
+    overlayColor: WidgetStateProperty.all(
+      _lightColorScheme.primary.withValues(alpha: 0.1),
+    ),
+    textStyle: WidgetStateProperty.all(
+      TextStyle(
+        fontFamily: GoogleFonts.nunito().fontFamily,
+        fontSize: uiConstants.buttonFontSize,
+        fontWeight: FontWeight.w600,
+        letterSpacing: uiConstants.buttonLetterSpacing,
+      ),
+    ),
+    iconSize: WidgetStateProperty.all(uiConstants.buttonIconSize),
+  ),
+);
+
 ThemeData customLightTheme = ThemeData(
   useMaterial3: true,
   colorScheme: _lightColorScheme,
@@ -354,4 +387,5 @@ ThemeData customLightTheme = ThemeData(
   filledButtonTheme: _lightFilledButtonTheme,
   elevatedButtonTheme: _lightElevatedButtonTheme,
   outlinedButtonTheme: _lightOutlinedButtonTheme,
+  textButtonTheme: _lightTextButtonTheme,
 );
