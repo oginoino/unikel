@@ -1,5 +1,5 @@
 import '../../utils/imports/common_libs.dart';
-import '../component/ui/button/custom_button.dart';
+import '../component/ui/button/custom_cta_button.dart';
 
 class OnboardingPage extends StatelessWidget {
   const OnboardingPage({super.key});
@@ -9,7 +9,7 @@ class OnboardingPage extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: uiConstants.spacing4),
       child: Center(
-        child: CustomButton(
+        child: CustomCTAButton(
           variant: ButtonVariant.primary,
           iconAlignment: IconAlignment.end,
           icon: Icon(Icons.arrow_forward_ios_rounded),

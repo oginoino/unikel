@@ -2,8 +2,8 @@ import '../../../../utils/imports/common_libs.dart';
 
 enum ButtonVariant { primary, secondary }
 
-class CustomButton extends StatelessWidget {
-  const CustomButton({
+class CustomCTAButton extends StatelessWidget {
+  const CustomCTAButton({
     super.key,
     this.variant = ButtonVariant.primary,
     this.icon,
