@@ -5,7 +5,7 @@ import '../../../../utils/imports/common_libs.dart';
 import '../../../../utils/constants/image_paths.dart';
 import '../button/custom_cta_button.dart';
 import '../page_indicator/page_indicator.dart';
-import '../responsive_padding.dart';
+import '../padding/responsive_padding.dart';
 
 class OnboardingHero extends StatefulWidget {
   const OnboardingHero({super.key});
