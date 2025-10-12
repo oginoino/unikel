@@ -7,27 +7,35 @@ class HandleRedirect {
   String? handleRedirect(BuildContext context, GoRouterState state) {
     _initialDeeplink ??= state.uri.toString();
 
-    return _redirectBasedOnState(state, context);
-  }
-
-  String? _redirectBasedOnState(GoRouterState state, BuildContext context) {
-    return _redirectToOnboardingIfNeeded(context, state);
-  }
-
-  String? _redirectToOnboardingIfNeeded(
-    BuildContext context,
-    GoRouterState state,
-  ) {
-    final isOnboardingComplete = context
-        .read<OnboardingProvider>()
-        .isOnboardingComplete;
+    final onboardingProvider = context.read<OnboardingProvider>();
+    final isOnboardingComplete = onboardingProvider.isOnboardingComplete;
+    final isFirstAccessComplete = onboardingProvider.isFirstAccessComplete;
     final path = state.uri.path;
-    if (!isOnboardingComplete && path != Routes.onboarding) {
-      return Routes.onboarding;
+
+    // 1. Handle onboarding redirection
+    if (!isOnboardingComplete) {
+      if (path != Routes.onboarding) {
+        return Routes.onboarding;
+      }
+      // If onboarding is not complete and we are on the onboarding page, stay there.
+      return null;
     }
-    if (isOnboardingComplete && path == Routes.onboarding) {
+
+    // 2. Handle first access redirection (only if onboarding is complete)
+    if (!isFirstAccessComplete) {
+      if (path != Routes.firstAccessCtaToRegister) {
+        return Routes.firstAccessCtaToRegister;
+      }
+      // If first access is not complete and we are on the first access page, stay there.
+      return null;
+    }
+
+    // 3. If both are complete, and user is on first access or onboarding page, redirect to home
+    if (path == Routes.firstAccessCtaToRegister || path == Routes.onboarding) {
       return Routes.home;
     }
+
+    // No redirection needed
     return null;
   }
 }
