@@ -159,7 +159,7 @@ AppBarTheme _darkAppBarTheme = AppBarTheme(
   backgroundColor: _darkColorScheme.surface,
   foregroundColor: _darkColorScheme.onSurface,
   elevation: 0,
-  scrolledUnderElevation: uiConstants.elevation4,
+  scrolledUnderElevation: 0,
   shadowColor: _darkColorScheme.shadow,
   surfaceTintColor: _darkColorScheme.surfaceTint,
   shape: RoundedRectangleBorder(

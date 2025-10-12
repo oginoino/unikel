@@ -88,6 +88,7 @@ class UIConstants {
   final double appBarActionsPadding = 8.0;
   final double appBarTitleFontSize = 22.0;
   final double appBarToolbarFontSize = 16.0;
+  final double appBarExpandedHeight = 200.0;
 
   // Button
   final double buttonPaddingHorizontal = 16.0;
