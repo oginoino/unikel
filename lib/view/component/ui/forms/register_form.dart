@@ -98,7 +98,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                     ),
                     SizedBox(height: uiConstants.spacing16),
                     Padding(
-                      padding: const EdgeInsets.all(16.0),
+                      padding: EdgeInsets.all(uiConstants.spacing4),
                       child: Form(
                         key: _formKeys[1],
                         child: Column(
@@ -135,7 +135,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                     ),
                     SizedBox(height: uiConstants.spacing16),
                     Padding(
-                      padding: const EdgeInsets.all(16.0),
+                      padding: EdgeInsets.all(uiConstants.spacing4),
                       child: Form(
                         key: _formKeys[2],
                         child: Column(
