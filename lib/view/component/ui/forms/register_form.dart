@@ -1,4 +1,5 @@
 import 'package:unikel/view/component/ui/button/custom_cta_button.dart';
+import 'package:unikel/view/component/ui/page_indicator/page_indicator.dart';
 
 import '../../../../utils/form_validators.dart';
 import '../../../../utils/imports/common_libs.dart';
@@ -86,10 +87,8 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                           labelText: context.l10n.labelPhone,
                           border: OutlineInputBorder(),
                         ),
-                        validator: (value) => FormValidators.validatePhone(
-                          value,
-                          context,
-                        ),
+                        validator: (value) =>
+                            FormValidators.validatePhone(value, context),
                       ),
                     ],
                   ),
@@ -111,10 +110,8 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                           labelText: context.l10n.labelPhoneCode,
                           border: OutlineInputBorder(),
                         ),
-                        validator: (value) => FormValidators.validatePhoneCode(
-                          value,
-                          context,
-                        ),
+                        validator: (value) =>
+                            FormValidators.validatePhoneCode(value, context),
                       ),
                     ],
                   ),
@@ -123,6 +120,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
             ],
           ),
         ),
+        PageIndicator(currentPage: _currentPage, itemCount: _formKeys.length),
         Padding(
           padding: EdgeInsets.symmetric(
             horizontal: uiConstants.spacing4,
