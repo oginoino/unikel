@@ -49,72 +49,117 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
             children: [
               // Page 1: Name Input
               ResponsivePadding(
-                child: Form(
-                  key: _formKeys[0],
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      TextFormField(
-                        controller: _nameController,
-                        decoration: InputDecoration(
-                          labelText: context.l10n.labelName,
-                          border: OutlineInputBorder(),
-                        ),
-                        validator: (value) => FormValidators.validateRequired(
-                          value,
-                          context.l10n.nameValue,
-                          context,
-                        ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    SizedBox(height: uiConstants.spacing16),
+                    Text(
+                      context.l10n.registerNameTitle,
+                      textAlign: TextAlign.left,
+                      style: Theme.of(context).textTheme.headlineMedium,
+                    ),
+                    SizedBox(height: uiConstants.spacing16),
+                    Form(
+                      key: _formKeys[0],
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          TextFormField(
+                            controller: _nameController,
+                            decoration: InputDecoration(
+                              labelText: context.l10n.labelName,
+                              border: OutlineInputBorder(),
+                            ),
+                            validator: (value) =>
+                                FormValidators.validateRequired(
+                                  value,
+                                  context.l10n.nameValue,
+                                  context,
+                                ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
               // Page 2: Phone Input
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Form(
-                  key: _formKeys[1],
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      TextFormField(
-                        controller: _phoneController,
-                        keyboardType: TextInputType.phone,
-                        decoration: InputDecoration(
-                          labelText: context.l10n.labelPhone,
-                          border: OutlineInputBorder(),
+              ResponsivePadding(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    SizedBox(height: uiConstants.spacing16),
+                    Text(
+                      context.l10n.registerPhoneTitle,
+                      style: Theme.of(context).textTheme.headlineMedium,
+                    ),
+                    SizedBox(height: uiConstants.spacing16),
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Form(
+                        key: _formKeys[1],
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            TextFormField(
+                              controller: _phoneController,
+                              keyboardType: TextInputType.phone,
+                              decoration: InputDecoration(
+                                labelText: context.l10n.labelPhone,
+                                border: OutlineInputBorder(),
+                              ),
+                              validator: (value) =>
+                                  FormValidators.validatePhone(value, context),
+                            ),
+                          ],
                         ),
-                        validator: (value) =>
-                            FormValidators.validatePhone(value, context),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
               // Page 3: Phone Code Input
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Form(
-                  key: _formKeys[2],
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      TextFormField(
-                        controller: _phoneCodeController,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          labelText: context.l10n.labelPhoneCode,
-                          border: OutlineInputBorder(),
+              ResponsivePadding(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    SizedBox(height: uiConstants.spacing16),
+                    Text(
+                      context.l10n.registerPhoneCodeTitle,
+                      style: Theme.of(context).textTheme.headlineMedium,
+                    ),
+                    SizedBox(height: uiConstants.spacing16),
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Form(
+                        key: _formKeys[2],
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            TextFormField(
+                              controller: _phoneCodeController,
+                              keyboardType: TextInputType.number,
+                              decoration: InputDecoration(
+                                labelText: context.l10n.labelPhoneCode,
+                                border: OutlineInputBorder(),
+                              ),
+                              validator: (value) =>
+                                  FormValidators.validatePhoneCode(
+                                    value,
+                                    context,
+                                  ),
+                            ),
+                          ],
                         ),
-                        validator: (value) =>
-                            FormValidators.validatePhoneCode(value, context),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ],

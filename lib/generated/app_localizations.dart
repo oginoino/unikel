@@ -277,6 +277,24 @@ abstract class AppLocalizations {
   /// **'Phone Code'**
   String get labelPhoneCode;
 
+  /// No description provided for @registerNameTitle.
+  ///
+  /// In en_US, this message translates to:
+  /// **'What is your name?'**
+  String get registerNameTitle;
+
+  /// No description provided for @registerPhoneTitle.
+  ///
+  /// In en_US, this message translates to:
+  /// **'What is your phone number?'**
+  String get registerPhoneTitle;
+
+  /// No description provided for @registerPhoneCodeTitle.
+  ///
+  /// In en_US, this message translates to:
+  /// **'What is your phone code?'**
+  String get registerPhoneCodeTitle;
+
   /// No description provided for @phoneCodeValue.
   ///
   /// In en_US, this message translates to:

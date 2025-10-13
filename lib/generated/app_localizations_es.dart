@@ -102,6 +102,15 @@ class AppLocalizationsEs extends AppLocalizations {
   String get labelPhoneCode => 'Código telefónico';
 
   @override
+  String get registerNameTitle => '¿Cuál es tu nombre?';
+
+  @override
+  String get registerPhoneTitle => '¿Cuál es tu número de teléfono?';
+
+  @override
+  String get registerPhoneCodeTitle => '¿Cuál es el código de tu teléfono?';
+
+  @override
   String get phoneCodeValue => 'Código telefónico';
 
   @override
@@ -217,6 +226,15 @@ class AppLocalizationsEsMx extends AppLocalizationsEs {
 
   @override
   String get labelPhoneCode => 'Código telefónico';
+
+  @override
+  String get registerNameTitle => '¿Cuál es tu nombre?';
+
+  @override
+  String get registerPhoneTitle => '¿Cuál es tu número de teléfono?';
+
+  @override
+  String get registerPhoneCodeTitle => '¿Cuál es el código de tu teléfono?';
 
   @override
   String get phoneCodeValue => 'Código telefónico';

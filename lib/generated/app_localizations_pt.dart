@@ -100,6 +100,15 @@ class AppLocalizationsPt extends AppLocalizations {
   String get labelPhoneCode => 'Código do Telefone';
 
   @override
+  String get registerNameTitle => 'Qual é o seu nome?';
+
+  @override
+  String get registerPhoneTitle => 'Qual é o seu telefone?';
+
+  @override
+  String get registerPhoneCodeTitle => 'Qual é o código do seu telefone?';
+
+  @override
   String get phoneCodeValue => 'Código do Telefone';
 
   @override
@@ -213,6 +222,15 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get labelPhoneCode => 'Código do Telefone';
+
+  @override
+  String get registerNameTitle => 'Qual é o seu nome?';
+
+  @override
+  String get registerPhoneTitle => 'Qual é o seu telefone?';
+
+  @override
+  String get registerPhoneCodeTitle => 'Qual é o código do seu telefone?';
 
   @override
   String get phoneCodeValue => 'Código do Telefone';

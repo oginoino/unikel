@@ -99,6 +99,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get labelPhoneCode => 'Phone Code';
 
   @override
+  String get registerNameTitle => 'What is your name?';
+
+  @override
+  String get registerPhoneTitle => 'What is your phone number?';
+
+  @override
+  String get registerPhoneCodeTitle => 'What is your phone code?';
+
+  @override
   String get phoneCodeValue => 'Phone Code';
 
   @override
@@ -211,6 +220,15 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get labelPhoneCode => 'Phone Code';
+
+  @override
+  String get registerNameTitle => 'What is your name?';
+
+  @override
+  String get registerPhoneTitle => 'What is your phone number?';
+
+  @override
+  String get registerPhoneCodeTitle => 'What is your phone code?';
 
   @override
   String get phoneCodeValue => 'Phone Code';
