@@ -476,8 +476,8 @@ ThemeData customLightTheme = ThemeData(
     hoverColor: _lightColorScheme.surfaceContainerHigh,
     focusColor: _lightColorScheme.primary.withValues(alpha: 0.12),
     contentPadding: EdgeInsets.symmetric(
-      horizontal: uiConstants.spacing2,
-      vertical: uiConstants.spacing2,
+      horizontal: uiConstants.spacing3,
+      vertical: uiConstants.spacing3,
     ),
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(uiConstants.radius12),
@@ -499,11 +499,13 @@ ThemeData customLightTheme = ThemeData(
       borderRadius: BorderRadius.circular(uiConstants.radius12),
       borderSide: BorderSide(color: _lightColorScheme.error, width: 2.0),
     ),
-    labelStyle: _lightTextTheme.labelMedium,
-    hintStyle: _lightTextTheme.bodyMedium?.copyWith(
+    labelStyle: _lightTextTheme.labelLarge?.copyWith(
+      color: _lightColorScheme.onSurfaceVariant,
+    ),
+    hintStyle: _lightTextTheme.bodyLarge?.copyWith(
       color: _lightColorScheme.onSurfaceVariant.withValues(alpha: 0.6),
     ),
-    errorStyle: _lightTextTheme.bodyMedium?.copyWith(
+    errorStyle: _lightTextTheme.bodySmall?.copyWith(
       color: _lightColorScheme.error,
     ),
   ),

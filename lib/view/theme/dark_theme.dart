@@ -463,8 +463,8 @@ ThemeData customDarkTheme = ThemeData(
     hoverColor: _darkColorScheme.surfaceContainerHigh,
     focusColor: _darkColorScheme.primary.withValues(alpha: 0.12),
     contentPadding: EdgeInsets.symmetric(
-      horizontal: uiConstants.spacing2,
-      vertical: uiConstants.spacing2,
+      horizontal: uiConstants.spacing3,
+      vertical: uiConstants.spacing3,
     ),
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(uiConstants.radius12),
@@ -489,8 +489,11 @@ ThemeData customDarkTheme = ThemeData(
     labelStyle: _darkTextTheme.labelLarge?.copyWith(
       color: _darkColorScheme.onSurfaceVariant,
     ),
-    hintStyle: _darkTextTheme.bodyMedium?.copyWith(
+    hintStyle: _darkTextTheme.bodyLarge?.copyWith(
       color: _darkColorScheme.onSurfaceVariant.withValues(alpha: 0.6),
+    ),
+    errorStyle: _darkTextTheme.bodySmall?.copyWith(
+      color: _darkColorScheme.error,
     ),
   ),
   platform: TargetPlatform.android,
