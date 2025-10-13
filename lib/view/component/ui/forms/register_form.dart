@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:unikel/config/di.dart';
+import 'package:unikel/view/component/ui/padding/responsive_padding.dart';
 
 import '../../../../utils/form_validators.dart';
 
@@ -45,8 +47,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
             },
             children: [
               // Page 1: Name Input
-              Padding(
-                padding: const EdgeInsets.all(16.0),
+              ResponsivePadding(
                 child: Form(
                   key: _formKeys[0],
                   child: Column(
@@ -143,7 +144,10 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: EdgeInsets.symmetric(
+            horizontal: uiConstants.spacing4,
+            vertical: uiConstants.spacing20,
+          ),
           child: SizedBox(
             height: 50.0, // Define uma altura fixa para o Row dos botões
             child: Row(
