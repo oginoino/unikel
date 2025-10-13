@@ -4,6 +4,7 @@ import 'package:unikel/view/component/ui/page_indicator/page_indicator.dart';
 import '../../../../utils/form_validators.dart';
 import '../../../../utils/imports/common_libs.dart';
 import '../padding/responsive_padding.dart';
+import 'package:country_code_picker/country_code_picker.dart';
 
 class RegisterUserForm extends StatefulWidget {
   const RegisterUserForm({super.key});
@@ -15,6 +16,7 @@ class RegisterUserForm extends StatefulWidget {
 class _RegisterUserFormState extends State<RegisterUserForm> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
+  CountryCode _selectedCountryCode = CountryCode.fromCountryCode('BR');
   final List<GlobalKey<FormState>> _formKeys = [
     GlobalKey<FormState>(),
     GlobalKey<FormState>(),
@@ -23,6 +25,12 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _phoneCodeController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _phoneCodeController.text = _selectedCountryCode.dialCode ?? '';
+  }
 
   @override
   void dispose() {
@@ -105,15 +113,37 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            TextFormField(
-                              controller: _phoneController,
-                              keyboardType: TextInputType.phone,
-                              decoration: InputDecoration(
-                                labelText: context.l10n.labelPhone,
-                                border: OutlineInputBorder(),
-                              ),
-                              validator: (value) =>
-                                  FormValidators.validatePhone(value, context),
+                            Row(
+                              children: [
+                                SizedBox(
+                                  width: 120,
+                                  child: CountryCodePicker(
+                                    onChanged: (countryCode) {
+                                      setState(() {
+                                        _selectedCountryCode = countryCode;
+                                        _phoneCodeController.text = countryCode.dialCode ?? '';
+                                      });
+                                    },
+                                    initialSelection: _selectedCountryCode.code,
+                                    favorite: const ['+55','BR'],
+                                    showCountryOnly: false,
+                                    showOnlyCountryWhenClosed: false,
+                                    alignLeft: false,
+                                  ),
+                                ),
+                                Expanded(
+                                  child: TextFormField(
+                                    controller: _phoneController,
+                                    keyboardType: TextInputType.phone,
+                                    decoration: InputDecoration(
+                                      labelText: context.l10n.labelPhone,
+                                      border: OutlineInputBorder(),
+                                    ),
+                                    validator: (value) =>
+                                        FormValidators.validatePhone(value, context),
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
