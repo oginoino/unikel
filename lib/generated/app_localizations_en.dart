@@ -49,6 +49,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get onboarding_subtitle_3 => 'Achieve your financial goals.';
+
+  @override
+  String get register => 'Register';
+
+  @override
+  String get login => 'Login';
 }
 
 /// The translations for English, as used in the United States (`en_US`).
@@ -96,4 +102,10 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get onboarding_subtitle_3 => 'Achieve your financial goals.';
+
+  @override
+  String get register => 'Register';
+
+  @override
+  String get login => 'Login';
 }

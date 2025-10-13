@@ -49,6 +49,12 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get onboarding_subtitle_3 => 'Alcanza tus metas financieras.';
+
+  @override
+  String get register => 'Registro';
+
+  @override
+  String get login => 'Inicio de Sesión';
 }
 
 /// The translations for Spanish Castilian, as used in Mexico (`es_MX`).
@@ -96,4 +102,10 @@ class AppLocalizationsEsMx extends AppLocalizationsEs {
 
   @override
   String get onboarding_subtitle_3 => 'Alcanza tus metas financieras.';
+
+  @override
+  String get register => 'Registro';
+
+  @override
+  String get login => 'Inicio de Sesión';
 }

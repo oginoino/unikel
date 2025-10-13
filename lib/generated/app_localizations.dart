@@ -186,6 +186,18 @@ abstract class AppLocalizations {
   /// In en_US, this message translates to:
   /// **'Achieve your financial goals.'**
   String get onboarding_subtitle_3;
+
+  /// No description provided for @register.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Register'**
+  String get register;
+
+  /// No description provided for @login.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Login'**
+  String get login;
 }
 
 class _AppLocalizationsDelegate

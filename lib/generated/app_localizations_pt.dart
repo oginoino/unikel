@@ -49,6 +49,12 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get onboarding_subtitle_3 => 'Alcance seus objetivos financeiros.';
+
+  @override
+  String get register => 'Cadastre-se';
+
+  @override
+  String get login => 'Entrar';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).
@@ -96,4 +102,10 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get onboarding_subtitle_3 => 'Alcance seus objetivos financeiros.';
+
+  @override
+  String get register => 'Cadastre-se';
+
+  @override
+  String get login => 'Entrar';
 }
