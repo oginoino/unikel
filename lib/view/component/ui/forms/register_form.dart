@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class RegisterForm extends StatefulWidget {
-  const RegisterForm({super.key});
+class RegisterUserForm extends StatefulWidget {
+  const RegisterUserForm({super.key});
 
   @override
-  State<RegisterForm> createState() => _RegisterFormState();
+  State<RegisterUserForm> createState() => _RegisterUserFormState();
 }
 
-class _RegisterFormState extends State<RegisterForm> {
+class _RegisterUserFormState extends State<RegisterUserForm> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
   final List<GlobalKey<FormState>> _formKeys = [
@@ -133,32 +133,42 @@ class _RegisterFormState extends State<RegisterForm> {
             ],
           ),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            if (_currentPage > 0)
-              ElevatedButton(
-                onPressed: () {
-                  _pageController.previousPage(
-                    duration: const Duration(milliseconds: 300),
-                    curve: Curves.easeIn,
-                  );
-                },
-                child: const Text('Anterior'),
-              ),
-            if (_currentPage < 2) // Assuming 3 pages
-              ElevatedButton(
-                onPressed: () {
-                  if (_formKeys[_currentPage].currentState!.validate()) {
-                    _pageController.nextPage(
-                      duration: const Duration(milliseconds: 300),
-                      curve: Curves.easeIn,
-                    );
-                  }
-                },
-                child: const Text('Próximo'),
-              ),
-          ],
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: SizedBox(
+            height: 50.0, // Define uma altura fixa para o Row dos botões
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                if (_currentPage > 0)
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        _pageController.previousPage(
+                          duration: const Duration(milliseconds: 300),
+                          curve: Curves.easeIn,
+                        );
+                      },
+                      child: const Text('Anterior'),
+                    ),
+                  ),
+                if (_currentPage < 2) // Assuming 3 pages
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if (_formKeys[_currentPage].currentState!.validate()) {
+                          _pageController.nextPage(
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.easeIn,
+                          );
+                        }
+                      },
+                      child: const Text('Próximo'),
+                    ),
+                  ),
+              ],
+            ),
+          ),
         ),
       ],
     );

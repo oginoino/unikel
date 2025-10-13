@@ -457,5 +457,41 @@ ThemeData customDarkTheme = ThemeData(
   elevatedButtonTheme: _darkElevatedButtonTheme,
   outlinedButtonTheme: _darkOutlinedButtonTheme,
   textButtonTheme: _darkTextButtonTheme,
+  inputDecorationTheme: InputDecorationTheme(
+    filled: true,
+    fillColor: _darkColorScheme.surfaceContainerHighest,
+    hoverColor: _darkColorScheme.surfaceContainerHigh,
+    focusColor: _darkColorScheme.primary.withValues(alpha: 0.12),
+    contentPadding: EdgeInsets.symmetric(
+      horizontal: uiConstants.spacing2,
+      vertical: uiConstants.spacing2,
+    ),
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(uiConstants.radius12),
+      borderSide: BorderSide.none,
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(uiConstants.radius12),
+      borderSide: BorderSide.none,
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(uiConstants.radius12),
+      borderSide: BorderSide(color: _darkColorScheme.primary, width: 2.0),
+    ),
+    errorBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(uiConstants.radius12),
+      borderSide: BorderSide(color: _darkColorScheme.error, width: 2.0),
+    ),
+    focusedErrorBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(uiConstants.radius12),
+      borderSide: BorderSide(color: _darkColorScheme.error, width: 2.0),
+    ),
+    labelStyle: _darkTextTheme.labelLarge?.copyWith(
+      color: _darkColorScheme.onSurfaceVariant,
+    ),
+    hintStyle: _darkTextTheme.bodyMedium?.copyWith(
+      color: _darkColorScheme.onSurfaceVariant.withValues(alpha: 0.6),
+    ),
+  ),
   platform: TargetPlatform.android,
 );

@@ -470,4 +470,41 @@ ThemeData customLightTheme = ThemeData(
   elevatedButtonTheme: _lightElevatedButtonTheme,
   outlinedButtonTheme: _lightOutlinedButtonTheme,
   textButtonTheme: _lightTextButtonTheme,
+  inputDecorationTheme: InputDecorationTheme(
+    filled: true,
+    fillColor: _lightColorScheme.surfaceContainerHighest,
+    hoverColor: _lightColorScheme.surfaceContainerHigh,
+    focusColor: _lightColorScheme.primary.withValues(alpha: 0.12),
+    contentPadding: EdgeInsets.symmetric(
+      horizontal: uiConstants.spacing2,
+      vertical: uiConstants.spacing2,
+    ),
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(uiConstants.radius12),
+      borderSide: BorderSide.none,
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(uiConstants.radius12),
+      borderSide: BorderSide.none,
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(uiConstants.radius12),
+      borderSide: BorderSide(color: _lightColorScheme.primary, width: 2.0),
+    ),
+    errorBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(uiConstants.radius12),
+      borderSide: BorderSide(color: _lightColorScheme.error, width: 2.0),
+    ),
+    focusedErrorBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(uiConstants.radius12),
+      borderSide: BorderSide(color: _lightColorScheme.error, width: 2.0),
+    ),
+    labelStyle: _lightTextTheme.labelMedium,
+    hintStyle: _lightTextTheme.bodyMedium?.copyWith(
+      color: _lightColorScheme.onSurfaceVariant.withValues(alpha: 0.6),
+    ),
+    errorStyle: _lightTextTheme.bodyMedium?.copyWith(
+      color: _lightColorScheme.error,
+    ),
+  ),
 );
