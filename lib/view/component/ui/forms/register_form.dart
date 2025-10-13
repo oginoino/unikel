@@ -1,8 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:unikel/config/di.dart';
-import 'package:unikel/view/component/ui/padding/responsive_padding.dart';
-
 import '../../../../utils/form_validators.dart';
+import '../../../../utils/imports/common_libs.dart';
+import '../padding/responsive_padding.dart';
 
 class RegisterUserForm extends StatefulWidget {
   const RegisterUserForm({super.key});
@@ -56,13 +54,13 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                     children: [
                       TextFormField(
                         controller: _nameController,
-                        decoration: const InputDecoration(
-                          labelText: 'Nome',
+                        decoration: InputDecoration(
+                          labelText: context.l10n.labelName,
                           border: OutlineInputBorder(),
                         ),
                         validator: (value) => FormValidators.validateRequired(
                           value,
-                          'Nome',
+                          context.l10n.nameValue,
                           context,
                         ),
                       ),
@@ -82,21 +80,21 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                       TextFormField(
                         controller: _phoneController,
                         keyboardType: TextInputType.phone,
-                        decoration: const InputDecoration(
-                          labelText: 'Telefone',
+                        decoration: InputDecoration(
+                          labelText: context.l10n.labelPhone,
                           border: OutlineInputBorder(),
                         ),
                         validator: (value) {
                           final requiredError = FormValidators.validateRequired(
                             value,
-                            'Telefone',
+                            context.l10n.phoneValue,
                             context,
                           );
                           if (requiredError != null) {
                             return requiredError;
                           }
                           if (!RegExp(r'^[0-9]+$').hasMatch(value!)) {
-                            return 'Por favor, insira apenas dígitos';
+                            return context.l10n.invalidPhoneMatch;
                           }
                           return null;
                         },
@@ -117,21 +115,21 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                       TextFormField(
                         controller: _phoneCodeController,
                         keyboardType: TextInputType.number,
-                        decoration: const InputDecoration(
-                          labelText: 'Código do Telefone',
+                        decoration: InputDecoration(
+                          labelText: context.l10n.labelPhoneCode,
                           border: OutlineInputBorder(),
                         ),
                         validator: (value) {
                           final requiredError = FormValidators.validateRequired(
                             value,
-                            'Código do Telefone',
+                            context.l10n.phoneCodeValue,
                             context,
                           );
                           if (requiredError != null) {
                             return requiredError;
                           }
                           if (!RegExp(r'^[0-9]{4}$').hasMatch(value!)) {
-                            return 'Por favor, insira um código de 4 dígitos';
+                            return context.l10n.invalidPhoneCodeMatch;
                           }
                           return null;
                         },
@@ -162,7 +160,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                           curve: Curves.easeIn,
                         );
                       },
-                      child: const Text('Anterior'),
+                      child: Text(context.l10n.previous),
                     ),
                   ),
                 if (_currentPage < 2) // Assuming 3 pages
@@ -176,7 +174,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                           );
                         }
                       },
-                      child: const Text('Próximo'),
+                      child: Text(context.l10n.next),
                     ),
                   ),
               ],

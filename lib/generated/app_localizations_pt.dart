@@ -76,6 +76,38 @@ class AppLocalizationsPt extends AppLocalizations {
   String fieldRequired(Object fieldName) {
     return '$fieldName é obrigatório.';
   }
+
+  @override
+  String get labelName => 'Nome';
+
+  @override
+  String get nameValue => 'Nome';
+
+  @override
+  String get labelPhone => 'Telefone';
+
+  @override
+  String get phoneValue => 'Telefone';
+
+  @override
+  String get invalidPhoneMatch =>
+      'Por favor, insira um número de telefone válido.';
+
+  @override
+  String get labelPhoneCode => 'Código do Telefone';
+
+  @override
+  String get phoneCodeValue => 'Código do Telefone';
+
+  @override
+  String get invalidPhoneCodeMatch =>
+      'Por favor, insira um código de telefone válido de 4 dígitos.';
+
+  @override
+  String get previous => 'Anterior';
+
+  @override
+  String get next => 'Próximo';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).
@@ -150,4 +182,36 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String fieldRequired(Object fieldName) {
     return '$fieldName é obrigatório.';
   }
+
+  @override
+  String get labelName => 'Nome';
+
+  @override
+  String get nameValue => 'Nome';
+
+  @override
+  String get labelPhone => 'Telefone';
+
+  @override
+  String get phoneValue => 'Telefone';
+
+  @override
+  String get invalidPhoneMatch =>
+      'Por favor, insira um número de telefone válido.';
+
+  @override
+  String get labelPhoneCode => 'Código do Telefone';
+
+  @override
+  String get phoneCodeValue => 'Código do Telefone';
+
+  @override
+  String get invalidPhoneCodeMatch =>
+      'Por favor, insira um código de telefone válido de 4 dígitos.';
+
+  @override
+  String get previous => 'Anterior';
+
+  @override
+  String get next => 'Próximo';
 }

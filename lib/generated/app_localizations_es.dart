@@ -78,6 +78,38 @@ class AppLocalizationsEs extends AppLocalizations {
   String fieldRequired(Object fieldName) {
     return '$fieldName es obligatorio.';
   }
+
+  @override
+  String get labelName => 'Nombre';
+
+  @override
+  String get nameValue => 'Nombre';
+
+  @override
+  String get labelPhone => 'Teléfono';
+
+  @override
+  String get phoneValue => 'Teléfono';
+
+  @override
+  String get invalidPhoneMatch =>
+      'Por favor, introduce un número de teléfono válido.';
+
+  @override
+  String get labelPhoneCode => 'Código telefónico';
+
+  @override
+  String get phoneCodeValue => 'Código telefónico';
+
+  @override
+  String get invalidPhoneCodeMatch =>
+      'Por favor, introduce un código telefónico válido de 4 dígitos.';
+
+  @override
+  String get previous => 'Anterior';
+
+  @override
+  String get next => 'Siguiente';
 }
 
 /// The translations for Spanish Castilian, as used in Mexico (`es_MX`).
@@ -154,4 +186,36 @@ class AppLocalizationsEsMx extends AppLocalizationsEs {
   String fieldRequired(Object fieldName) {
     return '$fieldName es obligatorio.';
   }
+
+  @override
+  String get labelName => 'Nombre';
+
+  @override
+  String get nameValue => 'Nombre';
+
+  @override
+  String get labelPhone => 'Teléfono';
+
+  @override
+  String get phoneValue => 'Teléfono';
+
+  @override
+  String get invalidPhoneMatch =>
+      'Por favor, introduce un número de teléfono válido.';
+
+  @override
+  String get labelPhoneCode => 'Código telefónico';
+
+  @override
+  String get phoneCodeValue => 'Código telefónico';
+
+  @override
+  String get invalidPhoneCodeMatch =>
+      'Por favor, introduce un código telefónico válido de 4 dígitos.';
+
+  @override
+  String get previous => 'Anterior';
+
+  @override
+  String get next => 'Siguiente';
 }

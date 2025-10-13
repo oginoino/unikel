@@ -234,6 +234,66 @@ abstract class AppLocalizations {
   /// In en_US, this message translates to:
   /// **'{fieldName} is required.'**
   String fieldRequired(Object fieldName);
+
+  /// No description provided for @labelName.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Name'**
+  String get labelName;
+
+  /// No description provided for @nameValue.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Name'**
+  String get nameValue;
+
+  /// No description provided for @labelPhone.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Phone'**
+  String get labelPhone;
+
+  /// No description provided for @phoneValue.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Phone'**
+  String get phoneValue;
+
+  /// No description provided for @invalidPhoneMatch.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Please enter a valid phone number.'**
+  String get invalidPhoneMatch;
+
+  /// No description provided for @labelPhoneCode.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Phone Code'**
+  String get labelPhoneCode;
+
+  /// No description provided for @phoneCodeValue.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Phone Code'**
+  String get phoneCodeValue;
+
+  /// No description provided for @invalidPhoneCodeMatch.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Please enter a valid 4-digit phone code.'**
+  String get invalidPhoneCodeMatch;
+
+  /// No description provided for @previous.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Previous'**
+  String get previous;
+
+  /// No description provided for @next.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Next'**
+  String get next;
 }
 
 class _AppLocalizationsDelegate

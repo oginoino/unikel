@@ -76,6 +76,37 @@ class AppLocalizationsEn extends AppLocalizations {
   String fieldRequired(Object fieldName) {
     return '$fieldName is required.';
   }
+
+  @override
+  String get labelName => 'Name';
+
+  @override
+  String get nameValue => 'Name';
+
+  @override
+  String get labelPhone => 'Phone';
+
+  @override
+  String get phoneValue => 'Phone';
+
+  @override
+  String get invalidPhoneMatch => 'Please enter a valid phone number.';
+
+  @override
+  String get labelPhoneCode => 'Phone Code';
+
+  @override
+  String get phoneCodeValue => 'Phone Code';
+
+  @override
+  String get invalidPhoneCodeMatch =>
+      'Please enter a valid 4-digit phone code.';
+
+  @override
+  String get previous => 'Previous';
+
+  @override
+  String get next => 'Next';
 }
 
 /// The translations for English, as used in the United States (`en_US`).
@@ -150,4 +181,35 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   String fieldRequired(Object fieldName) {
     return '$fieldName is required.';
   }
+
+  @override
+  String get labelName => 'Name';
+
+  @override
+  String get nameValue => 'Name';
+
+  @override
+  String get labelPhone => 'Phone';
+
+  @override
+  String get phoneValue => 'Phone';
+
+  @override
+  String get invalidPhoneMatch => 'Please enter a valid phone number.';
+
+  @override
+  String get labelPhoneCode => 'Phone Code';
+
+  @override
+  String get phoneCodeValue => 'Phone Code';
+
+  @override
+  String get invalidPhoneCodeMatch =>
+      'Please enter a valid 4-digit phone code.';
+
+  @override
+  String get previous => 'Previous';
+
+  @override
+  String get next => 'Next';
 }

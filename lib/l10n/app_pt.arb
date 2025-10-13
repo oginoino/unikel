@@ -21,6 +21,16 @@
   "invalidEmail": "Por favor, insira um email válido.",
   "passwordRequired": "Senha é obrigatória.",
   "passwordLength": "A senha deve ter pelo menos 6 caracteres.",
-  "fieldRequired": "{fieldName} é obrigatório."
+  "fieldRequired": "{fieldName} é obrigatório.",
+  "labelName": "Nome",
+  "nameValue": "Nome",
+  "labelPhone": "Telefone",
+  "phoneValue": "Telefone",
+  "invalidPhoneMatch": "Por favor, insira um número de telefone válido.",
+  "labelPhoneCode": "Código do Telefone",
+  "phoneCodeValue": "Código do Telefone",
+  "invalidPhoneCodeMatch": "Por favor, insira um código de telefone válido de 4 dígitos.",
+  "previous": "Anterior",
+  "next": "Próximo"
 }
   
