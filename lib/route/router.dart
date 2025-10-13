@@ -1,6 +1,7 @@
 import '../utils/imports/common_libs.dart';
 import '../view/page/first_access_cta_to_register_page.dart';
 import '../view/page/onboarding_page.dart';
+import '../view/page/register_user_page.dart';
 
 final GoRouter appRouter = GoRouter(
   redirect: HandleRedirect().handleRedirect,
@@ -17,6 +18,7 @@ final GoRouter appRouter = GoRouter(
           Routes.firstAccessCtaToRegister,
           (state) => FirstAccessCtaToRegisterPage(),
         ),
+        AppRoute(Routes.registerUser, (state) => RegisterUserPage()),
       ],
     ),
   ],

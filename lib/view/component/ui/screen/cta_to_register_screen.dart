@@ -25,7 +25,8 @@ class CtaToRegisterScreen extends StatelessWidget {
               variant: ButtonVariant.primary,
               label: context.l10n.register,
               onPressed: () {
-                // context.go(Routes.register);
+                context.read<OnboardingProvider>().setFirstAccessComplete(true);
+                context.go(Routes.registerUser);
               },
             ),
             CustomCTAButton(

@@ -10,6 +10,7 @@ class Routes {
     RouteInfo(name: 'Home', path: '/'),
     RouteInfo(name: 'Onboarding', path: '/onboarding'),
     RouteInfo(name: 'FirstAccessCtaToRegister', path: '/first-access'),
+    RouteInfo(name: 'RegisterUser', path: '/register-user'),
   ];
 
   // Helper method to get route by name
@@ -29,4 +30,6 @@ class Routes {
   static String get firstAccessCtaToRegister => routes
       .firstWhere((route) => route.name == 'FirstAccessCtaToRegister')
       .path;
+  static String get registerUser =>
+      routes.firstWhere((route) => route.name == 'RegisterUser').path;
 }
