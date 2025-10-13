@@ -86,20 +86,10 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                           labelText: context.l10n.labelPhone,
                           border: OutlineInputBorder(),
                         ),
-                        validator: (value) {
-                          final requiredError = FormValidators.validateRequired(
-                            value,
-                            context.l10n.phoneValue,
-                            context,
-                          );
-                          if (requiredError != null) {
-                            return requiredError;
-                          }
-                          if (!RegExp(r'^[0-9]+$').hasMatch(value!)) {
-                            return context.l10n.invalidPhoneMatch;
-                          }
-                          return null;
-                        },
+                        validator: (value) => FormValidators.validatePhone(
+                          value,
+                          context,
+                        ),
                       ),
                     ],
                   ),
@@ -121,20 +111,10 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                           labelText: context.l10n.labelPhoneCode,
                           border: OutlineInputBorder(),
                         ),
-                        validator: (value) {
-                          final requiredError = FormValidators.validateRequired(
-                            value,
-                            context.l10n.phoneCodeValue,
-                            context,
-                          );
-                          if (requiredError != null) {
-                            return requiredError;
-                          }
-                          if (!RegExp(r'^[0-9]{4}$').hasMatch(value!)) {
-                            return context.l10n.invalidPhoneCodeMatch;
-                          }
-                          return null;
-                        },
+                        validator: (value) => FormValidators.validatePhoneCode(
+                          value,
+                          context,
+                        ),
                       ),
                     ],
                   ),

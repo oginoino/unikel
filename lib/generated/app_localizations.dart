@@ -259,6 +259,12 @@ abstract class AppLocalizations {
   /// **'Phone'**
   String get phoneValue;
 
+  /// No description provided for @phoneRequired.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Phone number is required.'**
+  String get phoneRequired;
+
   /// No description provided for @invalidPhoneMatch.
   ///
   /// In en_US, this message translates to:
@@ -276,6 +282,12 @@ abstract class AppLocalizations {
   /// In en_US, this message translates to:
   /// **'Phone Code'**
   String get phoneCodeValue;
+
+  /// No description provided for @phoneCodeRequired.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Phone code is required.'**
+  String get phoneCodeRequired;
 
   /// No description provided for @invalidPhoneCodeMatch.
   ///

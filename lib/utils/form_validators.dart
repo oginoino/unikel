@@ -34,4 +34,24 @@ class FormValidators {
     }
     return null;
   }
+
+  static String? validatePhone(String? value, BuildContext context) {
+    if (value == null || value.isEmpty) {
+      return context.l10n.phoneRequired;
+    }
+    if (!RegExp(r'^[0-9]+$').hasMatch(value)) {
+      return context.l10n.invalidPhoneMatch;
+    }
+    return null;
+  }
+
+  static String? validatePhoneCode(String? value, BuildContext context) {
+    if (value == null || value.isEmpty) {
+      return context.l10n.phoneCodeRequired;
+    }
+    if (!RegExp(r'^[0-9]{4}$').hasMatch(value)) {
+      return context.l10n.invalidPhoneCodeMatch;
+    }
+    return null;
+  }
 }

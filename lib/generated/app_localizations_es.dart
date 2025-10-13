@@ -92,6 +92,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get phoneValue => 'Teléfono';
 
   @override
+  String get phoneRequired => 'El número de teléfono es obligatorio.';
+
+  @override
   String get invalidPhoneMatch =>
       'Por favor, introduce un número de teléfono válido.';
 
@@ -100,6 +103,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get phoneCodeValue => 'Código telefónico';
+
+  @override
+  String get phoneCodeRequired => 'El código telefónico es obligatorio.';
 
   @override
   String get invalidPhoneCodeMatch =>
@@ -203,6 +209,9 @@ class AppLocalizationsEsMx extends AppLocalizationsEs {
   String get phoneValue => 'Teléfono';
 
   @override
+  String get phoneRequired => 'El número de teléfono es obligatorio.';
+
+  @override
   String get invalidPhoneMatch =>
       'Por favor, introduce un número de teléfono válido.';
 
@@ -211,6 +220,9 @@ class AppLocalizationsEsMx extends AppLocalizationsEs {
 
   @override
   String get phoneCodeValue => 'Código telefónico';
+
+  @override
+  String get phoneCodeRequired => 'El código telefónico es obligatorio.';
 
   @override
   String get invalidPhoneCodeMatch =>

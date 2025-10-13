@@ -90,6 +90,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get phoneValue => 'Telefone';
 
   @override
+  String get phoneRequired => 'O número de telefone é obrigatório.';
+
+  @override
   String get invalidPhoneMatch =>
       'Por favor, insira um número de telefone válido.';
 
@@ -98,6 +101,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get phoneCodeValue => 'Código do Telefone';
+
+  @override
+  String get phoneCodeRequired => 'O código do telefone é obrigatório.';
 
   @override
   String get invalidPhoneCodeMatch =>
@@ -199,6 +205,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get phoneValue => 'Telefone';
 
   @override
+  String get phoneRequired => 'O número de telefone é obrigatório.';
+
+  @override
   String get invalidPhoneMatch =>
       'Por favor, insira um número de telefone válido.';
 
@@ -207,6 +216,9 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get phoneCodeValue => 'Código do Telefone';
+
+  @override
+  String get phoneCodeRequired => 'O código do telefone é obrigatório.';
 
   @override
   String get invalidPhoneCodeMatch =>
