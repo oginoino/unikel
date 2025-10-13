@@ -294,6 +294,12 @@ abstract class AppLocalizations {
   /// In en_US, this message translates to:
   /// **'Next'**
   String get next;
+
+  /// No description provided for @submitRegister.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Submit Register'**
+  String get submitRegister;
 }
 
 class _AppLocalizationsDelegate

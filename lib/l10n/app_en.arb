@@ -31,5 +31,6 @@
   "phoneCodeValue": "Phone Code",
   "invalidPhoneCodeMatch": "Please enter a valid 4-digit phone code.",
   "previous": "Previous",
-  "next": "Next"
+  "next": "Next",
+  "submitRegister": "Submit Register"
 }

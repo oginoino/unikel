@@ -108,6 +108,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get next => 'Próximo';
+
+  @override
+  String get submitRegister => 'Registrar';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).
@@ -214,4 +217,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get next => 'Próximo';
+
+  @override
+  String get submitRegister => 'Cadastrar';
 }

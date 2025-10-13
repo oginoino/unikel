@@ -110,6 +110,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get next => 'Siguiente';
+
+  @override
+  String get submitRegister => 'Registrar';
 }
 
 /// The translations for Spanish Castilian, as used in Mexico (`es_MX`).
@@ -218,4 +221,7 @@ class AppLocalizationsEsMx extends AppLocalizationsEs {
 
   @override
   String get next => 'Siguiente';
+
+  @override
+  String get submitRegister => 'Registrar';
 }

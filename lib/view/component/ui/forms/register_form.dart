@@ -1,3 +1,5 @@
+import 'package:unikel/view/component/ui/button/custom_cta_button.dart';
+
 import '../../../../utils/form_validators.dart';
 import '../../../../utils/imports/common_libs.dart';
 import '../padding/responsive_padding.dart';
@@ -149,23 +151,26 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
           child: SizedBox(
             height: 50.0, // Define uma altura fixa para o Row dos botões
             child: Row(
+              spacing: uiConstants.spacing4,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 if (_currentPage > 0)
                   Expanded(
-                    child: ElevatedButton(
+                    child: CustomCTAButton(
                       onPressed: () {
                         _pageController.previousPage(
                           duration: const Duration(milliseconds: 300),
                           curve: Curves.easeIn,
                         );
                       },
-                      child: Text(context.l10n.previous),
+                      variant: ButtonVariant.secondary,
+                      label: context.l10n.previous,
+                      icon: Icon(Icons.arrow_back_rounded),
                     ),
                   ),
-                if (_currentPage < 2) // Assuming 3 pages
+                if (_currentPage < _formKeys.length - 1) // Assuming 3 pages
                   Expanded(
-                    child: ElevatedButton(
+                    child: CustomCTAButton(
                       onPressed: () {
                         if (_formKeys[_currentPage].currentState!.validate()) {
                           _pageController.nextPage(
@@ -174,7 +179,23 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                           );
                         }
                       },
-                      child: Text(context.l10n.next),
+                      icon: Icon(Icons.arrow_forward_rounded),
+                      variant: ButtonVariant.primary,
+                      label: context.l10n.next,
+                    ),
+                  ),
+                // Page 4: Submit Button
+                if (_currentPage == _formKeys.length - 1)
+                  Expanded(
+                    child: CustomCTAButton(
+                      onPressed: () {
+                        if (_formKeys[_currentPage].currentState!.validate()) {
+                          // Submit the form
+                          // For example: _submitForm();
+                        }
+                      },
+                      variant: ButtonVariant.primary,
+                      label: context.l10n.submitRegister,
                     ),
                   ),
               ],

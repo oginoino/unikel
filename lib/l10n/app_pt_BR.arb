@@ -31,6 +31,7 @@
   "phoneCodeValue": "Código do Telefone",
   "invalidPhoneCodeMatch": "Por favor, insira um código de telefone válido de 4 dígitos.",
   "previous": "Anterior",
-  "next": "Próximo"
+  "next": "Próximo",
+  "submitRegister": "Cadastrar"  
 }
   

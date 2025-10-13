@@ -107,6 +107,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get next => 'Next';
+
+  @override
+  String get submitRegister => 'Submit Register';
 }
 
 /// The translations for English, as used in the United States (`en_US`).
@@ -212,4 +215,7 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get next => 'Next';
+
+  @override
+  String get submitRegister => 'Submit Register';
 }
