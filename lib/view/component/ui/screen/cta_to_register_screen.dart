@@ -1,4 +1,5 @@
 import 'package:unikel/utils/imports/common_libs.dart';
+import 'package:unikel/view/component/ui/padding/responsive_padding.dart';
 
 import '../button/custom_cta_button.dart';
 
@@ -8,24 +9,34 @@ class CtaToRegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Column(
-        spacing: uiConstants.spacing4,
-        children: [
-          CustomCTAButton(
-            variant: ButtonVariant.primary,
-            label: context.l10n.register,
-            onPressed: () {
-              // context.go(Routes.register);
-            },
-          ),
-          CustomCTAButton(
-            variant: ButtonVariant.secondary,
-            label: context.l10n.login,
-            onPressed: () {
-              // context.go(Routes.login);
-            },
-          ),
-        ],
+      child: ResponsivePadding(
+        child: Column(
+          spacing: uiConstants.spacing4,
+          children: [
+            SizedBox(
+              height: MediaQuery.sizeOf(context).height * 0.5,
+              child: Text(
+                context.l10n.cta_to_register_screen_text,
+                style: Theme.of(context).textTheme.headlineLarge,
+              ),
+            ),
+
+            CustomCTAButton(
+              variant: ButtonVariant.primary,
+              label: context.l10n.register,
+              onPressed: () {
+                // context.go(Routes.register);
+              },
+            ),
+            CustomCTAButton(
+              variant: ButtonVariant.secondary,
+              label: context.l10n.login,
+              onPressed: () {
+                // context.go(Routes.login);
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -55,6 +55,10 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get login => 'Entrar';
+
+  @override
+  String get cta_to_register_screen_text =>
+      'Cadastre-se para começar a gerenciar suas finanças.';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).
@@ -108,4 +112,8 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get login => 'Entrar';
+
+  @override
+  String get cta_to_register_screen_text =>
+      'Cadastre-se para começar a gerenciar seus gastos.';
 }

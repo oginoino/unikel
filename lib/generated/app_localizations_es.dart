@@ -55,6 +55,10 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get login => 'Inicio de Sesión';
+
+  @override
+  String get cta_to_register_screen_text =>
+      '¿No tienes cuenta? Regístrate ahora.';
 }
 
 /// The translations for Spanish Castilian, as used in Mexico (`es_MX`).
@@ -108,4 +112,8 @@ class AppLocalizationsEsMx extends AppLocalizationsEs {
 
   @override
   String get login => 'Inicio de Sesión';
+
+  @override
+  String get cta_to_register_screen_text =>
+      '¿No tienes una cuenta? Regístrate ahora.';
 }

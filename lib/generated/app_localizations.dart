@@ -198,6 +198,12 @@ abstract class AppLocalizations {
   /// In en_US, this message translates to:
   /// **'Login'**
   String get login;
+
+  /// No description provided for @cta_to_register_screen_text.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Ready to take control of your finances? Register now!'**
+  String get cta_to_register_screen_text;
 }
 
 class _AppLocalizationsDelegate
