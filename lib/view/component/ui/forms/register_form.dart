@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../utils/form_validators.dart';
+
 class RegisterUserForm extends StatefulWidget {
   const RegisterUserForm({super.key});
 
@@ -57,12 +59,8 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                           labelText: 'Nome',
                           border: OutlineInputBorder(),
                         ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Por favor, insira seu nome';
-                          }
-                          return null;
-                        },
+                        validator: (value) =>
+                            FormValidators.validateRequired(value, 'Nome'),
                       ),
                     ],
                   ),
@@ -85,11 +83,14 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                           border: OutlineInputBorder(),
                         ),
                         validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Por favor, insira seu telefone';
+                          final requiredError = FormValidators.validateRequired(
+                            value,
+                            'Telefone',
+                          );
+                          if (requiredError != null) {
+                            return requiredError;
                           }
-                          // Basic phone number validation (e.g., digits only)
-                          if (!RegExp(r'^[0-9]+$').hasMatch(value)) {
+                          if (!RegExp(r'^[0-9]+$').hasMatch(value!)) {
                             return 'Por favor, insira apenas dígitos';
                           }
                           return null;
@@ -116,11 +117,14 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                           border: OutlineInputBorder(),
                         ),
                         validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Por favor, insira o código do telefone';
+                          final requiredError = FormValidators.validateRequired(
+                            value,
+                            'Código do Telefone',
+                          );
+                          if (requiredError != null) {
+                            return requiredError;
                           }
-                          // Basic phone code validation (e.g., digits only and specific length)
-                          if (!RegExp(r'^[0-9]{4}$').hasMatch(value)) {
+                          if (!RegExp(r'^[0-9]{4}$').hasMatch(value!)) {
                             return 'Por favor, insira um código de 4 dígitos';
                           }
                           return null;
