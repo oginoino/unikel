@@ -59,6 +59,25 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get cta_to_register_screen_text =>
       '¿No tienes cuenta? Regístrate ahora.';
+
+  @override
+  String get emailRequired => 'El correo electrónico es obligatorio.';
+
+  @override
+  String get invalidEmail =>
+      'Por favor, introduce un correo electrónico válido.';
+
+  @override
+  String get passwordRequired => 'La contraseña es obligatoria.';
+
+  @override
+  String get passwordLength =>
+      'La contraseña debe tener al menos 6 caracteres.';
+
+  @override
+  String fieldRequired(Object fieldName) {
+    return '$fieldName es obligatorio.';
+  }
 }
 
 /// The translations for Spanish Castilian, as used in Mexico (`es_MX`).
@@ -116,4 +135,23 @@ class AppLocalizationsEsMx extends AppLocalizationsEs {
   @override
   String get cta_to_register_screen_text =>
       '¿No tienes una cuenta? Regístrate ahora.';
+
+  @override
+  String get emailRequired => 'El correo electrónico es obligatorio.';
+
+  @override
+  String get invalidEmail =>
+      'Por favor, introduce un correo electrónico válido.';
+
+  @override
+  String get passwordRequired => 'La contraseña es obligatoria.';
+
+  @override
+  String get passwordLength =>
+      'La contraseña debe tener al menos 6 caracteres.';
+
+  @override
+  String fieldRequired(Object fieldName) {
+    return '$fieldName es obligatorio.';
+  }
 }

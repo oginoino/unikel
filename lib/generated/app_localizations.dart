@@ -204,6 +204,36 @@ abstract class AppLocalizations {
   /// In en_US, this message translates to:
   /// **'Ready to take control of your finances? Register now!'**
   String get cta_to_register_screen_text;
+
+  /// No description provided for @emailRequired.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Email is required.'**
+  String get emailRequired;
+
+  /// No description provided for @invalidEmail.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Please enter a valid email address.'**
+  String get invalidEmail;
+
+  /// No description provided for @passwordRequired.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Password is required.'**
+  String get passwordRequired;
+
+  /// No description provided for @passwordLength.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Password must be at least 6 characters long.'**
+  String get passwordLength;
+
+  /// No description provided for @fieldRequired.
+  ///
+  /// In en_US, this message translates to:
+  /// **'{fieldName} is required.'**
+  String fieldRequired(Object fieldName);
 }
 
 class _AppLocalizationsDelegate

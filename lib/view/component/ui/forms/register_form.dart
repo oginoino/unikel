@@ -59,8 +59,11 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                           labelText: 'Nome',
                           border: OutlineInputBorder(),
                         ),
-                        validator: (value) =>
-                            FormValidators.validateRequired(value, 'Nome'),
+                        validator: (value) => FormValidators.validateRequired(
+                          value,
+                          'Nome',
+                          context,
+                        ),
                       ),
                     ],
                   ),
@@ -86,6 +89,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                           final requiredError = FormValidators.validateRequired(
                             value,
                             'Telefone',
+                            context,
                           );
                           if (requiredError != null) {
                             return requiredError;
@@ -120,6 +124,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                           final requiredError = FormValidators.validateRequired(
                             value,
                             'Código do Telefone',
+                            context,
                           );
                           if (requiredError != null) {
                             return requiredError;

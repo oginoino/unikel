@@ -59,6 +59,23 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get cta_to_register_screen_text =>
       'Cadastre-se para começar a gerenciar suas finanças.';
+
+  @override
+  String get emailRequired => 'Email é obrigatório.';
+
+  @override
+  String get invalidEmail => 'Por favor, insira um email válido.';
+
+  @override
+  String get passwordRequired => 'Senha é obrigatória.';
+
+  @override
+  String get passwordLength => 'A senha deve ter pelo menos 6 caracteres.';
+
+  @override
+  String fieldRequired(Object fieldName) {
+    return '$fieldName é obrigatório.';
+  }
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).
@@ -116,4 +133,21 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   @override
   String get cta_to_register_screen_text =>
       'Cadastre-se para começar a gerenciar seus gastos.';
+
+  @override
+  String get emailRequired => 'Email é obrigatório.';
+
+  @override
+  String get invalidEmail => 'Por favor, insira um email válido.';
+
+  @override
+  String get passwordRequired => 'Senha é obrigatória.';
+
+  @override
+  String get passwordLength => 'A senha deve ter pelo menos 6 caracteres.';
+
+  @override
+  String fieldRequired(Object fieldName) {
+    return '$fieldName é obrigatório.';
+  }
 }

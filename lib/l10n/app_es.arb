@@ -16,6 +16,11 @@
   "onboarding_subtitle_3": "Alcanza tus metas financieras.",
   "register": "Registro",
   "login": "Inicio de Sesión",
-  "cta_to_register_screen_text": "¿No tienes cuenta? Regístrate ahora."
+  "cta_to_register_screen_text": "¿No tienes cuenta? Regístrate ahora.",
+  "emailRequired": "El correo electrónico es obligatorio.",
+  "invalidEmail": "Por favor, introduce un correo electrónico válido.",
+  "passwordRequired": "La contraseña es obligatoria.",
+  "passwordLength": "La contraseña debe tener al menos 6 caracteres.",
+  "fieldRequired": "{fieldName} es obligatorio."
 }
   

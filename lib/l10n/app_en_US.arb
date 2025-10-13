@@ -16,6 +16,11 @@
   "onboarding_subtitle_3": "Achieve your financial goals.",
   "register": "Register",
   "login": "Login",
-  "cta_to_register_screen_text": "Ready to take control of your finances? Register now!"
+  "cta_to_register_screen_text": "Ready to take control of your finances? Register now!",
+  "emailRequired": "Email is required.",
+  "invalidEmail": "Please enter a valid email address.",
+  "passwordRequired": "Password is required.",
+  "passwordLength": "Password must be at least 6 characters long.",
+  "fieldRequired": "{fieldName} is required."
 }
   

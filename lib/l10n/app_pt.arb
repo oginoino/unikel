@@ -16,6 +16,11 @@
   "onboarding_subtitle_3": "Alcance seus objetivos financeiros.",
   "register": "Cadastre-se",
   "login": "Entrar",
-  "cta_to_register_screen_text": "Cadastre-se para começar a gerenciar suas finanças."  
+  "cta_to_register_screen_text": "Cadastre-se para começar a gerenciar suas finanças.",
+  "emailRequired": "Email é obrigatório.",
+  "invalidEmail": "Por favor, insira um email válido.",
+  "passwordRequired": "Senha é obrigatória.",
+  "passwordLength": "A senha deve ter pelo menos 6 caracteres.",
+  "fieldRequired": "{fieldName} é obrigatório."
 }
   

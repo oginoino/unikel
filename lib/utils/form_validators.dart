@@ -1,30 +1,36 @@
+import 'package:unikel/utils/imports/common_libs.dart';
+
 class FormValidators {
-  static String? validateEmail(String? value) {
+  static String? validateEmail(String? value, BuildContext context) {
     if (value == null || value.isEmpty) {
-      return 'Email é obrigatório.';
+      return context.l10n.emailRequired;
     }
     // Regex for email validation
     String pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
     RegExp regex = RegExp(pattern);
     if (!regex.hasMatch(value)) {
-      return 'Por favor, insira um email válido.';
+      return context.l10n.invalidEmail;
     }
     return null;
   }
 
-  static String? validatePassword(String? value) {
+  static String? validatePassword(String? value, BuildContext context) {
     if (value == null || value.isEmpty) {
-      return 'Senha é obrigatória.';
+      return context.l10n.passwordRequired;
     }
     if (value.length < 6) {
-      return 'A senha deve ter pelo menos 6 caracteres.';
+      return context.l10n.passwordLength;
     }
     return null;
   }
 
-  static String? validateRequired(String? value, String fieldName) {
+  static String? validateRequired(
+    String? value,
+    String fieldName,
+    BuildContext context,
+  ) {
     if (value == null || value.isEmpty) {
-      return '$fieldName é obrigatório.';
+      return context.l10n.fieldRequired(fieldName);
     }
     return null;
   }

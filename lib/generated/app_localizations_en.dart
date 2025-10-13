@@ -59,6 +59,23 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get cta_to_register_screen_text =>
       'Ready to take control of your finances? Register now!';
+
+  @override
+  String get emailRequired => 'Email is required.';
+
+  @override
+  String get invalidEmail => 'Please enter a valid email.';
+
+  @override
+  String get passwordRequired => 'Password is required.';
+
+  @override
+  String get passwordLength => 'Password must be at least 6 characters long.';
+
+  @override
+  String fieldRequired(Object fieldName) {
+    return '$fieldName is required.';
+  }
 }
 
 /// The translations for English, as used in the United States (`en_US`).
@@ -116,4 +133,21 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   @override
   String get cta_to_register_screen_text =>
       'Ready to take control of your finances? Register now!';
+
+  @override
+  String get emailRequired => 'Email is required.';
+
+  @override
+  String get invalidEmail => 'Please enter a valid email address.';
+
+  @override
+  String get passwordRequired => 'Password is required.';
+
+  @override
+  String get passwordLength => 'Password must be at least 6 characters long.';
+
+  @override
+  String fieldRequired(Object fieldName) {
+    return '$fieldName is required.';
+  }
 }
