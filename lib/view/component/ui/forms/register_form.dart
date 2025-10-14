@@ -5,6 +5,7 @@ import '../../../../utils/form_validators.dart';
 import '../../../../utils/imports/common_libs.dart';
 import '../padding/responsive_padding.dart';
 import 'package:country_code_picker/country_code_picker.dart';
+import 'package:pinput/pinput.dart';
 
 class RegisterUserForm extends StatefulWidget {
   const RegisterUserForm({super.key});
@@ -199,12 +200,35 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            TextFormField(
+                            Pinput(
                               controller: _phoneCodeController,
-                              keyboardType: TextInputType.number,
-                              decoration: InputDecoration(
-                                labelText: context.l10n.labelSecurityCode,
-                                border: OutlineInputBorder(),
+                              length: 4,
+                              defaultPinTheme: PinTheme(
+                                width: 56,
+                                height: 56,
+                                textStyle: Theme.of(context).textTheme.headlineSmall,
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: Theme.of(context).dividerColor),
+                                  borderRadius: BorderRadius.circular(uiConstants.spacing2),
+                                ),
+                              ),
+                              focusedPinTheme: PinTheme(
+                                width: 56,
+                                height: 56,
+                                textStyle: Theme.of(context).textTheme.headlineSmall,
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: Theme.of(context).primaryColor),
+                                  borderRadius: BorderRadius.circular(uiConstants.spacing2),
+                                ),
+                              ),
+                              submittedPinTheme: PinTheme(
+                                width: 56,
+                                height: 56,
+                                textStyle: Theme.of(context).textTheme.headlineSmall,
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: Theme.of(context).primaryColor),
+                                  borderRadius: BorderRadius.circular(uiConstants.spacing2),
+                                ),
                               ),
                               validator: (value) =>
                                   FormValidators.validateRequired(
@@ -212,6 +236,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                                     context.l10n.labelSecurityCode,
                                     context,
                                   ),
+                              keyboardType: TextInputType.number,
                             ),
                           ],
                         ),
