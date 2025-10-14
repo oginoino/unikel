@@ -203,33 +203,54 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Pinput(
+                              autofillHints: const [AutofillHints.oneTimeCode],
+
                               controller: _securityCodeController,
                               length: 4,
                               defaultPinTheme: PinTheme(
                                 width: 56,
                                 height: 56,
-                                textStyle: Theme.of(context).textTheme.headlineSmall,
+                                textStyle: Theme.of(
+                                  context,
+                                ).textTheme.headlineSmall,
                                 decoration: BoxDecoration(
-                                  border: Border.all(color: Theme.of(context).dividerColor),
-                                  borderRadius: BorderRadius.circular(uiConstants.spacing2),
+                                  border: Border.all(
+                                    color: Theme.of(context).dividerColor,
+                                  ),
+                                  borderRadius: BorderRadius.circular(
+                                    uiConstants.radius16,
+                                  ),
                                 ),
                               ),
                               focusedPinTheme: PinTheme(
+                                padding: EdgeInsets.all(uiConstants.spacing6),
                                 width: 56,
                                 height: 56,
-                                textStyle: Theme.of(context).textTheme.headlineSmall,
+                                textStyle: Theme.of(
+                                  context,
+                                ).textTheme.headlineSmall,
                                 decoration: BoxDecoration(
-                                  border: Border.all(color: Theme.of(context).primaryColor),
-                                  borderRadius: BorderRadius.circular(uiConstants.spacing2),
+                                  border: Border.all(
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                                  borderRadius: BorderRadius.circular(
+                                    uiConstants.radius16,
+                                  ),
                                 ),
                               ),
                               submittedPinTheme: PinTheme(
                                 width: 56,
                                 height: 56,
-                                textStyle: Theme.of(context).textTheme.headlineSmall,
+                                textStyle: Theme.of(
+                                  context,
+                                ).textTheme.headlineSmall,
                                 decoration: BoxDecoration(
-                                  border: Border.all(color: Theme.of(context).primaryColor),
-                                  borderRadius: BorderRadius.circular(uiConstants.spacing2),
+                                  border: Border.all(
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                                  borderRadius: BorderRadius.circular(
+                                    uiConstants.radius16,
+                                  ),
                                 ),
                               ),
                               validator: (value) =>
