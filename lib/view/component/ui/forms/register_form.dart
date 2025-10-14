@@ -133,7 +133,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                                         color: Theme.of(context).dividerColor,
                                       ),
                                       borderRadius: BorderRadius.circular(
-                                        uiConstants.spacing2,
+                                        uiConstants.radius16,
                                       ),
                                     ),
                                     flagWidth: uiConstants.spacing4,
@@ -215,7 +215,20 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                                 ).textTheme.headlineSmall,
                                 decoration: BoxDecoration(
                                   border: Border.all(
-                                    color: Theme.of(context).dividerColor,
+                                    color:
+                                        Theme.of(context)
+                                            .inputDecorationTheme
+                                            .enabledBorder
+                                            ?.borderSide
+                                            .color ??
+                                        Theme.of(context).dividerColor,
+                                    width:
+                                        Theme.of(context)
+                                            .inputDecorationTheme
+                                            .enabledBorder
+                                            ?.borderSide
+                                            .width ??
+                                        1.0,
                                   ),
                                   borderRadius: BorderRadius.circular(
                                     uiConstants.radius16,
@@ -231,7 +244,20 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                                 ).textTheme.headlineSmall,
                                 decoration: BoxDecoration(
                                   border: Border.all(
-                                    color: Theme.of(context).primaryColor,
+                                    color:
+                                        Theme.of(context)
+                                            .inputDecorationTheme
+                                            .focusedBorder
+                                            ?.borderSide
+                                            .color ??
+                                        Theme.of(context).primaryColor,
+                                    width:
+                                        Theme.of(context)
+                                            .inputDecorationTheme
+                                            .focusedBorder
+                                            ?.borderSide
+                                            .width ??
+                                        2.0,
                                   ),
                                   borderRadius: BorderRadius.circular(
                                     uiConstants.radius16,
@@ -246,7 +272,20 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                                 ).textTheme.headlineSmall,
                                 decoration: BoxDecoration(
                                   border: Border.all(
-                                    color: Theme.of(context).primaryColor,
+                                    color:
+                                        Theme.of(context)
+                                            .inputDecorationTheme
+                                            .focusedBorder
+                                            ?.borderSide
+                                            .color ??
+                                        Theme.of(context).primaryColor,
+                                    width:
+                                        Theme.of(context)
+                                            .inputDecorationTheme
+                                            .focusedBorder
+                                            ?.borderSide
+                                            .width ??
+                                        2.0,
                                   ),
                                   borderRadius: BorderRadius.circular(
                                     uiConstants.radius16,
