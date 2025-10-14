@@ -45,7 +45,7 @@
   "codeVerifiedSuccess": "Código verificado com sucesso!",
   "codeInvalid": "Código inválido. Tente novamente.",
   "errorVerifyingCode": "Erro ao verificar o código. Tente novamente.",
-  "editarTelefoneTextMessage": "Editar número de telefone"
-  
+  "editarTelefoneTextMessage": "Editar número de telefone",
+  "verifyPhoneNumberMessage": "Verifique seu número de telefone"
 }
   

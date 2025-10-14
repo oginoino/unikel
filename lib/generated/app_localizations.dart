@@ -378,6 +378,12 @@ abstract class AppLocalizations {
   /// In en_US, this message translates to:
   /// **'Edit phone number'**
   String get editarTelefoneTextMessage;
+
+  /// No description provided for @verifyPhoneNumberMessage.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Verify your phone number'**
+  String get verifyPhoneNumberMessage;
 }
 
 class _AppLocalizationsDelegate

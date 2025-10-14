@@ -40,6 +40,11 @@
   "submitRegister": "Submit Register",
   "selectCountryCode": "Select country code",
   "registerSecurityCodeTitle": "Security code verification",
-  "registerSecurityCodeTitle": "Security code verification",
-  "labelSecurityCode": "Security code"
+  "labelSecurityCode": "Security code",
+  "verifyingCode": "Verifying code...",
+  "codeVerifiedSuccess": "Code verified successfully!",
+  "codeInvalid": "Invalid code.",
+  "errorVerifyingCode": "Error verifying code.",
+  "editarTelefoneTextMessage": "Edit phone number",
+  "verifyPhoneNumberMessage": "Verify your phone number"
 }

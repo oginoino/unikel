@@ -277,6 +277,11 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                         context.l10n.registerSecurityCodeTitle,
                         style: Theme.of(context).textTheme.headlineMedium,
                       ),
+                      SizedBox(height: uiConstants.spacing8),
+                      Text(
+                        '${context.l10n.verifyPhoneNumberMessage}\n${_selectedCountryCode.dialCode}${_phoneController.text}',
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
                       SizedBox(height: uiConstants.spacing16),
                       Padding(
                         padding: EdgeInsets.all(uiConstants.spacing4),

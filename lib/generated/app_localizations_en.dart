@@ -149,6 +149,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get editarTelefoneTextMessage => 'Edit phone number';
+
+  @override
+  String get verifyPhoneNumberMessage => 'Verify your phone number';
 }
 
 /// The translations for English, as used in the United States (`en_US`).
@@ -296,4 +299,7 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get editarTelefoneTextMessage => 'Edit phone number';
+
+  @override
+  String get verifyPhoneNumberMessage => 'Verify your phone number';
 }
