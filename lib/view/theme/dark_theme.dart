@@ -447,6 +447,114 @@ TextButtonThemeData _darkTextButtonTheme = TextButtonThemeData(
   ),
 );
 
+// ============================================================================
+// DARK THEME INPUT DECORATION
+// ============================================================================
+
+InputDecorationTheme _darkInputDecorationTheme = InputDecorationTheme(
+  // Base styling
+  filled: true,
+  fillColor: _darkColorScheme.surfaceContainerLow,
+  hoverColor: _darkColorScheme.surfaceContainer,
+  focusColor: _darkColorScheme.primary.withValues(alpha: 0.12),
+
+  // Padding and spacing
+  contentPadding: EdgeInsets.symmetric(
+    horizontal: uiConstants.spacing4,
+    vertical: uiConstants.spacing3,
+  ),
+
+  // Label styling
+  labelStyle: _darkTextTheme.bodyLarge?.copyWith(
+    color: _darkColorScheme.onSurfaceVariant,
+    fontWeight: FontWeight.w500,
+  ),
+
+  // Hint styling
+  hintStyle: _darkTextTheme.bodyLarge?.copyWith(
+    color: _darkColorScheme.onSurfaceVariant.withValues(alpha: 0.5),
+  ),
+
+  // Helper text styling
+  helperStyle: _darkTextTheme.bodySmall?.copyWith(
+    color: _darkColorScheme.onSurfaceVariant.withValues(alpha: 0.7),
+  ),
+
+  // Error text styling
+  errorStyle: _darkTextTheme.bodySmall?.copyWith(
+    color: _darkColorScheme.error,
+    fontWeight: FontWeight.w500,
+  ),
+
+  // Counter styling
+  counterStyle: _darkTextTheme.bodySmall?.copyWith(
+    color: _darkColorScheme.onSurfaceVariant.withValues(alpha: 0.6),
+  ),
+
+  // Border radius - consistent with button design
+  border: OutlineInputBorder(
+    borderRadius: BorderRadius.circular(uiConstants.radius12),
+    borderSide: BorderSide.none,
+  ),
+  enabledBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.circular(uiConstants.radius12),
+    borderSide: BorderSide(color: _darkColorScheme.outlineVariant, width: 1.5),
+  ),
+
+  // Focused border with primary color
+  focusedBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.circular(uiConstants.radius12),
+    borderSide: BorderSide(color: _darkColorScheme.primary, width: 2.0),
+  ),
+
+  // Error border styling
+  errorBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.circular(uiConstants.radius12),
+    borderSide: BorderSide(color: _darkColorScheme.error, width: 2.0),
+  ),
+
+  // Focused error border
+  focusedErrorBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.circular(uiConstants.radius12),
+    borderSide: BorderSide(color: _darkColorScheme.error, width: 2.0),
+  ),
+
+  // Disabled state
+  disabledBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.circular(uiConstants.radius12),
+    borderSide: BorderSide(
+      color: _darkColorScheme.onSurface.withValues(alpha: 0.12),
+      width: 1.0,
+    ),
+  ),
+
+  // Prefix and suffix icon styling
+  prefixIconColor: WidgetStateColor.resolveWith((Set<WidgetState> states) {
+    if (states.contains(WidgetState.focused)) {
+      return _darkColorScheme.primary;
+    }
+    if (states.contains(WidgetState.error)) {
+      return _darkColorScheme.error;
+    }
+    return _darkColorScheme.onSurfaceVariant;
+  }),
+  suffixIconColor: WidgetStateColor.resolveWith((Set<WidgetState> states) {
+    if (states.contains(WidgetState.focused)) {
+      return _darkColorScheme.primary;
+    }
+    if (states.contains(WidgetState.error)) {
+      return _darkColorScheme.error;
+    }
+    return _darkColorScheme.onSurfaceVariant;
+  }),
+
+  outlineBorder: BorderSide(
+    color: _darkColorScheme.outlineVariant,
+    width: 1.5,
+    style: BorderStyle.solid,
+  ),
+);
+
 ThemeData customDarkTheme = ThemeData(
   useMaterial3: true,
   colorScheme: _darkColorScheme,
@@ -457,44 +565,6 @@ ThemeData customDarkTheme = ThemeData(
   elevatedButtonTheme: _darkElevatedButtonTheme,
   outlinedButtonTheme: _darkOutlinedButtonTheme,
   textButtonTheme: _darkTextButtonTheme,
-  inputDecorationTheme: InputDecorationTheme(
-    filled: true,
-    fillColor: _darkColorScheme.surfaceContainerHighest,
-    hoverColor: _darkColorScheme.surfaceContainerHigh,
-    focusColor: _darkColorScheme.primary.withValues(alpha: 0.12),
-    contentPadding: EdgeInsets.symmetric(
-      horizontal: uiConstants.spacing3,
-      vertical: uiConstants.spacing3,
-    ),
-    border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(uiConstants.radius12),
-      borderSide: BorderSide.none,
-    ),
-    enabledBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(uiConstants.radius12),
-      borderSide: BorderSide.none,
-    ),
-    focusedBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(uiConstants.radius12),
-      borderSide: BorderSide(color: _darkColorScheme.primary, width: 2.0),
-    ),
-    errorBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(uiConstants.radius12),
-      borderSide: BorderSide(color: _darkColorScheme.error, width: 2.0),
-    ),
-    focusedErrorBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(uiConstants.radius12),
-      borderSide: BorderSide(color: _darkColorScheme.error, width: 2.0),
-    ),
-    labelStyle: _darkTextTheme.labelLarge?.copyWith(
-      color: _darkColorScheme.onSurfaceVariant,
-    ),
-    hintStyle: _darkTextTheme.bodyLarge?.copyWith(
-      color: _darkColorScheme.onSurfaceVariant.withValues(alpha: 0.6),
-    ),
-    errorStyle: _darkTextTheme.bodySmall?.copyWith(
-      color: _darkColorScheme.error,
-    ),
-  ),
+  inputDecorationTheme: _darkInputDecorationTheme,
   platform: TargetPlatform.android,
 );
