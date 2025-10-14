@@ -155,7 +155,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get editarTelefoneTextMessage => 'Editar número de teléfono';
 
   @override
-  String get verifyPhoneNumberMessage => 'Verifique su número de teléfono';
+  String get verifyPhoneNumberMessage => 'Enviamos un mensaje al número';
 }
 
 /// The translations for Spanish Castilian, as used in Mexico (`es_MX`).
@@ -309,5 +309,5 @@ class AppLocalizationsEsMx extends AppLocalizationsEs {
   String get editarTelefoneTextMessage => 'Editar número de teléfono';
 
   @override
-  String get verifyPhoneNumberMessage => 'Verifique su número de teléfono';
+  String get verifyPhoneNumberMessage => 'Enviamos un mensaje al número';
 }

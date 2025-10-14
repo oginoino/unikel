@@ -382,7 +382,7 @@ abstract class AppLocalizations {
   /// No description provided for @verifyPhoneNumberMessage.
   ///
   /// In en_US, this message translates to:
-  /// **'Verify your phone number'**
+  /// **'We sent a message to the number'**
   String get verifyPhoneNumberMessage;
 }
 

@@ -152,7 +152,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get editarTelefoneTextMessage => 'Editar número de telefone';
 
   @override
-  String get verifyPhoneNumberMessage => 'Verifique seu número de telefone';
+  String get verifyPhoneNumberMessage => 'Enviamos uma mensagem para o número';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).
@@ -304,5 +304,5 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get editarTelefoneTextMessage => 'Editar número de telefone';
 
   @override
-  String get verifyPhoneNumberMessage => 'Verifique seu número de telefone';
+  String get verifyPhoneNumberMessage => 'Enviamos uma mensagem para o número';
 }
