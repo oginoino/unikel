@@ -477,9 +477,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                               SizedBox(height: uiConstants.spacing20),
                               // Feedback de Verificação
                               _buildVerificationFeedback(context),
-                              SizedBox(height: uiConstants.spacing16),
-                              // Botão de Reenviar Código
-                              _buildResendCodeButton(context),
+                              SizedBox(height: uiConstants.spacing8),
                             ],
                           ),
                         ),
@@ -492,64 +490,74 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
           ),
         ),
         PageIndicator(currentPage: _currentPage, itemCount: _formKeys.length),
-        Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: uiConstants.spacing4,
-            vertical: uiConstants.spacing20,
-          ),
-          child: SizedBox(
-            height: uiConstants.buttonHeight,
-            child: Row(
-              spacing: uiConstants.spacing4,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: uiConstants.spacing4,
+              vertical: uiConstants.spacing20,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                if (_currentPage > 0 && _currentPage < _formKeys.length - 1)
-                  Expanded(
-                    child: CustomCTAButton(
-                      onPressed: () {
-                        _pageController.previousPage(
-                          duration: const Duration(milliseconds: 300),
-                          curve: Curves.easeIn,
-                        );
-                      },
-                      variant: ButtonVariant.secondary,
-                      label: context.l10n.previous,
-                      icon: Icon(Icons.arrow_back_rounded),
-                    ),
-                  ),
-                if (_currentPage < _formKeys.length - 1)
-                  Expanded(
-                    child: CustomCTAButton(
-                      onPressed: () {
-                        if (_formKeys[_currentPage].currentState!.validate()) {
-                          _startResendTimer();
-                          _pageController.nextPage(
+                Row(
+                  spacing: uiConstants.spacing4,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    if (_currentPage > 0 && _currentPage < _formKeys.length - 1)
+                      Expanded(
+                        child: CustomCTAButton(
+                          onPressed: () {
+                            _pageController.previousPage(
+                              duration: const Duration(milliseconds: 300),
+                              curve: Curves.easeIn,
+                            );
+                          },
+                          variant: ButtonVariant.secondary,
+                          label: context.l10n.previous,
+                          icon: Icon(Icons.arrow_back_rounded),
+                        ),
+                      ),
+                    if (_currentPage < _formKeys.length - 1)
+                      Expanded(
+                        child: CustomCTAButton(
+                          onPressed: () {
+                            if (_formKeys[_currentPage].currentState!
+                                .validate()) {
+                              _startResendTimer();
+                              _pageController.nextPage(
+                                duration: const Duration(milliseconds: 300),
+                                curve: Curves.easeIn,
+                              );
+                            }
+                          },
+                          icon: Icon(Icons.arrow_forward_rounded),
+                          variant: ButtonVariant.primary,
+                          label: context.l10n.next,
+                        ),
+                      ),
+                  ],
+                ),
+                if (_currentPage == _formKeys.length - 1)
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      _buildResendCodeButton(context),
+                      SizedBox(height: uiConstants.spacing4),
+                      CustomCTAButton(
+                        onPressed: () {
+                          _resetVerificationState();
+                          _securityCodeController.clear();
+                          _resendTimer?.cancel();
+                          _resendCountdown = 0;
+                          _pageController.previousPage(
                             duration: const Duration(milliseconds: 300),
                             curve: Curves.easeIn,
                           );
-                        }
-                      },
-                      icon: Icon(Icons.arrow_forward_rounded),
-                      variant: ButtonVariant.primary,
-                      label: context.l10n.next,
-                    ),
-                  ),
-                if (_currentPage == _formKeys.length - 1)
-                  Expanded(
-                    child: CustomCTAButton(
-                      onPressed: () {
-                        _resetVerificationState();
-                        _securityCodeController.clear();
-                        _resendTimer?.cancel();
-                        _resendCountdown = 0;
-                        _pageController.previousPage(
-                          duration: const Duration(milliseconds: 300),
-                          curve: Curves.easeIn,
-                        );
-                      },
-                      variant: ButtonVariant.secondary,
-                      label: context.l10n.editarTelefoneTextMessage,
-                    ),
+                        },
+                        variant: ButtonVariant.secondary,
+                        label: context.l10n.editarTelefoneTextMessage,
+                      ),
+                    ],
                   ),
               ],
             ),
