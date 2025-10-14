@@ -465,23 +465,23 @@ InputDecorationTheme _darkInputDecorationTheme = InputDecorationTheme(
   ),
 
   // Label styling
-  labelStyle: _darkTextTheme.bodyLarge?.copyWith(
+  labelStyle: _darkTextTheme.titleLarge?.copyWith(
     color: _darkColorScheme.onSurfaceVariant,
     fontWeight: FontWeight.w500,
   ),
 
   // Hint styling
-  hintStyle: _darkTextTheme.bodyLarge?.copyWith(
+  hintStyle: _darkTextTheme.titleLarge?.copyWith(
     color: _darkColorScheme.onSurfaceVariant.withValues(alpha: 0.5),
   ),
 
   // Helper text styling
-  helperStyle: _darkTextTheme.bodySmall?.copyWith(
+  helperStyle: _darkTextTheme.bodyMedium?.copyWith(
     color: _darkColorScheme.onSurfaceVariant.withValues(alpha: 0.7),
   ),
 
   // Error text styling
-  errorStyle: _darkTextTheme.bodySmall?.copyWith(
+  errorStyle: _darkTextTheme.bodyMedium?.copyWith(
     color: _darkColorScheme.error,
     fontWeight: FontWeight.w500,
   ),

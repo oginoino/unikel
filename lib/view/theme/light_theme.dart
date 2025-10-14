@@ -478,23 +478,23 @@ InputDecorationTheme _lightInputDecorationTheme = InputDecorationTheme(
   ),
 
   // Label styling
-  labelStyle: _lightTextTheme.bodyLarge?.copyWith(
+  labelStyle: _lightTextTheme.titleLarge?.copyWith(
     color: _lightColorScheme.onSurfaceVariant,
     fontWeight: FontWeight.w500,
   ),
 
   // Hint styling
-  hintStyle: _lightTextTheme.bodyLarge?.copyWith(
+  hintStyle: _lightTextTheme.titleLarge?.copyWith(
     color: _lightColorScheme.onSurfaceVariant.withValues(alpha: 0.5),
   ),
 
   // Helper text styling
-  helperStyle: _lightTextTheme.bodySmall?.copyWith(
+  helperStyle: _lightTextTheme.bodyMedium?.copyWith(
     color: _lightColorScheme.onSurfaceVariant.withValues(alpha: 0.7),
   ),
 
   // Error text styling
-  errorStyle: _lightTextTheme.bodySmall?.copyWith(
+  errorStyle: _lightTextTheme.bodyMedium?.copyWith(
     color: _lightColorScheme.error,
     fontWeight: FontWeight.w500,
   ),
