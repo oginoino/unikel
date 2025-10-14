@@ -30,8 +30,8 @@
   "invalidPhoneMatch": "Please enter a valid phone number.",
   "labelPhoneCode": "Phone Code",
   "registerNameTitle": "What is your name?",
-    "registerPhoneTitle": "What is your phone number?",
-    "registerPhoneCodeTitle": "What is your phone code?",
+  "registerPhoneTitle": "What is your phone number?",
+  "registerPhoneCodeTitle": "What is your phone code?",
   "phoneCodeValue": "Phone Code",
   "phoneCodeRequired": "Phone code is required.",
   "invalidPhoneCodeMatch": "Please enter a valid 4-digit phone code.",
@@ -40,6 +40,20 @@
   "submitRegister": "Submit Register",
   "selectCountryCode": "Select country code",
   "registerSecurityCodeTitle": "Security code verification",
-  "labelSecurityCode": "Security code"
+  "labelSecurityCode": "Security code",
+  "verifyingCode": "Verifying code...",
+  "codeVerifiedSuccess": "Code verified successfully!",
+  "codeInvalid": "Invalid code.",
+  "errorVerifyingCode": "Error verifying code.",
+  "editarTelefoneTextMessage": "Edit phone number",
+  "verifyPhoneNumberMessage": "We sent a message to the number {phoneNumber}",
+  "@verifyPhoneNumberMessage": {
+    "placeholders": {
+      "phoneNumber": {}
+    }
+  },
+  "resendCode": "Resend code",
+  "codeResendSuccess": "Code resent successfully",
+  "errorResendingCode": "Error sending code"
 }
   

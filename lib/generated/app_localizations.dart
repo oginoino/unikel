@@ -348,6 +348,60 @@ abstract class AppLocalizations {
   /// In en_US, this message translates to:
   /// **'Security code'**
   String get labelSecurityCode;
+
+  /// No description provided for @verifyingCode.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Verifying code...'**
+  String get verifyingCode;
+
+  /// No description provided for @codeVerifiedSuccess.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Code verified successfully!'**
+  String get codeVerifiedSuccess;
+
+  /// No description provided for @codeInvalid.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Invalid code.'**
+  String get codeInvalid;
+
+  /// No description provided for @errorVerifyingCode.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Error verifying code.'**
+  String get errorVerifyingCode;
+
+  /// No description provided for @editarTelefoneTextMessage.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Edit phone number'**
+  String get editarTelefoneTextMessage;
+
+  /// No description provided for @verifyPhoneNumberMessage.
+  ///
+  /// In en_US, this message translates to:
+  /// **'We sent a message to the number {phoneNumber}'**
+  String verifyPhoneNumberMessage(Object phoneNumber);
+
+  /// No description provided for @resendCode.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Resend code'**
+  String get resendCode;
+
+  /// No description provided for @codeResendSuccess.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Code resent successfully'**
+  String get codeResendSuccess;
+
+  /// No description provided for @errorResendingCode.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Error sending code'**
+  String get errorResendingCode;
 }
 
 class _AppLocalizationsDelegate

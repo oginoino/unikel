@@ -460,6 +460,115 @@ TextButtonThemeData _lightTextButtonTheme = TextButtonThemeData(
   ),
 );
 
+// ============================================================================
+// LIGHT THEME INPUT DECORATION
+// ============================================================================
+
+InputDecorationTheme _lightInputDecorationTheme = InputDecorationTheme(
+  // Base styling
+  filled: true,
+  fillColor: _lightColorScheme.surfaceContainerLowest,
+  hoverColor: _lightColorScheme.surfaceContainerLow,
+  focusColor: _lightColorScheme.primary.withValues(alpha: 0.08),
+
+  visualDensity: VisualDensity.compact,
+  // Padding and spacing
+  contentPadding: EdgeInsets.symmetric(
+    horizontal: uiConstants.spacing4,
+    vertical: uiConstants.spacing3,
+  ),
+
+  // Label styling
+  labelStyle: _lightTextTheme.titleLarge?.copyWith(
+    color: _lightColorScheme.onSurfaceVariant,
+    fontWeight: FontWeight.w500,
+  ),
+
+  // Hint styling
+  hintStyle: _lightTextTheme.titleLarge?.copyWith(
+    color: _lightColorScheme.onSurfaceVariant.withValues(alpha: 0.5),
+  ),
+
+  // Helper text styling
+  helperStyle: _lightTextTheme.bodyMedium?.copyWith(
+    color: _lightColorScheme.onSurfaceVariant.withValues(alpha: 0.7),
+  ),
+
+  // Error text styling
+  errorStyle: _lightTextTheme.bodyMedium?.copyWith(
+    color: _lightColorScheme.error,
+    fontWeight: FontWeight.w500,
+  ),
+
+  // Counter styling
+  counterStyle: _lightTextTheme.bodySmall?.copyWith(
+    color: _lightColorScheme.onSurfaceVariant.withValues(alpha: 0.6),
+  ),
+
+  // Border radius - consistent with button design
+  border: OutlineInputBorder(
+    borderRadius: BorderRadius.circular(uiConstants.radius12),
+    borderSide: BorderSide.none,
+  ),
+  enabledBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.circular(uiConstants.radius12),
+    borderSide: BorderSide(color: _lightColorScheme.outline, width: 1.5),
+  ),
+
+  // Focused border with primary color
+  focusedBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.circular(uiConstants.radius12),
+    borderSide: BorderSide(color: _lightColorScheme.primary, width: 2.0),
+  ),
+
+  // Error border styling
+  errorBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.circular(uiConstants.radius12),
+    borderSide: BorderSide(color: _lightColorScheme.error, width: 2.0),
+  ),
+
+  // Focused error border
+  focusedErrorBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.circular(uiConstants.radius12),
+    borderSide: BorderSide(color: _lightColorScheme.error, width: 2.0),
+  ),
+
+  // Disabled state
+  disabledBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.circular(uiConstants.radius12),
+    borderSide: BorderSide(
+      color: _lightColorScheme.onSurface.withValues(alpha: 0.12),
+      width: 1.0,
+    ),
+  ),
+
+  // Prefix and suffix icon styling
+  prefixIconColor: WidgetStateColor.resolveWith((Set<WidgetState> states) {
+    if (states.contains(WidgetState.focused)) {
+      return _lightColorScheme.primary;
+    }
+    if (states.contains(WidgetState.error)) {
+      return _lightColorScheme.error;
+    }
+    return _lightColorScheme.onSurfaceVariant;
+  }),
+  suffixIconColor: WidgetStateColor.resolveWith((Set<WidgetState> states) {
+    if (states.contains(WidgetState.focused)) {
+      return _lightColorScheme.primary;
+    }
+    if (states.contains(WidgetState.error)) {
+      return _lightColorScheme.error;
+    }
+    return _lightColorScheme.onSurfaceVariant;
+  }),
+
+  outlineBorder: BorderSide(
+    color: _lightColorScheme.outline,
+    width: 1.5,
+    style: BorderStyle.solid,
+  ),
+);
+
 ThemeData customLightTheme = ThemeData(
   useMaterial3: true,
   colorScheme: _lightColorScheme,
@@ -470,43 +579,5 @@ ThemeData customLightTheme = ThemeData(
   elevatedButtonTheme: _lightElevatedButtonTheme,
   outlinedButtonTheme: _lightOutlinedButtonTheme,
   textButtonTheme: _lightTextButtonTheme,
-  inputDecorationTheme: InputDecorationTheme(
-    filled: true,
-    fillColor: _lightColorScheme.surfaceContainerHighest,
-    hoverColor: _lightColorScheme.surfaceContainerHigh,
-    focusColor: _lightColorScheme.primary.withValues(alpha: 0.12),
-    contentPadding: EdgeInsets.symmetric(
-      horizontal: uiConstants.spacing3,
-      vertical: uiConstants.spacing3,
-    ),
-    border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(uiConstants.radius12),
-      borderSide: BorderSide.none,
-    ),
-    enabledBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(uiConstants.radius12),
-      borderSide: BorderSide.none,
-    ),
-    focusedBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(uiConstants.radius12),
-      borderSide: BorderSide(color: _lightColorScheme.primary, width: 2.0),
-    ),
-    errorBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(uiConstants.radius12),
-      borderSide: BorderSide(color: _lightColorScheme.error, width: 2.0),
-    ),
-    focusedErrorBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(uiConstants.radius12),
-      borderSide: BorderSide(color: _lightColorScheme.error, width: 2.0),
-    ),
-    labelStyle: _lightTextTheme.labelLarge?.copyWith(
-      color: _lightColorScheme.onSurfaceVariant,
-    ),
-    hintStyle: _lightTextTheme.bodyLarge?.copyWith(
-      color: _lightColorScheme.onSurfaceVariant.withValues(alpha: 0.6),
-    ),
-    errorStyle: _lightTextTheme.bodySmall?.copyWith(
-      color: _lightColorScheme.error,
-    ),
-  ),
+  inputDecorationTheme: _lightInputDecorationTheme,
 );
