@@ -334,8 +334,20 @@ abstract class AppLocalizations {
   /// No description provided for @selectCountryCode.
   ///
   /// In en_US, this message translates to:
-  /// **'Select Country Code'**
+  /// **'Select country code'**
   String get selectCountryCode;
+
+  /// No description provided for @registerSecurityCodeTitle.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Security code verification'**
+  String get registerSecurityCodeTitle;
+
+  /// No description provided for @labelSecurityCode.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Security code'**
+  String get labelSecurityCode;
 }
 
 class _AppLocalizationsDelegate

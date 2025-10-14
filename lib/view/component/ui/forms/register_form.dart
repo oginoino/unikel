@@ -187,7 +187,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                   children: [
                     SizedBox(height: uiConstants.spacing16),
                     Text(
-                      context.l10n.registerPhoneCodeTitle,
+                      context.l10n.registerSecurityCodeTitle,
                       style: Theme.of(context).textTheme.headlineMedium,
                     ),
                     SizedBox(height: uiConstants.spacing16),
@@ -203,12 +203,13 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                               controller: _phoneCodeController,
                               keyboardType: TextInputType.number,
                               decoration: InputDecoration(
-                                labelText: context.l10n.labelPhoneCode,
+                                labelText: context.l10n.labelSecurityCode,
                                 border: OutlineInputBorder(),
                               ),
                               validator: (value) =>
-                                  FormValidators.validatePhoneCode(
+                                  FormValidators.validateRequired(
                                     value,
+                                    context.l10n.labelSecurityCode,
                                     context,
                                   ),
                             ),

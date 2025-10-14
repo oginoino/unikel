@@ -127,7 +127,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get submitRegister => 'Submit Register';
 
   @override
-  String get selectCountryCode => 'Select Country Code';
+  String get selectCountryCode => 'Select country code';
+
+  @override
+  String get registerSecurityCodeTitle => 'Security code verification';
+
+  @override
+  String get labelSecurityCode => 'Security code';
 }
 
 /// The translations for English, as used in the United States (`en_US`).
@@ -253,5 +259,11 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   String get submitRegister => 'Submit Register';
 
   @override
-  String get selectCountryCode => 'Select Country Code';
+  String get selectCountryCode => 'Select country code';
+
+  @override
+  String get registerSecurityCodeTitle => 'Security code verification';
+
+  @override
+  String get labelSecurityCode => 'Security code';
 }

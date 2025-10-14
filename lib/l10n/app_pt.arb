@@ -38,6 +38,8 @@
   "previous": "Anterior",
   "next": "Próximo",
   "submitRegister": "Registrar",
-  "selectCountryCode": "Selecione o código do país"  
+  "selectCountryCode": "Selecione o código do país",
+  "registerSecurityCodeTitle": "Verificação do código de segurança",
+  "labelSecurityCode": "Código de segurança"
 }
   

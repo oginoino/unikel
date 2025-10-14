@@ -130,7 +130,13 @@ class AppLocalizationsEs extends AppLocalizations {
   String get submitRegister => 'Registrar';
 
   @override
-  String get selectCountryCode => 'Seleccione el código de país';
+  String get selectCountryCode => 'Seleccionar código de país';
+
+  @override
+  String get registerSecurityCodeTitle => 'Verificación de código de seguridad';
+
+  @override
+  String get labelSecurityCode => 'Código de seguridad';
 }
 
 /// The translations for Spanish Castilian, as used in Mexico (`es_MX`).
@@ -259,5 +265,11 @@ class AppLocalizationsEsMx extends AppLocalizationsEs {
   String get submitRegister => 'Registrar';
 
   @override
-  String get selectCountryCode => 'Seleccione el código de país';
+  String get selectCountryCode => 'Seleccionar código de país';
+
+  @override
+  String get registerSecurityCodeTitle => 'Verificación de código de seguridad';
+
+  @override
+  String get labelSecurityCode => 'Código de seguridad';
 }

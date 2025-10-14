@@ -129,6 +129,12 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get selectCountryCode => 'Selecione o código do país';
+
+  @override
+  String get registerSecurityCodeTitle => 'Verificação do código de segurança';
+
+  @override
+  String get labelSecurityCode => 'Código de segurança';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).
@@ -256,4 +262,10 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get selectCountryCode => 'Selecione o código do país';
+
+  @override
+  String get registerSecurityCodeTitle => 'Verificação do código de segurança';
+
+  @override
+  String get labelSecurityCode => 'Código de segurança';
 }
