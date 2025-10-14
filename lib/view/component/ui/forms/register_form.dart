@@ -26,6 +26,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _phoneCodeController = TextEditingController();
+  final TextEditingController _securityCodeController = TextEditingController();
 
   @override
   void initState() {
@@ -39,6 +40,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
     _nameController.dispose();
     _phoneController.dispose();
     _phoneCodeController.dispose();
+    _securityCodeController.dispose();
     super.dispose();
   }
 
@@ -201,7 +203,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Pinput(
-                              controller: _phoneCodeController,
+                              controller: _securityCodeController,
                               length: 4,
                               defaultPinTheme: PinTheme(
                                 width: 56,
