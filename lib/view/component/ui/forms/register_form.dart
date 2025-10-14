@@ -6,6 +6,7 @@ import '../../../../utils/imports/common_libs.dart';
 import '../padding/responsive_padding.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:pinput/pinput.dart';
+import 'dart:async';
 
 class RegisterUserForm extends StatefulWidget {
   const RegisterUserForm({super.key});
@@ -32,6 +33,11 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
   VerificationState _verificationState = VerificationState.idle;
   String? _verificationMessage;
 
+  // Estados para reenvio de código
+  int _resendCountdown = 0;
+  Timer? _resendTimer;
+  static const int _resendDelaySeconds = 30;
+
   @override
   void initState() {
     super.initState();
@@ -46,6 +52,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
     _phoneController.dispose();
     _phoneCodeController.dispose();
     _securityCodeController.dispose();
+    _resendTimer?.cancel();
     super.dispose();
   }
 
@@ -67,6 +74,65 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
       _verificationState = VerificationState.idle;
       _verificationMessage = null;
     });
+  }
+
+  void _startResendTimer() {
+    _resendTimer?.cancel();
+    setState(() {
+      _resendCountdown = _resendDelaySeconds;
+    });
+
+    _resendTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      setState(() {
+        _resendCountdown--;
+      });
+
+      if (_resendCountdown <= 0) {
+        timer.cancel();
+      }
+    });
+  }
+
+  Future<void> _resendSecurityCode() async {
+    setState(() {
+      _verificationState = VerificationState.verifying;
+      _verificationMessage = null;
+    });
+
+    try {
+      // Simular chamada à API para reenvio do código
+      await Future.delayed(const Duration(seconds: 1));
+
+      setState(() {
+        _verificationState = VerificationState.idle;
+        _verificationMessage = context.l10n.codeResendSuccess;
+      });
+
+      // Limpar código anterior
+      _securityCodeController.clear();
+
+      // Iniciar novo timer de reenvio
+      _startResendTimer();
+
+      // Mostrar mensagem de sucesso brevemente
+      await Future.delayed(const Duration(seconds: 2));
+      if (mounted) {
+        setState(() {
+          _verificationMessage = null;
+        });
+      }
+    } catch (e) {
+      setState(() {
+        _verificationState = VerificationState.error;
+        _verificationMessage = context.l10n.errorResendingCode;
+      });
+
+      // Resetar após mostrar erro
+      await Future.delayed(const Duration(seconds: 2));
+      if (mounted) {
+        _resetVerificationState();
+      }
+    }
   }
 
   Future<void> _verifySecurityCode() async {
@@ -411,6 +477,9 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                               SizedBox(height: uiConstants.spacing20),
                               // Feedback de Verificação
                               _buildVerificationFeedback(context),
+                              SizedBox(height: uiConstants.spacing16),
+                              // Botão de Reenviar Código
+                              _buildResendCodeButton(context),
                             ],
                           ),
                         ),
@@ -453,6 +522,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                     child: CustomCTAButton(
                       onPressed: () {
                         if (_formKeys[_currentPage].currentState!.validate()) {
+                          _startResendTimer();
                           _pageController.nextPage(
                             duration: const Duration(milliseconds: 300),
                             curve: Curves.easeIn,
@@ -470,6 +540,8 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                       onPressed: () {
                         _resetVerificationState();
                         _securityCodeController.clear();
+                        _resendTimer?.cancel();
+                        _resendCountdown = 0;
                         _pageController.previousPage(
                           duration: const Duration(milliseconds: 300),
                           curve: Curves.easeIn,
@@ -554,6 +626,22 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
           ],
         );
     }
+  }
+
+  Widget _buildResendCodeButton(BuildContext context) {
+    final isCountdownActive = _resendCountdown > 0;
+
+    return SizedBox(
+      width: double.infinity,
+      child: CustomCTAButton(
+        onPressed: isCountdownActive ? null : _resendSecurityCode,
+        variant: ButtonVariant.primary,
+        label: isCountdownActive
+            ? '${context.l10n.resendCode} (${_resendCountdown}s)'
+            : context.l10n.resendCode,
+        icon: isCountdownActive ? null : Icon(Icons.refresh_rounded),
+      ),
+    );
   }
 }
 

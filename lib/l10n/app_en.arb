@@ -51,5 +51,8 @@
     "placeholders": {
       "phoneNumber": {}
     }
-  }
+  },
+   "resendCode": "Resend code",
+   "codeResendSuccess": "Code resent successfully",
+  "errorResendingCode": "Error sending code"
 }

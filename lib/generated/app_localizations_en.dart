@@ -154,6 +154,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String verifyPhoneNumberMessage(Object phoneNumber) {
     return 'We sent a message to the number $phoneNumber';
   }
+
+  @override
+  String get resendCode => 'Resend code';
+
+  @override
+  String get codeResendSuccess => 'Code resent successfully';
+
+  @override
+  String get errorResendingCode => 'Error sending code';
 }
 
 /// The translations for English, as used in the United States (`en_US`).
@@ -306,4 +315,13 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   String verifyPhoneNumberMessage(Object phoneNumber) {
     return 'We sent a message to the number $phoneNumber';
   }
+
+  @override
+  String get resendCode => 'Resend code';
+
+  @override
+  String get codeResendSuccess => 'Code resent successfully';
+
+  @override
+  String get errorResendingCode => 'Error sending code';
 }

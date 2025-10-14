@@ -51,6 +51,7 @@
     "placeholders": {
       "phoneNumber": {}
     }
-  }
+  },
+  "resendCode": "Enviar novamente"
 }
   

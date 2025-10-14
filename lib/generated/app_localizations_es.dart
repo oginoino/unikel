@@ -158,6 +158,15 @@ class AppLocalizationsEs extends AppLocalizations {
   String verifyPhoneNumberMessage(Object phoneNumber) {
     return 'Enviamos un mensaje al número $phoneNumber';
   }
+
+  @override
+  String get resendCode => 'Reenviar código';
+
+  @override
+  String get codeResendSuccess => 'Código reenviado exitosamente';
+
+  @override
+  String get errorResendingCode => 'Error al enviar el código';
 }
 
 /// The translations for Spanish Castilian, as used in Mexico (`es_MX`).
@@ -314,4 +323,13 @@ class AppLocalizationsEsMx extends AppLocalizationsEs {
   String verifyPhoneNumberMessage(Object phoneNumber) {
     return 'Enviamos un mensaje al número $phoneNumber';
   }
+
+  @override
+  String get resendCode => 'Reenviar código';
+
+  @override
+  String get codeResendSuccess => 'Código reenviado exitosamente';
+
+  @override
+  String get errorResendingCode => 'Error al enviar el código';
 }

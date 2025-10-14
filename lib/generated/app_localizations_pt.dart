@@ -155,6 +155,15 @@ class AppLocalizationsPt extends AppLocalizations {
   String verifyPhoneNumberMessage(Object phoneNumber) {
     return 'Enviamos uma mensagem para o número $phoneNumber';
   }
+
+  @override
+  String get resendCode => 'Enviar novamente';
+
+  @override
+  String get codeResendSuccess => 'Code resent successfully';
+
+  @override
+  String get errorResendingCode => 'Error sending code';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).
@@ -309,4 +318,13 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String verifyPhoneNumberMessage(Object phoneNumber) {
     return 'Enviamos uma mensagem para o número $phoneNumber';
   }
+
+  @override
+  String get resendCode => 'Enviar novamente';
+
+  @override
+  String get codeResendSuccess => 'Código reenviado com sucesso';
+
+  @override
+  String get errorResendingCode => 'Erro ao tentar reenviar';
 }

@@ -384,6 +384,24 @@ abstract class AppLocalizations {
   /// In en_US, this message translates to:
   /// **'We sent a message to the number {phoneNumber}'**
   String verifyPhoneNumberMessage(Object phoneNumber);
+
+  /// No description provided for @resendCode.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Resend code'**
+  String get resendCode;
+
+  /// No description provided for @codeResendSuccess.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Code resent successfully'**
+  String get codeResendSuccess;
+
+  /// No description provided for @errorResendingCode.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Error sending code'**
+  String get errorResendingCode;
 }
 
 class _AppLocalizationsDelegate

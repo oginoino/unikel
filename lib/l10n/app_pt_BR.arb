@@ -51,6 +51,9 @@
     "placeholders": {
       "phoneNumber": {}
     }
-  }
+  },
+  "resendCode": "Enviar novamente",
+  "codeResendSuccess": "Código reenviado com sucesso",
+  "errorResendingCode": "Erro ao tentar reenviar"
 }
   
