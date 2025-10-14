@@ -119,7 +119,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                             Row(
                               children: [
                                 SizedBox(
-                                  width: 92,
+                                  width: uiConstants.buttonHeight * 1.9,
                                   child: CountryCodePicker(
                                     dialogTextStyle: Theme.of(
                                       context,
@@ -317,7 +317,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
             vertical: uiConstants.spacing20,
           ),
           child: SizedBox(
-            height: 50.0, // Define uma altura fixa para o Row dos botões
+            height: uiConstants.buttonHeight, // Define uma altura fixa para o Row dos botões
             child: Row(
               spacing: uiConstants.spacing4,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
