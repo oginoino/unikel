@@ -28,10 +28,16 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
   final TextEditingController _phoneCodeController = TextEditingController();
   final TextEditingController _securityCodeController = TextEditingController();
 
+  // Novos estados para feedback de verificação
+  bool _isVerifying = false;
+  bool _verificationComplete = false;
+  String? _verificationMessage;
+
   @override
   void initState() {
     super.initState();
     _phoneCodeController.text = _selectedCountryCode.dialCode ?? '';
+    _securityCodeController.addListener(_onSecurityCodeChanged);
   }
 
   @override
@@ -44,6 +50,69 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
     super.dispose();
   }
 
+  void _onSecurityCodeChanged() {
+    // Trigger verification quando o código completo for inserido
+    if (_securityCodeController.text.length == 4) {
+      _verifySecurityCode();
+    } else {
+      // Reset verification state se o usuário apagar caracteres
+      if (_isVerifying || _verificationComplete) {
+        setState(() {
+          _isVerifying = false;
+          _verificationComplete = false;
+          _verificationMessage = null;
+        });
+      }
+    }
+  }
+
+  Future<void> _verifySecurityCode() async {
+    if (_isVerifying || _verificationComplete) return;
+
+    setState(() {
+      _isVerifying = true;
+      _verificationMessage = null;
+    });
+
+    try {
+      // Simular chamada à API para verificação do código
+      await Future.delayed(const Duration(seconds: 2));
+
+      // Simular sucesso na verificação
+      // Em produção, aqui você faria a chamada real à sua API
+      final isValid = _validateSecurityCode(_securityCodeController.text);
+
+      setState(() {
+        _isVerifying = false;
+        _verificationComplete = true;
+        _verificationMessage = isValid
+            ? 'Código verificado com sucesso!'
+            : 'Código inválido. Tente novamente.';
+      });
+
+      // Se falhar, resetar estado após alguns segundos
+      if (!isValid) {
+        await Future.delayed(const Duration(seconds: 2));
+        setState(() {
+          _verificationComplete = false;
+          _verificationMessage = null;
+        });
+      }
+    } catch (e) {
+      setState(() {
+        _isVerifying = false;
+        _verificationComplete = true;
+        _verificationMessage = 'Erro ao verificar código. Tente novamente.';
+      });
+    }
+  }
+
+  bool _validateSecurityCode(String code) {
+    // Implemente aqui sua lógica de validação
+    // Por enquanto, qualquer código com 4 dígitos é considerado válido
+    return code.length == 4 && code != '0000';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -51,7 +120,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
         Expanded(
           child: PageView(
             controller: _pageController,
-            physics: const NeverScrollableScrollPhysics(), // Disable swiping
+            physics: const NeverScrollableScrollPhysics(),
             onPageChanged: (int page) {
               setState(() {
                 _currentPage = page;
@@ -80,7 +149,6 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                           children: [
                             TextFormField(
                               controller: _nameController,
-
                               decoration: InputDecoration(
                                 labelText: context.l10n.labelName,
                                 border: OutlineInputBorder(),
@@ -197,7 +265,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                   ),
                 ),
               ),
-              // Page 3: Phone Code Input
+              // Page 3: Phone Code Input com Feedback
               ResponsivePadding(
                 child: SingleChildScrollView(
                   child: Column(
@@ -222,9 +290,9 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                                 autofillHints: const [
                                   AutofillHints.oneTimeCode,
                                 ],
-
                                 controller: _securityCodeController,
                                 length: 4,
+                                enabled: !_verificationComplete,
                                 defaultPinTheme: PinTheme(
                                   width: 56,
                                   height: 56,
@@ -318,6 +386,76 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                                     ),
                                 keyboardType: TextInputType.number,
                               ),
+                              SizedBox(height: uiConstants.spacing20),
+                              // Feedback de Verificação
+                              if (_isVerifying)
+                                Column(
+                                  children: [
+                                    SizedBox(
+                                      width: 50,
+                                      height: 50,
+                                      child: CircularProgressIndicator(
+                                        strokeWidth: 2.5,
+                                      ),
+                                    ),
+                                    SizedBox(height: uiConstants.spacing12),
+                                    Text(
+                                      'Verificando código...',
+                                      style: Theme.of(
+                                        context,
+                                      ).textTheme.bodyMedium,
+                                    ),
+                                  ],
+                                )
+                              else if (_verificationComplete)
+                                Column(
+                                  children: [
+                                    Container(
+                                      width: 50,
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                        color:
+                                            _verificationMessage ==
+                                                'Código verificado com sucesso!'
+                                            ? Theme.of(
+                                                context,
+                                              ).colorScheme.primary
+                                            : Theme.of(
+                                                context,
+                                              ).colorScheme.error,
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: Icon(
+                                        _verificationMessage ==
+                                                'Código verificado com sucesso!'
+                                            ? Icons.check
+                                            : Icons.close,
+                                        color: Colors.white,
+                                        size: 28,
+                                      ),
+                                    ),
+                                    SizedBox(height: uiConstants.spacing12),
+                                    Text(
+                                      _verificationMessage ?? '',
+                                      textAlign: TextAlign.center,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleMedium
+                                          ?.copyWith(
+                                            color:
+                                                _verificationMessage ==
+                                                    'Código verificado com sucesso!'
+                                                ? Theme.of(
+                                                    context,
+                                                  ).colorScheme.primary
+                                                : Theme.of(
+                                                    context,
+                                                  ).colorScheme.error,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                    ),
+                                  ],
+                                ),
                             ],
                           ),
                         ),
@@ -336,8 +474,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
             vertical: uiConstants.spacing20,
           ),
           child: SizedBox(
-            height: uiConstants
-                .buttonHeight, // Define uma altura fixa para o Row dos botões
+            height: uiConstants.buttonHeight,
             child: Row(
               spacing: uiConstants.spacing4,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -356,7 +493,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                       icon: Icon(Icons.arrow_back_rounded),
                     ),
                   ),
-                if (_currentPage < _formKeys.length - 1) // Assuming 3 pages
+                if (_currentPage < _formKeys.length - 1)
                   Expanded(
                     child: CustomCTAButton(
                       onPressed: () {
@@ -372,12 +509,14 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                       label: context.l10n.next,
                     ),
                   ),
-                // Page 4: Submit Button
                 if (_currentPage == _formKeys.length - 1)
                   Expanded(
                     child: CustomCTAButton(
                       onPressed: () {
-                        if (_formKeys[_currentPage].currentState!.validate()) {
+                        if (_formKeys[_currentPage].currentState!.validate() &&
+                            _verificationComplete &&
+                            _verificationMessage ==
+                                'Código verificado com sucesso!') {
                           // Submit the form
                           // For example: _submitForm();
                         }
