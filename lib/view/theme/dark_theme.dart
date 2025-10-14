@@ -472,7 +472,7 @@ InputDecorationTheme _darkInputDecorationTheme = InputDecorationTheme(
 
   // Hint styling
   hintStyle: _darkTextTheme.titleLarge?.copyWith(
-    color: _darkColorScheme.onSurfaceVariant.withOpacity(0.5),
+    color: _darkColorScheme.onSurfaceVariant.withValues(alpha: 0.5),
   ),
 
   // Helper text styling
