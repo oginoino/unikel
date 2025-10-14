@@ -64,7 +64,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get emailRequired => 'Email is required.';
 
   @override
-  String get invalidEmail => 'Please enter a valid email.';
+  String get invalidEmail => 'Please enter a valid email address.';
 
   @override
   String get passwordRequired => 'Password is required.';
@@ -134,6 +134,21 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get labelSecurityCode => 'Security code';
+
+  @override
+  String get verifyingCode => 'Verifying code...';
+
+  @override
+  String get codeVerifiedSuccess => 'Code verified successfully!';
+
+  @override
+  String get codeInvalid => 'Invalid code.';
+
+  @override
+  String get errorVerifyingCode => 'Error verifying code.';
+
+  @override
+  String get editarTelefoneTextMessage => 'Edit phone number';
 }
 
 /// The translations for English, as used in the United States (`en_US`).
@@ -266,4 +281,19 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get labelSecurityCode => 'Security code';
+
+  @override
+  String get verifyingCode => 'Verifying code...';
+
+  @override
+  String get codeVerifiedSuccess => 'Code verified successfully!';
+
+  @override
+  String get codeInvalid => 'Invalid code.';
+
+  @override
+  String get errorVerifyingCode => 'Error verifying code.';
+
+  @override
+  String get editarTelefoneTextMessage => 'Edit phone number';
 }

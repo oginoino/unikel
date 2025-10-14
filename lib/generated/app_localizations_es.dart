@@ -137,6 +137,22 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get labelSecurityCode => 'Código de seguridad';
+
+  @override
+  String get verifyingCode => 'Verificando código...';
+
+  @override
+  String get codeVerifiedSuccess => 'Código verificado con éxito!';
+
+  @override
+  String get codeInvalid => 'Código inválido. Inténtalo de nuevo.';
+
+  @override
+  String get errorVerifyingCode =>
+      'Error al verificar el código. Inténtalo de nuevo.';
+
+  @override
+  String get editarTelefoneTextMessage => 'Editar número de teléfono';
 }
 
 /// The translations for Spanish Castilian, as used in Mexico (`es_MX`).
@@ -272,4 +288,20 @@ class AppLocalizationsEsMx extends AppLocalizationsEs {
 
   @override
   String get labelSecurityCode => 'Código de seguridad';
+
+  @override
+  String get verifyingCode => 'Verificando código...';
+
+  @override
+  String get codeVerifiedSuccess => 'Código verificado con éxito!';
+
+  @override
+  String get codeInvalid => 'Código inválido. Inténtalo de nuevo.';
+
+  @override
+  String get errorVerifyingCode =>
+      'Error al verificar el código. Inténtalo de nuevo.';
+
+  @override
+  String get editarTelefoneTextMessage => 'Editar número de teléfono';
 }

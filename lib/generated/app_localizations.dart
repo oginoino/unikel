@@ -348,6 +348,36 @@ abstract class AppLocalizations {
   /// In en_US, this message translates to:
   /// **'Security code'**
   String get labelSecurityCode;
+
+  /// No description provided for @verifyingCode.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Verifying code...'**
+  String get verifyingCode;
+
+  /// No description provided for @codeVerifiedSuccess.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Code verified successfully!'**
+  String get codeVerifiedSuccess;
+
+  /// No description provided for @codeInvalid.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Invalid code.'**
+  String get codeInvalid;
+
+  /// No description provided for @errorVerifyingCode.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Error verifying code.'**
+  String get errorVerifyingCode;
+
+  /// No description provided for @editarTelefoneTextMessage.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Edit phone number'**
+  String get editarTelefoneTextMessage;
 }
 
 class _AppLocalizationsDelegate

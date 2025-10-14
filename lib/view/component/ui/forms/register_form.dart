@@ -400,7 +400,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                                     ),
                                     SizedBox(height: uiConstants.spacing12),
                                     Text(
-                                      'Verificando código...',
+                                      context.l10n.verifyingCode,
                                       style: Theme.of(
                                         context,
                                       ).textTheme.bodyMedium,
@@ -416,7 +416,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                                       decoration: BoxDecoration(
                                         color:
                                             _verificationMessage ==
-                                                'Código verificado com sucesso!'
+                                                context.l10n.codeVerifiedSuccess
                                             ? Theme.of(
                                                 context,
                                               ).colorScheme.primary
@@ -427,7 +427,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                                       ),
                                       child: Icon(
                                         _verificationMessage ==
-                                                'Código verificado com sucesso!'
+                                                context.l10n.codeVerifiedSuccess
                                             ? Icons.check
                                             : Icons.close,
                                         color: Colors.white,
@@ -438,24 +438,14 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                                     Text(
                                       _verificationMessage ?? '',
                                       textAlign: TextAlign.center,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleMedium
-                                          ?.copyWith(
-                                            color:
-                                                _verificationMessage ==
-                                                    'Código verificado com sucesso!'
-                                                ? Theme.of(
-                                                    context,
-                                                  ).colorScheme.primary
-                                                : Theme.of(
-                                                    context,
-                                                  ).colorScheme.error,
-                                            fontWeight: FontWeight.w500,
-                                          ),
+                                      style: Theme.of(
+                                        context,
+                                      ).textTheme.bodyMedium,
                                     ),
                                   ],
-                                ),
+                                )
+                              else
+                                const SizedBox.shrink(),
                             ],
                           ),
                         ),
@@ -479,7 +469,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
               spacing: uiConstants.spacing4,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                if (_currentPage > 0)
+                if (_currentPage > 0 && _currentPage < _formKeys.length - 1)
                   Expanded(
                     child: CustomCTAButton(
                       onPressed: () {
@@ -493,6 +483,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                       icon: Icon(Icons.arrow_back_rounded),
                     ),
                   ),
+
                 if (_currentPage < _formKeys.length - 1)
                   Expanded(
                     child: CustomCTAButton(
@@ -509,20 +500,24 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                       label: context.l10n.next,
                     ),
                   ),
+
                 if (_currentPage == _formKeys.length - 1)
                   Expanded(
                     child: CustomCTAButton(
                       onPressed: () {
-                        if (_formKeys[_currentPage].currentState!.validate() &&
-                            _verificationComplete &&
-                            _verificationMessage ==
-                                'Código verificado com sucesso!') {
-                          // Submit the form
-                          // For example: _submitForm();
-                        }
+                        // clear piped data
+                        _verificationComplete = false;
+                        _verificationMessage = '';
+                        _securityCodeController.clear();
+
+                        // back to last page
+                        _pageController.previousPage(
+                          duration: const Duration(milliseconds: 300),
+                          curve: Curves.easeIn,
+                        );
                       },
-                      variant: ButtonVariant.primary,
-                      label: context.l10n.submitRegister,
+                      variant: ButtonVariant.secondary,
+                      label: context.l10n.editarTelefoneTextMessage,
                     ),
                   ),
               ],

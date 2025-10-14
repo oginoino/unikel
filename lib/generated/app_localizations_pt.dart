@@ -135,6 +135,21 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get labelSecurityCode => 'Código de segurança';
+
+  @override
+  String get verifyingCode => 'Verificando código...';
+
+  @override
+  String get codeVerifiedSuccess => 'Código verificado com sucesso!';
+
+  @override
+  String get codeInvalid => 'Código inválido. Tente novamente.';
+
+  @override
+  String get errorVerifyingCode => 'Erro ao verificar código. Tente novamente.';
+
+  @override
+  String get editarTelefoneTextMessage => 'Editar número de telefone';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).
@@ -268,4 +283,20 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get labelSecurityCode => 'Código de segurança';
+
+  @override
+  String get verifyingCode => 'Verificando código...';
+
+  @override
+  String get codeVerifiedSuccess => 'Código verificado com sucesso!';
+
+  @override
+  String get codeInvalid => 'Código inválido. Tente novamente.';
+
+  @override
+  String get errorVerifyingCode =>
+      'Erro ao verificar o código. Tente novamente.';
+
+  @override
+  String get editarTelefoneTextMessage => 'Editar número de telefone';
 }
