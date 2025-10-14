@@ -60,258 +60,270 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
             children: [
               // Page 1: Name Input
               ResponsivePadding(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    SizedBox(height: uiConstants.spacing16),
-                    Text(
-                      context.l10n.registerNameTitle,
-                      textAlign: TextAlign.left,
-                      style: Theme.of(context).textTheme.headlineMedium,
-                    ),
-                    SizedBox(height: uiConstants.spacing16),
-                    Form(
-                      key: _formKeys[0],
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          TextFormField(
-                            controller: _nameController,
-
-                            decoration: InputDecoration(
-                              labelText: context.l10n.labelName,
-                              border: OutlineInputBorder(),
-                              labelStyle: Theme.of(context).textTheme.titleLarge
-                                  ?.copyWith(
-                                    color: Theme.of(
-                                      context,
-                                    ).colorScheme.onSurfaceVariant,
-                                  ),
-                            ),
-                            validator: (value) =>
-                                FormValidators.validateRequired(
-                                  value,
-                                  context.l10n.nameValue,
-                                  context,
-                                ),
-                          ),
-                        ],
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      SizedBox(height: uiConstants.spacing16),
+                      Text(
+                        context.l10n.registerNameTitle,
+                        textAlign: TextAlign.left,
+                        style: Theme.of(context).textTheme.headlineMedium,
                       ),
-                    ),
-                  ],
-                ),
-              ),
-              // Page 2: Phone Input
-              ResponsivePadding(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    SizedBox(height: uiConstants.spacing16),
-                    Text(
-                      context.l10n.registerPhoneTitle,
-                      style: Theme.of(context).textTheme.headlineMedium,
-                    ),
-                    SizedBox(height: uiConstants.spacing16),
-                    Padding(
-                      padding: EdgeInsets.all(uiConstants.spacing4),
-                      child: Form(
-                        key: _formKeys[1],
+                      SizedBox(height: uiConstants.spacing16),
+                      Form(
+                        key: _formKeys[0],
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Row(
-                              children: [
-                                SizedBox(
-                                  width: uiConstants.buttonHeight * 1.9,
-                                  child: CountryCodePicker(
-                                    dialogTextStyle: Theme.of(
-                                      context,
-                                    ).textTheme.bodyMedium,
-                                    dialogBackgroundColor: Theme.of(
-                                      context,
-                                    ).canvasColor,
-                                    headerText: context.l10n.selectCountryCode,
-                                    boxDecoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: Theme.of(context).dividerColor,
-                                      ),
-                                      borderRadius: BorderRadius.circular(
-                                        uiConstants.radius16,
-                                      ),
-                                    ),
-                                    flagWidth: uiConstants.spacing4,
-                                    padding: EdgeInsets.zero,
-                                    margin: EdgeInsets.symmetric(
-                                      horizontal: uiConstants.spacing1,
-                                    ),
-                                    textStyle: Theme.of(
-                                      context,
-                                    ).textTheme.bodyMedium,
-                                    onChanged: (countryCode) {
-                                      setState(() {
-                                        _selectedCountryCode = countryCode;
-                                        _phoneCodeController.text =
-                                            countryCode.dialCode ?? '';
-                                      });
-                                    },
-                                    initialSelection: _selectedCountryCode.code,
-                                    favorite: const ['+55', 'BR'],
-                                    showCountryOnly: false,
-                                    showOnlyCountryWhenClosed: false,
-                                    alignLeft: true,
-                                  ),
-                                ),
-                                Expanded(
-                                  child: TextFormField(
-                                    controller: _phoneController,
-                                    keyboardType: TextInputType.phone,
-                                    decoration: InputDecoration(
-                                      labelText: context.l10n.labelPhone,
-                                      border: OutlineInputBorder(),
-                                    ),
-                                    validator: (value) =>
-                                        FormValidators.validatePhone(
-                                          value,
-                                          context,
-                                        ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              // Page 3: Phone Code Input
-              ResponsivePadding(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    SizedBox(height: uiConstants.spacing16),
-                    Text(
-                      context.l10n.registerSecurityCodeTitle,
-                      style: Theme.of(context).textTheme.headlineMedium,
-                    ),
-                    SizedBox(height: uiConstants.spacing16),
-                    Padding(
-                      padding: EdgeInsets.all(uiConstants.spacing4),
-                      child: Form(
-                        key: _formKeys[2],
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Pinput(
-                              autofillHints: const [AutofillHints.oneTimeCode],
+                            TextFormField(
+                              controller: _nameController,
 
-                              controller: _securityCodeController,
-                              length: 4,
-                              defaultPinTheme: PinTheme(
-                                width: 56,
-                                height: 56,
-                                textStyle: Theme.of(
-                                  context,
-                                ).textTheme.headlineSmall,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color:
-                                        Theme.of(context)
-                                            .inputDecorationTheme
-                                            .enabledBorder
-                                            ?.borderSide
-                                            .color ??
-                                        Theme.of(context).dividerColor,
-                                    width:
-                                        Theme.of(context)
-                                            .inputDecorationTheme
-                                            .enabledBorder
-                                            ?.borderSide
-                                            .width ??
-                                        1.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(
-                                    uiConstants.radius16,
-                                  ),
-                                ),
-                              ),
-                              focusedPinTheme: PinTheme(
-                                padding: EdgeInsets.all(uiConstants.spacing6),
-                                width: 56,
-                                height: 56,
-                                textStyle: Theme.of(
-                                  context,
-                                ).textTheme.headlineSmall,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color:
-                                        Theme.of(context)
-                                            .inputDecorationTheme
-                                            .focusedBorder
-                                            ?.borderSide
-                                            .color ??
-                                        Theme.of(context).primaryColor,
-                                    width:
-                                        Theme.of(context)
-                                            .inputDecorationTheme
-                                            .focusedBorder
-                                            ?.borderSide
-                                            .width ??
-                                        2.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(
-                                    uiConstants.radius16,
-                                  ),
-                                ),
-                              ),
-                              submittedPinTheme: PinTheme(
-                                width: 56,
-                                height: 56,
-                                textStyle: Theme.of(
-                                  context,
-                                ).textTheme.headlineSmall,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color:
-                                        Theme.of(context)
-                                            .inputDecorationTheme
-                                            .focusedBorder
-                                            ?.borderSide
-                                            .color ??
-                                        Theme.of(context).primaryColor,
-                                    width:
-                                        Theme.of(context)
-                                            .inputDecorationTheme
-                                            .focusedBorder
-                                            ?.borderSide
-                                            .width ??
-                                        2.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(
-                                    uiConstants.radius16,
-                                  ),
-                                ),
+                              decoration: InputDecoration(
+                                labelText: context.l10n.labelName,
+                                border: OutlineInputBorder(),
+                                labelStyle: Theme.of(context)
+                                    .textTheme
+                                    .titleLarge
+                                    ?.copyWith(
+                                      color: Theme.of(
+                                        context,
+                                      ).colorScheme.onSurfaceVariant,
+                                    ),
                               ),
                               validator: (value) =>
                                   FormValidators.validateRequired(
                                     value,
-                                    context.l10n.labelSecurityCode,
+                                    context.l10n.nameValue,
                                     context,
                                   ),
-                              keyboardType: TextInputType.number,
                             ),
                           ],
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
+                ),
+              ),
+              // Page 2: Phone Input
+              ResponsivePadding(
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      SizedBox(height: uiConstants.spacing16),
+                      Text(
+                        context.l10n.registerPhoneTitle,
+                        style: Theme.of(context).textTheme.headlineMedium,
+                      ),
+                      SizedBox(height: uiConstants.spacing16),
+                      Padding(
+                        padding: EdgeInsets.all(uiConstants.spacing4),
+                        child: Form(
+                          key: _formKeys[1],
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width: uiConstants.buttonHeight * 1.9,
+                                    child: CountryCodePicker(
+                                      dialogTextStyle: Theme.of(
+                                        context,
+                                      ).textTheme.bodyMedium,
+                                      dialogBackgroundColor: Theme.of(
+                                        context,
+                                      ).canvasColor,
+                                      headerText:
+                                          context.l10n.selectCountryCode,
+                                      boxDecoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: Theme.of(context).dividerColor,
+                                        ),
+                                        borderRadius: BorderRadius.circular(
+                                          uiConstants.radius16,
+                                        ),
+                                      ),
+                                      flagWidth: uiConstants.spacing4,
+                                      padding: EdgeInsets.zero,
+                                      margin: EdgeInsets.symmetric(
+                                        horizontal: uiConstants.spacing1,
+                                      ),
+                                      textStyle: Theme.of(
+                                        context,
+                                      ).textTheme.bodyMedium,
+                                      onChanged: (countryCode) {
+                                        setState(() {
+                                          _selectedCountryCode = countryCode;
+                                          _phoneCodeController.text =
+                                              countryCode.dialCode ?? '';
+                                        });
+                                      },
+                                      initialSelection:
+                                          _selectedCountryCode.code,
+                                      favorite: const ['+55', 'BR'],
+                                      showCountryOnly: false,
+                                      showOnlyCountryWhenClosed: false,
+                                      alignLeft: true,
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: TextFormField(
+                                      controller: _phoneController,
+                                      keyboardType: TextInputType.phone,
+                                      decoration: InputDecoration(
+                                        labelText: context.l10n.labelPhone,
+                                        border: OutlineInputBorder(),
+                                      ),
+                                      validator: (value) =>
+                                          FormValidators.validatePhone(
+                                            value,
+                                            context,
+                                          ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              // Page 3: Phone Code Input
+              ResponsivePadding(
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      SizedBox(height: uiConstants.spacing16),
+                      Text(
+                        context.l10n.registerSecurityCodeTitle,
+                        style: Theme.of(context).textTheme.headlineMedium,
+                      ),
+                      SizedBox(height: uiConstants.spacing16),
+                      Padding(
+                        padding: EdgeInsets.all(uiConstants.spacing4),
+                        child: Form(
+                          key: _formKeys[2],
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Pinput(
+                                autofillHints: const [
+                                  AutofillHints.oneTimeCode,
+                                ],
+
+                                controller: _securityCodeController,
+                                length: 4,
+                                defaultPinTheme: PinTheme(
+                                  width: 56,
+                                  height: 56,
+                                  textStyle: Theme.of(
+                                    context,
+                                  ).textTheme.headlineSmall,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color:
+                                          Theme.of(context)
+                                              .inputDecorationTheme
+                                              .enabledBorder
+                                              ?.borderSide
+                                              .color ??
+                                          Theme.of(context).dividerColor,
+                                      width:
+                                          Theme.of(context)
+                                              .inputDecorationTheme
+                                              .enabledBorder
+                                              ?.borderSide
+                                              .width ??
+                                          1.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(
+                                      uiConstants.radius16,
+                                    ),
+                                  ),
+                                ),
+                                focusedPinTheme: PinTheme(
+                                  padding: EdgeInsets.all(uiConstants.spacing6),
+                                  width: 56,
+                                  height: 56,
+                                  textStyle: Theme.of(
+                                    context,
+                                  ).textTheme.headlineSmall,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color:
+                                          Theme.of(context)
+                                              .inputDecorationTheme
+                                              .focusedBorder
+                                              ?.borderSide
+                                              .color ??
+                                          Theme.of(context).primaryColor,
+                                      width:
+                                          Theme.of(context)
+                                              .inputDecorationTheme
+                                              .focusedBorder
+                                              ?.borderSide
+                                              .width ??
+                                          2.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(
+                                      uiConstants.radius16,
+                                    ),
+                                  ),
+                                ),
+                                submittedPinTheme: PinTheme(
+                                  width: 56,
+                                  height: 56,
+                                  textStyle: Theme.of(
+                                    context,
+                                  ).textTheme.headlineSmall,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color:
+                                          Theme.of(context)
+                                              .inputDecorationTheme
+                                              .focusedBorder
+                                              ?.borderSide
+                                              .color ??
+                                          Theme.of(context).primaryColor,
+                                      width:
+                                          Theme.of(context)
+                                              .inputDecorationTheme
+                                              .focusedBorder
+                                              ?.borderSide
+                                              .width ??
+                                          2.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(
+                                      uiConstants.radius16,
+                                    ),
+                                  ),
+                                ),
+                                validator: (value) =>
+                                    FormValidators.validateRequired(
+                                      value,
+                                      context.l10n.labelSecurityCode,
+                                      context,
+                                    ),
+                                keyboardType: TextInputType.number,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
