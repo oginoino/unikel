@@ -37,6 +37,7 @@
   "invalidPhoneCodeMatch": "Por favor, insira um código de telefone válido de 4 dígitos.",
   "previous": "Anterior",
   "next": "Próximo",
-  "submitRegister": "Cadastrar"  
+  "submitRegister": "Cadastrar",
+  "selectCountryCode": "Selecione o código do país"
 }
   

@@ -330,6 +330,12 @@ abstract class AppLocalizations {
   /// In en_US, this message translates to:
   /// **'Submit Register'**
   String get submitRegister;
+
+  /// No description provided for @selectCountryCode.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Select Country Code'**
+  String get selectCountryCode;
 }
 
 class _AppLocalizationsDelegate

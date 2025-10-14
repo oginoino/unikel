@@ -37,7 +37,7 @@
   "invalidPhoneCodeMatch": "Please enter a valid 4-digit phone code.",
   "previous": "Previous",
   "next": "Next",
-  "submitRegister": "Submit Register"
-  
+  "submitRegister": "Submit Register",
+  "selectCountryCode": "Select Country Code"
 }
   

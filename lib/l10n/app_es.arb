@@ -29,15 +29,15 @@
   "phoneRequired": "El número de teléfono es obligatorio.",
   "invalidPhoneMatch": "Por favor, introduce un número de teléfono válido.",
   "labelPhoneCode": "Código telefónico",
-    "registerNameTitle": "¿Cuál es tu nombre?",
-    "registerPhoneTitle": "¿Cuál es tu número de teléfono?",
-    "registerPhoneCodeTitle": "¿Cuál es el código de tu teléfono?",
-  
+  "registerNameTitle": "¿Cuál es tu nombre?",
+  "registerPhoneTitle": "¿Cuál es tu número de teléfono?",
+  "registerPhoneCodeTitle": "¿Cuál es el código de tu teléfono?",
   "phoneCodeValue": "Código telefónico",
   "phoneCodeRequired": "El código telefónico es obligatorio.",
   "invalidPhoneCodeMatch": "Por favor, introduce un código telefónico válido de 4 dígitos.",
   "previous": "Anterior",
   "next": "Siguiente",
-  "submitRegister": "Registrar"
+  "submitRegister": "Registrar",
+  "selectCountryCode": "Seleccione el código de país"
 }
   

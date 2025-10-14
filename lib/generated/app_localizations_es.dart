@@ -128,6 +128,9 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get submitRegister => 'Registrar';
+
+  @override
+  String get selectCountryCode => 'Seleccione el código de país';
 }
 
 /// The translations for Spanish Castilian, as used in Mexico (`es_MX`).
@@ -254,4 +257,7 @@ class AppLocalizationsEsMx extends AppLocalizationsEs {
 
   @override
   String get submitRegister => 'Registrar';
+
+  @override
+  String get selectCountryCode => 'Seleccione el código de país';
 }

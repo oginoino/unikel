@@ -126,6 +126,9 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get submitRegister => 'Registrar';
+
+  @override
+  String get selectCountryCode => 'Selecione o código do país';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).
@@ -250,4 +253,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get submitRegister => 'Cadastrar';
+
+  @override
+  String get selectCountryCode => 'Selecione o código do país';
 }

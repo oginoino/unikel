@@ -116,19 +116,43 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                             Row(
                               children: [
                                 SizedBox(
-                                  width: 120,
+                                  width: 92,
                                   child: CountryCodePicker(
+                                    dialogTextStyle: Theme.of(
+                                      context,
+                                    ).textTheme.bodyMedium,
+                                    dialogBackgroundColor: Theme.of(
+                                      context,
+                                    ).canvasColor,
+                                    headerText: context.l10n.selectCountryCode,
+                                    boxDecoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: Theme.of(context).dividerColor,
+                                      ),
+                                      borderRadius: BorderRadius.circular(
+                                        uiConstants.spacing2,
+                                      ),
+                                    ),
+                                    flagWidth: uiConstants.spacing4,
+                                    padding: EdgeInsets.zero,
+                                    margin: EdgeInsets.symmetric(
+                                      horizontal: uiConstants.spacing1,
+                                    ),
+                                    textStyle: Theme.of(
+                                      context,
+                                    ).textTheme.bodyMedium,
                                     onChanged: (countryCode) {
                                       setState(() {
                                         _selectedCountryCode = countryCode;
-                                        _phoneCodeController.text = countryCode.dialCode ?? '';
+                                        _phoneCodeController.text =
+                                            countryCode.dialCode ?? '';
                                       });
                                     },
                                     initialSelection: _selectedCountryCode.code,
-                                    favorite: const ['+55','BR'],
+                                    favorite: const ['+55', 'BR'],
                                     showCountryOnly: false,
                                     showOnlyCountryWhenClosed: false,
-                                    alignLeft: false,
+                                    alignLeft: true,
                                   ),
                                 ),
                                 Expanded(
@@ -140,7 +164,10 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                                       border: OutlineInputBorder(),
                                     ),
                                     validator: (value) =>
-                                        FormValidators.validatePhone(value, context),
+                                        FormValidators.validatePhone(
+                                          value,
+                                          context,
+                                        ),
                                   ),
                                 ),
                               ],
