@@ -28,9 +28,8 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
   final TextEditingController _phoneCodeController = TextEditingController();
   final TextEditingController _securityCodeController = TextEditingController();
 
-  // Novos estados para feedback de verificação
-  bool _isVerifying = false;
-  bool _verificationComplete = false;
+  // Estados para feedback de verificação
+  VerificationState _verificationState = VerificationState.idle;
   String? _verificationMessage;
 
   @override
@@ -51,26 +50,31 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
   }
 
   void _onSecurityCodeChanged() {
-    // Trigger verification quando o código completo for inserido
-    if (_securityCodeController.text.length == 4) {
+    final code = _securityCodeController.text;
+
+    // Se o código está completo, iniciar verificação
+    if (code.length == 4 && _verificationState == VerificationState.idle) {
       _verifySecurityCode();
-    } else {
-      // Reset verification state se o usuário apagar caracteres
-      if (_isVerifying || _verificationComplete) {
-        setState(() {
-          _isVerifying = false;
-          _verificationComplete = false;
-          _verificationMessage = null;
-        });
-      }
+    }
+    // Se o código foi alterado após verificação, resetar estado
+    else if (code.length < 4 && _verificationState != VerificationState.idle) {
+      _resetVerificationState();
     }
   }
 
+  void _resetVerificationState() {
+    setState(() {
+      _verificationState = VerificationState.idle;
+      _verificationMessage = null;
+    });
+  }
+
   Future<void> _verifySecurityCode() async {
-    if (_isVerifying || _verificationComplete) return;
+    // Evitar múltiplas chamadas simultâneas
+    if (_verificationState != VerificationState.idle) return;
 
     setState(() {
-      _isVerifying = true;
+      _verificationState = VerificationState.verifying;
       _verificationMessage = null;
     });
 
@@ -78,39 +82,48 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
       // Simular chamada à API para verificação do código
       await Future.delayed(const Duration(seconds: 2));
 
-      // Simular sucesso na verificação
-      // Em produção, aqui você faria a chamada real à sua API
-      final isValid = _validateSecurityCode(_securityCodeController.text);
+      final code = _securityCodeController.text;
+      final isValid = _validateSecurityCode(code);
 
       setState(() {
-        _isVerifying = false;
-        _verificationComplete = true;
-        _verificationMessage = isValid
-            ? 'Código verificado com sucesso!'
-            : 'Código inválido. Tente novamente.';
+        if (isValid) {
+          _verificationState = VerificationState.success;
+          _verificationMessage = context.l10n.codeVerifiedSuccess;
+        } else {
+          _verificationState = VerificationState.error;
+          _verificationMessage = context.l10n.invalidPhoneCodeMatch;
+        }
       });
 
-      // Se falhar, resetar estado após alguns segundos
+      // Para erros, resetar após delay permitindo nova tentativa
       if (!isValid) {
         await Future.delayed(const Duration(seconds: 2));
-        setState(() {
-          _verificationComplete = false;
-          _verificationMessage = null;
-        });
+        if (mounted) {
+          _resetVerificationState();
+          _securityCodeController.clear();
+        }
       }
     } catch (e) {
       setState(() {
-        _isVerifying = false;
-        _verificationComplete = true;
-        _verificationMessage = 'Erro ao verificar código. Tente novamente.';
+        _verificationState = VerificationState.error;
+        _verificationMessage = context.l10n.errorVerifyingCode;
       });
+
+      // Resetar após mostrar erro
+      await Future.delayed(const Duration(seconds: 2));
+      if (mounted) {
+        _resetVerificationState();
+      }
     }
   }
 
   bool _validateSecurityCode(String code) {
-    // Implemente aqui sua lógica de validação
-    // Por enquanto, qualquer código com 4 dígitos é considerado válido
+    // Validar formato: 4 dígitos, não todos iguais
     return code.length == 4 && code != '0000';
+  }
+
+  bool _isVerificationSuccessful() {
+    return _verificationState == VerificationState.success;
   }
 
   @override
@@ -299,7 +312,9 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                                 ],
                                 controller: _securityCodeController,
                                 length: 4,
-                                enabled: !_verificationComplete,
+                                enabled:
+                                    _verificationState !=
+                                    VerificationState.success,
                                 defaultPinTheme: PinTheme(
                                   width: 56,
                                   height: 56,
@@ -395,64 +410,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                               ),
                               SizedBox(height: uiConstants.spacing20),
                               // Feedback de Verificação
-                              if (_isVerifying)
-                                Column(
-                                  children: [
-                                    SizedBox(
-                                      width: 50,
-                                      height: 50,
-                                      child: CircularProgressIndicator(
-                                        strokeWidth: 2.5,
-                                      ),
-                                    ),
-                                    SizedBox(height: uiConstants.spacing12),
-                                    Text(
-                                      context.l10n.verifyingCode,
-                                      style: Theme.of(
-                                        context,
-                                      ).textTheme.bodyMedium,
-                                    ),
-                                  ],
-                                )
-                              else if (_verificationComplete)
-                                Column(
-                                  children: [
-                                    Container(
-                                      width: 50,
-                                      height: 50,
-                                      decoration: BoxDecoration(
-                                        color:
-                                            _verificationMessage ==
-                                                context.l10n.codeVerifiedSuccess
-                                            ? Theme.of(
-                                                context,
-                                              ).colorScheme.primary
-                                            : Theme.of(
-                                                context,
-                                              ).colorScheme.error,
-                                        shape: BoxShape.circle,
-                                      ),
-                                      child: Icon(
-                                        _verificationMessage ==
-                                                context.l10n.codeVerifiedSuccess
-                                            ? Icons.check
-                                            : Icons.close,
-                                        color: Colors.white,
-                                        size: 28,
-                                      ),
-                                    ),
-                                    SizedBox(height: uiConstants.spacing12),
-                                    Text(
-                                      _verificationMessage ?? '',
-                                      textAlign: TextAlign.center,
-                                      style: Theme.of(
-                                        context,
-                                      ).textTheme.bodyMedium,
-                                    ),
-                                  ],
-                                )
-                              else
-                                const SizedBox.shrink(),
+                              _buildVerificationFeedback(context),
                             ],
                           ),
                         ),
@@ -490,7 +448,6 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                       icon: Icon(Icons.arrow_back_rounded),
                     ),
                   ),
-
                 if (_currentPage < _formKeys.length - 1)
                   Expanded(
                     child: CustomCTAButton(
@@ -507,17 +464,12 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                       label: context.l10n.next,
                     ),
                   ),
-
                 if (_currentPage == _formKeys.length - 1)
                   Expanded(
                     child: CustomCTAButton(
                       onPressed: () {
-                        // clear piped data
-                        _verificationComplete = false;
-                        _verificationMessage = '';
+                        _resetVerificationState();
                         _securityCodeController.clear();
-
-                        // back to last page
                         _pageController.previousPage(
                           duration: const Duration(milliseconds: 300),
                           curve: Curves.easeIn,
@@ -534,4 +486,75 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
       ],
     );
   }
+
+  Widget _buildVerificationFeedback(BuildContext context) {
+    switch (_verificationState) {
+      case VerificationState.idle:
+        return const SizedBox.shrink();
+
+      case VerificationState.verifying:
+        return Column(
+          children: [
+            SizedBox(
+              width: 50,
+              height: 50,
+              child: CircularProgressIndicator(strokeWidth: 2.5),
+            ),
+            SizedBox(height: uiConstants.spacing12),
+            Text(
+              context.l10n.verifyingCode,
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+          ],
+        );
+
+      case VerificationState.success:
+        return Column(
+          children: [
+            Container(
+              width: 50,
+              height: 50,
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.primary,
+                shape: BoxShape.circle,
+              ),
+              child: Icon(Icons.check, color: Colors.white, size: 28),
+            ),
+            SizedBox(height: uiConstants.spacing12),
+            Text(
+              _verificationMessage ?? '',
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                color: Theme.of(context).colorScheme.primary,
+              ),
+            ),
+          ],
+        );
+
+      case VerificationState.error:
+        return Column(
+          children: [
+            Container(
+              width: 50,
+              height: 50,
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.error,
+                shape: BoxShape.circle,
+              ),
+              child: Icon(Icons.close, color: Colors.white, size: 28),
+            ),
+            SizedBox(height: uiConstants.spacing12),
+            Text(
+              _verificationMessage ?? '',
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                color: Theme.of(context).colorScheme.error,
+              ),
+            ),
+          ],
+        );
+    }
+  }
 }
+
+enum VerificationState { idle, verifying, success, error }
