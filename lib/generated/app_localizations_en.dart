@@ -151,7 +151,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get editarTelefoneTextMessage => 'Edit phone number';
 
   @override
-  String get verifyPhoneNumberMessage => 'We sent a message to the number';
+  String verifyPhoneNumberMessage(Object phoneNumber) {
+    return 'We sent a message to the number $phoneNumber';
+  }
 }
 
 /// The translations for English, as used in the United States (`en_US`).
@@ -301,5 +303,7 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   String get editarTelefoneTextMessage => 'Edit phone number';
 
   @override
-  String get verifyPhoneNumberMessage => 'We sent a message to the number';
+  String verifyPhoneNumberMessage(Object phoneNumber) {
+    return 'We sent a message to the number $phoneNumber';
+  }
 }

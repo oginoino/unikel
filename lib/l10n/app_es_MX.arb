@@ -47,5 +47,10 @@
   "codeInvalid": "Código inválido. Inténtalo de nuevo.",
   "errorVerifyingCode": "Error al verificar el código. Inténtalo de nuevo.",
   "editarTelefoneTextMessage": "Editar número de teléfono",
-  "verifyPhoneNumberMessage": "Enviamos un mensaje al número"
+  "verifyPhoneNumberMessage": "Enviamos un mensaje al número {phoneNumber}",
+  "@verifyPhoneNumberMessage": {
+    "placeholders": {
+      "phoneNumber": {}
+    }
+  }
 }

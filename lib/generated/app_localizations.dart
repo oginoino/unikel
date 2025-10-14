@@ -382,8 +382,8 @@ abstract class AppLocalizations {
   /// No description provided for @verifyPhoneNumberMessage.
   ///
   /// In en_US, this message translates to:
-  /// **'We sent a message to the number'**
-  String get verifyPhoneNumberMessage;
+  /// **'We sent a message to the number {phoneNumber}'**
+  String verifyPhoneNumberMessage(Object phoneNumber);
 }
 
 class _AppLocalizationsDelegate
