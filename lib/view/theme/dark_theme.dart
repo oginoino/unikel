@@ -458,8 +458,6 @@ InputDecorationTheme _darkInputDecorationTheme = InputDecorationTheme(
   hoverColor: _darkColorScheme.surfaceContainer,
   focusColor: _darkColorScheme.primary.withValues(alpha: 0.12),
 
-  visualDensity: VisualDensity.comfortable,
-
   // Padding and spacing
   contentPadding: EdgeInsets.symmetric(
     horizontal: uiConstants.spacing4,
@@ -474,7 +472,7 @@ InputDecorationTheme _darkInputDecorationTheme = InputDecorationTheme(
 
   // Hint styling
   hintStyle: _darkTextTheme.titleLarge?.copyWith(
-    color: _darkColorScheme.onSurfaceVariant.withValues(alpha: 0.5),
+    color: _darkColorScheme.onSurfaceVariant.withOpacity(0.5),
   ),
 
   // Helper text styling
@@ -568,5 +566,6 @@ ThemeData customDarkTheme = ThemeData(
   outlinedButtonTheme: _darkOutlinedButtonTheme,
   textButtonTheme: _darkTextButtonTheme,
   inputDecorationTheme: _darkInputDecorationTheme,
-  platform: TargetPlatform.android,
+
+  visualDensity: VisualDensity.standard,
 );
