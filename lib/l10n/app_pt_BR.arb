@@ -40,6 +40,20 @@
   "submitRegister": "Cadastrar",
   "selectCountryCode": "Selecione o código do país",
   "registerSecurityCodeTitle": "Verificação do código de segurança",
-  "labelSecurityCode": "Código de segurança"
+  "labelSecurityCode": "Código de segurança",
+  "verifyingCode": "Verificando código...",
+  "codeVerifiedSuccess": "Código verificado com sucesso!",
+  "codeInvalid": "Código inválido. Tente novamente.",
+  "errorVerifyingCode": "Erro ao verificar o código. Tente novamente.",
+  "editarTelefoneTextMessage": "Editar número de telefone",
+  "verifyPhoneNumberMessage": "Enviamos uma mensagem para o número {phoneNumber}",
+  "@verifyPhoneNumberMessage": {
+    "placeholders": {
+      "phoneNumber": {}
+    }
+  },
+  "resendCode": "Enviar novamente",
+  "codeResendSuccess": "Código reenviado com sucesso",
+  "errorResendingCode": "Erro ao tentar reenviar"
 }
   
