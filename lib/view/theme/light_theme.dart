@@ -471,6 +471,7 @@ InputDecorationTheme _lightInputDecorationTheme = InputDecorationTheme(
   hoverColor: _lightColorScheme.surfaceContainerLow,
   focusColor: _lightColorScheme.primary.withValues(alpha: 0.08),
 
+  visualDensity: VisualDensity.compact,
   // Padding and spacing
   contentPadding: EdgeInsets.symmetric(
     horizontal: uiConstants.spacing4,
