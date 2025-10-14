@@ -1,5 +1,6 @@
 import '../utils/imports/common_libs.dart';
 import 'package:unikel/generated/app_localizations.dart';
+import 'package:country_code_picker/country_code_picker.dart';
 
 class LocaleConfig {
   LocaleConfig._();
@@ -7,6 +8,7 @@ class LocaleConfig {
   /// Get the app localization delegates
   static List<LocalizationsDelegate<dynamic>> get localizationDelegates => [
     AppLocalizations.delegate,
+    CountryLocalizations.delegate,
     GlobalMaterialLocalizations.delegate,
     GlobalWidgetsLocalizations.delegate,
     GlobalCupertinoLocalizations.delegate,

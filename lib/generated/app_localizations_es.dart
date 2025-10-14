@@ -49,6 +49,94 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get onboarding_subtitle_3 => 'Alcanza tus metas financieras.';
+
+  @override
+  String get register => 'Registro';
+
+  @override
+  String get login => 'Inicio de Sesión';
+
+  @override
+  String get cta_to_register_screen_text =>
+      '¿No tienes cuenta? Regístrate ahora.';
+
+  @override
+  String get emailRequired => 'El correo electrónico es obligatorio.';
+
+  @override
+  String get invalidEmail =>
+      'Por favor, introduce un correo electrónico válido.';
+
+  @override
+  String get passwordRequired => 'La contraseña es obligatoria.';
+
+  @override
+  String get passwordLength =>
+      'La contraseña debe tener al menos 6 caracteres.';
+
+  @override
+  String fieldRequired(Object fieldName) {
+    return '$fieldName es obligatorio.';
+  }
+
+  @override
+  String get labelName => 'Nombre';
+
+  @override
+  String get nameValue => 'Nombre';
+
+  @override
+  String get labelPhone => 'Teléfono';
+
+  @override
+  String get phoneValue => 'Teléfono';
+
+  @override
+  String get phoneRequired => 'El número de teléfono es obligatorio.';
+
+  @override
+  String get invalidPhoneMatch =>
+      'Por favor, introduce un número de teléfono válido.';
+
+  @override
+  String get labelPhoneCode => 'Código telefónico';
+
+  @override
+  String get registerNameTitle => '¿Cuál es tu nombre?';
+
+  @override
+  String get registerPhoneTitle => '¿Cuál es tu número de teléfono?';
+
+  @override
+  String get registerPhoneCodeTitle => '¿Cuál es el código de tu teléfono?';
+
+  @override
+  String get phoneCodeValue => 'Código telefónico';
+
+  @override
+  String get phoneCodeRequired => 'El código telefónico es obligatorio.';
+
+  @override
+  String get invalidPhoneCodeMatch =>
+      'Por favor, introduce un código telefónico válido de 4 dígitos.';
+
+  @override
+  String get previous => 'Anterior';
+
+  @override
+  String get next => 'Siguiente';
+
+  @override
+  String get submitRegister => 'Registrar';
+
+  @override
+  String get selectCountryCode => 'Seleccionar código de país';
+
+  @override
+  String get registerSecurityCodeTitle => 'Verificación de código de seguridad';
+
+  @override
+  String get labelSecurityCode => 'Código de seguridad';
 }
 
 /// The translations for Spanish Castilian, as used in Mexico (`es_MX`).
@@ -96,4 +184,92 @@ class AppLocalizationsEsMx extends AppLocalizationsEs {
 
   @override
   String get onboarding_subtitle_3 => 'Alcanza tus metas financieras.';
+
+  @override
+  String get register => 'Registro';
+
+  @override
+  String get login => 'Inicio de Sesión';
+
+  @override
+  String get cta_to_register_screen_text =>
+      '¿No tienes una cuenta? Regístrate ahora.';
+
+  @override
+  String get emailRequired => 'El correo electrónico es obligatorio.';
+
+  @override
+  String get invalidEmail =>
+      'Por favor, introduce un correo electrónico válido.';
+
+  @override
+  String get passwordRequired => 'La contraseña es obligatoria.';
+
+  @override
+  String get passwordLength =>
+      'La contraseña debe tener al menos 6 caracteres.';
+
+  @override
+  String fieldRequired(Object fieldName) {
+    return '$fieldName es obligatorio.';
+  }
+
+  @override
+  String get labelName => 'Nombre';
+
+  @override
+  String get nameValue => 'Nombre';
+
+  @override
+  String get labelPhone => 'Teléfono';
+
+  @override
+  String get phoneValue => 'Teléfono';
+
+  @override
+  String get phoneRequired => 'El número de teléfono es obligatorio.';
+
+  @override
+  String get invalidPhoneMatch =>
+      'Por favor, introduce un número de teléfono válido.';
+
+  @override
+  String get labelPhoneCode => 'Código telefónico';
+
+  @override
+  String get registerNameTitle => '¿Cuál es tu nombre?';
+
+  @override
+  String get registerPhoneTitle => '¿Cuál es tu número de teléfono?';
+
+  @override
+  String get registerPhoneCodeTitle => '¿Cuál es el código de tu teléfono?';
+
+  @override
+  String get phoneCodeValue => 'Código telefónico';
+
+  @override
+  String get phoneCodeRequired => 'El código telefónico es obligatorio.';
+
+  @override
+  String get invalidPhoneCodeMatch =>
+      'Por favor, introduce un código telefónico válido de 4 dígitos.';
+
+  @override
+  String get previous => 'Anterior';
+
+  @override
+  String get next => 'Siguiente';
+
+  @override
+  String get submitRegister => 'Registrar';
+
+  @override
+  String get selectCountryCode => 'Seleccionar código de país';
+
+  @override
+  String get registerSecurityCodeTitle => 'Verificación de código de seguridad';
+
+  @override
+  String get labelSecurityCode => 'Código de seguridad';
 }

@@ -186,6 +186,168 @@ abstract class AppLocalizations {
   /// In en_US, this message translates to:
   /// **'Achieve your financial goals.'**
   String get onboarding_subtitle_3;
+
+  /// No description provided for @register.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Register'**
+  String get register;
+
+  /// No description provided for @login.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Login'**
+  String get login;
+
+  /// No description provided for @cta_to_register_screen_text.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Ready to take control of your finances? Register now!'**
+  String get cta_to_register_screen_text;
+
+  /// No description provided for @emailRequired.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Email is required.'**
+  String get emailRequired;
+
+  /// No description provided for @invalidEmail.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Please enter a valid email address.'**
+  String get invalidEmail;
+
+  /// No description provided for @passwordRequired.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Password is required.'**
+  String get passwordRequired;
+
+  /// No description provided for @passwordLength.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Password must be at least 6 characters long.'**
+  String get passwordLength;
+
+  /// No description provided for @fieldRequired.
+  ///
+  /// In en_US, this message translates to:
+  /// **'{fieldName} is required.'**
+  String fieldRequired(Object fieldName);
+
+  /// No description provided for @labelName.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Name'**
+  String get labelName;
+
+  /// No description provided for @nameValue.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Name'**
+  String get nameValue;
+
+  /// No description provided for @labelPhone.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Phone'**
+  String get labelPhone;
+
+  /// No description provided for @phoneValue.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Phone'**
+  String get phoneValue;
+
+  /// No description provided for @phoneRequired.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Phone number is required.'**
+  String get phoneRequired;
+
+  /// No description provided for @invalidPhoneMatch.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Please enter a valid phone number.'**
+  String get invalidPhoneMatch;
+
+  /// No description provided for @labelPhoneCode.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Phone Code'**
+  String get labelPhoneCode;
+
+  /// No description provided for @registerNameTitle.
+  ///
+  /// In en_US, this message translates to:
+  /// **'What is your name?'**
+  String get registerNameTitle;
+
+  /// No description provided for @registerPhoneTitle.
+  ///
+  /// In en_US, this message translates to:
+  /// **'What is your phone number?'**
+  String get registerPhoneTitle;
+
+  /// No description provided for @registerPhoneCodeTitle.
+  ///
+  /// In en_US, this message translates to:
+  /// **'What is your phone code?'**
+  String get registerPhoneCodeTitle;
+
+  /// No description provided for @phoneCodeValue.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Phone Code'**
+  String get phoneCodeValue;
+
+  /// No description provided for @phoneCodeRequired.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Phone code is required.'**
+  String get phoneCodeRequired;
+
+  /// No description provided for @invalidPhoneCodeMatch.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Please enter a valid 4-digit phone code.'**
+  String get invalidPhoneCodeMatch;
+
+  /// No description provided for @previous.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Previous'**
+  String get previous;
+
+  /// No description provided for @next.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Next'**
+  String get next;
+
+  /// No description provided for @submitRegister.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Submit Register'**
+  String get submitRegister;
+
+  /// No description provided for @selectCountryCode.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Select country code'**
+  String get selectCountryCode;
+
+  /// No description provided for @registerSecurityCodeTitle.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Security code verification'**
+  String get registerSecurityCodeTitle;
+
+  /// No description provided for @labelSecurityCode.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Security code'**
+  String get labelSecurityCode;
 }
 
 class _AppLocalizationsDelegate
