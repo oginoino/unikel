@@ -143,6 +143,45 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
     );
   }
 
+  InputDecoration _buildPrimaryInputDecoration({
+    required ThemeData theme,
+    required TextTheme textTheme,
+    required String labelText,
+  }) {
+    final colorScheme = theme.colorScheme;
+    final baseTheme = theme.inputDecorationTheme;
+    final labelStyle =
+        textTheme.titleLarge?.copyWith(color: colorScheme.onSurfaceVariant);
+
+    return InputDecoration(
+      labelText: labelText,
+      labelStyle: labelStyle,
+      floatingLabelStyle: labelStyle?.copyWith(color: colorScheme.primary),
+      filled: baseTheme.filled,
+      fillColor: baseTheme.fillColor,
+      isDense: baseTheme.isDense,
+      contentPadding: baseTheme.contentPadding ??
+          EdgeInsets.symmetric(
+            vertical: uiConstants.spacing8,
+            horizontal: uiConstants.spacing6,
+          ),
+      border: baseTheme.border ??
+          OutlineInputBorder(
+            borderRadius: BorderRadius.circular(uiConstants.radius16),
+          ),
+      enabledBorder: baseTheme.enabledBorder ??
+          OutlineInputBorder(
+            borderRadius: BorderRadius.circular(uiConstants.radius16),
+            borderSide: BorderSide(color: theme.dividerColor),
+          ),
+      focusedBorder: baseTheme.focusedBorder ??
+          OutlineInputBorder(
+            borderRadius: BorderRadius.circular(uiConstants.radius16),
+            borderSide: BorderSide(color: colorScheme.primary, width: 2),
+          ),
+    );
+  }
+
   void _handleNextStep() {
     final formState = _formKeys[_currentPage].currentState;
     if (formState == null || !formState.validate()) {
@@ -256,7 +295,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
   PinTheme _buildPinTheme({
     required ThemeData theme,
     BorderSide? borderSide,
-    EdgeInsetsGeometry padding = EdgeInsets.zero,
+    EdgeInsetsGeometry? padding,
     double fallbackWidth = 1.0,
     Color? fallbackColor,
   }) {
@@ -265,10 +304,11 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
           color: fallbackColor ?? theme.dividerColor,
           width: fallbackWidth,
         );
+   
 
     return PinTheme(
-      width: 56,
-      height: 56,
+      width: 64,
+      height: 64,
       textStyle: theme.textTheme.headlineSmall,
       decoration: BoxDecoration(
         border: Border.all(
@@ -277,7 +317,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
         ),
         borderRadius: BorderRadius.circular(uiConstants.radius16),
       ),
-      padding: padding,
+     
     );
   }
 
@@ -331,8 +371,6 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
     required ThemeData theme,
     required TextTheme textTheme,
   }) {
-    final colorScheme = theme.colorScheme;
-
     return ResponsivePadding(
       child: SingleChildScrollView(
         child: Column(
@@ -352,12 +390,11 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                 children: [
                   TextFormField(
                     controller: _nameController,
-                    decoration: InputDecoration(
+                    style: textTheme.titleLarge,
+                    decoration: _buildPrimaryInputDecoration(
+                      theme: theme,
+                      textTheme: textTheme,
                       labelText: l10n.labelName,
-                      border: const OutlineInputBorder(),
-                      labelStyle: textTheme.titleLarge?.copyWith(
-                        color: colorScheme.onSurfaceVariant,
-                      ),
                     ),
                     validator: (value) => FormValidators.validateRequired(
                       value,
@@ -403,7 +440,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                         SizedBox(
                           width: uiConstants.buttonHeight * 1.9,
                           child: CountryCodePicker(
-                            dialogTextStyle: textTheme.bodyMedium,
+                            dialogTextStyle: textTheme.titleMedium,
                             dialogBackgroundColor: theme.canvasColor,
                             headerText: l10n.selectCountryCode,
                             boxDecoration: BoxDecoration(
@@ -415,11 +452,13 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                               ),
                             ),
                             flagWidth: uiConstants.spacing4,
-                            padding: EdgeInsets.zero,
+                            padding: EdgeInsets.symmetric(
+                              vertical: uiConstants.spacing3,
+                            ),
                             margin: EdgeInsets.symmetric(
                               horizontal: uiConstants.spacing1,
                             ),
-                            textStyle: textTheme.bodyMedium,
+                            textStyle: textTheme.titleLarge,
                             onChanged: _updateSelectedCountryCode,
                             initialSelection: _selectedCountryCode.code,
                             favorite: const ['+55', 'BR'],
@@ -432,9 +471,11 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                           child: TextFormField(
                             controller: _phoneController,
                             keyboardType: TextInputType.phone,
-                            decoration: InputDecoration(
+                            style: textTheme.titleLarge,
+                            decoration: _buildPrimaryInputDecoration(
+                              theme: theme,
+                              textTheme: textTheme,
                               labelText: l10n.labelPhone,
-                              border: const OutlineInputBorder(),
                             ),
                             validator: (value) => FormValidators.validatePhone(
                               value,
