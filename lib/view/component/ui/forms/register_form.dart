@@ -176,6 +176,12 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
     _goToPreviousPage();
   }
 
+  Future<void> _navigateToHomeAfterSuccess() async {
+    await Future.delayed(const Duration(seconds: 1));
+    if (!mounted) return;
+    context.go(Routes.home);
+  }
+
   Future<void> _clearVerificationFeedback({required Duration delay}) async {
     await Future.delayed(delay);
     _resetVerificationState();
@@ -229,6 +235,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
           VerificationState.success,
           message: l10n.codeVerifiedSuccess,
         );
+        unawaited(_navigateToHomeAfterSuccess());
       } else {
         _setVerificationStatus(
           VerificationState.error,
