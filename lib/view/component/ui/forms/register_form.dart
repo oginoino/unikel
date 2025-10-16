@@ -618,11 +618,11 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                           RegExp(r'[A-Za-z0-9]'),
                         ),
                       ],
-                      errorBuilder: (context, errorText) => Padding(
+                        errorBuilder: (context, _) => Padding(
                           padding: EdgeInsets.only(top: uiConstants.spacing3),
                           child: Text(
-                            errorText ?? '',
-                            textAlign: TextAlign.center,
+                            _securityCodeError ?? '',
+                            textAlign: TextAlign.left,
                             style: theme.inputDecorationTheme.errorStyle ??
                                 textTheme.bodyMedium?.copyWith(
                                   color: theme.colorScheme.error,
