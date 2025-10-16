@@ -1,12 +1,14 @@
+import 'dart:async';
+
+import 'package:country_code_picker/country_code_picker.dart';
+import 'package:pinput/pinput.dart';
 import 'package:unikel/view/component/ui/button/custom_cta_button.dart';
 import 'package:unikel/view/component/ui/page_indicator/page_indicator.dart';
 
+import '../../../../generated/app_localizations.dart';
 import '../../../../utils/form_validators.dart';
 import '../../../../utils/imports/common_libs.dart';
 import '../padding/responsive_padding.dart';
-import 'package:country_code_picker/country_code_picker.dart';
-import 'package:pinput/pinput.dart';
-import 'dart:async';
 
 class RegisterUserForm extends StatefulWidget {
   const RegisterUserForm({super.key});
@@ -16,9 +18,11 @@ class RegisterUserForm extends StatefulWidget {
 }
 
 class _RegisterUserFormState extends State<RegisterUserForm> {
+  static const Duration _pageTransitionDuration = Duration(milliseconds: 300);
+  static const Curve _pageTransitionCurve = Curves.easeIn;
+  static const int _resendDelaySeconds = 30;
+
   final PageController _pageController = PageController();
-  int _currentPage = 0;
-  CountryCode _selectedCountryCode = CountryCode.fromCountryCode('BR');
   final List<GlobalKey<FormState>> _formKeys = [
     GlobalKey<FormState>(),
     GlobalKey<FormState>(),
@@ -29,14 +33,16 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
   final TextEditingController _phoneCodeController = TextEditingController();
   final TextEditingController _securityCodeController = TextEditingController();
 
-  // Estados para feedback de verificação
+  int _currentPage = 0;
+  int _resendCountdown = 0;
+  Timer? _resendTimer;
+  CountryCode _selectedCountryCode = CountryCode.fromCountryCode('BR');
+
   VerificationState _verificationState = VerificationState.idle;
   String? _verificationMessage;
 
-  // Estados para reenvio de código
-  int _resendCountdown = 0;
-  Timer? _resendTimer;
-  static const int _resendDelaySeconds = 30;
+  bool get _isOnFirstPage => _currentPage == 0;
+  bool get _isOnLastPage => _currentPage == _formKeys.length - 1;
 
   @override
   void initState() {
@@ -51,543 +57,578 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
     _nameController.dispose();
     _phoneController.dispose();
     _phoneCodeController.dispose();
+    _securityCodeController.removeListener(_onSecurityCodeChanged);
     _securityCodeController.dispose();
-    _resendTimer?.cancel();
+    _cancelResendTimer();
     super.dispose();
+  }
+
+  void _safeSetState(VoidCallback updates) {
+    if (!mounted) return;
+    setState(updates);
   }
 
   void _onSecurityCodeChanged() {
     final code = _securityCodeController.text;
 
-    // Se o código está completo, iniciar verificação
     if (code.length == 4 && _verificationState == VerificationState.idle) {
       _verifySecurityCode();
-    }
-    // Se o código foi alterado após verificação, resetar estado
-    else if (code.length < 4 && _verificationState != VerificationState.idle) {
+    } else if (code.length < 4 && _verificationState != VerificationState.idle) {
       _resetVerificationState();
     }
   }
 
-  void _resetVerificationState() {
-    setState(() {
-      _verificationState = VerificationState.idle;
-      _verificationMessage = null;
+  void _updateSelectedCountryCode(CountryCode countryCode) {
+    _safeSetState(() {
+      _selectedCountryCode = countryCode;
+      _phoneCodeController.text = countryCode.dialCode ?? '';
     });
   }
 
+  void _setVerificationStatus(VerificationState state, {String? message}) {
+    if (_verificationState == state && _verificationMessage == message) {
+      return;
+    }
+
+    _safeSetState(() {
+      _verificationState = state;
+      _verificationMessage = message;
+    });
+  }
+
+  void _resetVerificationState() {
+    _setVerificationStatus(VerificationState.idle);
+  }
+
   void _startResendTimer() {
-    _resendTimer?.cancel();
-    setState(() {
+    _cancelResendTimer();
+
+    _safeSetState(() {
       _resendCountdown = _resendDelaySeconds;
     });
 
     _resendTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      setState(() {
+      if (_resendCountdown <= 1) {
+        timer.cancel();
+        _safeSetState(() {
+          _resendCountdown = 0;
+        });
+        return;
+      }
+
+      _safeSetState(() {
         _resendCountdown--;
       });
-
-      if (_resendCountdown <= 0) {
-        timer.cancel();
-      }
     });
   }
 
-  Future<void> _resendSecurityCode() async {
-    setState(() {
-      _verificationState = VerificationState.verifying;
-      _verificationMessage = null;
+  void _cancelResendTimer() {
+    _resendTimer?.cancel();
+    _resendTimer = null;
+  }
+
+  void _onPageChanged(int page) {
+    if (_currentPage == page) {
+      return;
+    }
+
+    _safeSetState(() {
+      _currentPage = page;
     });
+  }
+
+  void _goToNextPage() {
+    _pageController.nextPage(
+      duration: _pageTransitionDuration,
+      curve: _pageTransitionCurve,
+    );
+  }
+
+  void _goToPreviousPage() {
+    _pageController.previousPage(
+      duration: _pageTransitionDuration,
+      curve: _pageTransitionCurve,
+    );
+  }
+
+  void _handleNextStep() {
+    final formState = _formKeys[_currentPage].currentState;
+    if (formState == null || !formState.validate()) {
+      return;
+    }
+
+    if (_currentPage == _formKeys.length - 2) {
+      _resetVerificationState();
+      _securityCodeController.clear();
+      _startResendTimer();
+    }
+
+    _goToNextPage();
+  }
+
+  void _handleEditPhone() {
+    _resetVerificationState();
+    _securityCodeController.clear();
+    _cancelResendTimer();
+    _safeSetState(() {
+      _resendCountdown = 0;
+    });
+    _goToPreviousPage();
+  }
+
+  Future<void> _clearVerificationFeedback({required Duration delay}) async {
+    await Future.delayed(delay);
+    _resetVerificationState();
+  }
+
+  Future<void> _resendSecurityCode() async {
+    final l10n = context.l10n;
+    _setVerificationStatus(VerificationState.verifying);
 
     try {
-      // Simular chamada à API para reenvio do código
       await Future.delayed(const Duration(seconds: 1));
+      if (!mounted) return;
 
-      setState(() {
-        _verificationState = VerificationState.idle;
-        _verificationMessage = context.l10n.codeResendSuccess;
-      });
-
-      // Limpar código anterior
       _securityCodeController.clear();
-
-      // Iniciar novo timer de reenvio
       _startResendTimer();
-
-      // Mostrar mensagem de sucesso brevemente
-      await Future.delayed(const Duration(seconds: 2));
-      if (mounted) {
-        setState(() {
-          _verificationMessage = null;
-        });
-      }
-    } catch (e) {
-      setState(() {
-        _verificationState = VerificationState.error;
-        _verificationMessage = context.l10n.errorResendingCode;
-      });
-
-      // Resetar após mostrar erro
-      await Future.delayed(const Duration(seconds: 2));
-      if (mounted) {
-        _resetVerificationState();
-      }
+      _setVerificationStatus(
+        VerificationState.idle,
+        message: l10n.codeResendSuccess,
+      );
+      unawaited(
+        _clearVerificationFeedback(delay: const Duration(seconds: 2)),
+      );
+    } catch (_) {
+      _setVerificationStatus(
+        VerificationState.error,
+        message: l10n.errorResendingCode,
+      );
+      unawaited(
+        _clearVerificationFeedback(delay: const Duration(seconds: 2)),
+      );
     }
   }
 
   Future<void> _verifySecurityCode() async {
-    // Evitar múltiplas chamadas simultâneas
-    if (_verificationState != VerificationState.idle) return;
+    if (_verificationState != VerificationState.idle) {
+      return;
+    }
 
-    setState(() {
-      _verificationState = VerificationState.verifying;
-      _verificationMessage = null;
-    });
+    final l10n = context.l10n;
+    _setVerificationStatus(VerificationState.verifying);
 
     try {
-      // Simular chamada à API para verificação do código
       await Future.delayed(const Duration(seconds: 2));
+      if (!mounted) return;
 
       final code = _securityCodeController.text;
       final isValid = _validateSecurityCode(code);
 
-      setState(() {
-        if (isValid) {
-          _verificationState = VerificationState.success;
-          _verificationMessage = context.l10n.codeVerifiedSuccess;
-        } else {
-          _verificationState = VerificationState.error;
-          _verificationMessage = context.l10n.invalidPhoneCodeMatch;
-        }
-      });
-
-      // Para erros, resetar após delay permitindo nova tentativa
-      if (!isValid) {
+      if (isValid) {
+        _setVerificationStatus(
+          VerificationState.success,
+          message: l10n.codeVerifiedSuccess,
+        );
+      } else {
+        _setVerificationStatus(
+          VerificationState.error,
+          message: l10n.invalidPhoneCodeMatch,
+        );
         await Future.delayed(const Duration(seconds: 2));
-        if (mounted) {
-          _resetVerificationState();
-          _securityCodeController.clear();
-        }
-      }
-    } catch (e) {
-      setState(() {
-        _verificationState = VerificationState.error;
-        _verificationMessage = context.l10n.errorVerifyingCode;
-      });
-
-      // Resetar após mostrar erro
-      await Future.delayed(const Duration(seconds: 2));
-      if (mounted) {
+        if (!mounted) return;
         _resetVerificationState();
+        _securityCodeController.clear();
       }
+    } catch (_) {
+      _setVerificationStatus(
+        VerificationState.error,
+        message: l10n.errorVerifyingCode,
+      );
+      unawaited(
+        _clearVerificationFeedback(delay: const Duration(seconds: 2)),
+      );
     }
   }
 
   bool _validateSecurityCode(String code) {
-    // Validar formato: 4 dígitos, não todos iguais
     return code.length == 4 && code != '0000';
   }
 
-  bool _isVerificationSuccessful() {
-    return _verificationState == VerificationState.success;
+  PinTheme _buildPinTheme({
+    required ThemeData theme,
+    BorderSide? borderSide,
+    EdgeInsetsGeometry padding = EdgeInsets.zero,
+    double fallbackWidth = 1.0,
+    Color? fallbackColor,
+  }) {
+    final resolvedBorder = borderSide ??
+        BorderSide(
+          color: fallbackColor ?? theme.dividerColor,
+          width: fallbackWidth,
+        );
+
+    return PinTheme(
+      width: 56,
+      height: 56,
+      textStyle: theme.textTheme.headlineSmall,
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: resolvedBorder.color,
+          width: resolvedBorder.width,
+        ),
+        borderRadius: BorderRadius.circular(uiConstants.radius16),
+      ),
+      padding: padding,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
+    final l10n = context.l10n;
+
     return Column(
       children: [
         Expanded(
           child: PageView(
             controller: _pageController,
             physics: const NeverScrollableScrollPhysics(),
-            onPageChanged: (int page) {
-              setState(() {
-                _currentPage = page;
-              });
-            },
+            onPageChanged: _onPageChanged,
             children: [
-              // Page 1: Name Input
-              ResponsivePadding(
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      SizedBox(height: uiConstants.spacing16),
-                      Text(
-                        context.l10n.registerNameTitle,
-                        textAlign: TextAlign.left,
-                        style: Theme.of(context).textTheme.headlineMedium,
-                      ),
-                      SizedBox(height: uiConstants.spacing16),
-                      Form(
-                        key: _formKeys[0],
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            TextFormField(
-                              controller: _nameController,
-                              decoration: InputDecoration(
-                                labelText: context.l10n.labelName,
-                                border: OutlineInputBorder(),
-                                labelStyle: Theme.of(context)
-                                    .textTheme
-                                    .titleLarge
-                                    ?.copyWith(
-                                      color: Theme.of(
-                                        context,
-                                      ).colorScheme.onSurfaceVariant,
-                                    ),
-                              ),
-                              validator: (value) =>
-                                  FormValidators.validateRequired(
-                                    value,
-                                    context.l10n.nameValue,
-                                    context,
-                                  ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+              _buildNameStep(
+                context: context,
+                l10n: l10n,
+                theme: theme,
+                textTheme: textTheme,
               ),
-              // Page 2: Phone Input
-              ResponsivePadding(
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      SizedBox(height: uiConstants.spacing16),
-                      Text(
-                        context.l10n.registerPhoneTitle,
-                        style: Theme.of(context).textTheme.headlineMedium,
-                      ),
-                      SizedBox(height: uiConstants.spacing16),
-                      Padding(
-                        padding: EdgeInsets.all(uiConstants.spacing4),
-                        child: Form(
-                          key: _formKeys[1],
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Row(
-                                children: [
-                                  SizedBox(
-                                    width: uiConstants.buttonHeight * 1.9,
-                                    child: CountryCodePicker(
-                                      dialogTextStyle: Theme.of(
-                                        context,
-                                      ).textTheme.bodyMedium,
-                                      dialogBackgroundColor: Theme.of(
-                                        context,
-                                      ).canvasColor,
-                                      headerText:
-                                          context.l10n.selectCountryCode,
-                                      boxDecoration: BoxDecoration(
-                                        border: Border.all(
-                                          color: Theme.of(context).dividerColor,
-                                        ),
-                                        borderRadius: BorderRadius.circular(
-                                          uiConstants.radius16,
-                                        ),
-                                      ),
-                                      flagWidth: uiConstants.spacing4,
-                                      padding: EdgeInsets.zero,
-                                      margin: EdgeInsets.symmetric(
-                                        horizontal: uiConstants.spacing1,
-                                      ),
-                                      textStyle: Theme.of(
-                                        context,
-                                      ).textTheme.bodyMedium,
-                                      onChanged: (countryCode) {
-                                        setState(() {
-                                          _selectedCountryCode = countryCode;
-                                          _phoneCodeController.text =
-                                              countryCode.dialCode ?? '';
-                                        });
-                                      },
-                                      initialSelection:
-                                          _selectedCountryCode.code,
-                                      favorite: const ['+55', 'BR'],
-                                      showCountryOnly: false,
-                                      showOnlyCountryWhenClosed: false,
-                                      alignLeft: true,
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: TextFormField(
-                                      controller: _phoneController,
-                                      keyboardType: TextInputType.phone,
-                                      decoration: InputDecoration(
-                                        labelText: context.l10n.labelPhone,
-                                        border: OutlineInputBorder(),
-                                      ),
-                                      validator: (value) =>
-                                          FormValidators.validatePhone(
-                                            value,
-                                            context,
-                                          ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+              _buildPhoneStep(
+                context: context,
+                l10n: l10n,
+                theme: theme,
+                textTheme: textTheme,
               ),
-              // Page 3: Phone Code Input com Feedback
-              ResponsivePadding(
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      SizedBox(height: uiConstants.spacing16),
-                      Text(
-                        context.l10n.registerSecurityCodeTitle,
-                        style: Theme.of(context).textTheme.headlineMedium,
-                      ),
-                      SizedBox(height: uiConstants.spacing8),
-                      Text(
-                        context.l10n.verifyPhoneNumberMessage(
-                          '${_selectedCountryCode.dialCode}${_phoneController.text}',
-                        ),
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-                      SizedBox(height: uiConstants.spacing16),
-                      Padding(
-                        padding: EdgeInsets.all(uiConstants.spacing4),
-                        child: Form(
-                          key: _formKeys[2],
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Pinput(
-                                autofillHints: const [
-                                  AutofillHints.oneTimeCode,
-                                ],
-                                controller: _securityCodeController,
-                                length: 4,
-                                enabled:
-                                    _verificationState !=
-                                    VerificationState.success,
-                                defaultPinTheme: PinTheme(
-                                  width: 56,
-                                  height: 56,
-                                  textStyle: Theme.of(
-                                    context,
-                                  ).textTheme.headlineSmall,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color:
-                                          Theme.of(context)
-                                              .inputDecorationTheme
-                                              .enabledBorder
-                                              ?.borderSide
-                                              .color ??
-                                          Theme.of(context).dividerColor,
-                                      width:
-                                          Theme.of(context)
-                                              .inputDecorationTheme
-                                              .enabledBorder
-                                              ?.borderSide
-                                              .width ??
-                                          1.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(
-                                      uiConstants.radius16,
-                                    ),
-                                  ),
-                                ),
-                                focusedPinTheme: PinTheme(
-                                  padding: EdgeInsets.all(uiConstants.spacing6),
-                                  width: 56,
-                                  height: 56,
-                                  textStyle: Theme.of(
-                                    context,
-                                  ).textTheme.headlineSmall,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color:
-                                          Theme.of(context)
-                                              .inputDecorationTheme
-                                              .focusedBorder
-                                              ?.borderSide
-                                              .color ??
-                                          Theme.of(context).primaryColor,
-                                      width:
-                                          Theme.of(context)
-                                              .inputDecorationTheme
-                                              .focusedBorder
-                                              ?.borderSide
-                                              .width ??
-                                          2.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(
-                                      uiConstants.radius16,
-                                    ),
-                                  ),
-                                ),
-                                submittedPinTheme: PinTheme(
-                                  width: 56,
-                                  height: 56,
-                                  textStyle: Theme.of(
-                                    context,
-                                  ).textTheme.headlineSmall,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color:
-                                          Theme.of(context)
-                                              .inputDecorationTheme
-                                              .focusedBorder
-                                              ?.borderSide
-                                              .color ??
-                                          Theme.of(context).primaryColor,
-                                      width:
-                                          Theme.of(context)
-                                              .inputDecorationTheme
-                                              .focusedBorder
-                                              ?.borderSide
-                                              .width ??
-                                          2.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(
-                                      uiConstants.radius16,
-                                    ),
-                                  ),
-                                ),
-                                validator: (value) =>
-                                    FormValidators.validateRequired(
-                                      value,
-                                      context.l10n.labelSecurityCode,
-                                      context,
-                                    ),
-                                keyboardType: TextInputType.number,
-                              ),
-                              SizedBox(height: uiConstants.spacing20),
-                              // Feedback de Verificação
-                              _buildVerificationFeedback(context),
-                              SizedBox(height: uiConstants.spacing8),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+              _buildSecurityCodeStep(
+                context: context,
+                l10n: l10n,
+                theme: theme,
+                textTheme: textTheme,
               ),
             ],
           ),
         ),
         PageIndicator(currentPage: _currentPage, itemCount: _formKeys.length),
-        SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: uiConstants.spacing4,
-              vertical: uiConstants.spacing20,
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Row(
-                  spacing: uiConstants.spacing4,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    if (_currentPage > 0 && _currentPage < _formKeys.length - 1)
-                      Expanded(
-                        child: CustomCTAButton(
-                          onPressed: () {
-                            _pageController.previousPage(
-                              duration: const Duration(milliseconds: 300),
-                              curve: Curves.easeIn,
-                            );
-                          },
-                          variant: ButtonVariant.secondary,
-                          label: context.l10n.previous,
-                          icon: Icon(Icons.arrow_back_rounded),
-                        ),
-                      ),
-                    if (_currentPage < _formKeys.length - 1)
-                      Expanded(
-                        child: CustomCTAButton(
-                          onPressed: () {
-                            if (_formKeys[_currentPage].currentState!
-                                .validate()) {
-                              _startResendTimer();
-                              _pageController.nextPage(
-                                duration: const Duration(milliseconds: 300),
-                                curve: Curves.easeIn,
-                              );
-                            }
-                          },
-                          icon: Icon(Icons.arrow_forward_rounded),
-                          variant: ButtonVariant.primary,
-                          label: context.l10n.next,
-                        ),
-                      ),
-                  ],
-                ),
-                if (_currentPage == _formKeys.length - 1)
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      _buildResendCodeButton(context),
-                      SizedBox(height: uiConstants.spacing4),
-                      CustomCTAButton(
-                        onPressed: () {
-                          _resetVerificationState();
-                          _securityCodeController.clear();
-                          _resendTimer?.cancel();
-                          _resendCountdown = 0;
-                          _pageController.previousPage(
-                            duration: const Duration(milliseconds: 300),
-                            curve: Curves.easeIn,
-                          );
-                        },
-                        variant: ButtonVariant.secondary,
-                        label: context.l10n.editarTelefoneTextMessage,
-                      ),
-                    ],
-                  ),
-              ],
-            ),
-          ),
+        _buildFooterControls(
+          context: context,
+          l10n: l10n,
         ),
       ],
     );
   }
 
-  Widget _buildVerificationFeedback(BuildContext context) {
+  Widget _buildNameStep({
+    required BuildContext context,
+    required AppLocalizations l10n,
+    required ThemeData theme,
+    required TextTheme textTheme,
+  }) {
+    final colorScheme = theme.colorScheme;
+
+    return ResponsivePadding(
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            SizedBox(height: uiConstants.spacing16),
+            Text(
+              l10n.registerNameTitle,
+              textAlign: TextAlign.left,
+              style: textTheme.headlineMedium,
+            ),
+            SizedBox(height: uiConstants.spacing16),
+            Form(
+              key: _formKeys[0],
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  TextFormField(
+                    controller: _nameController,
+                    decoration: InputDecoration(
+                      labelText: l10n.labelName,
+                      border: const OutlineInputBorder(),
+                      labelStyle: textTheme.titleLarge?.copyWith(
+                        color: colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                    validator: (value) => FormValidators.validateRequired(
+                      value,
+                      l10n.nameValue,
+                      context,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPhoneStep({
+    required BuildContext context,
+    required AppLocalizations l10n,
+    required ThemeData theme,
+    required TextTheme textTheme,
+  }) {
+    return ResponsivePadding(
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            SizedBox(height: uiConstants.spacing16),
+            Text(
+              l10n.registerPhoneTitle,
+              style: textTheme.headlineMedium,
+            ),
+            SizedBox(height: uiConstants.spacing16),
+            Padding(
+              padding: EdgeInsets.all(uiConstants.spacing4),
+              child: Form(
+                key: _formKeys[1],
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: uiConstants.buttonHeight * 1.9,
+                          child: CountryCodePicker(
+                            dialogTextStyle: textTheme.bodyMedium,
+                            dialogBackgroundColor: theme.canvasColor,
+                            headerText: l10n.selectCountryCode,
+                            boxDecoration: BoxDecoration(
+                              border: Border.all(
+                                color: theme.dividerColor,
+                              ),
+                              borderRadius: BorderRadius.circular(
+                                uiConstants.radius16,
+                              ),
+                            ),
+                            flagWidth: uiConstants.spacing4,
+                            padding: EdgeInsets.zero,
+                            margin: EdgeInsets.symmetric(
+                              horizontal: uiConstants.spacing1,
+                            ),
+                            textStyle: textTheme.bodyMedium,
+                            onChanged: _updateSelectedCountryCode,
+                            initialSelection: _selectedCountryCode.code,
+                            favorite: const ['+55', 'BR'],
+                            showCountryOnly: false,
+                            showOnlyCountryWhenClosed: false,
+                            alignLeft: true,
+                          ),
+                        ),
+                        Expanded(
+                          child: TextFormField(
+                            controller: _phoneController,
+                            keyboardType: TextInputType.phone,
+                            decoration: InputDecoration(
+                              labelText: l10n.labelPhone,
+                              border: const OutlineInputBorder(),
+                            ),
+                            validator: (value) => FormValidators.validatePhone(
+                              value,
+                              context,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSecurityCodeStep({
+    required BuildContext context,
+    required AppLocalizations l10n,
+    required ThemeData theme,
+    required TextTheme textTheme,
+  }) {
+    final dialCode = _selectedCountryCode.dialCode ?? '';
+    final phoneDisplay = '$dialCode${_phoneController.text}';
+    final inputDecorationTheme = theme.inputDecorationTheme;
+    final BorderSide? enabledBorderSide =
+        inputDecorationTheme.enabledBorder?.borderSide;
+    final BorderSide? focusedBorderSide =
+        inputDecorationTheme.focusedBorder?.borderSide;
+
+    return ResponsivePadding(
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            SizedBox(height: uiConstants.spacing16),
+            Text(
+              l10n.registerSecurityCodeTitle,
+              style: textTheme.headlineMedium,
+            ),
+            SizedBox(height: uiConstants.spacing8),
+            Text(
+              l10n.verifyPhoneNumberMessage(phoneDisplay),
+              style: textTheme.titleMedium,
+            ),
+            SizedBox(height: uiConstants.spacing16),
+            Padding(
+              padding: EdgeInsets.all(uiConstants.spacing4),
+              child: Form(
+                key: _formKeys[2],
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Pinput(
+                      autofillHints: const [
+                        AutofillHints.oneTimeCode,
+                      ],
+                      controller: _securityCodeController,
+                      length: 4,
+                      enabled: _verificationState != VerificationState.success,
+                      defaultPinTheme: _buildPinTheme(
+                        theme: theme,
+                        borderSide: enabledBorderSide,
+                        fallbackWidth: enabledBorderSide?.width ?? 1.0,
+                      ),
+                      focusedPinTheme: _buildPinTheme(
+                        theme: theme,
+                        borderSide: focusedBorderSide,
+                        fallbackWidth: focusedBorderSide?.width ?? 2.0,
+                        fallbackColor: theme.primaryColor,
+                        padding: EdgeInsets.all(uiConstants.spacing6),
+                      ),
+                      submittedPinTheme: _buildPinTheme(
+                        theme: theme,
+                        borderSide: focusedBorderSide,
+                        fallbackWidth: focusedBorderSide?.width ?? 2.0,
+                        fallbackColor: theme.primaryColor,
+                      ),
+                      validator: (value) => FormValidators.validateRequired(
+                        value,
+                        l10n.labelSecurityCode,
+                        context,
+                      ),
+                      keyboardType: TextInputType.number,
+                    ),
+                    SizedBox(height: uiConstants.spacing20),
+                    _buildVerificationFeedback(
+                      l10n: l10n,
+                      theme: theme,
+                      textTheme: textTheme,
+                    ),
+                    SizedBox(height: uiConstants.spacing8),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildFooterControls({
+    required BuildContext context,
+    required AppLocalizations l10n,
+  }) {
+    return SingleChildScrollView(
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: uiConstants.spacing4,
+          vertical: uiConstants.spacing20,
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              spacing: uiConstants.spacing4,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                if (!_isOnFirstPage && !_isOnLastPage)
+                  Expanded(
+                    child: CustomCTAButton(
+                      onPressed: _goToPreviousPage,
+                      variant: ButtonVariant.secondary,
+                      label: l10n.previous,
+                      icon: const Icon(Icons.arrow_back_rounded),
+                    ),
+                  ),
+                if (!_isOnLastPage)
+                  Expanded(
+                    child: CustomCTAButton(
+                      onPressed: _handleNextStep,
+                      icon: const Icon(Icons.arrow_forward_rounded),
+                      variant: ButtonVariant.primary,
+                      label: l10n.next,
+                    ),
+                  ),
+              ],
+            ),
+            if (_isOnLastPage)
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  _buildResendCodeButton(l10n),
+                  SizedBox(height: uiConstants.spacing4),
+                  CustomCTAButton(
+                    onPressed: _handleEditPhone,
+                    variant: ButtonVariant.secondary,
+                    label: l10n.editarTelefoneTextMessage,
+                  ),
+                ],
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildVerificationFeedback({
+    required AppLocalizations l10n,
+    required ThemeData theme,
+    required TextTheme textTheme,
+  }) {
     switch (_verificationState) {
       case VerificationState.idle:
-        return const SizedBox.shrink();
-
+        if (_verificationMessage == null || _verificationMessage!.isEmpty) {
+          return const SizedBox.shrink();
+        }
+        return Text(
+          _verificationMessage!,
+          textAlign: TextAlign.center,
+          style: textTheme.bodyMedium?.copyWith(
+            color: theme.colorScheme.primary,
+          ),
+        );
       case VerificationState.verifying:
         return Column(
           children: [
-            SizedBox(
+            const SizedBox(
               width: 50,
               height: 50,
               child: CircularProgressIndicator(strokeWidth: 2.5),
             ),
             SizedBox(height: uiConstants.spacing12),
             Text(
-              context.l10n.verifyingCode,
-              style: Theme.of(context).textTheme.bodyMedium,
+              l10n.verifyingCode,
+              style: textTheme.bodyMedium,
             ),
           ],
         );
-
       case VerificationState.success:
         return Column(
           children: [
@@ -595,22 +636,21 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
               width: 50,
               height: 50,
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primary,
+                color: theme.colorScheme.primary,
                 shape: BoxShape.circle,
               ),
-              child: Icon(Icons.check, color: Colors.white, size: 28),
+              child: const Icon(Icons.check, color: Colors.white, size: 28),
             ),
             SizedBox(height: uiConstants.spacing12),
             Text(
               _verificationMessage ?? '',
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Theme.of(context).colorScheme.primary,
+              style: textTheme.bodyMedium?.copyWith(
+                color: theme.colorScheme.primary,
               ),
             ),
           ],
         );
-
       case VerificationState.error:
         return Column(
           children: [
@@ -618,17 +658,17 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
               width: 50,
               height: 50,
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.error,
+                color: theme.colorScheme.error,
                 shape: BoxShape.circle,
               ),
-              child: Icon(Icons.close, color: Colors.white, size: 28),
+              child: const Icon(Icons.close, color: Colors.white, size: 28),
             ),
             SizedBox(height: uiConstants.spacing12),
             Text(
               _verificationMessage ?? '',
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Theme.of(context).colorScheme.error,
+              style: textTheme.bodyMedium?.copyWith(
+                color: theme.colorScheme.error,
               ),
             ),
           ],
@@ -636,18 +676,19 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
     }
   }
 
-  Widget _buildResendCodeButton(BuildContext context) {
+  Widget _buildResendCodeButton(AppLocalizations l10n) {
     final isCountdownActive = _resendCountdown > 0;
+    final label = isCountdownActive
+        ? '${l10n.resendCode} (${_resendCountdown}s)'
+        : l10n.resendCode;
 
     return SizedBox(
       width: double.infinity,
       child: CustomCTAButton(
         onPressed: isCountdownActive ? null : _resendSecurityCode,
         variant: ButtonVariant.primary,
-        label: isCountdownActive
-            ? '${context.l10n.resendCode} (${_resendCountdown}s)'
-            : context.l10n.resendCode,
-        icon: isCountdownActive ? null : Icon(Icons.refresh_rounded),
+        label: label,
+        icon: isCountdownActive ? null : const Icon(Icons.refresh_rounded),
       ),
     );
   }
