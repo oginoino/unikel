@@ -458,16 +458,22 @@ InputDecorationTheme _darkInputDecorationTheme = InputDecorationTheme(
   hoverColor: _darkColorScheme.surfaceContainer,
   focusColor: _darkColorScheme.primary.withValues(alpha: 0.12),
 
+  isDense: false,
+  visualDensity: VisualDensity.standard,
   // Padding and spacing
   contentPadding: EdgeInsets.symmetric(
-    horizontal: uiConstants.spacing4,
-    vertical: uiConstants.spacing3,
+    horizontal: uiConstants.spacing6,
+    vertical: uiConstants.spacing5,
   ),
 
   // Label styling
   labelStyle: _darkTextTheme.titleLarge?.copyWith(
     color: _darkColorScheme.onSurfaceVariant,
     fontWeight: FontWeight.w500,
+  ),
+  floatingLabelStyle: _darkTextTheme.titleLarge?.copyWith(
+    color: _darkColorScheme.primary,
+    fontWeight: FontWeight.w600,
   ),
 
   // Hint styling
@@ -493,35 +499,35 @@ InputDecorationTheme _darkInputDecorationTheme = InputDecorationTheme(
 
   // Border radius - consistent with button design
   border: OutlineInputBorder(
-    borderRadius: BorderRadius.circular(uiConstants.radius12),
+    borderRadius: BorderRadius.circular(uiConstants.radius16),
     borderSide: BorderSide.none,
   ),
   enabledBorder: OutlineInputBorder(
-    borderRadius: BorderRadius.circular(uiConstants.radius12),
+    borderRadius: BorderRadius.circular(uiConstants.radius16),
     borderSide: BorderSide(color: _darkColorScheme.outlineVariant, width: 1.5),
   ),
 
   // Focused border with primary color
   focusedBorder: OutlineInputBorder(
-    borderRadius: BorderRadius.circular(uiConstants.radius12),
+    borderRadius: BorderRadius.circular(uiConstants.radius16),
     borderSide: BorderSide(color: _darkColorScheme.primary, width: 2.0),
   ),
 
   // Error border styling
   errorBorder: OutlineInputBorder(
-    borderRadius: BorderRadius.circular(uiConstants.radius12),
+    borderRadius: BorderRadius.circular(uiConstants.radius16),
     borderSide: BorderSide(color: _darkColorScheme.error, width: 2.0),
   ),
 
   // Focused error border
   focusedErrorBorder: OutlineInputBorder(
-    borderRadius: BorderRadius.circular(uiConstants.radius12),
+    borderRadius: BorderRadius.circular(uiConstants.radius16),
     borderSide: BorderSide(color: _darkColorScheme.error, width: 2.0),
   ),
 
   // Disabled state
   disabledBorder: OutlineInputBorder(
-    borderRadius: BorderRadius.circular(uiConstants.radius12),
+    borderRadius: BorderRadius.circular(uiConstants.radius16),
     borderSide: BorderSide(
       color: _darkColorScheme.onSurface.withValues(alpha: 0.12),
       width: 1.0,

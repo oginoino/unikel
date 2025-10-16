@@ -143,45 +143,6 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
     );
   }
 
-  InputDecoration _buildPrimaryInputDecoration({
-    required ThemeData theme,
-    required TextTheme textTheme,
-    required String labelText,
-  }) {
-    final colorScheme = theme.colorScheme;
-    final baseTheme = theme.inputDecorationTheme;
-    final labelStyle =
-        textTheme.titleLarge?.copyWith(color: colorScheme.onSurfaceVariant);
-
-    return InputDecoration(
-      labelText: labelText,
-      labelStyle: labelStyle,
-      floatingLabelStyle: labelStyle?.copyWith(color: colorScheme.primary),
-      filled: baseTheme.filled,
-      fillColor: baseTheme.fillColor,
-      isDense: baseTheme.isDense,
-      contentPadding: baseTheme.contentPadding ??
-          EdgeInsets.symmetric(
-            vertical: uiConstants.spacing8,
-            horizontal: uiConstants.spacing6,
-          ),
-      border: baseTheme.border ??
-          OutlineInputBorder(
-            borderRadius: BorderRadius.circular(uiConstants.radius16),
-          ),
-      enabledBorder: baseTheme.enabledBorder ??
-          OutlineInputBorder(
-            borderRadius: BorderRadius.circular(uiConstants.radius16),
-            borderSide: BorderSide(color: theme.dividerColor),
-          ),
-      focusedBorder: baseTheme.focusedBorder ??
-          OutlineInputBorder(
-            borderRadius: BorderRadius.circular(uiConstants.radius16),
-            borderSide: BorderSide(color: colorScheme.primary, width: 2),
-          ),
-    );
-  }
-
   void _handleNextStep() {
     final formState = _formKeys[_currentPage].currentState;
     if (formState == null || !formState.validate()) {
@@ -391,11 +352,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                   TextFormField(
                     controller: _nameController,
                     style: textTheme.titleLarge,
-                    decoration: _buildPrimaryInputDecoration(
-                      theme: theme,
-                      textTheme: textTheme,
-                      labelText: l10n.labelName,
-                    ),
+                    decoration: InputDecoration(labelText: l10n.labelName),
                     validator: (value) => FormValidators.validateRequired(
                       value,
                       l10n.nameValue,
@@ -435,55 +392,83 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Row(
-                      children: [
-                        SizedBox(
-                          width: uiConstants.buttonHeight * 1.9,
-                          child: CountryCodePicker(
-                            dialogTextStyle: textTheme.titleMedium,
-                            dialogBackgroundColor: theme.canvasColor,
-                            headerText: l10n.selectCountryCode,
-                            boxDecoration: BoxDecoration(
-                              border: Border.all(
-                                color: theme.dividerColor,
+                    IntrinsicHeight(
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Flexible(
+                            flex: 3,
+                            fit: FlexFit.loose,
+                            child: SizedBox(
+                              height: uiConstants.buttonHeight,
+                              child: CountryCodePicker(
+                                dialogTextStyle: textTheme.titleMedium,
+                                dialogBackgroundColor:
+                                    theme.scaffoldBackgroundColor,
+                                backgroundColor: theme.cardColor,
+                                headerText: l10n.selectCountryCode,
+                                boxDecoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: theme.dividerColor,
+                                  ),
+                                  borderRadius: BorderRadius.circular(
+                                    uiConstants.radius16,
+                                  ),
+                                ),
+                                flagWidth: uiConstants.spacing8,
+                                padding: EdgeInsets.symmetric(
+                                  vertical: uiConstants.spacing3,
+                                  horizontal: uiConstants.spacing1,
+                                ),
+                                margin: EdgeInsets.zero,
+                                textStyle: textTheme.titleMedium,
+                                onChanged: _updateSelectedCountryCode,
+                                initialSelection: _selectedCountryCode.code,
+                                favorite: const ['+55', 'BR'],
+                                comparator: (a, b) =>
+                                    a.name?.compareTo(b.name ?? '') ?? 0,
+                                pickerStyle: PickerStyle.dialog,
+                                builder: (country) {
+                                  final flagUri = country?.flagUri;
+                                  return Padding(
+                                    padding: EdgeInsets.only(
+                                      left: uiConstants.spacing2,
+                                    ),
+                                    child: flagUri != null ?
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                          right: uiConstants.spacing1,
+                                        ),
+                                        child: Image.asset(
+                                          flagUri,
+                                          package: 'country_code_picker',
+                                          width: uiConstants.spacing6,
+                                          height: uiConstants.spacing6,
+                                          fit: BoxFit.contain,
+                                        ),
+                                      ) : const SizedBox.shrink()
+                                  );
+                                },
                               ),
-                              borderRadius: BorderRadius.circular(
-                                uiConstants.radius16,
+                            ),
+                          ),
+                          SizedBox(width: uiConstants.spacing3),
+                          Expanded(
+                            flex: 20,
+                            child: TextFormField(
+                              controller: _phoneController,
+                              keyboardType: TextInputType.phone,
+                              style: textTheme.titleLarge,
+                              decoration:
+                                  InputDecoration(labelText: l10n.labelPhone),
+                              validator: (value) => FormValidators.validatePhone(
+                                value,
+                                context,
                               ),
                             ),
-                            flagWidth: uiConstants.spacing4,
-                            padding: EdgeInsets.symmetric(
-                              vertical: uiConstants.spacing3,
-                            ),
-                            margin: EdgeInsets.symmetric(
-                              horizontal: uiConstants.spacing1,
-                            ),
-                            textStyle: textTheme.titleLarge,
-                            onChanged: _updateSelectedCountryCode,
-                            initialSelection: _selectedCountryCode.code,
-                            favorite: const ['+55', 'BR'],
-                            showCountryOnly: false,
-                            showOnlyCountryWhenClosed: false,
-                            alignLeft: true,
                           ),
-                        ),
-                        Expanded(
-                          child: TextFormField(
-                            controller: _phoneController,
-                            keyboardType: TextInputType.phone,
-                            style: textTheme.titleLarge,
-                            decoration: _buildPrimaryInputDecoration(
-                              theme: theme,
-                              textTheme: textTheme,
-                              labelText: l10n.labelPhone,
-                            ),
-                            validator: (value) => FormValidators.validatePhone(
-                              value,
-                              context,
-                            ),
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ],
                 ),
