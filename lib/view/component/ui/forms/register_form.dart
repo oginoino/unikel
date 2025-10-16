@@ -620,13 +620,16 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                       ],
                         errorBuilder: (context, _) => Padding(
                           padding: EdgeInsets.only(top: uiConstants.spacing3),
-                          child: Text(
-                            _securityCodeError ?? '',
-                            textAlign: TextAlign.left,
-                            style: theme.inputDecorationTheme.errorStyle ??
-                                textTheme.bodyMedium?.copyWith(
-                                  color: theme.colorScheme.error,
-                                ),
+                          child: SizedBox(
+                            width: uiConstants.spacing16 * 4,
+                            child: Text(
+                              _securityCodeError ?? '',
+                              textAlign: TextAlign.left,
+                              style: theme.inputDecorationTheme.errorStyle ??
+                                  textTheme.bodyMedium?.copyWith(
+                                    color: theme.colorScheme.error,
+                                  ),
+                            ),
                           ),
                         ),
                       ),
