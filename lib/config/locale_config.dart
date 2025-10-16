@@ -1,5 +1,4 @@
 import '../utils/imports/common_libs.dart';
-import 'package:unikel/generated/app_localizations.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 
 class LocaleConfig {

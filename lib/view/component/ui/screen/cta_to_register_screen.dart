@@ -1,7 +1,5 @@
 import 'package:unikel/utils/imports/common_libs.dart';
-import 'package:unikel/view/component/ui/padding/responsive_padding.dart';
 
-import '../button/custom_cta_button.dart';
 
 class CtaToRegisterScreen extends StatelessWidget {
   const CtaToRegisterScreen({super.key});
