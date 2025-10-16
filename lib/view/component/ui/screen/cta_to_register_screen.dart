@@ -1,4 +1,4 @@
-import 'package:unikel/utils/imports/common_libs.dart';
+import '../../../../utils/imports/common_libs.dart';
 
 
 class CtaToRegisterScreen extends StatelessWidget {
