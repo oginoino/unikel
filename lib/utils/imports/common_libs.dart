@@ -10,6 +10,7 @@ export 'package:flutter/services.dart';
 // Localization
 export 'package:flutter_localizations/flutter_localizations.dart';
 export '/utils/extensions/context_extensions.dart';
+export '/generated/app_localizations.dart';
 
 // UI & Styling
 export 'package:google_fonts/google_fonts.dart';
@@ -24,7 +25,8 @@ export 'package:get_it/get_it.dart';
 // Navigation
 export 'package:go_router/go_router.dart';
 
-// Math
+// Core Dart
+export 'dart:async';
 export 'dart:math';
 
 // Animation
@@ -96,6 +98,17 @@ export '../../view/component/ui/app_bar/custom_sliver_app_bar.dart';
 // Selectors
 export '../../view/component/ui/pop_up_menu/language_selector.dart';
 // Buttons
+export '../../view/component/ui/button/custom_cta_button.dart';
 export '../../view/component/ui/button/theme_toggle_button.dart';
 // Hero
 export '../../view/component/ui/hero/onboarding_hero.dart';
+// Indicators
+export '../../view/component/ui/page_indicator/page_indicator.dart';
+// Layout
+export '../../view/component/ui/padding/responsive_padding.dart';
+
+// =============================================================================
+// UTILITIES
+// =============================================================================
+
+export '/utils/form_validators.dart';

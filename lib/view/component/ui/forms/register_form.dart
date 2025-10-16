@@ -1,14 +1,6 @@
-import 'dart:async';
-
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:pinput/pinput.dart';
-import 'package:unikel/view/component/ui/button/custom_cta_button.dart';
-import 'package:unikel/view/component/ui/page_indicator/page_indicator.dart';
-
-import '../../../../generated/app_localizations.dart';
-import '../../../../utils/form_validators.dart';
 import '../../../../utils/imports/common_libs.dart';
-import '../padding/responsive_padding.dart';
 
 class RegisterUserForm extends StatefulWidget {
   const RegisterUserForm({super.key});
