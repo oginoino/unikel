@@ -284,6 +284,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
     EdgeInsetsGeometry? padding,
     double fallbackWidth = 1.0,
     Color? fallbackColor,
+    Color? textColor,
   }) {
     final resolvedBorder = borderSide ??
         BorderSide(
@@ -295,7 +296,9 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
     return PinTheme(
       width: 64,
       height: 64,
-      textStyle: theme.textTheme.headlineSmall,
+      textStyle: textColor != null
+          ? theme.textTheme.headlineSmall?.copyWith(color: textColor)
+          : theme.textTheme.headlineSmall,
       decoration: BoxDecoration(
         border: Border.all(
           color: resolvedBorder.color,
@@ -518,6 +521,11 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
         inputDecorationTheme.enabledBorder?.borderSide;
     final BorderSide? focusedBorderSide =
         inputDecorationTheme.focusedBorder?.borderSide;
+    final BorderSide? errorBorderSide =
+        inputDecorationTheme.errorBorder?.borderSide;
+    final BorderSide? focusedErrorBorderSide =
+        inputDecorationTheme.focusedErrorBorder?.borderSide;
+    final hasError = _securityCodeError != null;
 
     return ResponsivePadding(
       child: SingleChildScrollView(
@@ -542,47 +550,86 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Pinput(
-                      autofillHints: const [
-                        AutofillHints.oneTimeCode,
-                      ],
-                      controller: _securityCodeController,
-                      length: 4,
-                      enabled: _verificationState != VerificationState.success,
-                      forceErrorState: _securityCodeError != null,
-                      defaultPinTheme: _buildPinTheme(
-                        theme: theme,
-                        borderSide: enabledBorderSide,
-                        fallbackWidth: enabledBorderSide?.width ?? 1.0,
-                      ),
-                      focusedPinTheme: _buildPinTheme(
-                        theme: theme,
-                        borderSide: focusedBorderSide,
-                        fallbackWidth: focusedBorderSide?.width ?? 2.0,
-                        fallbackColor: theme.primaryColor,
-                        padding: EdgeInsets.all(uiConstants.spacing6),
-                      ),
-                      submittedPinTheme: _buildPinTheme(
-                        theme: theme,
-                        borderSide: focusedBorderSide,
-                        fallbackWidth: focusedBorderSide?.width ?? 2.0,
-                        fallbackColor: theme.primaryColor,
-                      ),
-                      errorText: _securityCodeError,
-                      validator: (value) {
-                        final requiredResult = FormValidators.validateRequired(
-                          value,
-                          l10n.labelSecurityCode,
-                          context,
-                        );
+                    Align(
+                      alignment: Alignment.center,
+                      child: Pinput(
+                        autofillHints: const [
+                          AutofillHints.oneTimeCode,
+                        ],
+                        controller: _securityCodeController,
+                        length: 4,
+                        enabled: _verificationState != VerificationState.success,
+                        forceErrorState: hasError,
+                        defaultPinTheme: _buildPinTheme(
+                          theme: theme,
+                          borderSide: enabledBorderSide,
+                          fallbackWidth: enabledBorderSide?.width ?? 1.0,
+                        ),
+                        focusedPinTheme: hasError
+                            ? _buildPinTheme(
+                                theme: theme,
+                                borderSide:
+                                    focusedErrorBorderSide ?? errorBorderSide,
+                                fallbackWidth:
+                                    (focusedErrorBorderSide ?? errorBorderSide)
+                                            ?.width ??
+                                        2.0,
+                                fallbackColor: theme.colorScheme.error,
+                                textColor: theme.colorScheme.error,
+                                padding: EdgeInsets.all(uiConstants.spacing6),
+                              )
+                            : _buildPinTheme(
+                                theme: theme,
+                                borderSide: focusedBorderSide,
+                                fallbackWidth: focusedBorderSide?.width ?? 2.0,
+                                fallbackColor: theme.primaryColor,
+                                padding: EdgeInsets.all(uiConstants.spacing6),
+                              ),
+                        submittedPinTheme: _buildPinTheme(
+                          theme: theme,
+                          borderSide: focusedBorderSide,
+                          fallbackWidth: focusedBorderSide?.width ?? 2.0,
+                          fallbackColor: theme.primaryColor,
+                        ),
+                        errorPinTheme: _buildPinTheme(
+                          theme: theme,
+                          borderSide: errorBorderSide,
+                          fallbackWidth: errorBorderSide?.width ?? 2.0,
+                          fallbackColor: theme.colorScheme.error,
+                          textColor: theme.colorScheme.error,
+                        ),
+                        errorText: context.l10n.invalidPhoneCodeMatch,
+                        validator: (value) {
+                          final requiredResult = FormValidators.validateRequired(
+                            value,
+                            l10n.labelSecurityCode,
+                            context,
+                          );
 
-                        if (requiredResult != null) {
-                          return requiredResult;
-                        }
+                          if (requiredResult != null) {
+                            return requiredResult;
+                          }
 
                         return _securityCodeError;
                       },
-                      keyboardType: TextInputType.number,
+                        keyboardType: TextInputType.visiblePassword,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(
+                          RegExp(r'[A-Za-z0-9]'),
+                        ),
+                      ],
+                      errorBuilder: (context, errorText) => Padding(
+                          padding: EdgeInsets.only(top: uiConstants.spacing3),
+                          child: Text(
+                            errorText ?? '',
+                            textAlign: TextAlign.center,
+                            style: theme.inputDecorationTheme.errorStyle ??
+                                textTheme.bodyMedium?.copyWith(
+                                  color: theme.colorScheme.error,
+                                ),
+                          ),
+                        ),
+                      ),
                     ),
                     SizedBox(height: uiConstants.spacing20),
                     _buildVerificationFeedback(
