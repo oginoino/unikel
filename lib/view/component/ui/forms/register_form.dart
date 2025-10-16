@@ -32,6 +32,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
 
   VerificationState _verificationState = VerificationState.idle;
   String? _verificationMessage;
+  String? _securityCodeError;
 
   bool get _isOnFirstPage => _currentPage == 0;
   bool get _isOnLastPage => _currentPage == _formKeys.length - 1;
@@ -60,6 +61,19 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
     setState(updates);
   }
 
+  void _updateSecurityCodeError(String? message) {
+    if (_securityCodeError == message) {
+      return;
+    }
+
+    _safeSetState(() {
+      _securityCodeError = message;
+    });
+
+    final formState = _formKeys[2].currentState;
+    formState?.validate();
+  }
+
   void _onSecurityCodeChanged() {
     final code = _securityCodeController.text;
 
@@ -67,6 +81,10 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
       _verifySecurityCode();
     } else if (code.length < 4 && _verificationState != VerificationState.idle) {
       _resetVerificationState();
+    }
+
+    if (code.length < 4 && _securityCodeError != null) {
+      _updateSecurityCodeError(null);
     }
   }
 
@@ -152,6 +170,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
     if (_currentPage == _formKeys.length - 2) {
       _resetVerificationState();
       _securityCodeController.clear();
+      _updateSecurityCodeError(null);
       _startResendTimer();
     }
 
@@ -161,6 +180,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
   void _handleEditPhone() {
     _resetVerificationState();
     _securityCodeController.clear();
+    _updateSecurityCodeError(null);
     _cancelResendTimer();
     _safeSetState(() {
       _resendCountdown = 0;
@@ -188,6 +208,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
       if (!mounted) return;
 
       _securityCodeController.clear();
+      _updateSecurityCodeError(null);
       _startResendTimer();
       _setVerificationStatus(
         VerificationState.idle,
@@ -213,6 +234,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
     }
 
     final l10n = context.l10n;
+    _updateSecurityCodeError(null);
     _setVerificationStatus(VerificationState.verifying);
 
     try {
@@ -223,12 +245,14 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
       final isValid = _validateSecurityCode(code);
 
       if (isValid) {
+        _updateSecurityCodeError(null);
         _setVerificationStatus(
           VerificationState.success,
           message: l10n.codeVerifiedSuccess,
         );
         unawaited(_navigateToHomeAfterSuccess());
       } else {
+        _updateSecurityCodeError(l10n.invalidPhoneCodeMatch);
         _setVerificationStatus(
           VerificationState.error,
           message: l10n.invalidPhoneCodeMatch,
@@ -237,6 +261,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
         if (!mounted) return;
         _resetVerificationState();
         _securityCodeController.clear();
+        _updateSecurityCodeError(null);
       }
     } catch (_) {
       _setVerificationStatus(
@@ -524,6 +549,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                       controller: _securityCodeController,
                       length: 4,
                       enabled: _verificationState != VerificationState.success,
+                      forceErrorState: _securityCodeError != null,
                       defaultPinTheme: _buildPinTheme(
                         theme: theme,
                         borderSide: enabledBorderSide,
@@ -542,11 +568,20 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                         fallbackWidth: focusedBorderSide?.width ?? 2.0,
                         fallbackColor: theme.primaryColor,
                       ),
-                      validator: (value) => FormValidators.validateRequired(
-                        value,
-                        l10n.labelSecurityCode,
-                        context,
-                      ),
+                      errorText: _securityCodeError,
+                      validator: (value) {
+                        final requiredResult = FormValidators.validateRequired(
+                          value,
+                          l10n.labelSecurityCode,
+                          context,
+                        );
+
+                        if (requiredResult != null) {
+                          return requiredResult;
+                        }
+
+                        return _securityCodeError;
+                      },
                       keyboardType: TextInputType.number,
                     ),
                     SizedBox(height: uiConstants.spacing20),
@@ -555,7 +590,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                       theme: theme,
                       textTheme: textTheme,
                     ),
-                    SizedBox(height: uiConstants.spacing8),
+                    
                   ],
                 ),
               ),
@@ -627,6 +662,28 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
     required ThemeData theme,
     required TextTheme textTheme,
   }) {
+    Widget buildStatusIcon({
+      required Color background,
+      required IconData icon,
+    }) {
+      return SizedBox.square(
+        dimension: uiConstants.spacing16,
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            color: background,
+            shape: BoxShape.circle,
+          ),
+          child: Center(
+            child: Icon(
+              icon,
+              color: Colors.white,
+              size: uiConstants.spacing6,
+            ),
+          ),
+        ),
+      );
+    }
+
     switch (_verificationState) {
       case VerificationState.idle:
         if (_verificationMessage == null || _verificationMessage!.isEmpty) {
@@ -642,10 +699,11 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
       case VerificationState.verifying:
         return Column(
           children: [
-            const SizedBox(
-              width: 50,
-              height: 50,
-              child: CircularProgressIndicator(strokeWidth: 2.5),
+            SizedBox.square(
+              dimension: uiConstants.spacing16,
+              child: const Center(
+                child: CircularProgressIndicator(strokeWidth: 2.5),
+              ),
             ),
             SizedBox(height: uiConstants.spacing12),
             Text(
@@ -657,14 +715,9 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
       case VerificationState.success:
         return Column(
           children: [
-            Container(
-              width: 50,
-              height: 50,
-              decoration: BoxDecoration(
-                color: theme.colorScheme.primary,
-                shape: BoxShape.circle,
-              ),
-              child: const Icon(Icons.check, color: Colors.white, size: 28),
+            buildStatusIcon(
+              background: theme.colorScheme.primary,
+              icon: Icons.check,
             ),
             SizedBox(height: uiConstants.spacing12),
             Text(
@@ -677,27 +730,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
           ],
         );
       case VerificationState.error:
-        return Column(
-          children: [
-            Container(
-              width: 50,
-              height: 50,
-              decoration: BoxDecoration(
-                color: theme.colorScheme.error,
-                shape: BoxShape.circle,
-              ),
-              child: const Icon(Icons.close, color: Colors.white, size: 28),
-            ),
-            SizedBox(height: uiConstants.spacing12),
-            Text(
-              _verificationMessage ?? '',
-              textAlign: TextAlign.center,
-              style: textTheme.bodyMedium?.copyWith(
-                color: theme.colorScheme.error,
-              ),
-            ),
-          ],
-        );
+        return SizedBox.shrink();
     }
   }
 
