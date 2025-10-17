@@ -12,8 +12,8 @@ final GoRouter appRouter = GoRouter(
     ShellRoute(
       builder: (context, state, widget) {
         return ScaffoldSliver(
-          child: widget,
           state: state,
+          child: widget,
         );
       },
       routes: [
