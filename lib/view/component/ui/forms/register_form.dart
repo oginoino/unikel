@@ -245,11 +245,32 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
       final isValid = _validateSecurityCode(code);
 
       if (isValid) {
+        try {
+          final userDataProvider = context.read<UserDataProvider>();
+          final fullPhoneNumber = _composeFullPhoneNumber();
+          await userDataProvider.registerConsumer(
+            name: _nameController.text.trim(),
+            phone: fullPhoneNumber,
+            email: null,
+            isPhoneVerified: true,
+          );
+          if (!mounted) return;
+        } catch (_) {
+          _updateSecurityCodeError(l10n.errorVerifyingCode);
+          _setVerificationStatus(
+            VerificationState.error,
+            message: l10n.errorVerifyingCode,
+          );
+          await Future.delayed(const Duration(seconds: 2));
+          if (!mounted) return;
+          _resetVerificationState();
+          _securityCodeController.clear();
+          _updateSecurityCodeError(null);
+          return;
+        }
+
         _updateSecurityCodeError(null);
-        _setVerificationStatus(
-          VerificationState.success,
-          message: l10n.codeVerifiedSuccess,
-        );
+        _setVerificationStatus(VerificationState.success);
         unawaited(_navigateToHomeAfterSuccess());
       } else {
         _updateSecurityCodeError(l10n.invalidPhoneCodeMatch);
@@ -276,6 +297,13 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
 
   bool _validateSecurityCode(String code) {
     return code.length == 4 && code != '0000';
+  }
+
+  String _composeFullPhoneNumber() {
+    final dialCode = _selectedCountryCode.dialCode ?? '';
+    final trimmedPhone = _phoneController.text.trim();
+    final rawValue = '$dialCode$trimmedPhone';
+    return rawValue.replaceAll(RegExp(r'[^0-9+]'), '');
   }
 
   PinTheme _buildPinTheme({

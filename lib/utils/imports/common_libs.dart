@@ -53,6 +53,7 @@ export '../../providers/register_provider.dart';
 export '../../providers/theme_provider.dart';
 export '../../providers/locale_provider.dart';
 export '../../providers/onboarding_provider.dart';
+export '../../providers/user_data_provider.dart';
 
 // =============================================================================
 // ROUTING
