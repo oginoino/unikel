@@ -54,6 +54,18 @@
   },
   "resendCode": "Enviar novamente",
   "codeResendSuccess": "Código reenviado com sucesso",
-  "errorResendingCode": "Erro ao tentar reenviar"
+  "errorResendingCode": "Erro ao tentar reenviar",
+  "profileTooltip": "Abrir perfil",
+  "profileTitle": "Perfil",
+  "profileSubtitle": "Gerencie seus dados e preferências.",
+  "profileAccountSectionTitle": "Informações da conta",
+  "profileContactSectionTitle": "Informações de contato",
+  "profileIdLabel": "Identificador",
+  "profileEmailLabel": "E-mail",
+  "profileStatusActive": "Conta ativa",
+  "profileStatusInactive": "Conta inativa",
+  "profilePhoneVerified": "Telefone verificado",
+  "profilePhoneUnverified": "Telefone não verificado",
+  "profileMissingData": "Informação indisponível"
 }
   

@@ -52,6 +52,18 @@
       "phoneNumber": {}
     }
   },
-  "resendCode": "Enviar novamente"
+  "resendCode": "Enviar novamente",
+  "profileTooltip": "Abrir perfil",
+  "profileTitle": "Perfil",
+  "profileSubtitle": "Gerencie seus dados e preferências.",
+  "profileAccountSectionTitle": "Informações da conta",
+  "profileContactSectionTitle": "Informações de contato",
+  "profileIdLabel": "Identificador",
+  "profileEmailLabel": "E-mail",
+  "profileStatusActive": "Conta ativa",
+  "profileStatusInactive": "Conta inativa",
+  "profilePhoneVerified": "Telefone verificado",
+  "profilePhoneUnverified": "Telefone não verificado",
+  "profileMissingData": "Informação indisponível"
 }
   

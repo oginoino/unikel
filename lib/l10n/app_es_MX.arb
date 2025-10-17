@@ -55,5 +55,17 @@
   },
   "resendCode": "Reenviar código",
   "codeResendSuccess": "Código reenviado exitosamente",
-  "errorResendingCode": "Error al enviar el código"
+  "errorResendingCode": "Error al enviar el código",
+  "profileTooltip": "Ver perfil",
+  "profileTitle": "Perfil",
+  "profileSubtitle": "Administra tu información y preferencias.",
+  "profileAccountSectionTitle": "Información de la cuenta",
+  "profileContactSectionTitle": "Información de contacto",
+  "profileIdLabel": "Identificador",
+  "profileEmailLabel": "Correo electrónico",
+  "profileStatusActive": "Cuenta activa",
+  "profileStatusInactive": "Cuenta inactiva",
+  "profilePhoneVerified": "Teléfono verificado",
+  "profilePhoneUnverified": "Teléfono no verificado",
+  "profileMissingData": "Información no disponible"
 }

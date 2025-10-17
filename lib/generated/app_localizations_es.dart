@@ -167,6 +167,42 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get errorResendingCode => 'Error al enviar el código';
+
+  @override
+  String get profileTooltip => 'Ver perfil';
+
+  @override
+  String get profileTitle => 'Perfil';
+
+  @override
+  String get profileSubtitle => 'Administra tu información y preferencias.';
+
+  @override
+  String get profileAccountSectionTitle => 'Información de la cuenta';
+
+  @override
+  String get profileContactSectionTitle => 'Información de contacto';
+
+  @override
+  String get profileIdLabel => 'Identificador';
+
+  @override
+  String get profileEmailLabel => 'Correo electrónico';
+
+  @override
+  String get profileStatusActive => 'Cuenta activa';
+
+  @override
+  String get profileStatusInactive => 'Cuenta inactiva';
+
+  @override
+  String get profilePhoneVerified => 'Teléfono verificado';
+
+  @override
+  String get profilePhoneUnverified => 'Teléfono no verificado';
+
+  @override
+  String get profileMissingData => 'Información no disponible';
 }
 
 /// The translations for Spanish Castilian, as used in Mexico (`es_MX`).
@@ -332,4 +368,40 @@ class AppLocalizationsEsMx extends AppLocalizationsEs {
 
   @override
   String get errorResendingCode => 'Error al enviar el código';
+
+  @override
+  String get profileTooltip => 'Ver perfil';
+
+  @override
+  String get profileTitle => 'Perfil';
+
+  @override
+  String get profileSubtitle => 'Administra tu información y preferencias.';
+
+  @override
+  String get profileAccountSectionTitle => 'Información de la cuenta';
+
+  @override
+  String get profileContactSectionTitle => 'Información de contacto';
+
+  @override
+  String get profileIdLabel => 'Identificador';
+
+  @override
+  String get profileEmailLabel => 'Correo electrónico';
+
+  @override
+  String get profileStatusActive => 'Cuenta activa';
+
+  @override
+  String get profileStatusInactive => 'Cuenta inactiva';
+
+  @override
+  String get profilePhoneVerified => 'Teléfono verificado';
+
+  @override
+  String get profilePhoneUnverified => 'Teléfono no verificado';
+
+  @override
+  String get profileMissingData => 'Información no disponible';
 }

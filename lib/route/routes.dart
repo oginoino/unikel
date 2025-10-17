@@ -11,6 +11,7 @@ class Routes {
     RouteInfo(name: 'Onboarding', path: '/onboarding'),
     RouteInfo(name: 'FirstAccessCtaToRegister', path: '/first-access'),
     RouteInfo(name: 'RegisterUser', path: '/register-user'),
+    RouteInfo(name: 'Profile', path: '/profile'),
   ];
 
   // Helper method to get route by name
@@ -32,4 +33,6 @@ class Routes {
       .path;
   static String get registerUser =>
       routes.firstWhere((route) => route.name == 'RegisterUser').path;
+  static String get profile =>
+      routes.firstWhere((route) => route.name == 'Profile').path;
 }

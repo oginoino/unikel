@@ -164,6 +164,42 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get errorResendingCode => 'Error sending code';
+
+  @override
+  String get profileTooltip => 'Abrir perfil';
+
+  @override
+  String get profileTitle => 'Perfil';
+
+  @override
+  String get profileSubtitle => 'Gerencie seus dados e preferências.';
+
+  @override
+  String get profileAccountSectionTitle => 'Informações da conta';
+
+  @override
+  String get profileContactSectionTitle => 'Informações de contato';
+
+  @override
+  String get profileIdLabel => 'Identificador';
+
+  @override
+  String get profileEmailLabel => 'E-mail';
+
+  @override
+  String get profileStatusActive => 'Conta ativa';
+
+  @override
+  String get profileStatusInactive => 'Conta inativa';
+
+  @override
+  String get profilePhoneVerified => 'Telefone verificado';
+
+  @override
+  String get profilePhoneUnverified => 'Telefone não verificado';
+
+  @override
+  String get profileMissingData => 'Informação indisponível';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).
@@ -327,4 +363,40 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get errorResendingCode => 'Erro ao tentar reenviar';
+
+  @override
+  String get profileTooltip => 'Abrir perfil';
+
+  @override
+  String get profileTitle => 'Perfil';
+
+  @override
+  String get profileSubtitle => 'Gerencie seus dados e preferências.';
+
+  @override
+  String get profileAccountSectionTitle => 'Informações da conta';
+
+  @override
+  String get profileContactSectionTitle => 'Informações de contato';
+
+  @override
+  String get profileIdLabel => 'Identificador';
+
+  @override
+  String get profileEmailLabel => 'E-mail';
+
+  @override
+  String get profileStatusActive => 'Conta ativa';
+
+  @override
+  String get profileStatusInactive => 'Conta inativa';
+
+  @override
+  String get profilePhoneVerified => 'Telefone verificado';
+
+  @override
+  String get profilePhoneUnverified => 'Telefone não verificado';
+
+  @override
+  String get profileMissingData => 'Informação indisponível';
 }

@@ -402,6 +402,78 @@ abstract class AppLocalizations {
   /// In en_US, this message translates to:
   /// **'Error sending code'**
   String get errorResendingCode;
+
+  /// No description provided for @profileTooltip.
+  ///
+  /// In en_US, this message translates to:
+  /// **'View profile'**
+  String get profileTooltip;
+
+  /// No description provided for @profileTitle.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Profile'**
+  String get profileTitle;
+
+  /// No description provided for @profileSubtitle.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Manage your information and preferences.'**
+  String get profileSubtitle;
+
+  /// No description provided for @profileAccountSectionTitle.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Account information'**
+  String get profileAccountSectionTitle;
+
+  /// No description provided for @profileContactSectionTitle.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Contact information'**
+  String get profileContactSectionTitle;
+
+  /// No description provided for @profileIdLabel.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Identifier'**
+  String get profileIdLabel;
+
+  /// No description provided for @profileEmailLabel.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Email'**
+  String get profileEmailLabel;
+
+  /// No description provided for @profileStatusActive.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Active account'**
+  String get profileStatusActive;
+
+  /// No description provided for @profileStatusInactive.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Inactive account'**
+  String get profileStatusInactive;
+
+  /// No description provided for @profilePhoneVerified.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Phone verified'**
+  String get profilePhoneVerified;
+
+  /// No description provided for @profilePhoneUnverified.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Phone not verified'**
+  String get profilePhoneUnverified;
+
+  /// No description provided for @profileMissingData.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Information unavailable'**
+  String get profileMissingData;
 }
 
 class _AppLocalizationsDelegate

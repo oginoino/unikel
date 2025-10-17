@@ -163,6 +163,42 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get errorResendingCode => 'Error sending code';
+
+  @override
+  String get profileTooltip => 'View profile';
+
+  @override
+  String get profileTitle => 'Profile';
+
+  @override
+  String get profileSubtitle => 'Manage your information and preferences.';
+
+  @override
+  String get profileAccountSectionTitle => 'Account information';
+
+  @override
+  String get profileContactSectionTitle => 'Contact information';
+
+  @override
+  String get profileIdLabel => 'Identifier';
+
+  @override
+  String get profileEmailLabel => 'Email';
+
+  @override
+  String get profileStatusActive => 'Active account';
+
+  @override
+  String get profileStatusInactive => 'Inactive account';
+
+  @override
+  String get profilePhoneVerified => 'Phone verified';
+
+  @override
+  String get profilePhoneUnverified => 'Phone not verified';
+
+  @override
+  String get profileMissingData => 'Information unavailable';
 }
 
 /// The translations for English, as used in the United States (`en_US`).
@@ -324,4 +360,40 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get errorResendingCode => 'Error sending code';
+
+  @override
+  String get profileTooltip => 'View profile';
+
+  @override
+  String get profileTitle => 'Profile';
+
+  @override
+  String get profileSubtitle => 'Manage your information and preferences.';
+
+  @override
+  String get profileAccountSectionTitle => 'Account information';
+
+  @override
+  String get profileContactSectionTitle => 'Contact information';
+
+  @override
+  String get profileIdLabel => 'Identifier';
+
+  @override
+  String get profileEmailLabel => 'Email';
+
+  @override
+  String get profileStatusActive => 'Active account';
+
+  @override
+  String get profileStatusInactive => 'Inactive account';
+
+  @override
+  String get profilePhoneVerified => 'Phone verified';
+
+  @override
+  String get profilePhoneUnverified => 'Phone not verified';
+
+  @override
+  String get profileMissingData => 'Information unavailable';
 }
