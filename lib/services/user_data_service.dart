@@ -38,6 +38,16 @@ class UserDataService {
   }) async {
     await ensureInitialized();
 
+    final normalizedPhone = _normalizePhone(phone);
+    final phoneInUse = _registeredUsers.any(
+      (user) => user.consumerProfile?.phone == normalizedPhone,
+    );
+    if (phoneInUse) {
+      throw StateError(
+        'Já existe um usuário registrado com o telefone informado.',
+      );
+    }
+
     await Future<void>.delayed(const Duration(milliseconds: 300));
 
     final user = UserData(
@@ -48,7 +58,7 @@ class UserDataService {
       profileType: UserProfileType.consumer,
       consumerProfile: ConsumerProfileData(
         name: name,
-        phone: phone,
+        phone: normalizedPhone,
         isPhoneVerified: isPhoneVerified,
       ),
       preferences: const UserPreferences(isFirstOpen: false),
@@ -123,4 +133,13 @@ class UserDataService {
 
   String _generateUserId() =>
       'consumer-${DateTime.now().millisecondsSinceEpoch}';
+
+  String _normalizePhone(String value) {
+    final sanitized = value.replaceAll(RegExp(r'[^0-9+]'), '');
+    final trimmed = sanitized.trim();
+    if (trimmed.isEmpty) {
+      throw ArgumentError('O telefone informado é inválido.');
+    }
+    return trimmed;
+  }
 }
