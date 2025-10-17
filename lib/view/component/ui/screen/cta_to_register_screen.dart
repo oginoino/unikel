@@ -32,7 +32,8 @@ class CtaToRegisterScreen extends StatelessWidget {
               variant: ButtonVariant.secondary,
               label: context.l10n.login,
               onPressed: () {
-                // context.go(Routes.login);
+                context.read<OnboardingProvider>().setFirstAccessComplete(true);
+                context.go(Routes.login);
               },
             ),
           ],

@@ -173,6 +173,30 @@ class ProfilePage extends StatelessWidget {
                     ),
                   ],
                 ),
+                SizedBox(height: uiConstants.spacing6),
+                CustomCTAButton(
+                  variant: ButtonVariant.secondary,
+                  label: l10n.logout,
+                  onPressed: provider.isLoading
+                      ? null
+                      : () async {
+                          final messenger = ScaffoldMessenger.of(context);
+                          try {
+                            await context.read<UserDataProvider>().logout();
+                            if (!context.mounted) return;
+                            context
+                                .read<OnboardingProvider>()
+                                .setFirstAccessComplete(true);
+                            context.go(Routes.login);
+                          } catch (error) {
+                            messenger.showSnackBar(
+                              SnackBar(
+                                content: Text(l10n.logoutError),
+                              ),
+                            );
+                          }
+                        },
+                ),
                 SizedBox(height: uiConstants.spacing10),
               ],
             ),

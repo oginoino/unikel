@@ -64,6 +64,13 @@
   "profileStatusInactive": "Conta inativa",
   "profilePhoneVerified": "Telefone verificado",
   "profilePhoneUnverified": "Telefone não verificado",
-  "profileMissingData": "Informação indisponível"
+  "profileMissingData": "Informação indisponível",
+  "loginPageTitle": "Bem-vindo de volta",
+  "loginPageSubtitle": "Entre com o telefone cadastrado para continuar.",
+  "loginPageRegisterCta": "Não tem conta? Cadastre-se",
+  "loginUserNotFound": "Não encontramos uma conta associada ao telefone informado.",
+  "loginGenericError": "Não foi possível concluir o login. Tente novamente.",
+  "logout": "Sair",
+  "logoutError": "Não foi possível encerrar a sessão. Tente novamente."
 }
   

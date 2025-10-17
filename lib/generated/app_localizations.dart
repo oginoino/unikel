@@ -474,6 +474,48 @@ abstract class AppLocalizations {
   /// In en_US, this message translates to:
   /// **'Information unavailable'**
   String get profileMissingData;
+
+  /// No description provided for @loginPageTitle.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Welcome back'**
+  String get loginPageTitle;
+
+  /// No description provided for @loginPageSubtitle.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Sign in with your registered phone number to continue.'**
+  String get loginPageSubtitle;
+
+  /// No description provided for @loginPageRegisterCta.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Don\'t have an account? Register'**
+  String get loginPageRegisterCta;
+
+  /// No description provided for @loginUserNotFound.
+  ///
+  /// In en_US, this message translates to:
+  /// **'We couldn\'t find an account with the provided phone number.'**
+  String get loginUserNotFound;
+
+  /// No description provided for @loginGenericError.
+  ///
+  /// In en_US, this message translates to:
+  /// **'We couldn\'t complete your login. Please try again.'**
+  String get loginGenericError;
+
+  /// No description provided for @logout.
+  ///
+  /// In en_US, this message translates to:
+  /// **'Log out'**
+  String get logout;
+
+  /// No description provided for @logoutError.
+  ///
+  /// In en_US, this message translates to:
+  /// **'We couldn\'t complete your sign out. Please try again.'**
+  String get logoutError;
 }
 
 class _AppLocalizationsDelegate

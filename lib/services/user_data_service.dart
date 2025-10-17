@@ -17,6 +17,7 @@ class UserDataService {
 
   late final Future<void> _initialization;
   final List<UserData> _registeredUsers = <UserData>[];
+  String? _currentUserId;
 
   Future<void> ensureInitialized() => _initialization;
 
@@ -27,7 +28,15 @@ class UserDataService {
 
   Future<UserData?> fetchCurrentUser() async {
     await ensureInitialized();
-    return _registeredUsers.isEmpty ? null : _registeredUsers.last;
+    if (_currentUserId == null) {
+      return null;
+    }
+    for (final user in _registeredUsers) {
+      if (user.id == _currentUserId) {
+        return user;
+      }
+    }
+    return null;
   }
 
   Future<UserData> registerConsumer({
@@ -66,13 +75,41 @@ class UserDataService {
     );
 
     _registeredUsers.add(user);
+    _currentUserId = user.id;
     await _persist();
     return user;
+  }
+
+  Future<UserData> loginConsumer({
+    required String phone,
+  }) async {
+    await ensureInitialized();
+
+    final normalizedPhone = _normalizePhone(phone);
+    final user = _registeredUsers.firstWhere(
+      (candidate) => candidate.consumerProfile?.phone == normalizedPhone,
+      orElse: () => throw StateError(
+        'Nenhum usuário encontrado com o telefone informado.',
+      ),
+    );
+
+    await Future<void>.delayed(const Duration(milliseconds: 200));
+
+    _currentUserId = user.id;
+    await _persist();
+    return user;
+  }
+
+  Future<void> logout() async {
+    await ensureInitialized();
+    _currentUserId = null;
+    await _persist();
   }
 
   Future<void> clearAll() async {
     await ensureInitialized();
     _registeredUsers.clear();
+    _currentUserId = null;
     await _persist();
   }
 
@@ -94,9 +131,18 @@ class UserDataService {
                     .map(UserData.fromJson),
               );
           }
+          final currentUserId = payload['currentUserId'];
+          if (currentUserId is String &&
+              currentUserId.isNotEmpty &&
+              _registeredUsers.any((user) => user.id == currentUserId)) {
+            _currentUserId = currentUserId;
+          } else {
+            _currentUserId = null;
+          }
         } catch (_) {
           // If decoding fails we reset the file with default data.
           _registeredUsers.clear();
+          _currentUserId = null;
         }
       }
     }
@@ -112,6 +158,9 @@ class UserDataService {
       'updatedAt': DateTime.now().toUtc().toIso8601String(),
       'users': _registeredUsers.map((user) => user.toJson()).toList(),
     };
+    if (_currentUserId != null) {
+      payload['currentUserId'] = _currentUserId;
+    }
     await file.writeAsString(
       const JsonEncoder.withIndent('  ').convert(payload),
     );

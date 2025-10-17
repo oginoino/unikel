@@ -200,6 +200,31 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get profileMissingData => 'Informação indisponível';
+
+  @override
+  String get loginPageTitle => 'Bem-vindo de volta';
+
+  @override
+  String get loginPageSubtitle =>
+      'Entre com o telefone cadastrado para continuar.';
+
+  @override
+  String get loginPageRegisterCta => 'Não tem conta? Cadastre-se';
+
+  @override
+  String get loginUserNotFound =>
+      'Não encontramos uma conta associada ao telefone informado.';
+
+  @override
+  String get loginGenericError =>
+      'Não foi possível concluir o login. Tente novamente.';
+
+  @override
+  String get logout => 'Sair';
+
+  @override
+  String get logoutError =>
+      'Não foi possível encerrar a sessão. Tente novamente.';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).
@@ -399,4 +424,29 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
 
   @override
   String get profileMissingData => 'Informação indisponível';
+
+  @override
+  String get loginPageTitle => 'Bem-vindo de volta';
+
+  @override
+  String get loginPageSubtitle =>
+      'Entre com o telefone cadastrado para continuar.';
+
+  @override
+  String get loginPageRegisterCta => 'Não tem conta? Cadastre-se';
+
+  @override
+  String get loginUserNotFound =>
+      'Não encontramos uma conta associada ao telefone informado.';
+
+  @override
+  String get loginGenericError =>
+      'Não foi possível concluir o login. Tente novamente.';
+
+  @override
+  String get logout => 'Sair';
+
+  @override
+  String get logoutError =>
+      'Não foi possível encerrar a sessão. Tente novamente.';
 }

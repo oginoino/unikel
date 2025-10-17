@@ -203,6 +203,31 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get profileMissingData => 'Información no disponible';
+
+  @override
+  String get loginPageTitle => 'Bienvenido de nuevo';
+
+  @override
+  String get loginPageSubtitle =>
+      'Inicia sesión con tu número registrado para continuar.';
+
+  @override
+  String get loginPageRegisterCta => '¿No tienes cuenta? Regístrate';
+
+  @override
+  String get loginUserNotFound =>
+      'No encontramos una cuenta asociada al número proporcionado.';
+
+  @override
+  String get loginGenericError =>
+      'No pudimos completar tu inicio de sesión. Inténtalo nuevamente.';
+
+  @override
+  String get logout => 'Cerrar sesión';
+
+  @override
+  String get logoutError =>
+      'No pudimos cerrar tu sesión. Inténtalo nuevamente.';
 }
 
 /// The translations for Spanish Castilian, as used in Mexico (`es_MX`).
@@ -404,4 +429,29 @@ class AppLocalizationsEsMx extends AppLocalizationsEs {
 
   @override
   String get profileMissingData => 'Información no disponible';
+
+  @override
+  String get loginPageTitle => 'Bienvenido de nuevo';
+
+  @override
+  String get loginPageSubtitle =>
+      'Inicia sesión con tu número registrado para continuar.';
+
+  @override
+  String get loginPageRegisterCta => '¿No tienes cuenta? Regístrate';
+
+  @override
+  String get loginUserNotFound =>
+      'No encontramos una cuenta asociada al número proporcionado.';
+
+  @override
+  String get loginGenericError =>
+      'No pudimos completar tu inicio de sesión. Inténtalo nuevamente.';
+
+  @override
+  String get logout => 'Cerrar sesión';
+
+  @override
+  String get logoutError =>
+      'No pudimos cerrar tu sesión. Inténtalo nuevamente.';
 }

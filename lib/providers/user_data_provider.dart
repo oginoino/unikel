@@ -69,6 +69,41 @@ class UserDataProvider extends ChangeNotifier {
     await _initialize();
   }
 
+  Future<UserData> login({required String phone}) async {
+    _isLoading = true;
+    _errorMessage = null;
+    notifyListeners();
+
+    try {
+      final user = await _service.loginConsumer(phone: phone);
+      _currentUser = user;
+      _registeredUsers = await _service.fetchUsers();
+      return user;
+    } catch (error) {
+      _errorMessage = error.toString();
+      rethrow;
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  Future<void> logout() async {
+    _isLoading = true;
+    _errorMessage = null;
+    notifyListeners();
+    try {
+      await _service.logout();
+      _currentUser = null;
+    } catch (error) {
+      _errorMessage = error.toString();
+      rethrow;
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
   Future<void> clear() async {
     _isLoading = true;
     _errorMessage = null;

@@ -66,6 +66,13 @@
   "profileStatusInactive": "Cuenta inactiva",
   "profilePhoneVerified": "Teléfono verificado",
   "profilePhoneUnverified": "Teléfono no verificado",
-  "profileMissingData": "Información no disponible"
+  "profileMissingData": "Información no disponible",
+  "loginPageTitle": "Bienvenido de nuevo",
+  "loginPageSubtitle": "Inicia sesión con tu número registrado para continuar.",
+  "loginPageRegisterCta": "¿No tienes cuenta? Regístrate",
+  "loginUserNotFound": "No encontramos una cuenta asociada al número proporcionado.",
+  "loginGenericError": "No pudimos completar tu inicio de sesión. Inténtalo nuevamente.",
+  "logout": "Cerrar sesión",
+  "logoutError": "No pudimos cerrar tu sesión. Inténtalo nuevamente."
 }
   

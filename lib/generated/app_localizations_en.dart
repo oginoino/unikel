@@ -199,6 +199,31 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profileMissingData => 'Information unavailable';
+
+  @override
+  String get loginPageTitle => 'Welcome back';
+
+  @override
+  String get loginPageSubtitle =>
+      'Sign in with your registered phone number to continue.';
+
+  @override
+  String get loginPageRegisterCta => 'Don\'t have an account? Register';
+
+  @override
+  String get loginUserNotFound =>
+      'We couldn\'t find an account with the provided phone number.';
+
+  @override
+  String get loginGenericError =>
+      'We couldn\'t complete your login. Please try again.';
+
+  @override
+  String get logout => 'Log out';
+
+  @override
+  String get logoutError =>
+      'We couldn\'t complete your sign out. Please try again.';
 }
 
 /// The translations for English, as used in the United States (`en_US`).
@@ -396,4 +421,29 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get profileMissingData => 'Information unavailable';
+
+  @override
+  String get loginPageTitle => 'Welcome back';
+
+  @override
+  String get loginPageSubtitle =>
+      'Sign in with your registered phone number to continue.';
+
+  @override
+  String get loginPageRegisterCta => 'Don\'t have an account? Register';
+
+  @override
+  String get loginUserNotFound =>
+      'We couldn\'t find an account with the provided phone number.';
+
+  @override
+  String get loginGenericError =>
+      'We couldn\'t complete your login. Please try again.';
+
+  @override
+  String get logout => 'Log out';
+
+  @override
+  String get logoutError =>
+      'We couldn\'t complete your sign out. Please try again.';
 }
