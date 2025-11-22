@@ -239,14 +239,6 @@ TooltipThemeData _darkTooltipTheme = TooltipThemeData(
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(uiConstants.radius8),
     ),
-    shadows: [
-      BoxShadow(
-        color: _darkColorScheme.shadow.withValues(alpha: uiConstants.opacity20),
-        offset: const Offset(0, 2),
-        blurRadius: uiConstants.elevation4,
-        spreadRadius: 0,
-      ),
-    ],
   ),
   textStyle: TextStyle(
     fontFamily: GoogleFonts.nunito().fontFamily,

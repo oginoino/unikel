@@ -21,7 +21,8 @@ class LanguageSelector extends StatelessWidget {
           ), // Display the flag
           tooltip: context.l10n.languageSelection,
           color: colorScheme.surface,
-          elevation: uiConstants.elevation8,
+          elevation: 0,
+          shadowColor: Colors.transparent,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(uiConstants.radius12),
             side: BorderSide(

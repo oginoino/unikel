@@ -84,12 +84,12 @@ class GlassmorphismContainer extends StatelessWidget {
             boxShadow ??
             [
               BoxShadow(
-                color: (isDark ? Colors.black : Colors.white).withValues(
-                  alpha: 0.1,
+                color: (isDark ? Colors.black : Colors.grey).withValues(
+                  alpha: 0.05,
                 ),
-                blurRadius: effectiveBlur,
-                spreadRadius: 0,
-                offset: const Offset(0, 4),
+                blurRadius: effectiveBlur * 0.5,
+                spreadRadius: -2,
+                offset: const Offset(0, 2),
               ),
             ],
       ),

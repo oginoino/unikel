@@ -41,7 +41,8 @@ class HomePage extends StatelessWidget {
                       l10n.profileTitle;
 
                   return Card(
-                    elevation: uiConstants.elevation2,
+                    elevation: 0,
+                    shadowColor: Colors.transparent,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(
                         uiConstants.radius16,
