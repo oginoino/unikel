@@ -10,7 +10,7 @@ export 'package:flutter/services.dart';
 // Localization
 export 'package:flutter_localizations/flutter_localizations.dart';
 export '/utils/extensions/context_extensions.dart';
-export '/generated/app_localizations.dart';
+export 'package:glassy/generated/app_localizations.dart';
 
 // UI & Styling
 export 'package:google_fonts/google_fonts.dart';
