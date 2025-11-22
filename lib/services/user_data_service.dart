@@ -1,7 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
-import '../model/user_data.dart';
+import '../model/user_enums.dart';
+import '../model/user_model.dart';
 
 /// File-backed service responsible for managing [UserData] instances.
 ///
@@ -80,9 +81,7 @@ class UserDataService {
     return user;
   }
 
-  Future<UserData> loginConsumer({
-    required String phone,
-  }) async {
+  Future<UserData> loginConsumer({required String phone}) async {
     await ensureInitialized();
 
     final normalizedPhone = _normalizePhone(phone);
@@ -126,9 +125,7 @@ class UserDataService {
             _registeredUsers
               ..clear()
               ..addAll(
-                users
-                    .whereType<Map<String, dynamic>>()
-                    .map(UserData.fromJson),
+                users.whereType<Map<String, dynamic>>().map(UserData.fromJson),
               );
           }
           final currentUserId = payload['currentUserId'];
@@ -168,8 +165,9 @@ class UserDataService {
 
   Future<File> get _storageFile async {
     final Directory baseDir = Directory.systemTemp;
-    final Directory storageDir =
-        Directory('${baseDir.path}/$_storageFolderName');
+    final Directory storageDir = Directory(
+      '${baseDir.path}/$_storageFolderName',
+    );
     if (!await storageDir.exists()) {
       await storageDir.create(recursive: true);
     }

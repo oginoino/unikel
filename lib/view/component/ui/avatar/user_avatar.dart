@@ -1,4 +1,4 @@
-import '../../../../model/user_data.dart';
+import '../../../../model/user_model.dart';
 import '../../../../utils/imports/common_libs.dart';
 
 class UserAvatar extends StatelessWidget {
@@ -59,8 +59,9 @@ class UserAvatar extends StatelessWidget {
         }
 
         final borderRadius = BorderRadius.circular(size);
-        final animationDuration =
-            Duration(milliseconds: uiConstants.animationDurationDefault);
+        final animationDuration = Duration(
+          milliseconds: uiConstants.animationDurationDefault,
+        );
         final avatar = Hero(
           tag: heroTag,
           child: AnimatedContainer(
@@ -125,9 +126,8 @@ class UserAvatar extends StatelessWidget {
       return null;
     }
     final parts = trimmed.split(RegExp(r'\s+'));
-    String takeFirstLetter(String value) => value.isEmpty
-        ? ''
-        : value.substring(0, 1);
+    String takeFirstLetter(String value) =>
+        value.isEmpty ? '' : value.substring(0, 1);
 
     if (parts.length == 1) {
       final name = parts.first;

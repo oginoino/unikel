@@ -1,10 +1,10 @@
-import '../model/user_data.dart';
+import '../model/user_model.dart';
 import '../services/user_data_service.dart';
 import '../utils/imports/common_libs.dart';
 
 class UserDataProvider extends ChangeNotifier {
   UserDataProvider({UserDataService? service})
-      : _service = service ?? GetIt.I<UserDataService>() {
+    : _service = service ?? GetIt.I<UserDataService>() {
     unawaited(_initialize());
   }
 
