@@ -1,6 +1,7 @@
 import 'package:country_code_picker/country_code_picker.dart';
 
 import '../../../../utils/imports/common_libs.dart';
+import '../glassmorphism/glass_container.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -66,7 +67,8 @@ class _LoginFormState extends State<LoginForm> {
 
     final bool isLoading = userProvider.isLoading;
     final String? providerError = userProvider.errorMessage;
-    final String? errorMessage = _submissionError ??
+    final String? errorMessage =
+        _submissionError ??
         (providerError == null ? null : l10n.loginGenericError);
 
     return Form(
@@ -88,61 +90,59 @@ class _LoginFormState extends State<LoginForm> {
             ),
           ),
           SizedBox(height: uiConstants.spacing6),
-          Text(
-            l10n.labelPhone,
-            style: textTheme.labelLarge,
-          ),
+          Text(l10n.labelPhone, style: textTheme.labelLarge),
           SizedBox(height: uiConstants.spacing1),
           Row(
             children: [
               SizedBox(
                 width: 112,
                 height: uiConstants.buttonHeight,
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(uiConstants.radius12),
-                    border: Border.all(
-                      color: theme.colorScheme.outlineVariant,
-                      width: uiConstants.borderWidth1,
+                child: GlassmorphismContainer(
+                  borderRadius: BorderRadius.circular(uiConstants.radius12),
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: uiConstants.spacing2,
                     ),
-                    color: theme.colorScheme.surfaceContainerLowest,
-                  ),
-                  padding:
-                      EdgeInsets.symmetric(horizontal: uiConstants.spacing2),
-                  child: Center(
-                    child: CountryCodePicker(
-                      onChanged: (countryCode) {
-                        setState(() {
-                          _selectedCountryCode = countryCode;
-                        });
-                      },
-                      initialSelection: _selectedCountryCode.code,
-                      favorite: const ['BR', 'US'],
-                      showCountryOnly: false,
-                      showOnlyCountryWhenClosed: false,
-                      alignLeft: false,
-                      padding: EdgeInsets.zero,
-                      textStyle: textTheme.bodyLarge,
+                    child: Center(
+                      child: CountryCodePicker(
+                        onChanged: (countryCode) {
+                          setState(() {
+                            _selectedCountryCode = countryCode;
+                          });
+                        },
+                        initialSelection: _selectedCountryCode.code,
+                        favorite: const ['BR', 'US'],
+                        showCountryOnly: false,
+                        showOnlyCountryWhenClosed: false,
+                        alignLeft: false,
+                        padding: EdgeInsets.zero,
+                        textStyle: textTheme.bodyLarge,
+                      ),
                     ),
                   ),
                 ),
               ),
               SizedBox(width: uiConstants.spacing2),
               Expanded(
-                child: TextFormField(
-                  controller: _phoneController,
-                  enabled: !isLoading,
-                  decoration: InputDecoration(
-                    hintText: l10n.phoneValue,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(uiConstants.radius12),
+                child: GlassmorphismContainer(
+                  borderRadius: BorderRadius.circular(uiConstants.radius12),
+                  child: TextFormField(
+                    controller: _phoneController,
+                    enabled: !isLoading,
+                    decoration: InputDecoration(
+                      hintText: l10n.phoneValue,
+                      border: InputBorder.none,
+                      contentPadding: EdgeInsets.symmetric(
+                        horizontal: uiConstants.spacing4,
+                        vertical: uiConstants.spacing3,
+                      ),
                     ),
+                    keyboardType: TextInputType.phone,
+                    textInputAction: TextInputAction.done,
+                    validator: (value) =>
+                        FormValidators.validatePhone(value, context),
+                    onFieldSubmitted: (_) => _handleSubmit(),
                   ),
-                  keyboardType: TextInputType.phone,
-                  textInputAction: TextInputAction.done,
-                  validator: (value) =>
-                      FormValidators.validatePhone(value, context),
-                  onFieldSubmitted: (_) => _handleSubmit(),
                 ),
               ),
             ],
@@ -162,6 +162,7 @@ class _LoginFormState extends State<LoginForm> {
             label: l10n.login,
             onPressed: isLoading ? null : _handleSubmit,
             isLoading: isLoading,
+            variant: ButtonVariant.glass,
           ),
           SizedBox(height: uiConstants.spacing2),
           Align(

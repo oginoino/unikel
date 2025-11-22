@@ -1,5 +1,6 @@
 import '../../../../model/user_model.dart';
 import '../../../../utils/imports/common_libs.dart';
+import '../glassmorphism/glass_container.dart';
 
 class UserAvatar extends StatelessWidget {
   const UserAvatar({
@@ -7,6 +8,10 @@ class UserAvatar extends StatelessWidget {
     this.size = 40,
     this.onTap,
     this.showTooltip = true,
+    this.useGlassmorphism = false,
+    this.glassBlur,
+    this.glassBackgroundColor,
+    this.glassBorderColor,
   });
 
   static const String heroTag = 'user-avatar-hero';
@@ -14,6 +19,10 @@ class UserAvatar extends StatelessWidget {
   final double size;
   final VoidCallback? onTap;
   final bool showTooltip;
+  final bool useGlassmorphism;
+  final double? glassBlur;
+  final Color? glassBackgroundColor;
+  final Color? glassBorderColor;
 
   @override
   Widget build(BuildContext context) {
@@ -62,28 +71,47 @@ class UserAvatar extends StatelessWidget {
         final animationDuration = Duration(
           milliseconds: uiConstants.animationDurationDefault,
         );
-        final avatar = Hero(
-          tag: heroTag,
-          child: AnimatedContainer(
-            duration: animationDuration,
-            curve: Curves.easeInOut,
-            width: size,
-            height: size,
-            decoration: BoxDecoration(
-              color: backgroundColor,
-              borderRadius: borderRadius,
-              border: Border.all(
-                color: theme.colorScheme.primary.withValues(alpha: 0.35),
-                width: uiConstants.borderWidth1,
+
+        Widget avatar;
+        if (useGlassmorphism) {
+          avatar = Hero(
+            tag: heroTag,
+            child: GlassmorphismContainer(
+              borderRadius: BorderRadius.circular(size),
+              width: size,
+              height: size,
+              blurAmount: glassBlur,
+              backgroundColor: glassBackgroundColor,
+              child: AnimatedSwitcher(
+                duration: animationDuration,
+                child: avatarContents,
               ),
             ),
-            alignment: Alignment.center,
-            child: AnimatedSwitcher(
+          );
+        } else {
+          avatar = Hero(
+            tag: heroTag,
+            child: AnimatedContainer(
               duration: animationDuration,
-              child: avatarContents,
+              curve: Curves.easeInOut,
+              width: size,
+              height: size,
+              decoration: BoxDecoration(
+                color: backgroundColor,
+                borderRadius: borderRadius,
+                border: Border.all(
+                  color: theme.colorScheme.primary.withValues(alpha: 0.35),
+                  width: uiConstants.borderWidth1,
+                ),
+              ),
+              alignment: Alignment.center,
+              child: AnimatedSwitcher(
+                duration: animationDuration,
+                child: avatarContents,
+              ),
             ),
-          ),
-        );
+          );
+        }
 
         Widget tappableAvatar = Material(
           color: Colors.transparent,

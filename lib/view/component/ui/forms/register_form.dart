@@ -1,6 +1,7 @@
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:pinput/pinput.dart';
 import '../../../../utils/imports/common_libs.dart';
+import '../glassmorphism/glass_container.dart';
 
 class RegisterUserForm extends StatefulWidget {
   const RegisterUserForm({super.key});
@@ -396,14 +397,24 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  TextFormField(
-                    controller: _nameController,
-                    style: textTheme.titleLarge,
-                    decoration: InputDecoration(labelText: l10n.labelName),
-                    validator: (value) => FormValidators.validateRequired(
-                      value,
-                      l10n.nameValue,
-                      context,
+                  GlassmorphismContainer(
+                    borderRadius: BorderRadius.circular(uiConstants.radius12),
+                    child: TextFormField(
+                      controller: _nameController,
+                      style: textTheme.titleLarge,
+                      decoration: InputDecoration(
+                        labelText: l10n.labelName,
+                        border: InputBorder.none,
+                        contentPadding: EdgeInsets.symmetric(
+                          horizontal: uiConstants.spacing4,
+                          vertical: uiConstants.spacing3,
+                        ),
+                      ),
+                      validator: (value) => FormValidators.validateRequired(
+                        value,
+                        l10n.nameValue,
+                        context,
+                      ),
                     ),
                   ),
                 ],
@@ -445,68 +456,88 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                             fit: FlexFit.loose,
                             child: SizedBox(
                               height: uiConstants.buttonHeight,
-                              child: CountryCodePicker(
-                                dialogTextStyle: textTheme.titleMedium,
-                                dialogBackgroundColor:
-                                    theme.scaffoldBackgroundColor,
-                                backgroundColor: theme.cardColor,
-                                headerText: l10n.selectCountryCode,
-                                boxDecoration: BoxDecoration(
-                                  border: Border.all(color: theme.dividerColor),
-                                  borderRadius: BorderRadius.circular(
-                                    uiConstants.radius16,
-                                  ),
+                              child: GlassmorphismContainer(
+                                borderRadius: BorderRadius.circular(
+                                  uiConstants.radius16,
                                 ),
-                                flagWidth: uiConstants.spacing8,
-                                padding: EdgeInsets.symmetric(
-                                  vertical: uiConstants.spacing3,
-                                  horizontal: uiConstants.spacing1,
-                                ),
-                                margin: EdgeInsets.zero,
-                                textStyle: textTheme.titleMedium,
-                                onChanged: _updateSelectedCountryCode,
-                                initialSelection: _selectedCountryCode.code,
-                                favorite: const ['+55', 'BR'],
-                                comparator: (a, b) =>
-                                    a.name?.compareTo(b.name ?? '') ?? 0,
-                                pickerStyle: PickerStyle.dialog,
-                                builder: (country) {
-                                  final flagUri = country?.flagUri;
-                                  return Padding(
-                                    padding: EdgeInsets.only(
-                                      left: uiConstants.spacing2,
+                                child: CountryCodePicker(
+                                  dialogTextStyle: textTheme.titleMedium,
+                                  dialogBackgroundColor:
+                                      theme.scaffoldBackgroundColor,
+                                  backgroundColor: theme.cardColor,
+                                  headerText: l10n.selectCountryCode,
+                                  boxDecoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: theme.dividerColor,
                                     ),
-                                    child: flagUri != null
-                                        ? Padding(
-                                            padding: EdgeInsets.only(
-                                              right: uiConstants.spacing1,
-                                            ),
-                                            child: Image.asset(
-                                              flagUri,
-                                              package: 'country_code_picker',
-                                              width: uiConstants.spacing6,
-                                              height: uiConstants.spacing6,
-                                              fit: BoxFit.contain,
-                                            ),
-                                          )
-                                        : const SizedBox.shrink(),
-                                  );
-                                },
+                                    borderRadius: BorderRadius.circular(
+                                      uiConstants.radius16,
+                                    ),
+                                  ),
+                                  flagWidth: uiConstants.spacing8,
+                                  padding: EdgeInsets.symmetric(
+                                    vertical: uiConstants.spacing3,
+                                    horizontal: uiConstants.spacing1,
+                                  ),
+                                  margin: EdgeInsets.zero,
+                                  textStyle: textTheme.titleMedium,
+                                  onChanged: _updateSelectedCountryCode,
+                                  initialSelection: _selectedCountryCode.code,
+                                  favorite: const ['+55', 'BR'],
+                                  comparator: (a, b) =>
+                                      a.name?.compareTo(b.name ?? '') ?? 0,
+                                  pickerStyle: PickerStyle.dialog,
+                                  builder: (country) {
+                                    final flagUri = country?.flagUri;
+                                    return Padding(
+                                      padding: EdgeInsets.only(
+                                        left: uiConstants.spacing2,
+                                      ),
+                                      child: flagUri != null
+                                          ? Padding(
+                                              padding: EdgeInsets.only(
+                                                right: uiConstants.spacing1,
+                                              ),
+                                              child: Image.asset(
+                                                flagUri,
+                                                package: 'country_code_picker',
+                                                width: uiConstants.spacing6,
+                                                height: uiConstants.spacing6,
+                                                fit: BoxFit.contain,
+                                              ),
+                                            )
+                                          : const SizedBox.shrink(),
+                                    );
+                                  },
+                                ),
                               ),
                             ),
                           ),
                           SizedBox(width: uiConstants.spacing3),
                           Expanded(
                             flex: 20,
-                            child: TextFormField(
-                              controller: _phoneController,
-                              keyboardType: TextInputType.phone,
-                              style: textTheme.titleLarge,
-                              decoration: InputDecoration(
-                                labelText: l10n.labelPhone,
+                            child: GlassmorphismContainer(
+                              borderRadius: BorderRadius.circular(
+                                uiConstants.radius16,
                               ),
-                              validator: (value) =>
-                                  FormValidators.validatePhone(value, context),
+                              child: TextFormField(
+                                controller: _phoneController,
+                                keyboardType: TextInputType.phone,
+                                style: textTheme.titleLarge,
+                                decoration: InputDecoration(
+                                  labelText: l10n.labelPhone,
+                                  border: InputBorder.none,
+                                  contentPadding: EdgeInsets.symmetric(
+                                    horizontal: uiConstants.spacing4,
+                                    vertical: uiConstants.spacing3,
+                                  ),
+                                ),
+                                validator: (value) =>
+                                    FormValidators.validatePhone(
+                                      value,
+                                      context,
+                                    ),
+                              ),
                             ),
                           ),
                         ],
@@ -679,24 +710,25 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Row(
-              spacing: uiConstants.spacing4,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 if (!_isOnFirstPage && !_isOnLastPage)
                   Expanded(
                     child: CustomCTAButton(
                       onPressed: _goToPreviousPage,
-                      variant: ButtonVariant.secondary,
+                      variant: ButtonVariant.glass,
                       label: l10n.previous,
                       icon: const Icon(Icons.arrow_back_rounded),
                     ),
                   ),
+                if (!_isOnFirstPage && !_isOnLastPage)
+                  SizedBox(width: uiConstants.spacing4),
                 if (!_isOnLastPage)
                   Expanded(
                     child: CustomCTAButton(
                       onPressed: _handleNextStep,
                       icon: const Icon(Icons.arrow_forward_rounded),
-                      variant: ButtonVariant.primary,
+                      variant: ButtonVariant.glass,
                       label: l10n.next,
                     ),
                   ),
@@ -710,7 +742,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                   SizedBox(height: uiConstants.spacing4),
                   CustomCTAButton(
                     onPressed: _handleEditPhone,
-                    variant: ButtonVariant.secondary,
+                    variant: ButtonVariant.glass,
                     label: l10n.editarTelefoneTextMessage,
                   ),
                 ],
@@ -798,7 +830,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
       width: double.infinity,
       child: CustomCTAButton(
         onPressed: isCountdownActive ? null : _resendSecurityCode,
-        variant: ButtonVariant.primary,
+        variant: ButtonVariant.glass,
         label: label,
         icon: isCountdownActive ? null : const Icon(Icons.refresh_rounded),
       ),

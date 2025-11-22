@@ -1,6 +1,7 @@
 import '../../../../utils/imports/common_libs.dart';
+import '../glassmorphism/glass_container.dart';
 
-enum ButtonVariant { primary, secondary, text }
+enum ButtonVariant { primary, secondary, text, glass }
 
 class CustomCTAButton extends StatelessWidget {
   const CustomCTAButton({
@@ -11,6 +12,10 @@ class CustomCTAButton extends StatelessWidget {
     required this.label,
     this.onPressed,
     this.isLoading = false,
+    this.useGlassmorphism = false,
+    this.glassBlur,
+    this.glassBackgroundColor,
+    this.glassBorderColor,
   });
 
   final ButtonVariant variant;
@@ -19,6 +24,10 @@ class CustomCTAButton extends StatelessWidget {
   final String label;
   final VoidCallback? onPressed;
   final bool isLoading;
+  final bool useGlassmorphism;
+  final double? glassBlur;
+  final Color? glassBackgroundColor;
+  final Color? glassBorderColor;
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +36,7 @@ class CustomCTAButton extends StatelessWidget {
       child: Consumer<ThemeProvider>(
         builder: (context, themeProvider, child) {
           final isDark = themeProvider.isDarkMode;
+          final theme = themeProvider.currentTheme;
 
           // Custom loading widget
           Widget loadingWidget = SizedBox(
@@ -35,8 +45,8 @@ class CustomCTAButton extends StatelessWidget {
             child: CircularProgressIndicator(
               valueColor: AlwaysStoppedAnimation<Color>(
                 isDark
-                    ? themeProvider.currentTheme.colorScheme.onSurface
-                    : themeProvider.currentTheme.colorScheme.primary,
+                    ? theme.colorScheme.onSurface
+                    : theme.colorScheme.primary,
               ),
             ),
           );
@@ -67,6 +77,24 @@ class CustomCTAButton extends StatelessWidget {
             children: children,
           );
 
+          // Glassmorphism button variant
+          if (variant == ButtonVariant.glass || useGlassmorphism) {
+            return GlassmorphismContainer(
+              width: double.infinity,
+              padding: EdgeInsets.symmetric(
+                horizontal: uiConstants.spacing6,
+                vertical: uiConstants.spacing4,
+              ),
+              backgroundColor: glassBackgroundColor,
+              blurAmount: glassBlur,
+              child: InkWell(
+                onTap: isLoading ? null : onPressed,
+                borderRadius: BorderRadius.circular(uiConstants.radius16),
+                child: Center(child: buttonChild),
+              ),
+            );
+          }
+
           ButtonStyle? style;
           // Customize style based on theme and variant
           switch (variant) {
@@ -89,6 +117,20 @@ class CustomCTAButton extends StatelessWidget {
                 onPressed: isLoading ? null : onPressed,
                 style: style,
                 child: buttonChild,
+              );
+
+            case ButtonVariant.glass:
+              return GlassmorphismContainer(
+                width: double.infinity,
+                padding: EdgeInsets.symmetric(
+                  horizontal: uiConstants.spacing6,
+                  vertical: uiConstants.spacing4,
+                ),
+                child: InkWell(
+                  onTap: isLoading ? null : onPressed,
+                  borderRadius: BorderRadius.circular(uiConstants.radius16),
+                  child: Center(child: buttonChild),
+                ),
               );
           }
         },
