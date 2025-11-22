@@ -464,7 +464,7 @@ InputDecorationTheme _lightInputDecorationTheme = InputDecorationTheme(
 ThemeData customLightTheme = ThemeData(
   useMaterial3: true,
   // IMPORTANTE: Scaffold transparente para ver o background/gradiente global
-  scaffoldBackgroundColor: Colors.transparent,
+  scaffoldBackgroundColor: uiConstants.lightBackground,
   colorScheme: _lightColorScheme,
   textTheme: _lightTextTheme,
   appBarTheme: _lightAppBarTheme,

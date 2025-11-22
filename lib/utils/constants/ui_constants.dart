@@ -111,6 +111,8 @@ class UIConstants {
   final Color lightInversePrimary = Color(0xFF7FFFFF);
   final Color lightSurfaceTint = Color(0xFF00BFA5);
 
+  final Color lightBackground = Color(0xFFEEF2F0);
+
   final Color lightSecondary = Color(0xFF1B6E3C);
   final Color lightOnSecondary = Color(0xFFFFFFFF);
   final Color lightSecondaryContainer = Color(0xFFA5F9B1);
@@ -162,6 +164,8 @@ class UIConstants {
   final Color darkOnPrimaryFixedVariant = Color(0xFF00BFA5);
   final Color darkInversePrimary = Color(0xFF00BFA5);
   final Color darkSurfaceTint = Color(0xFF7FFFFF);
+
+  final Color darkBackground = Color(0xFF191C1A);
 
   final Color darkSecondary = Color(0xFF8DF999);
   final Color darkOnSecondary = Color(0xFF003D1B);

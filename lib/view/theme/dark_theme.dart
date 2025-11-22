@@ -472,7 +472,7 @@ InputDecorationTheme _darkInputDecorationTheme = InputDecorationTheme(
 ThemeData customDarkTheme = ThemeData(
   useMaterial3: true,
   // Scaffold transparente para ver o gradiente global
-  scaffoldBackgroundColor: Colors.transparent,
+  scaffoldBackgroundColor: uiConstants.darkBackground,
   colorScheme: _darkColorScheme,
   textTheme: _darkTextTheme,
   appBarTheme: _darkAppBarTheme,
