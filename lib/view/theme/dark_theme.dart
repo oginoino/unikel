@@ -288,9 +288,9 @@ final _darkButtonBaseStyle = ButtonStyle(
   iconSize: WidgetStateProperty.all(uiConstants.buttonIconSize),
 );
 
-// Botão Filled (Glassy Dark)
 FilledButtonThemeData _darkFilledButtonTheme = FilledButtonThemeData(
   style: _darkButtonBaseStyle.copyWith(
+    // 1. Fundo Translúcido (Glassy Dark)
     backgroundColor: WidgetStateProperty.resolveWith<Color>((
       Set<WidgetState> states,
     ) {
@@ -298,10 +298,18 @@ FilledButtonThemeData _darkFilledButtonTheme = FilledButtonThemeData(
         return _darkColorScheme.primary.withValues(alpha: 0.38);
       }
       if (states.contains(WidgetState.pressed)) {
-        return _darkColorScheme.primary.withValues(alpha: 0.9);
+        // Mais opaco ao pressionar para feedback visual
+        return _darkColorScheme.primary.withValues(alpha: 0.70);
       }
-      return _darkColorScheme.primary.withValues(alpha: 0.8);
+      if (states.contains(WidgetState.hovered)) {
+        // Levemente mais visível no hover
+        return _darkColorScheme.primary.withValues(alpha: 0.60);
+      }
+      // Estado normal: Transparência média (0.50) para o efeito de vidro
+      return _darkColorScheme.primary.withValues(alpha: 0.50);
     }),
+
+    // 2. Cor do Texto/Ícone (Mantida)
     foregroundColor: WidgetStateProperty.resolveWith<Color>((
       Set<WidgetState> states,
     ) {
@@ -310,8 +318,36 @@ FilledButtonThemeData _darkFilledButtonTheme = FilledButtonThemeData(
       }
       return _darkColorScheme.onPrimary;
     }),
+
+    // 3. Elevação Zero (Glass é flat)
     elevation: WidgetStateProperty.all(0),
     shadowColor: WidgetStateProperty.all(Colors.transparent),
+
+    // 4. Borda de Vidro (Reflexo no Dark Theme)
+    // Uma borda branca/clara com opacidade muito baixa para simular o reflexo da luz
+    side: WidgetStateProperty.resolveWith<BorderSide>((
+      Set<WidgetState> states,
+    ) {
+      if (states.contains(WidgetState.disabled)) {
+        return BorderSide.none;
+      }
+      return BorderSide(
+        // Cor branca/clara com opacidade baixa
+        color: Colors.white.withValues(alpha: 0.20),
+        width: 1.0,
+      );
+    }),
+
+    // 5. Overlay (Splash) sutil
+    overlayColor: WidgetStateProperty.resolveWith<Color?>((
+      Set<WidgetState> states,
+    ) {
+      if (states.contains(WidgetState.pressed)) {
+        // Brilho branco muito sutil ao interagir no tema escuro
+        return Colors.white.withValues(alpha: 0.05);
+      }
+      return null;
+    }),
   ),
 );
 

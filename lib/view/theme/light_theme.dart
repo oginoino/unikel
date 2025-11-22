@@ -266,9 +266,9 @@ TooltipThemeData _lightTooltipTheme = TooltipThemeData(
   showDuration: Duration(milliseconds: uiConstants.tooltipShowDurationMs),
 );
 
-// Botão Filled
 FilledButtonThemeData _lightFilledButtonTheme = FilledButtonThemeData(
   style: _lightButtonBaseStyle.copyWith(
+    // 1. Fundo Translúcido (Glassy)
     backgroundColor: WidgetStateProperty.resolveWith<Color>((
       Set<WidgetState> states,
     ) {
@@ -276,25 +276,57 @@ FilledButtonThemeData _lightFilledButtonTheme = FilledButtonThemeData(
         return _lightColorScheme.primary.withValues(alpha: 0.38);
       }
       if (states.contains(WidgetState.pressed)) {
-        return _lightColorScheme.primary.withValues(alpha: 0.9);
+        // Mais opaco ao pressionar para feedback visual
+        return _lightColorScheme.primary.withValues(alpha: 0.70);
       }
       if (states.contains(WidgetState.hovered)) {
-        return _lightColorScheme.primary.withValues(alpha: 0.92);
+        // Levemente mais visível no hover
+        return _lightColorScheme.primary.withValues(alpha: 0.60);
       }
-      return _lightColorScheme.primary.withValues(
-        alpha: 0.85,
-      ); // Leve transparência
+      // Estado normal: Transparência média (0.5) para ver o fundo através dele
+      return _lightColorScheme.primary.withValues(alpha: 0.50);
     }),
+
+    // 2. Cor do Texto/Ícone
     foregroundColor: WidgetStateProperty.resolveWith<Color>((
       Set<WidgetState> states,
     ) {
       if (states.contains(WidgetState.disabled)) {
         return _lightColorScheme.onPrimary.withValues(alpha: 0.38);
       }
+      // Mantemos sólido para legibilidade ou levemente ajustado
       return _lightColorScheme.onPrimary;
     }),
-    elevation: WidgetStateProperty.all(0), // Sem sombra no glass flat
+
+    // 3. Elevação Zero (Glass é flat)
+    elevation: WidgetStateProperty.all(0),
     shadowColor: WidgetStateProperty.all(Colors.transparent),
+
+    // 4. Borda de Vidro (O Segredo do Glassmorphism)
+    // Adiciona uma borda fina e clara para simular o reflexo da luz nas arestas
+    side: WidgetStateProperty.resolveWith<BorderSide>((
+      Set<WidgetState> states,
+    ) {
+      if (states.contains(WidgetState.disabled)) {
+        return BorderSide.none;
+      }
+      // Borda branca translúcida (simula luz batendo na borda)
+      // Se tiver uiConstants, use: uiConstants.glassBorderLightStart
+      return BorderSide(
+        color: Colors.white.withValues(alpha: 0.30),
+        width: 1.0,
+      );
+    }),
+
+    // 5. Overlay (Splash) sutil
+    overlayColor: WidgetStateProperty.resolveWith<Color?>((
+      Set<WidgetState> states,
+    ) {
+      if (states.contains(WidgetState.pressed)) {
+        return Colors.white.withValues(alpha: 0.1);
+      }
+      return null;
+    }),
   ),
 );
 
