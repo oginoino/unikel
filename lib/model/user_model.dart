@@ -63,15 +63,12 @@ class UserData {
   final bool active;
   final UserRole role;
 
-  /// Custom permissions granted beyond role-based defaults.
   final List<String> customPermissions;
 
   final UserProfileType profileType;
   final String? profileId;
   final ConsumerProfileData? consumerProfile;
   final UserPreferences preferences;
-
-  // --- Domain Logic & Getters ---
 
   bool get isActive => active;
   bool get isConsumer => profileType == UserProfileType.consumer;
@@ -162,8 +159,6 @@ class UserData {
     return result;
   }
 }
-
-// --- Sub Models ---
 
 class ConsumerProfileData {
   ConsumerProfileData({
