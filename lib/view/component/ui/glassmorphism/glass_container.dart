@@ -122,7 +122,19 @@ class GlassmorphismContainer extends StatelessWidget {
                   ),
                   borderRadius: effectiveBorderRadius,
                 ),
-                child: child,
+                child: DefaultTextStyle(
+                  style: DefaultTextStyle.of(context).style.copyWith(
+                    shadows: [
+                      Shadow(
+                        color: (isDark ? Colors.black : Colors.white)
+                            .withValues(alpha: 0.3),
+                        blurRadius: 2,
+                        offset: const Offset(0, 1),
+                      ),
+                    ],
+                  ),
+                  child: child,
+                ),
               ),
             ),
           ),
@@ -182,6 +194,18 @@ class GlassmorphismCard extends StatelessWidget {
                           title!,
                           style: textTheme.titleLarge?.copyWith(
                             fontWeight: FontWeight.w600,
+                            color: theme.colorScheme.onSurface,
+                            shadows: [
+                              Shadow(
+                                color:
+                                    (theme.brightness == Brightness.dark
+                                            ? Colors.black
+                                            : Colors.white)
+                                        .withValues(alpha: 0.4),
+                                blurRadius: 3,
+                                offset: const Offset(0, 1),
+                              ),
+                            ],
                           ),
                         ),
                       if (subtitle != null)
@@ -189,6 +213,17 @@ class GlassmorphismCard extends StatelessWidget {
                           subtitle!,
                           style: textTheme.bodyMedium?.copyWith(
                             color: theme.colorScheme.onSurfaceVariant,
+                            shadows: [
+                              Shadow(
+                                color:
+                                    (theme.brightness == Brightness.dark
+                                            ? Colors.black
+                                            : Colors.white)
+                                        .withValues(alpha: 0.3),
+                                blurRadius: 2,
+                                offset: const Offset(0, 1),
+                              ),
+                            ],
                           ),
                         ),
                     ],

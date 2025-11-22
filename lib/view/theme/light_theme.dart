@@ -40,25 +40,25 @@ ColorScheme _lightColorScheme = ColorScheme.light(
   errorContainer: uiConstants.lightErrorContainer,
   onErrorContainer: uiConstants.lightOnErrorContainer,
 
-  // Surface colors
+  // Surface colors - Aumentada opacidade para melhor contraste
   surface: uiConstants.lightSurface.withValues(
-    alpha: 0.8,
-  ), // Semi-transparent base
+    alpha: 0.9,
+  ), // Base semi-transparente melhorada
   onSurface: uiConstants.lightOnSurface,
   surfaceDim: uiConstants.lightSurfaceDim,
   surfaceBright: uiConstants.lightSurfaceBright,
   surfaceContainerLowest: uiConstants.lightSurfaceContainerLowest.withValues(
-    alpha: 0.5,
+    alpha: 0.7,
   ),
   surfaceContainerLow: uiConstants.lightSurfaceContainerLow.withValues(
-    alpha: 0.5,
+    alpha: 0.75,
   ),
-  surfaceContainer: uiConstants.lightSurfaceContainer.withValues(alpha: 0.5),
+  surfaceContainer: uiConstants.lightSurfaceContainer.withValues(alpha: 0.8),
   surfaceContainerHigh: uiConstants.lightSurfaceContainerHigh.withValues(
-    alpha: 0.5,
+    alpha: 0.85,
   ),
   surfaceContainerHighest: uiConstants.lightSurfaceContainerHighest.withValues(
-    alpha: 0.5,
+    alpha: 0.9,
   ),
 
   // Outline colors

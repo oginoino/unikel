@@ -41,23 +41,23 @@ ColorScheme _darkColorScheme = ColorScheme.dark(
   errorContainer: uiConstants.darkErrorContainer,
   onErrorContainer: uiConstants.darkOnErrorContainer,
 
-  // Surface colors
-  surface: uiConstants.darkSurface.withValues(alpha: 0.7), // Semi-transparente
+  // Surface colors - Aumentada opacidade para melhor contraste
+  surface: uiConstants.darkSurface.withValues(alpha: 0.85), // Semi-transparente melhorado
   onSurface: uiConstants.darkOnSurface,
   surfaceDim: uiConstants.darkSurfaceDim,
   surfaceBright: uiConstants.darkSurfaceBright,
   surfaceContainerLowest: uiConstants.darkSurfaceContainerLowest.withValues(
-    alpha: 0.5,
+    alpha: 0.7,
   ),
   surfaceContainerLow: uiConstants.darkSurfaceContainerLow.withValues(
-    alpha: 0.5,
+    alpha: 0.75,
   ),
-  surfaceContainer: uiConstants.darkSurfaceContainer.withValues(alpha: 0.5),
+  surfaceContainer: uiConstants.darkSurfaceContainer.withValues(alpha: 0.8),
   surfaceContainerHigh: uiConstants.darkSurfaceContainerHigh.withValues(
-    alpha: 0.5,
+    alpha: 0.85,
   ),
   surfaceContainerHighest: uiConstants.darkSurfaceContainerHighest.withValues(
-    alpha: 0.5,
+    alpha: 0.9,
   ),
 
   // Outline colors
