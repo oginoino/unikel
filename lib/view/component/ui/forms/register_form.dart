@@ -79,7 +79,8 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
 
     if (code.length == 4 && _verificationState == VerificationState.idle) {
       _verifySecurityCode();
-    } else if (code.length < 4 && _verificationState != VerificationState.idle) {
+    } else if (code.length < 4 &&
+        _verificationState != VerificationState.idle) {
       _resetVerificationState();
     }
 
@@ -214,17 +215,13 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
         VerificationState.idle,
         message: l10n.codeResendSuccess,
       );
-      unawaited(
-        _clearVerificationFeedback(delay: const Duration(seconds: 2)),
-      );
+      unawaited(_clearVerificationFeedback(delay: const Duration(seconds: 2)));
     } catch (_) {
       _setVerificationStatus(
         VerificationState.error,
         message: l10n.errorResendingCode,
       );
-      unawaited(
-        _clearVerificationFeedback(delay: const Duration(seconds: 2)),
-      );
+      unawaited(_clearVerificationFeedback(delay: const Duration(seconds: 2)));
     }
   }
 
@@ -289,9 +286,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
         VerificationState.error,
         message: l10n.errorVerifyingCode,
       );
-      unawaited(
-        _clearVerificationFeedback(delay: const Duration(seconds: 2)),
-      );
+      unawaited(_clearVerificationFeedback(delay: const Duration(seconds: 2)));
     }
   }
 
@@ -314,12 +309,12 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
     Color? fallbackColor,
     Color? textColor,
   }) {
-    final resolvedBorder = borderSide ??
+    final resolvedBorder =
+        borderSide ??
         BorderSide(
           color: fallbackColor ?? theme.dividerColor,
           width: fallbackWidth,
         );
-   
 
     return PinTheme(
       width: 64,
@@ -334,7 +329,6 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
         ),
         borderRadius: BorderRadius.circular(uiConstants.radius16),
       ),
-     
     );
   }
 
@@ -374,10 +368,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
           ),
         ),
         PageIndicator(currentPage: _currentPage, itemCount: _formKeys.length),
-        _buildFooterControls(
-          context: context,
-          l10n: l10n,
-        ),
+        _buildFooterControls(context: context, l10n: l10n),
       ],
     );
   }
@@ -436,10 +427,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             SizedBox(height: uiConstants.spacing16),
-            Text(
-              l10n.registerPhoneTitle,
-              style: textTheme.headlineMedium,
-            ),
+            Text(l10n.registerPhoneTitle, style: textTheme.headlineMedium),
             SizedBox(height: uiConstants.spacing16),
             Padding(
               padding: EdgeInsets.all(uiConstants.spacing4),
@@ -464,9 +452,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                                 backgroundColor: theme.cardColor,
                                 headerText: l10n.selectCountryCode,
                                 boxDecoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: theme.dividerColor,
-                                  ),
+                                  border: Border.all(color: theme.dividerColor),
                                   borderRadius: BorderRadius.circular(
                                     uiConstants.radius16,
                                   ),
@@ -490,19 +476,20 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                                     padding: EdgeInsets.only(
                                       left: uiConstants.spacing2,
                                     ),
-                                    child: flagUri != null ?
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                          right: uiConstants.spacing1,
-                                        ),
-                                        child: Image.asset(
-                                          flagUri,
-                                          package: 'country_code_picker',
-                                          width: uiConstants.spacing6,
-                                          height: uiConstants.spacing6,
-                                          fit: BoxFit.contain,
-                                        ),
-                                      ) : const SizedBox.shrink()
+                                    child: flagUri != null
+                                        ? Padding(
+                                            padding: EdgeInsets.only(
+                                              right: uiConstants.spacing1,
+                                            ),
+                                            child: Image.asset(
+                                              flagUri,
+                                              package: 'country_code_picker',
+                                              width: uiConstants.spacing6,
+                                              height: uiConstants.spacing6,
+                                              fit: BoxFit.contain,
+                                            ),
+                                          )
+                                        : const SizedBox.shrink(),
                                   );
                                 },
                               ),
@@ -515,12 +502,11 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                               controller: _phoneController,
                               keyboardType: TextInputType.phone,
                               style: textTheme.titleLarge,
-                              decoration:
-                                  InputDecoration(labelText: l10n.labelPhone),
-                              validator: (value) => FormValidators.validatePhone(
-                                value,
-                                context,
+                              decoration: InputDecoration(
+                                labelText: l10n.labelPhone,
                               ),
+                              validator: (value) =>
+                                  FormValidators.validatePhone(value, context),
                             ),
                           ),
                         ],
@@ -581,12 +567,11 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                     Align(
                       alignment: Alignment.center,
                       child: Pinput(
-                        autofillHints: const [
-                          AutofillHints.oneTimeCode,
-                        ],
+                        autofillHints: const [AutofillHints.oneTimeCode],
                         controller: _securityCodeController,
                         length: 4,
-                        enabled: _verificationState != VerificationState.success,
+                        enabled:
+                            _verificationState != VerificationState.success,
                         forceErrorState: hasError,
                         defaultPinTheme: _buildPinTheme(
                           theme: theme,
@@ -600,8 +585,8 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                                     focusedErrorBorderSide ?? errorBorderSide,
                                 fallbackWidth:
                                     (focusedErrorBorderSide ?? errorBorderSide)
-                                            ?.width ??
-                                        2.0,
+                                        ?.width ??
+                                    2.0,
                                 fallbackColor: theme.colorScheme.error,
                                 textColor: theme.colorScheme.error,
                                 padding: EdgeInsets.all(uiConstants.spacing6),
@@ -628,24 +613,25 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                         ),
                         errorText: context.l10n.invalidPhoneCodeMatch,
                         validator: (value) {
-                          final requiredResult = FormValidators.validateRequired(
-                            value,
-                            l10n.labelSecurityCode,
-                            context,
-                          );
+                          final requiredResult =
+                              FormValidators.validateRequired(
+                                value,
+                                l10n.labelSecurityCode,
+                                context,
+                              );
 
                           if (requiredResult != null) {
                             return requiredResult;
                           }
 
-                        return _securityCodeError;
-                      },
+                          return _securityCodeError;
+                        },
                         keyboardType: TextInputType.visiblePassword,
-                      inputFormatters: [
-                        FilteringTextInputFormatter.allow(
-                          RegExp(r'[A-Za-z0-9]'),
-                        ),
-                      ],
+                        inputFormatters: [
+                          FilteringTextInputFormatter.allow(
+                            RegExp(r'[A-Za-z0-9]'),
+                          ),
+                        ],
                         errorBuilder: (context, _) => Padding(
                           padding: EdgeInsets.only(top: uiConstants.spacing3),
                           child: SizedBox(
@@ -653,7 +639,8 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                             child: Text(
                               _securityCodeError ?? '',
                               textAlign: TextAlign.left,
-                              style: theme.inputDecorationTheme.errorStyle ??
+                              style:
+                                  theme.inputDecorationTheme.errorStyle ??
                                   textTheme.bodyMedium?.copyWith(
                                     color: theme.colorScheme.error,
                                   ),
@@ -668,7 +655,6 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                       theme: theme,
                       textTheme: textTheme,
                     ),
-                    
                   ],
                 ),
               ),
@@ -747,16 +733,9 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
       return SizedBox.square(
         dimension: uiConstants.spacing16,
         child: DecoratedBox(
-          decoration: BoxDecoration(
-            color: background,
-            shape: BoxShape.circle,
-          ),
+          decoration: BoxDecoration(color: background, shape: BoxShape.circle),
           child: Center(
-            child: Icon(
-              icon,
-              color: Colors.white,
-              size: uiConstants.spacing6,
-            ),
+            child: Icon(icon, color: Colors.white, size: uiConstants.spacing6),
           ),
         ),
       );
@@ -784,10 +763,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
               ),
             ),
             SizedBox(height: uiConstants.spacing12),
-            Text(
-              l10n.verifyingCode,
-              style: textTheme.bodyMedium,
-            ),
+            Text(l10n.verifyingCode, style: textTheme.bodyMedium),
           ],
         );
       case VerificationState.success:

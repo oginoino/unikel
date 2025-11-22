@@ -1,4 +1,7 @@
 import '../../utils/imports/common_libs.dart';
+import 'glass_theme_extention.dart';
+// Certifique-se de importar o arquivo da extensão criada acima
+// import 'path/to/glass_theme_extension.dart';
 
 ColorScheme _lightColorScheme = ColorScheme.light(
   // Primary colors
@@ -38,15 +41,25 @@ ColorScheme _lightColorScheme = ColorScheme.light(
   onErrorContainer: uiConstants.lightOnErrorContainer,
 
   // Surface colors
-  surface: uiConstants.lightSurface,
+  surface: uiConstants.lightSurface.withValues(
+    alpha: 0.8,
+  ), // Semi-transparent base
   onSurface: uiConstants.lightOnSurface,
   surfaceDim: uiConstants.lightSurfaceDim,
   surfaceBright: uiConstants.lightSurfaceBright,
-  surfaceContainerLowest: uiConstants.lightSurfaceContainerLowest,
-  surfaceContainerLow: uiConstants.lightSurfaceContainerLow,
-  surfaceContainer: uiConstants.lightSurfaceContainer,
-  surfaceContainerHigh: uiConstants.lightSurfaceContainerHigh,
-  surfaceContainerHighest: uiConstants.lightSurfaceContainerHighest,
+  surfaceContainerLowest: uiConstants.lightSurfaceContainerLowest.withValues(
+    alpha: 0.5,
+  ),
+  surfaceContainerLow: uiConstants.lightSurfaceContainerLow.withValues(
+    alpha: 0.5,
+  ),
+  surfaceContainer: uiConstants.lightSurfaceContainer.withValues(alpha: 0.5),
+  surfaceContainerHigh: uiConstants.lightSurfaceContainerHigh.withValues(
+    alpha: 0.5,
+  ),
+  surfaceContainerHighest: uiConstants.lightSurfaceContainerHighest.withValues(
+    alpha: 0.5,
+  ),
 
   // Outline colors
   outline: uiConstants.lightOutline,
@@ -60,6 +73,16 @@ ColorScheme _lightColorScheme = ColorScheme.light(
   inversePrimary: uiConstants.lightInversePrimary,
   surfaceTint: uiConstants.lightSurfaceTint,
   onSurfaceVariant: uiConstants.lightOnSurfaceVariant,
+);
+
+// EXTENSÃO GLASSMORPHISM LIGHT
+GlassTheme _lightGlassTheme = GlassTheme(
+  glassColor: uiConstants.glassWhiteLow,
+  glassBorderColor: uiConstants.glassWhiteMedium,
+  glassBorderColorStart: uiConstants.glassBorderLightStart,
+  glassBorderColorEnd: uiConstants.glassBorderLightEnd,
+  blurAmount: uiConstants.glassBlurMedium,
+  borderWidth: uiConstants.glassBorderWidthThin,
 );
 
 TextTheme _lightTextTheme = TextTheme(
@@ -156,12 +179,13 @@ TextTheme _lightTextTheme = TextTheme(
 );
 
 AppBarTheme _lightAppBarTheme = AppBarTheme(
-  backgroundColor: _lightColorScheme.surface,
+  // Glassmorphism: AppBar transparente para mostrar o gradiente de fundo
+  backgroundColor: uiConstants.glassWhiteDim,
   foregroundColor: _lightColorScheme.onSurface,
   elevation: 0,
   scrolledUnderElevation: 0,
-  shadowColor: _lightColorScheme.shadow,
-  surfaceTintColor: _lightColorScheme.surfaceTint,
+  shadowColor: Colors.transparent,
+  surfaceTintColor: Colors.transparent,
   shape: RoundedRectangleBorder(
     borderRadius: BorderRadius.vertical(bottom: Radius.zero),
   ),
@@ -193,7 +217,7 @@ AppBarTheme _lightAppBarTheme = AppBarTheme(
     statusBarColor: uiConstants.transparent,
     statusBarIconBrightness: Brightness.dark,
     statusBarBrightness: Brightness.light,
-    systemNavigationBarColor: _lightColorScheme.surface,
+    systemNavigationBarColor: uiConstants.glassWhiteLow,
     systemNavigationBarIconBrightness: Brightness.dark,
   ),
   actionsPadding: EdgeInsets.symmetric(
@@ -213,7 +237,9 @@ TooltipThemeData _lightTooltipTheme = TooltipThemeData(
   excludeFromSemantics: false,
   enableFeedback: true,
   decoration: ShapeDecoration(
-    color: _lightColorScheme.inverseSurface,
+    color: _lightColorScheme.inverseSurface.withValues(
+      alpha: 0.8,
+    ), // Glassy tooltip
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(uiConstants.radius8),
     ),
@@ -240,7 +266,7 @@ TooltipThemeData _lightTooltipTheme = TooltipThemeData(
   showDuration: Duration(milliseconds: uiConstants.tooltipShowDurationMs),
 );
 
-// Botão Filled melhorado com estados interativos
+// Botão Filled
 FilledButtonThemeData _lightFilledButtonTheme = FilledButtonThemeData(
   style: _lightButtonBaseStyle.copyWith(
     backgroundColor: WidgetStateProperty.resolveWith<Color>((
@@ -255,7 +281,9 @@ FilledButtonThemeData _lightFilledButtonTheme = FilledButtonThemeData(
       if (states.contains(WidgetState.hovered)) {
         return _lightColorScheme.primary.withValues(alpha: 0.92);
       }
-      return _lightColorScheme.primary;
+      return _lightColorScheme.primary.withValues(
+        alpha: 0.85,
+      ); // Leve transparência
     }),
     foregroundColor: WidgetStateProperty.resolveWith<Color>((
       Set<WidgetState> states,
@@ -265,29 +293,8 @@ FilledButtonThemeData _lightFilledButtonTheme = FilledButtonThemeData(
       }
       return _lightColorScheme.onPrimary;
     }),
-    elevation: WidgetStateProperty.resolveWith<double>((
-      Set<WidgetState> states,
-    ) {
-      if (states.contains(WidgetState.disabled)) return 0;
-      if (states.contains(WidgetState.pressed)) return uiConstants.elevation2;
-      if (states.contains(WidgetState.hovered)) return uiConstants.elevation4;
-      return uiConstants.elevation2;
-    }),
-    shadowColor: WidgetStateProperty.all(_lightColorScheme.shadow),
-    overlayColor: WidgetStateProperty.resolveWith<Color?>((
-      Set<WidgetState> states,
-    ) {
-      if (states.contains(WidgetState.hovered)) {
-        return _lightColorScheme.primary.withValues(alpha: 0.08);
-      }
-      if (states.contains(WidgetState.focused)) {
-        return _lightColorScheme.primary.withValues(alpha: 0.12);
-      }
-      if (states.contains(WidgetState.pressed)) {
-        return _lightColorScheme.primary.withValues(alpha: 0.12);
-      }
-      return null;
-    }),
+    elevation: WidgetStateProperty.all(0), // Sem sombra no glass flat
+    shadowColor: WidgetStateProperty.all(Colors.transparent),
   ),
 );
 
@@ -304,6 +311,8 @@ final _lightButtonBaseStyle = ButtonStyle(
   shape: WidgetStateProperty.all(
     RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(uiConstants.radius16),
+      // Borda sutil para glass buttons
+      side: BorderSide(color: uiConstants.glassWhiteLow, width: 0.5),
     ),
   ),
   textStyle: WidgetStateProperty.all(
@@ -317,7 +326,7 @@ final _lightButtonBaseStyle = ButtonStyle(
   iconSize: WidgetStateProperty.all(uiConstants.buttonIconSize),
 );
 
-// Botão Elevated melhorado com estados interativos
+// Botão Elevated (Glassy)
 ElevatedButtonThemeData _lightElevatedButtonTheme = ElevatedButtonThemeData(
   style: _lightButtonBaseStyle.copyWith(
     backgroundColor: WidgetStateProperty.resolveWith<Color>((
@@ -326,13 +335,7 @@ ElevatedButtonThemeData _lightElevatedButtonTheme = ElevatedButtonThemeData(
       if (states.contains(WidgetState.disabled)) {
         return _lightColorScheme.onSurface.withValues(alpha: 0.12);
       }
-      if (states.contains(WidgetState.pressed)) {
-        return _lightColorScheme.primary;
-      }
-      if (states.contains(WidgetState.hovered)) {
-        return _lightColorScheme.primary.withValues(alpha: 0.95);
-      }
-      return _lightColorScheme.primary;
+      return uiConstants.glassWhiteMedium; // Fundo vidro branco
     }),
     foregroundColor: WidgetStateProperty.resolveWith<Color>((
       Set<WidgetState> states,
@@ -340,56 +343,19 @@ ElevatedButtonThemeData _lightElevatedButtonTheme = ElevatedButtonThemeData(
       if (states.contains(WidgetState.disabled)) {
         return _lightColorScheme.onSurface.withValues(alpha: 0.38);
       }
-      return _lightColorScheme.onPrimary;
+      return _lightColorScheme.primary;
     }),
-    elevation: WidgetStateProperty.resolveWith<double>((
-      Set<WidgetState> states,
-    ) {
-      if (states.contains(WidgetState.disabled)) return 0;
-      if (states.contains(WidgetState.pressed)) return uiConstants.elevation2;
-      if (states.contains(WidgetState.hovered)) return uiConstants.elevation8;
-      return uiConstants.elevation4;
-    }),
-    shadowColor: WidgetStateProperty.all(_lightColorScheme.shadow),
-    overlayColor: WidgetStateProperty.resolveWith<Color?>((
-      Set<WidgetState> states,
-    ) {
-      if (states.contains(WidgetState.hovered)) {
-        return _lightColorScheme.onPrimary.withValues(alpha: 0.08);
-      }
-      if (states.contains(WidgetState.focused)) {
-        return _lightColorScheme.onPrimary.withValues(alpha: 0.12);
-      }
-      if (states.contains(WidgetState.pressed)) {
-        return _lightColorScheme.onPrimary.withValues(alpha: 0.12);
-      }
-      return null;
-    }),
+    elevation: WidgetStateProperty.all(0),
+    side: WidgetStateProperty.all(
+      BorderSide(color: uiConstants.glassBorderLightStart, width: 1),
+    ),
   ),
 );
 
-// Botão Outlined melhorado com estados interativos
+// Botão Outlined
 OutlinedButtonThemeData _lightOutlinedButtonTheme = OutlinedButtonThemeData(
   style: _lightButtonBaseStyle.copyWith(
-    backgroundColor: WidgetStateProperty.resolveWith<Color>((
-      Set<WidgetState> states,
-    ) {
-      if (states.contains(WidgetState.hovered)) {
-        return _lightColorScheme.primary.withValues(alpha: 0.08);
-      }
-      if (states.contains(WidgetState.pressed)) {
-        return _lightColorScheme.primary.withValues(alpha: 0.12);
-      }
-      return Colors.transparent;
-    }),
-    foregroundColor: WidgetStateProperty.resolveWith<Color>((
-      Set<WidgetState> states,
-    ) {
-      if (states.contains(WidgetState.disabled)) {
-        return _lightColorScheme.onSurface.withValues(alpha: 0.38);
-      }
-      return _lightColorScheme.primary;
-    }),
+    backgroundColor: WidgetStateProperty.all(Colors.transparent),
     side: WidgetStateProperty.resolveWith<BorderSide>((
       Set<WidgetState> states,
     ) {
@@ -402,84 +368,42 @@ OutlinedButtonThemeData _lightOutlinedButtonTheme = OutlinedButtonThemeData(
       if (states.contains(WidgetState.hovered)) {
         return BorderSide(color: _lightColorScheme.primary, width: 1.5);
       }
-      return BorderSide(color: _lightColorScheme.primary, width: 1.0);
+      return BorderSide(
+        color: _lightColorScheme.primary.withValues(alpha: 0.7),
+        width: 1.0,
+      );
     }),
-    overlayColor: WidgetStateProperty.resolveWith<Color?>((
-      Set<WidgetState> states,
-    ) {
-      if (states.contains(WidgetState.hovered)) {
-        return _lightColorScheme.primary.withValues(alpha: 0.04);
-      }
-      if (states.contains(WidgetState.focused)) {
-        return _lightColorScheme.primary.withValues(alpha: 0.08);
-      }
-      if (states.contains(WidgetState.pressed)) {
-        return _lightColorScheme.primary.withValues(alpha: 0.12);
-      }
-      return null;
-    }),
+    foregroundColor: WidgetStateProperty.all(_lightColorScheme.primary),
   ),
 );
 
-// Botão Text melhorado com estados interativos
+// Botão Text
 TextButtonThemeData _lightTextButtonTheme = TextButtonThemeData(
   style: _lightButtonBaseStyle.copyWith(
-    backgroundColor: WidgetStateProperty.resolveWith<Color>((
-      Set<WidgetState> states,
-    ) {
-      if (states.contains(WidgetState.hovered)) {
-        return _lightColorScheme.primary.withValues(alpha: 0.08);
-      }
-      if (states.contains(WidgetState.pressed)) {
-        return _lightColorScheme.primary.withValues(alpha: 0.12);
-      }
-      return Colors.transparent;
-    }),
-    foregroundColor: WidgetStateProperty.resolveWith<Color>((
-      Set<WidgetState> states,
-    ) {
-      if (states.contains(WidgetState.disabled)) {
-        return _lightColorScheme.onSurface.withValues(alpha: 0.38);
-      }
-      return _lightColorScheme.primary;
-    }),
-    overlayColor: WidgetStateProperty.resolveWith<Color?>((
-      Set<WidgetState> states,
-    ) {
-      if (states.contains(WidgetState.hovered)) {
-        return _lightColorScheme.primary.withValues(alpha: 0.08);
-      }
-      if (states.contains(WidgetState.focused)) {
-        return _lightColorScheme.primary.withValues(alpha: 0.12);
-      }
-      if (states.contains(WidgetState.pressed)) {
-        return _lightColorScheme.primary.withValues(alpha: 0.12);
-      }
-      return null;
-    }),
+    backgroundColor: WidgetStateProperty.all(Colors.transparent),
+    foregroundColor: WidgetStateProperty.all(_lightColorScheme.primary),
   ),
 );
 
 // ============================================================================
-// LIGHT THEME INPUT DECORATION
+// LIGHT THEME INPUT DECORATION (GLASS)
 // ============================================================================
 
 InputDecorationTheme _lightInputDecorationTheme = InputDecorationTheme(
-  // Base styling
+  // Base styling - Glassmorphism
   filled: true,
-  fillColor: _lightColorScheme.surfaceContainerLowest,
-  hoverColor: _lightColorScheme.surfaceContainerLow,
-  focusColor: _lightColorScheme.primary.withValues(alpha: 0.08),
+  // Fundo branco com baixa opacidade para efeito vidro
+  fillColor: uiConstants.glassWhiteLow,
+  hoverColor: uiConstants.glassWhiteMedium,
+  focusColor: uiConstants.glassWhiteMedium,
 
   isDense: false,
   visualDensity: VisualDensity.standard,
-  // Padding and spacing
   contentPadding: EdgeInsets.symmetric(
     horizontal: uiConstants.spacing6,
     vertical: uiConstants.spacing5,
   ),
 
-  // Label styling
   labelStyle: _lightTextTheme.titleLarge?.copyWith(
     color: _lightColorScheme.onSurfaceVariant,
     fontWeight: FontWeight.w500,
@@ -488,94 +412,59 @@ InputDecorationTheme _lightInputDecorationTheme = InputDecorationTheme(
     color: _lightColorScheme.primary,
     fontWeight: FontWeight.w600,
   ),
-
-  // Hint styling
   hintStyle: _lightTextTheme.titleLarge?.copyWith(
     color: _lightColorScheme.onSurfaceVariant.withValues(alpha: 0.5),
   ),
-
-  // Helper text styling
   helperStyle: _lightTextTheme.bodyMedium?.copyWith(
     color: _lightColorScheme.onSurfaceVariant.withValues(alpha: 0.7),
   ),
-
-  // Error text styling
   errorStyle: _lightTextTheme.bodyMedium?.copyWith(
     color: _lightColorScheme.error,
     fontWeight: FontWeight.w500,
   ),
 
-  // Counter styling
-  counterStyle: _lightTextTheme.bodySmall?.copyWith(
-    color: _lightColorScheme.onSurfaceVariant.withValues(alpha: 0.6),
-  ),
-
-  // Border radius - consistent with button design
+  // Borders - Using Glass Borders (Light Gradients logic via colors)
   border: OutlineInputBorder(
     borderRadius: BorderRadius.circular(uiConstants.radius16),
     borderSide: BorderSide.none,
   ),
+
+  // Enabled: Borda sutil (reflexo)
   enabledBorder: OutlineInputBorder(
     borderRadius: BorderRadius.circular(uiConstants.radius16),
-    borderSide: BorderSide(color: _lightColorScheme.outline, width: 1.5),
+    borderSide: BorderSide(
+      color: uiConstants.glassBorderLightStart,
+      width: uiConstants.glassBorderWidthThin,
+    ),
   ),
 
-  // Focused border with primary color
+  // Focused: Cor primária sólida ou gradiente forte
   focusedBorder: OutlineInputBorder(
     borderRadius: BorderRadius.circular(uiConstants.radius16),
     borderSide: BorderSide(color: _lightColorScheme.primary, width: 2.0),
   ),
 
-  // Error border styling
   errorBorder: OutlineInputBorder(
     borderRadius: BorderRadius.circular(uiConstants.radius16),
     borderSide: BorderSide(color: _lightColorScheme.error, width: 2.0),
   ),
-
-  // Focused error border
   focusedErrorBorder: OutlineInputBorder(
     borderRadius: BorderRadius.circular(uiConstants.radius16),
     borderSide: BorderSide(color: _lightColorScheme.error, width: 2.0),
   ),
-
-  // Disabled state
   disabledBorder: OutlineInputBorder(
     borderRadius: BorderRadius.circular(uiConstants.radius16),
     borderSide: BorderSide(
-      color: _lightColorScheme.onSurface.withValues(alpha: 0.12),
+      color: _lightColorScheme.onSurface.withValues(alpha: 0.05),
       width: 1.0,
     ),
-  ),
-
-  // Prefix and suffix icon styling
-  prefixIconColor: WidgetStateColor.resolveWith((Set<WidgetState> states) {
-    if (states.contains(WidgetState.focused)) {
-      return _lightColorScheme.primary;
-    }
-    if (states.contains(WidgetState.error)) {
-      return _lightColorScheme.error;
-    }
-    return _lightColorScheme.onSurfaceVariant;
-  }),
-  suffixIconColor: WidgetStateColor.resolveWith((Set<WidgetState> states) {
-    if (states.contains(WidgetState.focused)) {
-      return _lightColorScheme.primary;
-    }
-    if (states.contains(WidgetState.error)) {
-      return _lightColorScheme.error;
-    }
-    return _lightColorScheme.onSurfaceVariant;
-  }),
-
-  outlineBorder: BorderSide(
-    color: _lightColorScheme.outline,
-    width: 1.5,
-    style: BorderStyle.solid,
   ),
 );
 
 ThemeData customLightTheme = ThemeData(
   useMaterial3: true,
+  // IMPORTANTE: Scaffold transparente para ver o background/gradiente global
+  scaffoldBackgroundColor: Colors.transparent,
   colorScheme: _lightColorScheme,
   textTheme: _lightTextTheme,
   appBarTheme: _lightAppBarTheme,
@@ -585,4 +474,5 @@ ThemeData customLightTheme = ThemeData(
   outlinedButtonTheme: _lightOutlinedButtonTheme,
   textButtonTheme: _lightTextButtonTheme,
   inputDecorationTheme: _lightInputDecorationTheme,
+  extensions: [_lightGlassTheme], // Adiciona a extensão
 );
