@@ -4,10 +4,6 @@ import 'dart:io';
 import '../model/user_enums.dart';
 import '../model/user_model.dart';
 
-/// File-backed service responsible for managing [UserData] instances.
-///
-/// The service serializes data into a local JSON document that simulates
-/// persistence while keeping the implementation self-contained.
 class UserDataService {
   UserDataService() {
     _initialization = _loadFromDisk();

@@ -1,7 +1,8 @@
 import '../imports/common_libs.dart';
 
 class AppConstants {
-  String appName = Environment.appName ?? 'Unikel';
+  String appName = Environment.appName ?? 'Glassy';
 
-  String appTitle = Environment.appTitle ?? 'Unikel: Flutter Skeleton';
+  String appTitle =
+      Environment.appTitle ?? 'Glassy: A transparent social network';
 }

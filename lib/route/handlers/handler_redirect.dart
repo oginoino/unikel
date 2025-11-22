@@ -12,30 +12,24 @@ class HandleRedirect {
     final isFirstAccessComplete = onboardingProvider.isFirstAccessComplete;
     final path = state.uri.path;
 
-    // 1. Handle onboarding redirection
     if (!isOnboardingComplete) {
       if (path != Routes.onboarding) {
         return Routes.onboarding;
       }
-      // If onboarding is not complete and we are on the onboarding page, stay there.
       return null;
     }
 
-    // 2. Handle first access redirection (only if onboarding is complete)
     if (!isFirstAccessComplete) {
       if (path != Routes.firstAccessCtaToRegister) {
         return Routes.firstAccessCtaToRegister;
       }
-      // If first access is not complete and we are on the first access page, stay there.
       return null;
     }
 
-    // 3. If both are complete, and user is on first access or onboarding page, redirect to home
     if (path == Routes.firstAccessCtaToRegister || path == Routes.onboarding) {
       return Routes.home;
     }
 
-    // No redirection needed
     return null;
   }
 }
