@@ -126,10 +126,30 @@ class GlassmorphismContainer extends StatelessWidget {
                   style: DefaultTextStyle.of(context).style.copyWith(
                     shadows: [
                       Shadow(
-                        color: (isDark ? Colors.black : Colors.white)
-                            .withValues(alpha: 0.3),
-                        blurRadius: 2,
+                        color:
+                            (theme.brightness == Brightness.dark
+                                    ? Colors.black
+                                    : Colors.white)
+                                .withValues(
+                                  alpha: theme.brightness == Brightness.dark
+                                      ? 0.2
+                                      : 0.25,
+                                ),
+                        blurRadius: 3,
                         offset: const Offset(0, 1),
+                      ),
+                      Shadow(
+                        color:
+                            (theme.brightness == Brightness.dark
+                                    ? Colors.black
+                                    : Colors.white)
+                                .withValues(
+                                  alpha: theme.brightness == Brightness.dark
+                                      ? 0.1
+                                      : 0.15,
+                                ),
+                        blurRadius: 6,
+                        offset: const Offset(0, 2),
                       ),
                     ],
                   ),
@@ -201,9 +221,30 @@ class GlassmorphismCard extends StatelessWidget {
                                     (theme.brightness == Brightness.dark
                                             ? Colors.black
                                             : Colors.white)
-                                        .withValues(alpha: 0.4),
+                                        .withValues(
+                                          alpha:
+                                              theme.brightness ==
+                                                  Brightness.dark
+                                              ? 0.25
+                                              : 0.3,
+                                        ),
                                 blurRadius: 3,
                                 offset: const Offset(0, 1),
+                              ),
+                              Shadow(
+                                color:
+                                    (theme.brightness == Brightness.dark
+                                            ? Colors.black
+                                            : Colors.white)
+                                        .withValues(
+                                          alpha:
+                                              theme.brightness ==
+                                                  Brightness.dark
+                                              ? 0.1
+                                              : 0.15,
+                                        ),
+                                blurRadius: 6,
+                                offset: const Offset(0, 2),
                               ),
                             ],
                           ),
@@ -219,9 +260,30 @@ class GlassmorphismCard extends StatelessWidget {
                                     (theme.brightness == Brightness.dark
                                             ? Colors.black
                                             : Colors.white)
-                                        .withValues(alpha: 0.3),
-                                blurRadius: 2,
+                                        .withValues(
+                                          alpha:
+                                              theme.brightness ==
+                                                  Brightness.dark
+                                              ? 0.2
+                                              : 0.25,
+                                        ),
+                                blurRadius: 3,
                                 offset: const Offset(0, 1),
+                              ),
+                              Shadow(
+                                color:
+                                    (theme.brightness == Brightness.dark
+                                            ? Colors.black
+                                            : Colors.white)
+                                        .withValues(
+                                          alpha:
+                                              theme.brightness ==
+                                                  Brightness.dark
+                                              ? 0.08
+                                              : 0.12,
+                                        ),
+                                blurRadius: 5,
+                                offset: const Offset(0, 1.5),
                               ),
                             ],
                           ),
