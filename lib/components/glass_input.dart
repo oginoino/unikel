@@ -91,10 +91,14 @@ class GlassInput extends StatefulWidget {
   State<GlassInput> createState() => _GlassInputState();
 }
 
-class _GlassInputState extends State<GlassInput> {
+class _GlassInputState extends State<GlassInput>
+    with SingleTickerProviderStateMixin {
   FocusNode? _ownFocusNode;
   bool _isHovered = false;
   bool _isFocused = false;
+  String? _errorText;
+  late AnimationController _animationController;
+  late Animation<double> _scaleAnimation;
 
   FocusNode get _focusNode => widget.focusNode ?? _ownFocusNode!;
 
@@ -104,6 +108,15 @@ class _GlassInputState extends State<GlassInput> {
     _ownFocusNode = widget.focusNode ?? FocusNode();
     _focusNode.addListener(_handleFocusChange);
     _isFocused = _focusNode.hasFocus;
+
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 200),
+    );
+
+    _scaleAnimation = Tween<double>(begin: 1.0, end: 1.02).animate(
+      CurvedAnimation(parent: _animationController, curve: Curves.easeOut),
+    );
   }
 
   @override
@@ -112,12 +125,18 @@ class _GlassInputState extends State<GlassInput> {
     if (widget.focusNode == null) {
       _focusNode.dispose();
     }
+    _animationController.dispose();
     super.dispose();
   }
 
   void _handleFocusChange() {
     setState(() {
       _isFocused = _focusNode.hasFocus;
+      if (_isFocused) {
+        _animationController.forward();
+      } else {
+        _animationController.reverse();
+      }
     });
   }
 
@@ -137,16 +156,13 @@ class _GlassInputState extends State<GlassInput> {
 
     final double effectiveBorderRadius =
         widget.borderRadius ??
-            glassTheme?.control.radius ??
-            uiConstants.glassInputBorderRadius;
-    final double effectiveBorderWidth =
-        widget.borderWidth ??
-            glassTheme?.control.borderWidth ??
-            uiConstants.glassBorderWidthThin;
+        glassTheme?.control.radius ??
+        uiConstants.glassInputBorderRadius;
+
     final double effectiveBlur =
         widget.blurAmount ??
-            glassTheme?.control.blur ??
-            uiConstants.glassInputBlurAmount;
+        glassTheme?.control.blur ??
+        uiConstants.glassInputBlurAmount;
 
     // Cores padrão baseadas no tema
     final defaultFillColor =
@@ -190,22 +206,27 @@ class _GlassInputState extends State<GlassInput> {
               : theme.colorScheme.onSurface.withValues(alpha: 0.7),
         );
 
-    final defaultCursorColor =
-        widget.cursorColor ?? theme.colorScheme.primary;
-    final Color highlightColor = theme.colorScheme.primary;
-    final double highlightOpacity = _isFocused
-        ? 0.28
-        : (_isHovered && widget.enabled ? 0.14 : 0.0);
-    final double highlightWidth =
-        highlightOpacity > 0 ? (glassTheme?.focusWidth ?? uiConstants.borderWidth2) : 0.0;
+    final defaultCursorColor = widget.cursorColor ?? theme.colorScheme.primary;
+
+    final Color borderColor = _errorText != null
+        ? theme.colorScheme.error
+        : (_isFocused
+              ? theme.colorScheme.primary
+              : (_isHovered
+                    ? theme.colorScheme.onSurface.withValues(alpha: 0.3)
+                    : theme.colorScheme.onSurface.withValues(alpha: 0.1)));
+
+    final double borderWidth = _isFocused || _errorText != null ? 1.5 : 1.0;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
         if (widget.labelText != null) ...[
-          Text(widget.labelText!, style: defaultLabelStyle),
-          const SizedBox(height: 8),
+          Padding(
+            padding: const EdgeInsets.only(left: 4, bottom: 8),
+            child: Text(widget.labelText!, style: defaultLabelStyle),
+          ),
         ],
         MouseRegion(
           cursor: widget.enabled
@@ -213,21 +234,39 @@ class _GlassInputState extends State<GlassInput> {
               : SystemMouseCursors.forbidden,
           onEnter: (_) => _handleHover(true),
           onExit: (_) => _handleHover(false),
-          child: Stack(
-            children: [
-              GlassmorphismContainer(
+          child: ScaleTransition(
+            scale: _scaleAnimation,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(effectiveBorderRadius),
+                boxShadow: _isFocused
+                    ? [
+                        BoxShadow(
+                          color: theme.colorScheme.primary.withValues(
+                            alpha: 0.25,
+                          ),
+                          blurRadius: 12,
+                          offset: const Offset(0, 4),
+                        ),
+                      ]
+                    : [],
+              ),
+              child: GlassmorphismContainer(
                 variant: GlassSurfaceVariant.control,
                 blurAmount: effectiveBlur,
                 borderRadius: BorderRadius.circular(effectiveBorderRadius),
-                borderWidth: effectiveBorderWidth,
-                child: Container(
+                borderWidth: 0, // We handle border manually for better control
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 200),
                   height: widget.height,
                   decoration: BoxDecoration(
                     color: defaultFillColor,
                     borderRadius: BorderRadius.circular(effectiveBorderRadius),
+                    border: Border.all(color: borderColor, width: borderWidth),
                   ),
                   child: Semantics(
-                    label: widget.semanticsLabel ??
+                    label:
+                        widget.semanticsLabel ??
                         widget.labelText ??
                         widget.hintText,
                     textField: true,
@@ -237,8 +276,21 @@ class _GlassInputState extends State<GlassInput> {
                       obscureText: widget.obscureText,
                       keyboardType: widget.keyboardType,
                       inputFormatters: widget.inputFormatters,
-                      validator: widget.validator,
-                      onChanged: widget.onChanged,
+                      validator: (value) {
+                        final result = widget.validator?.call(value);
+                        setState(() {
+                          _errorText = result;
+                        });
+                        return result;
+                      },
+                      onChanged: (value) {
+                        if (_errorText != null) {
+                          setState(() {
+                            _errorText = null;
+                          });
+                        }
+                        widget.onChanged?.call(value);
+                      },
                       onFieldSubmitted: widget.onSubmitted,
                       enabled: widget.enabled,
                       maxLines: widget.maxLines,
@@ -247,8 +299,7 @@ class _GlassInputState extends State<GlassInput> {
                       focusNode: _focusNode,
                       textAlign: widget.textAlign,
                       textAlignVertical:
-                          widget.textAlignVertical ??
-                              TextAlignVertical.center,
+                          widget.textAlignVertical ?? TextAlignVertical.center,
                       expands: widget.expands,
                       maxLength: widget.maxLength,
                       cursorColor: defaultCursorColor,
@@ -260,25 +311,28 @@ class _GlassInputState extends State<GlassInput> {
                       style: defaultTextStyle.copyWith(
                         color: widget.enabled
                             ? (defaultTextStyle.color ??
-                                theme.colorScheme.onSurface)
-                            : theme.colorScheme.onSurface
-                                .withValues(alpha: 0.5),
+                                  theme.colorScheme.onSurface)
+                            : theme.colorScheme.onSurface.withValues(
+                                alpha: 0.5,
+                              ),
                       ),
                       decoration: InputDecoration(
                         hintText: widget.hintText,
                         hintStyle: defaultHintStyle,
                         prefixIcon: widget.prefixIcon != null
                             ? Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 16, right: 12),
+                                padding: const EdgeInsets.only(
+                                  left: 16,
+                                  right: 12,
+                                ),
                                 child: IconTheme(
                                   data: IconThemeData(
                                     size: 20,
                                     color: isDark
                                         ? theme.colorScheme.onSurface
-                                            .withValues(alpha: 0.7)
+                                              .withValues(alpha: 0.7)
                                         : theme.colorScheme.onSurface
-                                            .withValues(alpha: 0.6),
+                                              .withValues(alpha: 0.6),
                                   ),
                                   child: widget.prefixIcon!,
                                 ),
@@ -286,16 +340,18 @@ class _GlassInputState extends State<GlassInput> {
                             : null,
                         suffixIcon: widget.suffixIcon != null
                             ? Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 12, right: 16),
+                                padding: const EdgeInsets.only(
+                                  left: 12,
+                                  right: 16,
+                                ),
                                 child: IconTheme(
                                   data: IconThemeData(
                                     size: 20,
                                     color: isDark
                                         ? theme.colorScheme.onSurface
-                                            .withValues(alpha: 0.7)
+                                              .withValues(alpha: 0.7)
                                         : theme.colorScheme.onSurface
-                                            .withValues(alpha: 0.6),
+                                              .withValues(alpha: 0.6),
                                   ),
                                   child: widget.suffixIcon!,
                                 ),
@@ -315,44 +371,29 @@ class _GlassInputState extends State<GlassInput> {
                         focusedErrorBorder: InputBorder.none,
                         isDense: widget.isDense,
                         counterText: widget.showCounter ? null : '',
+                        errorStyle: const TextStyle(
+                          height: 0,
+                          fontSize: 0,
+                        ), // Hide default error text
                       ),
                     ),
                   ),
                 ),
               ),
-              Positioned.fill(
-                child: IgnorePointer(
-                  child: AnimatedContainer(
-                    duration: Duration(
-                      milliseconds: uiConstants.animationDurationDefault,
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius:
-                          BorderRadius.circular(effectiveBorderRadius + 1),
-                      border: Border.all(
-                        color: highlightColor.withValues(
-                          alpha: highlightOpacity,
-                        ),
-                        width: highlightWidth,
-                      ),
-                      boxShadow: highlightOpacity > 0
-                          ? [
-                              BoxShadow(
-                                color: highlightColor.withValues(
-                                  alpha: highlightOpacity * 0.6,
-                                ),
-                                blurRadius: 12,
-                                offset: const Offset(0, 6),
-                              ),
-                            ]
-                          : [],
-                    ),
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
         ),
+        if (_errorText != null)
+          Padding(
+            padding: const EdgeInsets.only(left: 16, top: 6),
+            child: Text(
+              _errorText!,
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: theme.colorScheme.error,
+                fontSize: 12,
+              ),
+            ),
+          ),
       ],
     );
   }
