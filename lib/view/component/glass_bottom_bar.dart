@@ -20,6 +20,7 @@ class GlassBottomBar extends StatelessWidget {
         variant: GlassSurfaceVariant.navigation,
         borderRadius: BorderRadius.circular(32),
         height: 64,
+        padding: const EdgeInsets.symmetric(horizontal: 8),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
