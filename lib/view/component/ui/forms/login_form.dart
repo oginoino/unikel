@@ -66,6 +66,11 @@ class _LoginFormState extends State<LoginForm> {
     final textTheme = theme.textTheme;
     final l10n = context.l10n;
     final userProvider = context.watch<UserDataProvider>();
+    final glassTheme = theme.extension<GlassTheme>();
+    final glassDialogColor = glassTheme?.elevated.background ??
+        (theme.brightness == Brightness.dark
+            ? uiConstants.glassBlackMedium
+            : uiConstants.glassWhiteMedium);
 
     final bool isLoading = userProvider.isLoading;
     final String? providerError = userProvider.errorMessage;
@@ -101,6 +106,26 @@ class _LoginFormState extends State<LoginForm> {
                     ),
                     child: Center(
                       child: CountryCodePicker(
+                        dialogBackgroundColor: glassDialogColor,
+                        dialogTextStyle: textTheme.titleMedium,
+                        backgroundColor: glassDialogColor,
+                        boxDecoration: BoxDecoration(
+                          color: glassDialogColor,
+                          borderRadius: BorderRadius.circular(
+                            uiConstants.glassInputBorderRadius,
+                          ),
+                          border: Border.all(
+                            color: theme.dividerColor.withValues(alpha: 0.3),
+                          ),
+                        ),
+                        headerText: l10n.selectCountryCode,
+                        flagWidth: uiConstants.spacing8,
+                        margin: EdgeInsets.zero,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: uiConstants.spacing2,
+                          vertical: uiConstants.spacing2,
+                        ),
+                        textStyle: textTheme.titleMedium,
                         onChanged: (countryCode) {
                           setState(() {
                             _selectedCountryCode = countryCode;
@@ -111,8 +136,7 @@ class _LoginFormState extends State<LoginForm> {
                         showCountryOnly: false,
                         showOnlyCountryWhenClosed: false,
                         alignLeft: false,
-                        padding: EdgeInsets.zero,
-                        textStyle: textTheme.bodyLarge,
+                        
                       ),
                     ),
                   ),

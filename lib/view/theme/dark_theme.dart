@@ -77,7 +77,7 @@ ColorScheme _darkColorScheme = ColorScheme.dark(
 // EXTENSÃO GLASSMORPHISM DARK
 GlassTheme _darkGlassTheme = GlassTheme(
   surface: GlassSurfaceStyle(
-    background: uiConstants.glassBlackLow,
+    background: uiConstants.glassBlackLow.withValues(alpha: 0.16),
     borderGradient: LinearGradient(
       colors: [
         uiConstants.glassBorderDarkStart,
@@ -98,13 +98,13 @@ GlassTheme _darkGlassTheme = GlassTheme(
         offset: const Offset(0, 4),
       ),
     ],
-    blur: uiConstants.glassBlurMedium,
+    blur: 8,
     borderWidth: uiConstants.glassBorderWidthThin,
     radius: uiConstants.radius16,
     padding: EdgeInsets.all(uiConstants.spacing4),
   ),
   elevated: GlassSurfaceStyle(
-    background: uiConstants.glassBlackMedium,
+    background: uiConstants.glassBlackMedium.withValues(alpha: 0.3),
     borderGradient: LinearGradient(
       colors: [
         Colors.white.withValues(alpha: 0.24),
@@ -120,7 +120,7 @@ GlassTheme _darkGlassTheme = GlassTheme(
         offset: const Offset(0, 18),
       ),
     ],
-    blur: uiConstants.glassBlurHeavy,
+    blur: 14,
     borderWidth: uiConstants.glassBorderWidthThick,
     radius: uiConstants.radius20,
     padding: EdgeInsets.symmetric(
@@ -129,7 +129,7 @@ GlassTheme _darkGlassTheme = GlassTheme(
     ),
   ),
   control: GlassSurfaceStyle(
-    background: uiConstants.glassBlackMedium,
+    background: uiConstants.glassBlackMedium.withValues(alpha: 0.28),
     borderGradient: LinearGradient(
       colors: [
         uiConstants.glassBorderDarkStart,
@@ -145,7 +145,7 @@ GlassTheme _darkGlassTheme = GlassTheme(
         offset: const Offset(0, 10),
       ),
     ],
-    blur: uiConstants.glassBlurLight,
+    blur: 4.5,
     borderWidth: uiConstants.glassBorderWidthThin,
     radius: uiConstants.glassInputBorderRadius,
     padding: EdgeInsets.symmetric(
@@ -154,7 +154,7 @@ GlassTheme _darkGlassTheme = GlassTheme(
     ),
   ),
   navigation: GlassSurfaceStyle(
-    background: uiConstants.glassBlackLow,
+    background: uiConstants.glassBlackLow.withValues(alpha: 0.16),
     borderGradient: LinearGradient(
       colors: [
         Colors.white.withValues(alpha: 0.18),
@@ -170,7 +170,7 @@ GlassTheme _darkGlassTheme = GlassTheme(
         offset: const Offset(0, 12),
       ),
     ],
-    blur: uiConstants.glassBlurMedium,
+    blur: 8,
     borderWidth: uiConstants.glassBorderWidthThin,
     radius: uiConstants.radius16,
     padding: EdgeInsets.symmetric(

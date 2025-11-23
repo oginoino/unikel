@@ -78,7 +78,7 @@ ColorScheme _lightColorScheme = ColorScheme.light(
 // EXTENSÃO GLASSMORPHISM LIGHT
 GlassTheme _lightGlassTheme = GlassTheme(
   surface: GlassSurfaceStyle(
-    background: uiConstants.glassWhiteLow,
+    background: uiConstants.glassWhiteLow.withValues(alpha: 0.16),
     borderGradient: LinearGradient(
       colors: [
         uiConstants.glassBorderLightStart,
@@ -99,13 +99,13 @@ GlassTheme _lightGlassTheme = GlassTheme(
         offset: const Offset(0, 2),
       ),
     ],
-    blur: uiConstants.glassBlurMedium,
+    blur: 8,
     borderWidth: uiConstants.glassBorderWidthThin,
     radius: uiConstants.radius16,
     padding: EdgeInsets.all(uiConstants.spacing4),
   ),
   elevated: GlassSurfaceStyle(
-    background: uiConstants.glassWhiteMedium,
+    background: uiConstants.glassWhiteMedium.withValues(alpha: 0.32),
     borderGradient: LinearGradient(
       colors: [
         Colors.white.withValues(alpha: 0.72),
@@ -121,7 +121,7 @@ GlassTheme _lightGlassTheme = GlassTheme(
         offset: const Offset(0, 18),
       ),
     ],
-    blur: uiConstants.glassBlurHeavy,
+    blur: 14,
     borderWidth: uiConstants.glassBorderWidthThick,
     radius: uiConstants.radius20,
     padding: EdgeInsets.symmetric(
@@ -130,7 +130,7 @@ GlassTheme _lightGlassTheme = GlassTheme(
     ),
   ),
   control: GlassSurfaceStyle(
-    background: uiConstants.glassWhiteMedium,
+    background: uiConstants.glassWhiteMedium.withValues(alpha: 0.26),
     borderGradient: LinearGradient(
       colors: [
         uiConstants.glassBorderLightStart,
@@ -146,7 +146,7 @@ GlassTheme _lightGlassTheme = GlassTheme(
         offset: const Offset(0, 8),
       ),
     ],
-    blur: uiConstants.glassBlurLight,
+    blur: 4.5,
     borderWidth: uiConstants.glassBorderWidthThin,
     radius: uiConstants.glassInputBorderRadius,
     padding: EdgeInsets.symmetric(
@@ -155,7 +155,7 @@ GlassTheme _lightGlassTheme = GlassTheme(
     ),
   ),
   navigation: GlassSurfaceStyle(
-    background: uiConstants.glassWhiteLow,
+    background: uiConstants.glassWhiteLow.withValues(alpha: 0.16),
     borderGradient: LinearGradient(
       colors: [
         Colors.white.withValues(alpha: 0.38),
@@ -171,7 +171,7 @@ GlassTheme _lightGlassTheme = GlassTheme(
         offset: const Offset(0, 12),
       ),
     ],
-    blur: uiConstants.glassBlurMedium,
+    blur: 8,
     borderWidth: uiConstants.glassBorderWidthThin,
     radius: uiConstants.radius16,
     padding: EdgeInsets.symmetric(

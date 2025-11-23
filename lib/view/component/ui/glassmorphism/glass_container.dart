@@ -156,7 +156,7 @@ class GlassmorphismContainer extends StatelessWidget {
   }) {
     final fallback = GlassSurfaceStyle(
       background:
-          isDark ? uiConstants.glassBlackMedium : uiConstants.glassWhiteMedium,
+          isDark ? uiConstants.glassBlackLow : uiConstants.glassWhiteLow,
       borderGradient: LinearGradient(
         colors: isDark
             ? [
@@ -173,11 +173,11 @@ class GlassmorphismContainer extends StatelessWidget {
       shadow: [
         BoxShadow(
           color: (isDark ? Colors.black : Colors.grey).withValues(alpha: 0.08),
-          blurRadius: 16,
+          blurRadius: 14,
           offset: const Offset(0, 10),
         ),
       ],
-      blur: uiConstants.glassBlurMedium,
+      blur: 8,
       borderWidth: uiConstants.glassBorderWidthThin,
       radius: uiConstants.radius16,
       padding: EdgeInsets.all(uiConstants.spacing4),
