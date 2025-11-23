@@ -5,7 +5,7 @@ import 'package:glassy/view/theme/glass_theme_extention.dart';
 import '../utils/constants/ui_constants.dart';
 import '../view/component/ui/glassmorphism/glass_container.dart';
 
-class GlassInput extends StatelessWidget {
+class GlassInput extends StatefulWidget {
   final TextEditingController? controller;
   final String? hintText;
   final String? labelText;
@@ -88,6 +88,47 @@ class GlassInput extends StatelessWidget {
   });
 
   @override
+  State<GlassInput> createState() => _GlassInputState();
+}
+
+class _GlassInputState extends State<GlassInput> {
+  FocusNode? _ownFocusNode;
+  bool _isHovered = false;
+  bool _isFocused = false;
+
+  FocusNode get _focusNode => widget.focusNode ?? _ownFocusNode!;
+
+  @override
+  void initState() {
+    super.initState();
+    _ownFocusNode = widget.focusNode ?? FocusNode();
+    _focusNode.addListener(_handleFocusChange);
+    _isFocused = _focusNode.hasFocus;
+  }
+
+  @override
+  void dispose() {
+    _focusNode.removeListener(_handleFocusChange);
+    if (widget.focusNode == null) {
+      _focusNode.dispose();
+    }
+    super.dispose();
+  }
+
+  void _handleFocusChange() {
+    setState(() {
+      _isFocused = _focusNode.hasFocus;
+    });
+  }
+
+  void _handleHover(bool value) {
+    if (_isHovered == value) return;
+    setState(() {
+      _isHovered = value;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final uiConstants = UIConstants();
@@ -95,27 +136,27 @@ class GlassInput extends StatelessWidget {
     final glassTheme = theme.extension<GlassTheme>();
 
     final double effectiveBorderRadius =
-        borderRadius ??
+        widget.borderRadius ??
             glassTheme?.control.radius ??
             uiConstants.glassInputBorderRadius;
     final double effectiveBorderWidth =
-        borderWidth ??
+        widget.borderWidth ??
             glassTheme?.control.borderWidth ??
             uiConstants.glassBorderWidthThin;
     final double effectiveBlur =
-        blurAmount ??
+        widget.blurAmount ??
             glassTheme?.control.blur ??
             uiConstants.glassInputBlurAmount;
 
     // Cores padrão baseadas no tema
     final defaultFillColor =
-        fillColor ??
+        widget.fillColor ??
         (isDark
             ? uiConstants.glassBlackSeeThrough
             : uiConstants.glassWhiteSeeThrough);
 
     final defaultTextStyle =
-        textStyle ??
+        widget.textStyle ??
         theme.textTheme.bodyLarge?.copyWith(
           fontSize: 16,
           fontWeight: FontWeight.w500,
@@ -129,7 +170,7 @@ class GlassInput extends StatelessWidget {
         );
 
     final defaultHintStyle =
-        hintStyle ??
+        widget.hintStyle ??
         theme.textTheme.bodyLarge?.copyWith(
           fontSize: 16,
           color: isDark
@@ -139,7 +180,7 @@ class GlassInput extends StatelessWidget {
         );
 
     final defaultLabelStyle =
-        labelStyle ??
+        widget.labelStyle ??
         theme.textTheme.bodyMedium?.copyWith(
           fontSize: 14,
           fontWeight: FontWeight.w500,
@@ -149,116 +190,167 @@ class GlassInput extends StatelessWidget {
               : theme.colorScheme.onSurface.withValues(alpha: 0.7),
         );
 
-    final defaultCursorColor = cursorColor ?? theme.colorScheme.primary;
+    final defaultCursorColor =
+        widget.cursorColor ?? theme.colorScheme.primary;
+    final Color highlightColor = theme.colorScheme.primary;
+    final double highlightOpacity = _isFocused
+        ? 0.28
+        : (_isHovered && widget.enabled ? 0.14 : 0.0);
+    final double highlightWidth =
+        highlightOpacity > 0 ? (glassTheme?.focusWidth ?? uiConstants.borderWidth2) : 0.0;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        if (labelText != null) ...[
-          Text(labelText!, style: defaultLabelStyle),
+        if (widget.labelText != null) ...[
+          Text(widget.labelText!, style: defaultLabelStyle),
           const SizedBox(height: 8),
         ],
-        GlassmorphismContainer(
-          variant: GlassSurfaceVariant.control,
-          blurAmount: effectiveBlur,
-          borderRadius: BorderRadius.circular(effectiveBorderRadius),
-          borderWidth: effectiveBorderWidth,
-          child: Container(
-            height: height,
-            decoration: BoxDecoration(
-              color: defaultFillColor,
-              borderRadius: BorderRadius.circular(effectiveBorderRadius),
-            ),
-            child: Semantics(
-              label: semanticsLabel ?? labelText ?? hintText,
-              textField: true,
-              enabled: enabled,
-              child: TextFormField(
-                controller: controller,
-                obscureText: obscureText,
-                keyboardType: keyboardType,
-                inputFormatters: inputFormatters,
-                validator: validator,
-                onChanged: onChanged,
-                onFieldSubmitted: onSubmitted,
-                enabled: enabled,
-                maxLines: maxLines,
-                minLines: minLines,
-                autofocus: autoFocus,
-                focusNode: focusNode,
-                textAlign: textAlign,
-                textAlignVertical:
-                    textAlignVertical ?? TextAlignVertical.center,
-                expands: expands,
-                maxLength: maxLength,
-                cursorColor: defaultCursorColor,
-                cursorWidth: cursorWidth,
-                cursorRadius: cursorRadius ?? const Radius.circular(2),
-                autofillHints: autofillHints,
-                textInputAction: textInputAction,
-                style: defaultTextStyle.copyWith(
-                  color: enabled
-                      ? (defaultTextStyle.color ??
-                          theme.colorScheme.onSurface)
-                      : theme.colorScheme.onSurface.withValues(alpha: 0.5),
-                ),
-                decoration: InputDecoration(
-                  hintText: hintText,
-                  hintStyle: defaultHintStyle,
-                  prefixIcon: prefixIcon != null
-                      ? Padding(
-                          padding: const EdgeInsets.only(left: 16, right: 12),
-                          child: IconTheme(
-                            data: IconThemeData(
-                              size: 20,
-                              color: isDark
-                                  ? theme.colorScheme.onSurface.withValues(
-                                      alpha: 0.7,
-                                    )
-                                  : theme.colorScheme.onSurface.withValues(
-                                      alpha: 0.6,
-                                    ),
-                            ),
-                            child: prefixIcon!,
-                          ),
-                        )
-                      : null,
-                  suffixIcon: suffixIcon != null
-                      ? Padding(
-                          padding: const EdgeInsets.only(left: 12, right: 16),
-                          child: IconTheme(
-                            data: IconThemeData(
-                              size: 20,
-                              color: isDark
-                                  ? theme.colorScheme.onSurface.withValues(
-                                      alpha: 0.7,
-                                    )
-                                  : theme.colorScheme.onSurface.withValues(
-                                      alpha: 0.6,
-                                    ),
-                            ),
-                            child: suffixIcon!,
-                          ),
-                        )
-                      : null,
-                  contentPadding:
-                      contentPadding ??
-                      EdgeInsets.symmetric(
-                        horizontal: prefixIcon != null ? 12 : 20,
-                        vertical: isDense ? 8 : 16,
+        MouseRegion(
+          cursor: widget.enabled
+              ? SystemMouseCursors.text
+              : SystemMouseCursors.forbidden,
+          onEnter: (_) => _handleHover(true),
+          onExit: (_) => _handleHover(false),
+          child: Stack(
+            children: [
+              GlassmorphismContainer(
+                variant: GlassSurfaceVariant.control,
+                blurAmount: effectiveBlur,
+                borderRadius: BorderRadius.circular(effectiveBorderRadius),
+                borderWidth: effectiveBorderWidth,
+                child: Container(
+                  height: widget.height,
+                  decoration: BoxDecoration(
+                    color: defaultFillColor,
+                    borderRadius: BorderRadius.circular(effectiveBorderRadius),
+                  ),
+                  child: Semantics(
+                    label: widget.semanticsLabel ??
+                        widget.labelText ??
+                        widget.hintText,
+                    textField: true,
+                    enabled: widget.enabled,
+                    child: TextFormField(
+                      controller: widget.controller,
+                      obscureText: widget.obscureText,
+                      keyboardType: widget.keyboardType,
+                      inputFormatters: widget.inputFormatters,
+                      validator: widget.validator,
+                      onChanged: widget.onChanged,
+                      onFieldSubmitted: widget.onSubmitted,
+                      enabled: widget.enabled,
+                      maxLines: widget.maxLines,
+                      minLines: widget.minLines,
+                      autofocus: widget.autoFocus,
+                      focusNode: _focusNode,
+                      textAlign: widget.textAlign,
+                      textAlignVertical:
+                          widget.textAlignVertical ??
+                              TextAlignVertical.center,
+                      expands: widget.expands,
+                      maxLength: widget.maxLength,
+                      cursorColor: defaultCursorColor,
+                      cursorWidth: widget.cursorWidth,
+                      cursorRadius:
+                          widget.cursorRadius ?? const Radius.circular(2),
+                      autofillHints: widget.autofillHints,
+                      textInputAction: widget.textInputAction,
+                      style: defaultTextStyle.copyWith(
+                        color: widget.enabled
+                            ? (defaultTextStyle.color ??
+                                theme.colorScheme.onSurface)
+                            : theme.colorScheme.onSurface
+                                .withValues(alpha: 0.5),
                       ),
-                  border: InputBorder.none,
-                  enabledBorder: InputBorder.none,
-                  focusedBorder: InputBorder.none,
-                  errorBorder: InputBorder.none,
-                  disabledBorder: InputBorder.none,
-                  focusedErrorBorder: InputBorder.none,
-                  isDense: isDense,
-                  counterText: showCounter ? null : '',
+                      decoration: InputDecoration(
+                        hintText: widget.hintText,
+                        hintStyle: defaultHintStyle,
+                        prefixIcon: widget.prefixIcon != null
+                            ? Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 16, right: 12),
+                                child: IconTheme(
+                                  data: IconThemeData(
+                                    size: 20,
+                                    color: isDark
+                                        ? theme.colorScheme.onSurface
+                                            .withValues(alpha: 0.7)
+                                        : theme.colorScheme.onSurface
+                                            .withValues(alpha: 0.6),
+                                  ),
+                                  child: widget.prefixIcon!,
+                                ),
+                              )
+                            : null,
+                        suffixIcon: widget.suffixIcon != null
+                            ? Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 12, right: 16),
+                                child: IconTheme(
+                                  data: IconThemeData(
+                                    size: 20,
+                                    color: isDark
+                                        ? theme.colorScheme.onSurface
+                                            .withValues(alpha: 0.7)
+                                        : theme.colorScheme.onSurface
+                                            .withValues(alpha: 0.6),
+                                  ),
+                                  child: widget.suffixIcon!,
+                                ),
+                              )
+                            : null,
+                        contentPadding:
+                            widget.contentPadding ??
+                            EdgeInsets.symmetric(
+                              horizontal: widget.prefixIcon != null ? 12 : 20,
+                              vertical: widget.isDense ? 8 : 16,
+                            ),
+                        border: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        errorBorder: InputBorder.none,
+                        disabledBorder: InputBorder.none,
+                        focusedErrorBorder: InputBorder.none,
+                        isDense: widget.isDense,
+                        counterText: widget.showCounter ? null : '',
+                      ),
+                    ),
+                  ),
                 ),
               ),
-            ),
+              Positioned.fill(
+                child: IgnorePointer(
+                  child: AnimatedContainer(
+                    duration: Duration(
+                      milliseconds: uiConstants.animationDurationDefault,
+                    ),
+                    decoration: BoxDecoration(
+                      borderRadius:
+                          BorderRadius.circular(effectiveBorderRadius + 1),
+                      border: Border.all(
+                        color: highlightColor.withValues(
+                          alpha: highlightOpacity,
+                        ),
+                        width: highlightWidth,
+                      ),
+                      boxShadow: highlightOpacity > 0
+                          ? [
+                              BoxShadow(
+                                color: highlightColor.withValues(
+                                  alpha: highlightOpacity * 0.6,
+                                ),
+                                blurRadius: 12,
+                                offset: const Offset(0, 6),
+                              ),
+                            ]
+                          : [],
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ],
