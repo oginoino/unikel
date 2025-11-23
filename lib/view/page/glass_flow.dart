@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:glassy/components/glass_editor.dart';
+
 import 'package:glassy/model/glassy_post.dart';
+import 'package:glassy/view/component/glass_comments_sheet.dart';
+import 'package:glassy/view/component/glass_immersive_post.dart';
 import 'package:glassy/view/component/glass_post_card.dart';
-import 'package:glassy/view/component/ui/glassmorphism/glass_container.dart';
-import 'package:glassy/view/theme/glass_theme_extention.dart';
 
 class GlassFlow extends StatefulWidget {
   const GlassFlow({super.key});
@@ -13,41 +13,45 @@ class GlassFlow extends StatefulWidget {
 }
 
 class _GlassFlowState extends State<GlassFlow> {
-  // Dummy data for initial display
+  // Dummy Data
   final List<GlassyPost> _posts = [
     GlassyPost(
       id: '1',
       authorName: 'Elena Fisher',
       authorHandle: 'elena_writes',
+      authorAvatarUrl: null, // Use initial
       content:
-          'The beauty of glassmorphism isn\'t just in the blur, but in the depth it creates. It feels like looking through a window into another world. 🌿 #Design #UI',
-      timestamp: DateTime.now().subtract(const Duration(minutes: 45)),
-      applauseCount: 124,
-      recommendCount: 12,
-      isApplauded: true,
+          'Just discovered this amazing new glassmorphism library for Flutter! The blur effects are incredibly smooth and performant. #Flutter #UI #Design',
+      timestamp: DateTime.now().subtract(const Duration(minutes: 5)),
+      applauseCount: 12,
+      recommendCount: 3,
     ),
     GlassyPost(
       id: '2',
-      authorName: 'Marcus Chen',
-      authorHandle: 'marcus_c',
+      authorName: 'Alex Creator',
+      authorHandle: 'alex_builds',
+      authorAvatarUrl: null,
       content:
-          'Just finished reading "The Psychology of Money". A fascinating deep dive into how our emotions shape our financial decisions. Highly recommend it to anyone looking to understand their relationship with wealth.',
-      timestamp: DateTime.now().subtract(const Duration(hours: 3)),
-      applauseCount: 89,
-      recommendCount: 45,
-      isRecommended: true,
+          'Working on the new "Fragments" feature. It\'s going to change how we organize content. Stay tuned! 🚀',
+      timestamp: DateTime.now().subtract(const Duration(hours: 2)),
+      applauseCount: 45,
+      recommendCount: 8,
+      isApplauded: true,
     ),
     GlassyPost(
       id: '3',
-      authorName: 'Sarah Jenkins',
-      authorHandle: 'sarah_j',
+      authorName: 'Design Daily',
+      authorHandle: 'designdaily',
+      authorAvatarUrl: null,
       content:
-          'Sometimes the most productive thing you can do is step away from the screen and take a walk. 🌳🚶‍♀️',
-      timestamp: DateTime.now().subtract(const Duration(hours: 5)),
-      applauseCount: 256,
-      recommendCount: 8,
+          'Minimalism isn\'t about removing things you love. It\'s about removing the things that distract you from the things you love.',
+      timestamp: DateTime.now().subtract(const Duration(days: 1)),
+      applauseCount: 890,
+      recommendCount: 120,
     ),
   ];
+
+  bool _isImmersive = true;
 
   void _handleApplause(String postId) {
     setState(() {
@@ -55,10 +59,8 @@ class _GlassFlowState extends State<GlassFlow> {
       if (index != -1) {
         final post = _posts[index];
         _posts[index] = post.copyWith(
+          applauseCount: post.applauseCount + (post.isApplauded ? -1 : 1),
           isApplauded: !post.isApplauded,
-          applauseCount: post.isApplauded
-              ? post.applauseCount - 1
-              : post.applauseCount + 1,
         );
       }
     });
@@ -70,21 +72,39 @@ class _GlassFlowState extends State<GlassFlow> {
       if (index != -1) {
         final post = _posts[index];
         _posts[index] = post.copyWith(
+          recommendCount: post.recommendCount + (post.isRecommended ? -1 : 1),
           isRecommended: !post.isRecommended,
-          recommendCount: post.isRecommended
-              ? post.recommendCount - 1
-              : post.recommendCount + 1,
         );
       }
     });
   }
 
-  void _showEditor(BuildContext context) {
-    showModalBottomSheet(
+  void _showComments(BuildContext context) {
+    showGeneralDialog(
       context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      builder: (context) => const _EditorSheet(),
+      barrierDismissible: true,
+      barrierLabel: 'Comments',
+      barrierColor: Colors.black54,
+      transitionDuration: const Duration(milliseconds: 300),
+      pageBuilder: (context, animation, secondaryAnimation) {
+        return Align(
+          alignment: Alignment.centerRight,
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width * 0.85,
+            height: double.infinity,
+            child: const GlassCommentsSheet(),
+          ),
+        );
+      },
+      transitionBuilder: (context, animation, secondaryAnimation, child) {
+        return SlideTransition(
+          position: Tween<Offset>(begin: const Offset(1, 0), end: Offset.zero)
+              .animate(
+                CurvedAnimation(parent: animation, curve: Curves.easeOutCubic),
+              ),
+          child: child,
+        );
+      },
     );
   }
 
@@ -94,104 +114,84 @@ class _GlassFlowState extends State<GlassFlow> {
 
     return Scaffold(
       backgroundColor: theme.colorScheme.surface,
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            floating: true,
-            snap: true,
-            backgroundColor: theme.colorScheme.surface.withValues(alpha: 0.8),
-            title: Text(
-              'The Flow',
-              style: theme.textTheme.headlineSmall?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            centerTitle: false,
-            actions: [
-              IconButton(icon: const Icon(Icons.search), onPressed: () {}),
-              IconButton(
-                icon: const CircleAvatar(
-                  radius: 14,
-                  backgroundImage: NetworkImage(
-                    'https://i.pravatar.cc/150?img=12',
-                  ),
-                ),
-                onPressed: () {},
-              ),
-              const SizedBox(width: 16),
-            ],
-          ),
-          SliverPadding(
-            padding: const EdgeInsets.only(bottom: 80), // Space for FAB
-            sliver: SliverList(
-              delegate: SliverChildBuilderDelegate((context, index) {
-                final post = _posts[index];
-                return GlassPostCard(
-                  post: post,
-                  onApplause: () => _handleApplause(post.id),
-                  onRecommend: () => _handleRecommend(post.id),
-                  onTap: () {},
-                );
-              }, childCount: _posts.length),
-            ),
-          ),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => _showEditor(context),
-        label: const Text('New Glassy'),
-        icon: const Icon(Icons.edit),
-        backgroundColor: theme.colorScheme.primary,
-        foregroundColor: theme.colorScheme.onPrimary,
-      ),
-    );
-  }
-}
-
-class _EditorSheet extends StatelessWidget {
-  const _EditorSheet();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(
-        bottom: MediaQuery.of(context).viewInsets.bottom,
-      ),
-      child: GlassmorphismContainer(
-        variant: GlassSurfaceVariant.surface,
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-        child: Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  TextButton(
-                    onPressed: () => Navigator.pop(context),
-                    child: const Text('Cancel'),
-                  ),
-                  FilledButton(
-                    onPressed: () {
-                      // TODO: Implement post creation
-                      Navigator.pop(context);
-                    },
-                    child: const Text('Post'),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
-              const GlassEditor(
-                hintText: "What's on your mind?",
-                maxLength: 500,
-              ),
-              const SizedBox(height: 16),
-            ],
+      extendBodyBehindAppBar: _isImmersive,
+      appBar: AppBar(
+        backgroundColor: _isImmersive ? Colors.transparent : null,
+        elevation: 0,
+        title: Text(
+          'The Flow',
+          style: theme.textTheme.headlineSmall?.copyWith(
+            fontWeight: FontWeight.bold,
+            color: _isImmersive ? Colors.white : null,
           ),
         ),
+        actions: [
+          IconButton(
+            icon: Icon(
+              _isImmersive
+                  ? Icons.view_agenda_outlined
+                  : Icons.view_stream_rounded,
+              color: _isImmersive ? Colors.white : null,
+            ),
+            onPressed: () {
+              setState(() {
+                _isImmersive = !_isImmersive;
+              });
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.search, color: _isImmersive ? Colors.white : null),
+            onPressed: () {},
+          ),
+          const SizedBox(width: 8),
+        ],
       ),
+      body: _isImmersive ? _buildImmersiveView() : _buildListView(),
+    );
+  }
+
+  Widget _buildImmersiveView() {
+    return PageView.builder(
+      scrollDirection: Axis.vertical,
+      itemCount: _posts.length,
+      itemBuilder: (context, index) {
+        final post = _posts[index];
+        return GestureDetector(
+          onHorizontalDragEnd: (details) {
+            if (details.primaryVelocity! < 0) {
+              // Swipe Left -> Show Comments
+              _showComments(context);
+            }
+          },
+          child: GlassImmersivePost(
+            post: post,
+            onApplause: () => _handleApplause(post.id),
+            onRecommend: () => _handleRecommend(post.id),
+            onComments: () => _showComments(context),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildListView() {
+    return CustomScrollView(
+      slivers: [
+        SliverPadding(
+          padding: const EdgeInsets.only(bottom: 80),
+          sliver: SliverList(
+            delegate: SliverChildBuilderDelegate((context, index) {
+              final post = _posts[index];
+              return GlassPostCard(
+                post: post,
+                onApplause: () => _handleApplause(post.id),
+                onRecommend: () => _handleRecommend(post.id),
+                onTap: () {},
+              );
+            }, childCount: _posts.length),
+          ),
+        ),
+      ],
     );
   }
 }

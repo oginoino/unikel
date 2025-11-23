@@ -4,45 +4,84 @@ import 'package:glassy/view/theme/glass_theme_extention.dart';
 
 class GlassBottomBar extends StatelessWidget {
   final int currentIndex;
-  final ValueChanged<int> onTap;
+  final Function(int) onTap;
+  final VoidCallback onAdd;
 
   const GlassBottomBar({
     super.key,
     required this.currentIndex,
     required this.onTap,
+    required this.onAdd,
   });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(24, 0, 24, 24),
+      padding: const EdgeInsets.only(bottom: 24, left: 24, right: 24),
       child: GlassmorphismContainer(
         variant: GlassSurfaceVariant.navigation,
         borderRadius: BorderRadius.circular(32),
-        height: 64,
-        padding: const EdgeInsets.symmetric(horizontal: 8),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            _NavBarItem(
-              icon: Icons.stream_rounded,
-              label: 'Flow',
-              isSelected: currentIndex == 0,
-              onTap: () => onTap(0),
-            ),
-            _NavBarItem(
-              icon: Icons.tag_rounded,
-              label: 'Fragments',
-              isSelected: currentIndex == 1,
-              onTap: () => onTap(1),
-            ),
-            _NavBarItem(
-              icon: Icons.person_outline_rounded,
-              label: 'Profile',
-              isSelected: currentIndex == 2,
-              onTap: () => onTap(2),
-            ),
-          ],
+        height: 80, // Increased height for better touch targets
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              _NavBarItem(
+                icon: Icons.stream_rounded,
+                label: 'Flow',
+                isSelected: currentIndex == 0,
+                onTap: () => onTap(0),
+              ),
+
+              // Central Add Button
+              GestureDetector(
+                onTap: onAdd,
+                child: Container(
+                  width: 56,
+                  height: 56,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Theme.of(context).colorScheme.primary,
+                        Theme.of(context).colorScheme.tertiary,
+                      ],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.primary.withValues(alpha: 0.4),
+                        blurRadius: 12,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
+                  ),
+                  child: Icon(
+                    Icons.add_rounded,
+                    color: Theme.of(context).colorScheme.onPrimary,
+                    size: 32,
+                  ),
+                ),
+              ),
+
+              _NavBarItem(
+                icon: Icons.tag_rounded,
+                label: 'Fragments',
+                isSelected: currentIndex == 1,
+                onTap: () => onTap(1),
+              ),
+              _NavBarItem(
+                icon: Icons.person_outline_rounded,
+                label: 'Profile',
+                isSelected: currentIndex == 2,
+                onTap: () => onTap(2),
+              ),
+            ],
+          ),
         ),
       ),
     );

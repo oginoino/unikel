@@ -4,6 +4,8 @@ import 'package:glassy/view/page/glass_fragments.dart';
 import 'package:glassy/view/page/glass_flow.dart';
 import 'package:glassy/view/page/glass_profile.dart';
 
+import 'package:glassy/components/glass_editor.dart';
+
 class GlassScaffold extends StatefulWidget {
   const GlassScaffold({super.key});
 
@@ -26,14 +28,38 @@ class _GlassScaffoldState extends State<GlassScaffold> {
     });
   }
 
+  void _showEditor() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => Padding(
+        padding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewInsets.bottom,
+        ),
+        child: const GlassEditor(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBody: true, // Important for the floating glass bar
-      body: IndexedStack(index: _currentIndex, children: _pages),
-      bottomNavigationBar: GlassBottomBar(
-        currentIndex: _currentIndex,
-        onTap: _onTabTapped,
+      body: Stack(
+        children: [
+          // Main Content
+          IndexedStack(index: _currentIndex, children: _pages),
+
+          // Bottom Navigation Bar
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: GlassBottomBar(
+              currentIndex: _currentIndex,
+              onTap: _onTabTapped,
+              onAdd: _showEditor,
+            ),
+          ),
+        ],
       ),
     );
   }
