@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:glassy/model/glass_collection.dart';
+import 'package:glassy/model/glass_fragment.dart';
 import 'package:glassy/model/glassy_post.dart';
-import 'package:glassy/view/component/glass_collection_card.dart';
+import 'package:glassy/view/component/glass_fragment_card.dart';
 import 'package:glassy/view/component/glass_post_card.dart';
 import 'package:glassy/view/component/glass_profile_header.dart';
 import 'package:glassy/view/page/glass_settings.dart';
@@ -39,11 +39,12 @@ class _GlassProfileState extends State<GlassProfile>
     ),
   ];
 
-  final _collections = [
-    GlassCollection(
+  final _fragments = [
+    GlassFragment(
       id: '3',
       title: 'Project Alpha',
       description: 'Ideas and notes for the new startup.',
+      subscriberCount: 1,
       posts: [],
     ),
   ];
@@ -100,7 +101,7 @@ class _GlassProfileState extends State<GlassProfile>
                   indicatorColor: theme.colorScheme.primary,
                   tabs: const [
                     Tab(text: 'My Glassies'),
-                    Tab(text: 'Collections'),
+                    Tab(text: 'Fragments'),
                   ],
                 ),
               ),
@@ -120,7 +121,7 @@ class _GlassProfileState extends State<GlassProfile>
               },
             ),
 
-            // Collections Tab
+            // Fragments Tab
             GridView.builder(
               padding: const EdgeInsets.fromLTRB(16, 16, 16, 100),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -129,9 +130,9 @@ class _GlassProfileState extends State<GlassProfile>
                 crossAxisSpacing: 16,
                 childAspectRatio: 0.85,
               ),
-              itemCount: _collections.length,
+              itemCount: _fragments.length,
               itemBuilder: (context, index) {
-                return GlassCollectionCard(collection: _collections[index]);
+                return GlassFragmentCard(fragment: _fragments[index]);
               },
             ),
           ],

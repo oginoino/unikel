@@ -1,23 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:glassy/model/glass_collection.dart';
+import 'package:glassy/model/glass_fragment.dart';
 import 'package:glassy/model/glassy_post.dart';
-import 'package:glassy/view/component/glass_collection_card.dart';
-import 'package:glassy/view/page/glass_collection_detail.dart';
+import 'package:glassy/view/component/glass_fragment_card.dart';
+import 'package:glassy/view/page/glass_fragment_detail.dart';
 
-class GlassCollections extends StatefulWidget {
-  const GlassCollections({super.key});
+class GlassFragments extends StatefulWidget {
+  const GlassFragments({super.key});
 
   @override
-  State<GlassCollections> createState() => _GlassCollectionsState();
+  State<GlassFragments> createState() => _GlassFragmentsState();
 }
 
-class _GlassCollectionsState extends State<GlassCollections> {
+class _GlassFragmentsState extends State<GlassFragments> {
   // Dummy data
-  final List<GlassCollection> _collections = [
-    GlassCollection(
+  final List<GlassFragment> _fragments = [
+    GlassFragment(
       id: '1',
-      title: 'Design Inspiration',
-      description: 'UI/UX patterns, color palettes, and typography ideas.',
+      title: 'Design Systems',
+      description:
+          'Discussions about UI kits, tokens, and component libraries.',
+      subscriberCount: 1240,
       posts: [
         GlassyPost(
           id: '1',
@@ -26,26 +28,21 @@ class _GlassCollectionsState extends State<GlassCollections> {
           content: 'Glassmorphism is back!',
           timestamp: DateTime.now(),
         ),
-        GlassyPost(
-          id: '2',
-          authorName: 'Elena Fisher',
-          authorHandle: 'elena_writes',
-          content: 'Check out this gradient.',
-          timestamp: DateTime.now(),
-        ),
       ],
     ),
-    GlassCollection(
+    GlassFragment(
       id: '2',
-      title: 'Reading List',
-      description: 'Books and articles to read later.',
-      isPrivate: true,
+      title: 'Flutter Devs',
+      description: 'Everything Flutter. Tips, tricks, and showcases.',
+      subscriberCount: 5600,
       posts: [],
     ),
-    GlassCollection(
+    GlassFragment(
       id: '3',
-      title: 'Project Alpha',
-      description: 'Ideas and notes for the new startup.',
+      title: 'Startup Ideas',
+      description: 'Brainstorming the next big thing.',
+      isPrivate: true,
+      subscriberCount: 12,
       posts: [
         GlassyPost(
           id: '3',
@@ -56,12 +53,19 @@ class _GlassCollectionsState extends State<GlassCollections> {
         ),
       ],
     ),
+    GlassFragment(
+      id: '4',
+      title: 'Random',
+      description: 'Off-topic chatter.',
+      subscriberCount: 89,
+      posts: [],
+    ),
   ];
 
-  void _openCollection(GlassCollection collection) {
+  void _openFragment(GlassFragment fragment) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => GlassCollectionDetail(collection: collection),
+        builder: (context) => GlassFragmentDetail(fragment: fragment),
       ),
     );
   }
@@ -79,12 +83,13 @@ class _GlassCollectionsState extends State<GlassCollections> {
             snap: true,
             backgroundColor: theme.colorScheme.surface.withValues(alpha: 0.8),
             title: Text(
-              'Collections',
+              'Fragments',
               style: theme.textTheme.headlineSmall?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
             ),
             actions: [
+              IconButton(icon: const Icon(Icons.search), onPressed: () {}),
               IconButton(icon: const Icon(Icons.add), onPressed: () {}),
               const SizedBox(width: 16),
             ],
@@ -99,12 +104,12 @@ class _GlassCollectionsState extends State<GlassCollections> {
                 childAspectRatio: 0.85,
               ),
               delegate: SliverChildBuilderDelegate((context, index) {
-                final collection = _collections[index];
-                return GlassCollectionCard(
-                  collection: collection,
-                  onTap: () => _openCollection(collection),
+                final fragment = _fragments[index];
+                return GlassFragmentCard(
+                  fragment: fragment,
+                  onTap: () => _openFragment(fragment),
                 );
-              }, childCount: _collections.length),
+              }, childCount: _fragments.length),
             ),
           ),
           // Bottom padding for the floating bar

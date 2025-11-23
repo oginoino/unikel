@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:glassy/view/component/glass_bottom_bar.dart';
-import 'package:glassy/view/page/glass_collections.dart';
+import 'package:glassy/view/page/glass_fragments.dart';
 import 'package:glassy/view/page/glass_flow.dart';
 import 'package:glassy/view/page/glass_profile.dart';
 
@@ -16,7 +16,7 @@ class _GlassScaffoldState extends State<GlassScaffold> {
 
   final List<Widget> _pages = const [
     GlassFlow(),
-    GlassCollections(),
+    GlassFragments(),
     GlassProfile(),
   ];
 

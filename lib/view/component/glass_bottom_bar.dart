@@ -31,8 +31,8 @@ class GlassBottomBar extends StatelessWidget {
               onTap: () => onTap(0),
             ),
             _NavBarItem(
-              icon: Icons.layers_outlined,
-              label: 'Collections',
+              icon: Icons.tag_rounded,
+              label: 'Fragments',
               isSelected: currentIndex == 1,
               onTap: () => onTap(1),
             ),
