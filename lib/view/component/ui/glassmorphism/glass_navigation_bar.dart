@@ -1,3 +1,5 @@
+import 'package:glassy/view/theme/glass_theme_extention.dart';
+
 import '../../../../utils/imports/common_libs.dart';
 import '../glassmorphism/glass_container.dart';
 
@@ -24,6 +26,7 @@ class GlassmorphismNavigationBar extends StatelessWidget {
     final theme = Theme.of(context);
 
     return GlassmorphismContainer(
+      variant: GlassSurfaceVariant.navigation,
       borderRadius: BorderRadius.circular(uiConstants.radius12),
       blurAmount: blurAmount,
       backgroundColor: glassBackgroundColor,
@@ -41,6 +44,7 @@ class GlassmorphismNavigationBar extends StatelessWidget {
           unselectedItemColor: theme.colorScheme.onSurface.withValues(
             alpha: 0.6,
           ),
+          enableFeedback: true,
           selectedLabelStyle: theme.textTheme.labelSmall?.copyWith(
             fontWeight: FontWeight.w600,
           ),

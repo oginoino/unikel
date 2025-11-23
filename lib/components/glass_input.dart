@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:glassy/view/theme/glass_theme_extention.dart';
+
 import '../utils/constants/ui_constants.dart';
 import '../view/component/ui/glassmorphism/glass_container.dart';
 
@@ -19,7 +21,7 @@ class GlassInput extends StatelessWidget {
   final int? maxLines;
   final int? minLines;
   final double height;
-  final double borderRadius;
+  final double? borderRadius;
   final EdgeInsetsGeometry? contentPadding;
   final TextStyle? textStyle;
   final TextStyle? hintStyle;
@@ -27,8 +29,8 @@ class GlassInput extends StatelessWidget {
   final bool isDense;
   final Color? fillColor;
   final Color? borderColor;
-  final double borderWidth;
-  final double blurAmount;
+  final double? borderWidth;
+  final double? blurAmount;
   final bool autoFocus;
   final FocusNode? focusNode;
   final TextAlign textAlign;
@@ -39,6 +41,9 @@ class GlassInput extends StatelessWidget {
   final Color? cursorColor;
   final double cursorWidth;
   final Radius? cursorRadius;
+  final List<String>? autofillHints;
+  final String? semanticsLabel;
+  final TextInputAction? textInputAction;
 
   const GlassInput({
     super.key,
@@ -57,7 +62,7 @@ class GlassInput extends StatelessWidget {
     this.maxLines = 1,
     this.minLines,
     this.height = 56.0,
-    this.borderRadius = 12.0,
+    this.borderRadius,
     this.contentPadding,
     this.textStyle,
     this.hintStyle,
@@ -65,8 +70,8 @@ class GlassInput extends StatelessWidget {
     this.isDense = false,
     this.fillColor,
     this.borderColor,
-    this.borderWidth = 1.0,
-    this.blurAmount = 5.0,
+    this.borderWidth,
+    this.blurAmount,
     this.autoFocus = false,
     this.focusNode,
     this.textAlign = TextAlign.start,
@@ -77,6 +82,9 @@ class GlassInput extends StatelessWidget {
     this.cursorColor,
     this.cursorWidth = 2.0,
     this.cursorRadius,
+    this.autofillHints,
+    this.semanticsLabel,
+    this.textInputAction,
   });
 
   @override
@@ -84,6 +92,20 @@ class GlassInput extends StatelessWidget {
     final theme = Theme.of(context);
     final uiConstants = UIConstants();
     final isDark = theme.brightness == Brightness.dark;
+    final glassTheme = theme.extension<GlassTheme>();
+
+    final double effectiveBorderRadius =
+        borderRadius ??
+            glassTheme?.control.radius ??
+            uiConstants.glassInputBorderRadius;
+    final double effectiveBorderWidth =
+        borderWidth ??
+            glassTheme?.control.borderWidth ??
+            uiConstants.glassBorderWidthThin;
+    final double effectiveBlur =
+        blurAmount ??
+            glassTheme?.control.blur ??
+            uiConstants.glassInputBlurAmount;
 
     // Cores padrão baseadas no tema
     final defaultFillColor =
@@ -138,93 +160,103 @@ class GlassInput extends StatelessWidget {
           const SizedBox(height: 8),
         ],
         GlassmorphismContainer(
-          blurAmount: blurAmount,
-          borderRadius: BorderRadius.circular(borderRadius),
-          borderWidth: borderWidth,
+          variant: GlassSurfaceVariant.control,
+          blurAmount: effectiveBlur,
+          borderRadius: BorderRadius.circular(effectiveBorderRadius),
+          borderWidth: effectiveBorderWidth,
           child: Container(
             height: height,
             decoration: BoxDecoration(
               color: defaultFillColor,
-              borderRadius: BorderRadius.circular(borderRadius),
+              borderRadius: BorderRadius.circular(effectiveBorderRadius),
             ),
-            child: TextFormField(
-              controller: controller,
-              obscureText: obscureText,
-              keyboardType: keyboardType,
-              inputFormatters: inputFormatters,
-              validator: validator,
-              onChanged: onChanged,
-              onFieldSubmitted: onSubmitted,
+            child: Semantics(
+              label: semanticsLabel ?? labelText ?? hintText,
+              textField: true,
               enabled: enabled,
-              maxLines: maxLines,
-              minLines: minLines,
-              autofocus: autoFocus,
-              focusNode: focusNode,
-              textAlign: textAlign,
-              textAlignVertical: textAlignVertical ?? TextAlignVertical.center,
-              expands: expands,
-              maxLength: maxLength,
-              cursorColor: defaultCursorColor,
-              cursorWidth: cursorWidth,
-              cursorRadius: cursorRadius ?? const Radius.circular(2),
-              style: defaultTextStyle.copyWith(
-                color: enabled
-                    ? (defaultTextStyle.color ?? theme.colorScheme.onSurface)
-                    : theme.colorScheme.onSurface.withValues(alpha: 0.5),
-              ),
-              decoration: InputDecoration(
-                hintText: hintText,
-                hintStyle: defaultHintStyle,
-                prefixIcon: prefixIcon != null
-                    ? Padding(
-                        padding: const EdgeInsets.only(left: 16, right: 12),
-                        child: IconTheme(
-                          data: IconThemeData(
-                            size: 20,
-                            color: isDark
-                                ? theme.colorScheme.onSurface.withValues(
-                                    alpha: 0.7,
-                                  )
-                                : theme.colorScheme.onSurface.withValues(
-                                    alpha: 0.6,
-                                  ),
+              child: TextFormField(
+                controller: controller,
+                obscureText: obscureText,
+                keyboardType: keyboardType,
+                inputFormatters: inputFormatters,
+                validator: validator,
+                onChanged: onChanged,
+                onFieldSubmitted: onSubmitted,
+                enabled: enabled,
+                maxLines: maxLines,
+                minLines: minLines,
+                autofocus: autoFocus,
+                focusNode: focusNode,
+                textAlign: textAlign,
+                textAlignVertical:
+                    textAlignVertical ?? TextAlignVertical.center,
+                expands: expands,
+                maxLength: maxLength,
+                cursorColor: defaultCursorColor,
+                cursorWidth: cursorWidth,
+                cursorRadius: cursorRadius ?? const Radius.circular(2),
+                autofillHints: autofillHints,
+                textInputAction: textInputAction,
+                style: defaultTextStyle.copyWith(
+                  color: enabled
+                      ? (defaultTextStyle.color ??
+                          theme.colorScheme.onSurface)
+                      : theme.colorScheme.onSurface.withValues(alpha: 0.5),
+                ),
+                decoration: InputDecoration(
+                  hintText: hintText,
+                  hintStyle: defaultHintStyle,
+                  prefixIcon: prefixIcon != null
+                      ? Padding(
+                          padding: const EdgeInsets.only(left: 16, right: 12),
+                          child: IconTheme(
+                            data: IconThemeData(
+                              size: 20,
+                              color: isDark
+                                  ? theme.colorScheme.onSurface.withValues(
+                                      alpha: 0.7,
+                                    )
+                                  : theme.colorScheme.onSurface.withValues(
+                                      alpha: 0.6,
+                                    ),
+                            ),
+                            child: prefixIcon!,
                           ),
-                          child: prefixIcon!,
-                        ),
-                      )
-                    : null,
-                suffixIcon: suffixIcon != null
-                    ? Padding(
-                        padding: const EdgeInsets.only(left: 12, right: 16),
-                        child: IconTheme(
-                          data: IconThemeData(
-                            size: 20,
-                            color: isDark
-                                ? theme.colorScheme.onSurface.withValues(
-                                    alpha: 0.7,
-                                  )
-                                : theme.colorScheme.onSurface.withValues(
-                                    alpha: 0.6,
-                                  ),
+                        )
+                      : null,
+                  suffixIcon: suffixIcon != null
+                      ? Padding(
+                          padding: const EdgeInsets.only(left: 12, right: 16),
+                          child: IconTheme(
+                            data: IconThemeData(
+                              size: 20,
+                              color: isDark
+                                  ? theme.colorScheme.onSurface.withValues(
+                                      alpha: 0.7,
+                                    )
+                                  : theme.colorScheme.onSurface.withValues(
+                                      alpha: 0.6,
+                                    ),
+                            ),
+                            child: suffixIcon!,
                           ),
-                          child: suffixIcon!,
-                        ),
-                      )
-                    : null,
-                contentPadding:
-                    contentPadding ??
-                    EdgeInsets.symmetric(
-                      horizontal: prefixIcon != null ? 12 : 20,
-                      vertical: isDense ? 8 : 16,
-                    ),
-                border: InputBorder.none,
-                enabledBorder: InputBorder.none,
-                focusedBorder: InputBorder.none,
-                errorBorder: InputBorder.none,
-                disabledBorder: InputBorder.none,
-                focusedErrorBorder: InputBorder.none,
-                isDense: isDense,
-                counterText: showCounter ? null : '',
+                        )
+                      : null,
+                  contentPadding:
+                      contentPadding ??
+                      EdgeInsets.symmetric(
+                        horizontal: prefixIcon != null ? 12 : 20,
+                        vertical: isDense ? 8 : 16,
+                      ),
+                  border: InputBorder.none,
+                  enabledBorder: InputBorder.none,
+                  focusedBorder: InputBorder.none,
+                  errorBorder: InputBorder.none,
+                  disabledBorder: InputBorder.none,
+                  focusedErrorBorder: InputBorder.none,
+                  isDense: isDense,
+                  counterText: showCounter ? null : '',
+                ),
               ),
             ),
           ),
@@ -245,7 +277,7 @@ class GlassInputPassword extends StatefulWidget {
   final void Function(String)? onSubmitted;
   final bool enabled;
   final double height;
-  final double borderRadius;
+  final double? borderRadius;
   final EdgeInsetsGeometry? contentPadding;
   final TextStyle? textStyle;
   final TextStyle? hintStyle;
@@ -253,8 +285,8 @@ class GlassInputPassword extends StatefulWidget {
   final bool isDense;
   final Color? fillColor;
   final Color? borderColor;
-  final double borderWidth;
-  final double blurAmount;
+  final double? borderWidth;
+  final double? blurAmount;
   final bool autoFocus;
   final FocusNode? focusNode;
   final TextAlign textAlign;
@@ -263,6 +295,9 @@ class GlassInputPassword extends StatefulWidget {
   final Color? cursorColor;
   final double cursorWidth;
   final Radius? cursorRadius;
+  final List<String>? autofillHints;
+  final String? semanticsLabel;
+  final TextInputAction? textInputAction;
 
   const GlassInputPassword({
     super.key,
@@ -276,7 +311,7 @@ class GlassInputPassword extends StatefulWidget {
     this.onSubmitted,
     this.enabled = true,
     this.height = 56.0,
-    this.borderRadius = 12.0,
+    this.borderRadius,
     this.contentPadding,
     this.textStyle,
     this.hintStyle,
@@ -284,8 +319,8 @@ class GlassInputPassword extends StatefulWidget {
     this.isDense = false,
     this.fillColor,
     this.borderColor,
-    this.borderWidth = 1.0,
-    this.blurAmount = 5.0,
+    this.borderWidth,
+    this.blurAmount,
     this.autoFocus = false,
     this.focusNode,
     this.textAlign = TextAlign.start,
@@ -294,6 +329,9 @@ class GlassInputPassword extends StatefulWidget {
     this.cursorColor,
     this.cursorWidth = 2.0,
     this.cursorRadius,
+    this.autofillHints,
+    this.semanticsLabel,
+    this.textInputAction,
   });
 
   @override
@@ -358,6 +396,9 @@ class _GlassInputPasswordState extends State<GlassInputPassword> {
       cursorColor: widget.cursorColor,
       cursorWidth: widget.cursorWidth,
       cursorRadius: widget.cursorRadius,
+      autofillHints: widget.autofillHints,
+      semanticsLabel: widget.semanticsLabel,
+      textInputAction: widget.textInputAction,
     );
   }
 }

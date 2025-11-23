@@ -1,6 +1,7 @@
 import '../../../../utils/imports/common_libs.dart';
 import '../avatar/user_avatar.dart';
 import '../glassmorphism/glass_container.dart';
+import '../../../theme/glass_theme_extention.dart';
 
 class CustomSliverAppBar extends StatelessWidget {
   const CustomSliverAppBar({
@@ -55,10 +56,13 @@ class CustomSliverAppBar extends StatelessWidget {
           flexibleSpace: useGlassmorphism
               ? FlexibleSpaceBar(
                   background: GlassmorphismContainer(
+                    variant: GlassSurfaceVariant.surface,
                     borderRadius: BorderRadius.zero,
+                    padding: EdgeInsets.zero,
                     blurAmount: glassBlur,
                     backgroundColor: glassBackgroundColor,
-                    child: Container(),
+                    semanticLabel: appConstants.appName,
+                    child: const SizedBox.expand(),
                   ),
                 )
               : null,

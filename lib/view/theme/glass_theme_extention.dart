@@ -1,67 +1,130 @@
-import 'dart:ui'; // Necessário para lerpDouble
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+
+/// Define um conjunto de superfícies de vidro reutilizáveis para a UI.
+@immutable
+class GlassSurfaceStyle {
+  const GlassSurfaceStyle({
+    required this.background,
+    required this.borderGradient,
+    required this.shadow,
+    required this.blur,
+    required this.borderWidth,
+    required this.radius,
+    required this.padding,
+  });
+
+  final Color background;
+  final Gradient borderGradient;
+  final List<BoxShadow> shadow;
+  final double blur;
+  final double borderWidth;
+  final double radius;
+  final EdgeInsetsGeometry padding;
+
+  GlassSurfaceStyle copyWith({
+    Color? background,
+    Gradient? borderGradient,
+    List<BoxShadow>? shadow,
+    double? blur,
+    double? borderWidth,
+    double? radius,
+    EdgeInsetsGeometry? padding,
+  }) {
+    return GlassSurfaceStyle(
+      background: background ?? this.background,
+      borderGradient: borderGradient ?? this.borderGradient,
+      shadow: shadow ?? this.shadow,
+      blur: blur ?? this.blur,
+      borderWidth: borderWidth ?? this.borderWidth,
+      radius: radius ?? this.radius,
+      padding: padding ?? this.padding,
+    );
+  }
+
+  static GlassSurfaceStyle lerp(
+    GlassSurfaceStyle a,
+    GlassSurfaceStyle b,
+    double t,
+  ) {
+    return GlassSurfaceStyle(
+      background: Color.lerp(a.background, b.background, t) ?? a.background,
+      borderGradient:
+          Gradient.lerp(a.borderGradient, b.borderGradient, t) ??
+              a.borderGradient,
+      shadow: BoxShadow.lerpList(a.shadow, b.shadow, t) ?? a.shadow,
+      blur: lerpDouble(a.blur, b.blur, t) ?? a.blur,
+      borderWidth: lerpDouble(a.borderWidth, b.borderWidth, t) ??
+          a.borderWidth,
+      radius: lerpDouble(a.radius, b.radius, t) ?? a.radius,
+      padding: EdgeInsetsGeometry.lerp(a.padding, b.padding, t) ?? a.padding,
+    );
+  }
+}
+
+enum GlassSurfaceVariant { surface, elevated, control, navigation }
 
 @immutable
 class GlassTheme extends ThemeExtension<GlassTheme> {
-  final Color glassColor;
-  final Color glassBorderColor;
-  final Color glassBorderColorStart;
-  final Color glassBorderColorEnd;
-  final double blurAmount;
-  final double borderWidth; // Corrigido de 'borderWith' para 'borderWidth'
-
   const GlassTheme({
-    required this.glassColor,
-    required this.glassBorderColor,
-    required this.glassBorderColorStart,
-    required this.glassBorderColorEnd,
-    required this.blurAmount,
-    required this.borderWidth,
+    required this.surface,
+    required this.elevated,
+    required this.control,
+    required this.navigation,
+    required this.focusColor,
+    required this.focusWidth,
+    required this.textShadow,
+    required this.inverseTextShadow,
   });
+
+  final GlassSurfaceStyle surface;
+  final GlassSurfaceStyle elevated;
+  final GlassSurfaceStyle control;
+  final GlassSurfaceStyle navigation;
+  final Color focusColor;
+  final double focusWidth;
+  final Color textShadow;
+  final Color inverseTextShadow;
 
   @override
   GlassTheme copyWith({
-    Color? glassColor,
-    Color? glassBorderColor,
-    Color? glassBorderColorStart,
-    Color? glassBorderColorEnd,
-    double? blurAmount,
-    double? borderWidth,
+    GlassSurfaceStyle? surface,
+    GlassSurfaceStyle? elevated,
+    GlassSurfaceStyle? control,
+    GlassSurfaceStyle? navigation,
+    Color? focusColor,
+    double? focusWidth,
+    Color? textShadow,
+    Color? inverseTextShadow,
   }) {
     return GlassTheme(
-      glassColor: glassColor ?? this.glassColor,
-      glassBorderColor: glassBorderColor ?? this.glassBorderColor,
-      glassBorderColorStart:
-          glassBorderColorStart ?? this.glassBorderColorStart,
-      glassBorderColorEnd: glassBorderColorEnd ?? this.glassBorderColorEnd,
-      blurAmount: blurAmount ?? this.blurAmount,
-      borderWidth: borderWidth ?? this.borderWidth,
+      surface: surface ?? this.surface,
+      elevated: elevated ?? this.elevated,
+      control: control ?? this.control,
+      navigation: navigation ?? this.navigation,
+      focusColor: focusColor ?? this.focusColor,
+      focusWidth: focusWidth ?? this.focusWidth,
+      textShadow: textShadow ?? this.textShadow,
+      inverseTextShadow: inverseTextShadow ?? this.inverseTextShadow,
     );
   }
 
   @override
   GlassTheme lerp(ThemeExtension<GlassTheme>? other, double t) {
     if (other is! GlassTheme) return this;
+
     return GlassTheme(
-      glassColor: Color.lerp(glassColor, other.glassColor, t)!,
-      glassBorderColor: Color.lerp(
-        glassBorderColor,
-        other.glassBorderColor,
-        t,
-      )!,
-      glassBorderColorStart: Color.lerp(
-        glassBorderColorStart,
-        other.glassBorderColorStart,
-        t,
-      )!,
-      glassBorderColorEnd: Color.lerp(
-        glassBorderColorEnd,
-        other.glassBorderColorEnd,
-        t,
-      )!,
-      // CORREÇÃO AQUI: Usando lerpDouble em vez de double.lerp
-      blurAmount: lerpDouble(blurAmount, other.blurAmount, t)!,
-      borderWidth: lerpDouble(borderWidth, other.borderWidth, t)!,
+      surface: GlassSurfaceStyle.lerp(surface, other.surface, t),
+      elevated: GlassSurfaceStyle.lerp(elevated, other.elevated, t),
+      control: GlassSurfaceStyle.lerp(control, other.control, t),
+      navigation: GlassSurfaceStyle.lerp(navigation, other.navigation, t),
+      focusColor: Color.lerp(focusColor, other.focusColor, t) ?? focusColor,
+      focusWidth: lerpDouble(focusWidth, other.focusWidth, t) ?? focusWidth,
+      textShadow: Color.lerp(textShadow, other.textShadow, t) ?? textShadow,
+      inverseTextShadow:
+          Color.lerp(inverseTextShadow, other.inverseTextShadow, t) ??
+              inverseTextShadow,
     );
   }
 }

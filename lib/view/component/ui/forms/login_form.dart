@@ -1,4 +1,5 @@
 import 'package:country_code_picker/country_code_picker.dart';
+import 'package:glassy/view/theme/glass_theme_extention.dart';
 
 import '../../../../utils/imports/common_libs.dart';
 import '../glassmorphism/glass_container.dart';
@@ -77,20 +78,6 @@ class _LoginFormState extends State<LoginForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            l10n.loginPageTitle,
-            style: textTheme.headlineSmall?.copyWith(
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          SizedBox(height: uiConstants.spacing2),
-          Text(
-            l10n.loginPageSubtitle,
-            style: textTheme.bodyLarge?.copyWith(
-              color: theme.colorScheme.onSurfaceVariant,
-            ),
-          ),
-          SizedBox(height: uiConstants.spacing6),
           Wrap(
             spacing: uiConstants.spacing2,
             runSpacing: uiConstants.spacing2,
@@ -100,8 +87,13 @@ class _LoginFormState extends State<LoginForm> {
                 width: 112,
                 height: uiConstants.glassInputHeightMedium,
                 child: GlassmorphismContainer(
+                  variant: GlassSurfaceVariant.control,
                   borderRadius: BorderRadius.circular(
                     uiConstants.glassInputBorderRadius,
+                  ),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: uiConstants.spacing3,
+                    vertical: uiConstants.spacing2,
                   ),
                   child: Container(
                     padding: EdgeInsets.symmetric(
@@ -135,13 +127,17 @@ class _LoginFormState extends State<LoginForm> {
                   controller: _phoneController,
                   hintText: l10n.phoneValue,
                   labelText: l10n.labelPhone,
+                  semanticsLabel: l10n.labelPhone,
                   enabled: !isLoading,
                   height: uiConstants.glassInputHeightMedium,
                   borderRadius: uiConstants.glassInputBorderRadius,
-                  borderWidth: uiConstants.glassInputBorderWidth,
-                  blurAmount: uiConstants.glassInputBlurAmount,
                   contentPadding: uiConstants.glassInputContentPadding,
                   keyboardType: TextInputType.phone,
+                  autofillHints: const [
+                    AutofillHints.telephoneNumberNational,
+                    AutofillHints.telephoneNumber,
+                  ],
+                  textInputAction: TextInputAction.done,
                   validator: (value) =>
                       FormValidators.validatePhone(value, context),
                   onSubmitted: (_) => _handleSubmit(),

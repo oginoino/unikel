@@ -1,11 +1,14 @@
 import 'dart:ui';
+
+import 'package:glassy/view/theme/glass_theme_extention.dart';
+
 import '../../../../utils/imports/common_libs.dart';
-import 'glass_theme.dart';
 
 class GlassmorphismContainer extends StatelessWidget {
   const GlassmorphismContainer({
     super.key,
     required this.child,
+    this.variant = GlassSurfaceVariant.surface,
     this.blurAmount,
     this.borderRadius,
     this.borderWidth,
@@ -17,9 +20,11 @@ class GlassmorphismContainer extends StatelessWidget {
     this.height,
     this.alignment,
     this.boxShadow,
+    this.semanticLabel,
   });
 
   final Widget child;
+  final GlassSurfaceVariant variant;
   final double? blurAmount;
   final BorderRadius? borderRadius;
   final double? borderWidth;
@@ -31,6 +36,7 @@ class GlassmorphismContainer extends StatelessWidget {
   final double? height;
   final AlignmentGeometry? alignment;
   final List<BoxShadow>? boxShadow;
+  final String? semanticLabel;
 
   @override
   Widget build(BuildContext context) {
@@ -38,60 +44,46 @@ class GlassmorphismContainer extends StatelessWidget {
     final isDark = theme.brightness == Brightness.dark;
     final glassTheme = theme.extension<GlassTheme>();
 
-    final double effectiveBlur =
-        blurAmount ?? glassTheme?.blurAmount ?? uiConstants.glassBlurMedium;
+    final GlassSurfaceStyle style = _resolveStyle(
+      glassTheme: glassTheme,
+      variant: variant,
+      isDark: isDark,
+    );
+
+    final double effectiveBlur = blurAmount ?? style.blur;
     final double effectiveBorderWidth =
-        borderWidth ??
-        glassTheme?.borderWidth ??
-        uiConstants.glassBorderWidthThin;
+        borderWidth ?? style.borderWidth;
     final BorderRadius effectiveBorderRadius =
-        borderRadius ?? BorderRadius.circular(uiConstants.radius16);
-
+        borderRadius ?? BorderRadius.circular(style.radius);
     final Color effectiveBackgroundColor =
-        backgroundColor ??
-        (isDark ? uiConstants.glassBlackMedium : uiConstants.glassWhiteMedium);
-
+        backgroundColor ?? style.background;
     final Gradient effectiveBorderGradient =
-        borderGradient ??
-        (isDark
-            ? LinearGradient(
-                colors: [
-                  glassTheme?.glassBorderColorStart ??
-                      uiConstants.glassBorderDarkStart,
-                  glassTheme?.glassBorderColorEnd ??
-                      uiConstants.glassBorderDarkEnd,
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              )
-            : LinearGradient(
-                colors: [
-                  uiConstants.glassBorderLightStart,
-                  uiConstants.glassBorderLightEnd,
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ));
+        borderGradient ?? style.borderGradient;
+    final EdgeInsetsGeometry effectivePadding =
+        padding ?? style.padding;
+    final List<BoxShadow> effectiveShadow = boxShadow ?? style.shadow;
 
-    return Container(
+    final Color primaryShadow =
+        glassTheme?.textShadow ??
+            (isDark
+                ? Colors.black.withValues(alpha: 0.32)
+                : Colors.white.withValues(alpha: 0.38));
+    final Color secondaryShadow =
+        glassTheme?.inverseTextShadow ??
+            (isDark
+                ? Colors.white.withValues(alpha: 0.24)
+                : Colors.black.withValues(alpha: 0.18));
+
+    Widget content = AnimatedContainer(
+      duration: Duration(milliseconds: uiConstants.animationDurationDefault),
+      curve: Curves.easeOutCubic,
       width: width,
       height: height,
       margin: margin,
       alignment: alignment,
       decoration: BoxDecoration(
         borderRadius: effectiveBorderRadius,
-        boxShadow:
-            boxShadow ??
-            [
-              BoxShadow(
-                color: (isDark ? Colors.black : Colors.grey).withValues(
-                  alpha: 0.05,
-                ),
-                blurRadius: effectiveBlur * 0.5,
-                spreadRadius: -2,
-                offset: const Offset(0, 2),
-              ),
-            ],
+        boxShadow: effectiveShadow,
       ),
       child: ClipRRect(
         borderRadius: effectiveBorderRadius,
@@ -101,7 +93,7 @@ class GlassmorphismContainer extends StatelessWidget {
             sigmaY: effectiveBlur,
           ),
           child: Container(
-            padding: padding ?? EdgeInsets.all(uiConstants.spacing4),
+            padding: effectivePadding,
             decoration: BoxDecoration(
               color: effectiveBackgroundColor,
               borderRadius: effectiveBorderRadius,
@@ -118,7 +110,7 @@ class GlassmorphismContainer extends StatelessWidget {
                 decoration: BoxDecoration(
                   border: Border.all(
                     width: effectiveBorderWidth,
-                    color: Colors.white.withValues(alpha: 0.3),
+                    color: Colors.white.withValues(alpha: 0.24),
                   ),
                   borderRadius: effectiveBorderRadius,
                 ),
@@ -126,29 +118,13 @@ class GlassmorphismContainer extends StatelessWidget {
                   style: DefaultTextStyle.of(context).style.copyWith(
                     shadows: [
                       Shadow(
-                        color:
-                            (theme.brightness == Brightness.dark
-                                    ? Colors.black
-                                    : Colors.white)
-                                .withValues(
-                                  alpha: theme.brightness == Brightness.dark
-                                      ? 0.2
-                                      : 0.25,
-                                ),
-                        blurRadius: 3,
+                        color: primaryShadow,
+                        blurRadius: 4,
                         offset: const Offset(0, 1),
                       ),
                       Shadow(
-                        color:
-                            (theme.brightness == Brightness.dark
-                                    ? Colors.black
-                                    : Colors.white)
-                                .withValues(
-                                  alpha: theme.brightness == Brightness.dark
-                                      ? 0.1
-                                      : 0.15,
-                                ),
-                        blurRadius: 6,
+                        color: secondaryShadow,
+                        blurRadius: 8,
                         offset: const Offset(0, 2),
                       ),
                     ],
@@ -161,6 +137,64 @@ class GlassmorphismContainer extends StatelessWidget {
         ),
       ),
     );
+
+    if (semanticLabel != null) {
+      content = Semantics(
+        container: true,
+        label: semanticLabel,
+        child: content,
+      );
+    }
+
+    return content;
+  }
+
+  GlassSurfaceStyle _resolveStyle({
+    GlassTheme? glassTheme,
+    required GlassSurfaceVariant variant,
+    required bool isDark,
+  }) {
+    final fallback = GlassSurfaceStyle(
+      background:
+          isDark ? uiConstants.glassBlackMedium : uiConstants.glassWhiteMedium,
+      borderGradient: LinearGradient(
+        colors: isDark
+            ? [
+                uiConstants.glassBorderDarkStart,
+                uiConstants.glassBorderDarkEnd,
+              ]
+            : [
+                uiConstants.glassBorderLightStart,
+                uiConstants.glassBorderLightEnd,
+              ],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+      ),
+      shadow: [
+        BoxShadow(
+          color: (isDark ? Colors.black : Colors.grey).withValues(alpha: 0.08),
+          blurRadius: 16,
+          offset: const Offset(0, 10),
+        ),
+      ],
+      blur: uiConstants.glassBlurMedium,
+      borderWidth: uiConstants.glassBorderWidthThin,
+      radius: uiConstants.radius16,
+      padding: EdgeInsets.all(uiConstants.spacing4),
+    );
+
+    if (glassTheme == null) return fallback;
+
+    switch (variant) {
+      case GlassSurfaceVariant.surface:
+        return glassTheme.surface;
+      case GlassSurfaceVariant.elevated:
+        return glassTheme.elevated;
+      case GlassSurfaceVariant.control:
+        return glassTheme.control;
+      case GlassSurfaceVariant.navigation:
+        return glassTheme.navigation;
+    }
   }
 }
 
@@ -190,10 +224,13 @@ class GlassmorphismCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
+    final glassTheme = theme.extension<GlassTheme>();
 
     Widget content = GlassmorphismContainer(
+      variant: GlassSurfaceVariant.elevated,
       margin: margin,
       padding: padding ?? EdgeInsets.all(uiConstants.spacing6),
+      semanticLabel: title,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
@@ -217,32 +254,16 @@ class GlassmorphismCard extends StatelessWidget {
                             color: theme.colorScheme.onSurface,
                             shadows: [
                               Shadow(
-                                color:
-                                    (theme.brightness == Brightness.dark
-                                            ? Colors.black
-                                            : Colors.white)
-                                        .withValues(
-                                          alpha:
-                                              theme.brightness ==
-                                                  Brightness.dark
-                                              ? 0.25
-                                              : 0.3,
-                                        ),
+                                color: glassTheme?.textShadow ??
+                                    theme.colorScheme.onSurface
+                                        .withValues(alpha: 0.12),
                                 blurRadius: 3,
                                 offset: const Offset(0, 1),
                               ),
                               Shadow(
-                                color:
-                                    (theme.brightness == Brightness.dark
-                                            ? Colors.black
-                                            : Colors.white)
-                                        .withValues(
-                                          alpha:
-                                              theme.brightness ==
-                                                  Brightness.dark
-                                              ? 0.1
-                                              : 0.15,
-                                        ),
+                                color: glassTheme?.inverseTextShadow ??
+                                    theme.colorScheme.onSurface
+                                        .withValues(alpha: 0.08),
                                 blurRadius: 6,
                                 offset: const Offset(0, 2),
                               ),
@@ -254,38 +275,6 @@ class GlassmorphismCard extends StatelessWidget {
                           subtitle!,
                           style: textTheme.bodyMedium?.copyWith(
                             color: theme.colorScheme.onSurfaceVariant,
-                            shadows: [
-                              Shadow(
-                                color:
-                                    (theme.brightness == Brightness.dark
-                                            ? Colors.black
-                                            : Colors.white)
-                                        .withValues(
-                                          alpha:
-                                              theme.brightness ==
-                                                  Brightness.dark
-                                              ? 0.2
-                                              : 0.25,
-                                        ),
-                                blurRadius: 3,
-                                offset: const Offset(0, 1),
-                              ),
-                              Shadow(
-                                color:
-                                    (theme.brightness == Brightness.dark
-                                            ? Colors.black
-                                            : Colors.white)
-                                        .withValues(
-                                          alpha:
-                                              theme.brightness ==
-                                                  Brightness.dark
-                                              ? 0.08
-                                              : 0.12,
-                                        ),
-                                blurRadius: 5,
-                                offset: const Offset(0, 1.5),
-                              ),
-                            ],
                           ),
                         ),
                     ],
@@ -301,10 +290,15 @@ class GlassmorphismCard extends StatelessWidget {
     );
 
     if (onTap != null) {
-      return InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(uiConstants.radius16),
-        child: content,
+      content = Semantics(
+        button: true,
+        enabled: true,
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(uiConstants.radius16),
+          focusColor: glassTheme?.focusColor.withValues(alpha: 0.15),
+          child: content,
+        ),
       );
     }
 

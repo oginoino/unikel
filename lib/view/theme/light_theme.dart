@@ -77,12 +77,112 @@ ColorScheme _lightColorScheme = ColorScheme.light(
 
 // EXTENSÃO GLASSMORPHISM LIGHT
 GlassTheme _lightGlassTheme = GlassTheme(
-  glassColor: uiConstants.glassWhiteLow,
-  glassBorderColor: uiConstants.glassWhiteMedium,
-  glassBorderColorStart: uiConstants.glassBorderLightStart,
-  glassBorderColorEnd: uiConstants.glassBorderLightEnd,
-  blurAmount: uiConstants.glassBlurMedium,
-  borderWidth: uiConstants.glassBorderWidthThin,
+  surface: GlassSurfaceStyle(
+    background: uiConstants.glassWhiteLow,
+    borderGradient: LinearGradient(
+      colors: [
+        uiConstants.glassBorderLightStart,
+        uiConstants.glassBorderLightEnd,
+      ],
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+    ),
+    shadow: [
+      BoxShadow(
+        color: uiConstants.lightShadow.withValues(alpha: 0.04),
+        blurRadius: 20,
+        offset: const Offset(0, 10),
+      ),
+      BoxShadow(
+        color: uiConstants.lightShadow.withValues(alpha: 0.02),
+        blurRadius: 8,
+        offset: const Offset(0, 2),
+      ),
+    ],
+    blur: uiConstants.glassBlurMedium,
+    borderWidth: uiConstants.glassBorderWidthThin,
+    radius: uiConstants.radius16,
+    padding: EdgeInsets.all(uiConstants.spacing4),
+  ),
+  elevated: GlassSurfaceStyle(
+    background: uiConstants.glassWhiteMedium,
+    borderGradient: LinearGradient(
+      colors: [
+        Colors.white.withValues(alpha: 0.72),
+        Colors.white.withValues(alpha: 0.2),
+      ],
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+    ),
+    shadow: [
+      BoxShadow(
+        color: uiConstants.lightShadow.withValues(alpha: 0.1),
+        blurRadius: 28,
+        offset: const Offset(0, 18),
+      ),
+    ],
+    blur: uiConstants.glassBlurHeavy,
+    borderWidth: uiConstants.glassBorderWidthThick,
+    radius: uiConstants.radius20,
+    padding: EdgeInsets.symmetric(
+      horizontal: uiConstants.spacing6,
+      vertical: uiConstants.spacing5,
+    ),
+  ),
+  control: GlassSurfaceStyle(
+    background: uiConstants.glassWhiteMedium,
+    borderGradient: LinearGradient(
+      colors: [
+        uiConstants.glassBorderLightStart,
+        uiConstants.glassBorderLightEnd,
+      ],
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+    ),
+    shadow: [
+      BoxShadow(
+        color: uiConstants.lightShadow.withValues(alpha: 0.06),
+        blurRadius: 16,
+        offset: const Offset(0, 8),
+      ),
+    ],
+    blur: uiConstants.glassBlurLight,
+    borderWidth: uiConstants.glassBorderWidthThin,
+    radius: uiConstants.glassInputBorderRadius,
+    padding: EdgeInsets.symmetric(
+      horizontal: uiConstants.spacing4,
+      vertical: uiConstants.spacing3,
+    ),
+  ),
+  navigation: GlassSurfaceStyle(
+    background: uiConstants.glassWhiteLow,
+    borderGradient: LinearGradient(
+      colors: [
+        Colors.white.withValues(alpha: 0.38),
+        Colors.white.withValues(alpha: 0.16),
+      ],
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+    ),
+    shadow: [
+      BoxShadow(
+        color: uiConstants.lightShadow.withValues(alpha: 0.08),
+        blurRadius: 22,
+        offset: const Offset(0, 12),
+      ),
+    ],
+    blur: uiConstants.glassBlurMedium,
+    borderWidth: uiConstants.glassBorderWidthThin,
+    radius: uiConstants.radius16,
+    padding: EdgeInsets.symmetric(
+      horizontal: uiConstants.spacing4,
+      vertical: uiConstants.spacing3,
+    ),
+  ),
+  focusColor: uiConstants.lightPrimary,
+  focusWidth: uiConstants.borderWidth2,
+  textShadow: Colors.white.withValues(alpha: 0.38),
+  inverseTextShadow: Colors.black.withValues(alpha: 0.2),
 );
 
 TextTheme _lightTextTheme = TextTheme(
