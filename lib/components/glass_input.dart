@@ -208,15 +208,30 @@ class _GlassInputState extends State<GlassInput>
 
     final defaultCursorColor = widget.cursorColor ?? theme.colorScheme.primary;
 
-    final Color borderColor = _errorText != null
-        ? theme.colorScheme.error
-        : (_isFocused
-              ? theme.colorScheme.primary
-              : (_isHovered
-                    ? theme.colorScheme.onSurface.withValues(alpha: 0.3)
-                    : theme.colorScheme.onSurface.withValues(alpha: 0.1)));
+    final defaultBorderGradient =
+        glassTheme?.control.borderGradient ??
+        LinearGradient(
+          colors: [
+            uiConstants.glassBorderLightStart,
+            uiConstants.glassBorderLightEnd,
+          ],
+        );
 
-    final double borderWidth = _isFocused || _errorText != null ? 1.5 : 1.0;
+    final Gradient effectiveBorderGradient = _errorText != null
+        ? LinearGradient(
+            colors: [
+              theme.colorScheme.error,
+              theme.colorScheme.error.withValues(alpha: 0.5),
+            ],
+          )
+        : (_isFocused
+              ? LinearGradient(
+                  colors: [
+                    theme.colorScheme.primary,
+                    theme.colorScheme.primary.withValues(alpha: 0.5),
+                  ],
+                )
+              : defaultBorderGradient);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -243,10 +258,10 @@ class _GlassInputState extends State<GlassInput>
                     ? [
                         BoxShadow(
                           color: theme.colorScheme.primary.withValues(
-                            alpha: 0.25,
+                            alpha: 0.15,
                           ),
-                          blurRadius: 12,
-                          offset: const Offset(0, 4),
+                          blurRadius: 16,
+                          offset: const Offset(0, 8),
                         ),
                       ]
                     : [],
@@ -255,14 +270,14 @@ class _GlassInputState extends State<GlassInput>
                 variant: GlassSurfaceVariant.control,
                 blurAmount: effectiveBlur,
                 borderRadius: BorderRadius.circular(effectiveBorderRadius),
-                borderWidth: 0, // We handle border manually for better control
+                borderGradient: effectiveBorderGradient,
+                borderWidth: 1.5,
                 child: AnimatedContainer(
                   duration: const Duration(milliseconds: 200),
                   height: widget.height,
                   decoration: BoxDecoration(
                     color: defaultFillColor,
                     borderRadius: BorderRadius.circular(effectiveBorderRadius),
-                    border: Border.all(color: borderColor, width: borderWidth),
                   ),
                   child: Semantics(
                     label:
