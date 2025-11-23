@@ -2,6 +2,7 @@ import 'package:country_code_picker/country_code_picker.dart';
 import 'package:pinput/pinput.dart';
 import '../../../../utils/imports/common_libs.dart';
 import '../glassmorphism/glass_container.dart';
+import '../../../../components/glass_input.dart';
 
 class RegisterUserForm extends StatefulWidget {
   const RegisterUserForm({super.key});
@@ -397,25 +398,22 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  GlassmorphismContainer(
-                    borderRadius: BorderRadius.circular(uiConstants.radius12),
-                    child: TextFormField(
-                      controller: _nameController,
-                      style: textTheme.titleLarge,
-                      decoration: InputDecoration(
-                        labelText: l10n.labelName,
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.symmetric(
-                          horizontal: uiConstants.spacing4,
-                          vertical: uiConstants.spacing3,
-                        ),
-                      ),
-                      validator: (value) => FormValidators.validateRequired(
-                        value,
-                        l10n.nameValue,
-                        context,
-                      ),
+                  GlassInput(
+                    controller: _nameController,
+                    hintText: l10n.nameValue,
+                    labelText: l10n.labelName,
+                    height: uiConstants.glassInputHeightMedium,
+                    borderRadius: uiConstants.glassInputBorderRadius,
+                    borderWidth: uiConstants.glassInputBorderWidth,
+                    blurAmount: uiConstants.glassInputBlurAmount,
+                    contentPadding: uiConstants.glassInputContentPadding,
+                    textStyle: textTheme.titleLarge,
+                    validator: (value) => FormValidators.validateRequired(
+                      value,
+                      l10n.nameValue,
+                      context,
                     ),
+                    prefixIcon: const Icon(Icons.person_outline),
                   ),
                 ],
               ),
@@ -455,10 +453,10 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                             flex: 3,
                             fit: FlexFit.loose,
                             child: SizedBox(
-                              height: uiConstants.buttonHeight,
+                              height: uiConstants.glassInputHeightMedium,
                               child: GlassmorphismContainer(
                                 borderRadius: BorderRadius.circular(
-                                  uiConstants.radius16,
+                                  uiConstants.glassInputBorderRadius,
                                 ),
                                 child: CountryCodePicker(
                                   dialogTextStyle: textTheme.titleMedium,
@@ -471,7 +469,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                                       color: theme.dividerColor,
                                     ),
                                     borderRadius: BorderRadius.circular(
-                                      uiConstants.radius16,
+                                      uiConstants.glassInputBorderRadius,
                                     ),
                                   ),
                                   flagWidth: uiConstants.spacing8,
@@ -516,28 +514,21 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                           SizedBox(width: uiConstants.spacing3),
                           Expanded(
                             flex: 20,
-                            child: GlassmorphismContainer(
-                              borderRadius: BorderRadius.circular(
-                                uiConstants.radius16,
-                              ),
-                              child: TextFormField(
-                                controller: _phoneController,
-                                keyboardType: TextInputType.phone,
-                                style: textTheme.titleLarge,
-                                decoration: InputDecoration(
-                                  labelText: l10n.labelPhone,
-                                  border: InputBorder.none,
-                                  contentPadding: EdgeInsets.symmetric(
-                                    horizontal: uiConstants.spacing4,
-                                    vertical: uiConstants.spacing3,
-                                  ),
-                                ),
-                                validator: (value) =>
-                                    FormValidators.validatePhone(
-                                      value,
-                                      context,
-                                    ),
-                              ),
+                            child: GlassInput(
+                              controller: _phoneController,
+                              hintText: l10n.phoneValue,
+                              labelText: l10n.labelPhone,
+                              height: uiConstants.glassInputHeightMedium,
+                              borderRadius: uiConstants.glassInputBorderRadius,
+                              borderWidth: uiConstants.glassInputBorderWidth,
+                              blurAmount: uiConstants.glassInputBlurAmount,
+                              contentPadding:
+                                  uiConstants.glassInputContentPadding,
+                              keyboardType: TextInputType.phone,
+                              textStyle: textTheme.titleLarge,
+                              validator: (value) =>
+                                  FormValidators.validatePhone(value, context),
+                              prefixIcon: const Icon(Icons.phone_outlined),
                             ),
                           ),
                         ],
@@ -607,7 +598,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                         defaultPinTheme: _buildPinTheme(
                           theme: theme,
                           borderSide: enabledBorderSide,
-                          fallbackWidth: enabledBorderSide?.width ?? 1.0,
+                          fallbackWidth: uiConstants.glassInputBorderWidth,
                         ),
                         focusedPinTheme: hasError
                             ? _buildPinTheme(
@@ -615,9 +606,7 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                                 borderSide:
                                     focusedErrorBorderSide ?? errorBorderSide,
                                 fallbackWidth:
-                                    (focusedErrorBorderSide ?? errorBorderSide)
-                                        ?.width ??
-                                    2.0,
+                                    uiConstants.glassInputBorderWidth,
                                 fallbackColor: theme.colorScheme.error,
                                 textColor: theme.colorScheme.error,
                                 padding: EdgeInsets.all(uiConstants.spacing6),
@@ -625,20 +614,21 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                             : _buildPinTheme(
                                 theme: theme,
                                 borderSide: focusedBorderSide,
-                                fallbackWidth: focusedBorderSide?.width ?? 2.0,
+                                fallbackWidth:
+                                    uiConstants.glassInputBorderWidth,
                                 fallbackColor: theme.primaryColor,
                                 padding: EdgeInsets.all(uiConstants.spacing6),
                               ),
                         submittedPinTheme: _buildPinTheme(
                           theme: theme,
                           borderSide: focusedBorderSide,
-                          fallbackWidth: focusedBorderSide?.width ?? 2.0,
+                          fallbackWidth: uiConstants.glassInputBorderWidth,
                           fallbackColor: theme.primaryColor,
                         ),
                         errorPinTheme: _buildPinTheme(
                           theme: theme,
                           borderSide: errorBorderSide,
-                          fallbackWidth: errorBorderSide?.width ?? 2.0,
+                          fallbackWidth: uiConstants.glassInputBorderWidth,
                           fallbackColor: theme.colorScheme.error,
                           textColor: theme.colorScheme.error,
                         ),

@@ -221,6 +221,16 @@ class UIConstants {
   final double glassBlurMedium = 10.0;
   final double glassBlurHeavy = 20.0;
 
+  // Input Dimensions
+  final double glassInputHeightSmall = 48.0;
+  final double glassInputHeightMedium = 56.0;
+  final double glassInputHeightLarge = 64.0;
+  final double glassInputBorderRadius = 12.0;
+  final double glassInputBorderWidth = 1.0;
+  final double glassInputBlurAmount = 5.0;
+  final EdgeInsets glassInputContentPadding = const EdgeInsets.symmetric(horizontal: 20, vertical: 16);
+  final EdgeInsets glassInputDensePadding = const EdgeInsets.symmetric(horizontal: 16, vertical: 12);
+
   // Border Widths
   final double glassBorderWidthThin = 1.0;
   final double glassBorderWidthThick = 1.5;

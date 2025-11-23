@@ -2,6 +2,7 @@ import 'package:country_code_picker/country_code_picker.dart';
 
 import '../../../../utils/imports/common_libs.dart';
 import '../glassmorphism/glass_container.dart';
+import '../../../../components/glass_input.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -90,15 +91,15 @@ class _LoginFormState extends State<LoginForm> {
             ),
           ),
           SizedBox(height: uiConstants.spacing6),
-          Text(l10n.labelPhone, style: textTheme.labelLarge),
-          SizedBox(height: uiConstants.spacing1),
           Row(
             children: [
               SizedBox(
                 width: 112,
-                height: uiConstants.buttonHeight,
+                height: uiConstants.glassInputHeightMedium,
                 child: GlassmorphismContainer(
-                  borderRadius: BorderRadius.circular(uiConstants.radius12),
+                  borderRadius: BorderRadius.circular(
+                    uiConstants.glassInputBorderRadius,
+                  ),
                   child: Container(
                     padding: EdgeInsets.symmetric(
                       horizontal: uiConstants.spacing2,
@@ -124,25 +125,21 @@ class _LoginFormState extends State<LoginForm> {
               ),
               SizedBox(width: uiConstants.spacing2),
               Expanded(
-                child: GlassmorphismContainer(
-                  borderRadius: BorderRadius.circular(uiConstants.radius12),
-                  child: TextFormField(
-                    controller: _phoneController,
-                    enabled: !isLoading,
-                    decoration: InputDecoration(
-                      hintText: l10n.phoneValue,
-                      border: InputBorder.none,
-                      contentPadding: EdgeInsets.symmetric(
-                        horizontal: uiConstants.spacing4,
-                        vertical: uiConstants.spacing3,
-                      ),
-                    ),
-                    keyboardType: TextInputType.phone,
-                    textInputAction: TextInputAction.done,
-                    validator: (value) =>
-                        FormValidators.validatePhone(value, context),
-                    onFieldSubmitted: (_) => _handleSubmit(),
-                  ),
+                child: GlassInput(
+                  controller: _phoneController,
+                  hintText: l10n.phoneValue,
+                  labelText: l10n.labelPhone,
+                  enabled: !isLoading,
+                  height: uiConstants.glassInputHeightMedium,
+                  borderRadius: uiConstants.glassInputBorderRadius,
+                  borderWidth: uiConstants.glassInputBorderWidth,
+                  blurAmount: uiConstants.glassInputBlurAmount,
+                  contentPadding: uiConstants.glassInputContentPadding,
+                  keyboardType: TextInputType.phone,
+                  validator: (value) =>
+                      FormValidators.validatePhone(value, context),
+                  onSubmitted: (_) => _handleSubmit(),
+                  prefixIcon: const Icon(Icons.phone_outlined),
                 ),
               ),
             ],
