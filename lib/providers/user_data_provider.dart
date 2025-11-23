@@ -38,9 +38,8 @@ class UserDataProvider extends ChangeNotifier {
 
   Future<UserData> registerConsumer({
     required String name,
-    required String phone,
-    String? email,
-    bool isPhoneVerified = false,
+    required String email,
+    required String password,
   }) async {
     _isLoading = true;
     _errorMessage = null;
@@ -49,9 +48,8 @@ class UserDataProvider extends ChangeNotifier {
     try {
       final user = await _service.registerConsumer(
         name: name,
-        phone: phone,
         email: email,
-        isPhoneVerified: isPhoneVerified,
+        password: password,
       );
       _currentUser = user;
       _registeredUsers = await _service.fetchUsers();
@@ -69,13 +67,19 @@ class UserDataProvider extends ChangeNotifier {
     await _initialize();
   }
 
-  Future<UserData> login({required String phone}) async {
+  Future<UserData> login({
+    required String email,
+    required String password,
+  }) async {
     _isLoading = true;
     _errorMessage = null;
     notifyListeners();
 
     try {
-      final user = await _service.loginConsumer(phone: phone);
+      final user = await _service.loginConsumer(
+        email: email,
+        password: password,
+      );
       _currentUser = user;
       _registeredUsers = await _service.fetchUsers();
       return user;

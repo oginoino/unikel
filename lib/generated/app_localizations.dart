@@ -105,417 +105,471 @@ abstract class AppLocalizations {
 
   /// No description provided for @languageSelection.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'Select Language'**
   String get languageSelection;
 
   /// No description provided for @lightMode.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'Light Mode'**
   String get lightMode;
 
   /// No description provided for @darkMode.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'Dark Mode'**
   String get darkMode;
 
   /// No description provided for @proceed.
   ///
-  /// In en_US, this message translates to:
-  /// **'Proceed'**
+  /// In en, this message translates to:
+  /// **'Start Exploring'**
   String get proceed;
 
   /// No description provided for @languageNamePortuguese.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'Portuguese'**
   String get languageNamePortuguese;
 
   /// No description provided for @languageNameEnglish.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'English'**
   String get languageNameEnglish;
 
   /// No description provided for @languageNameSpanish.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'Spanish'**
   String get languageNameSpanish;
 
   /// No description provided for @languageTooltipPortugueseBrazil.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'Portuguese (Brazil)'**
   String get languageTooltipPortugueseBrazil;
 
   /// No description provided for @languageTooltipEnglishUnitedStates.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'English (United States)'**
   String get languageTooltipEnglishUnitedStates;
 
   /// No description provided for @languageTooltipSpanishMexico.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'Spanish (Mexico)'**
   String get languageTooltipSpanishMexico;
 
   /// No description provided for @onboarding_subtitle.
   ///
-  /// In en_US, this message translates to:
-  /// **'Your financial journey, simplified.'**
+  /// In en, this message translates to:
+  /// **'Connect. Share. Discover.'**
   String get onboarding_subtitle;
 
   /// No description provided for @onboarding_subtitle_1.
   ///
-  /// In en_US, this message translates to:
-  /// **'Your financial journey, simplified.'**
+  /// In en, this message translates to:
+  /// **'Connect with friends and family.'**
   String get onboarding_subtitle_1;
 
   /// No description provided for @onboarding_subtitle_2.
   ///
-  /// In en_US, this message translates to:
-  /// **'Track your expenses with ease.'**
+  /// In en, this message translates to:
+  /// **'Share your moments with the world.'**
   String get onboarding_subtitle_2;
 
   /// No description provided for @onboarding_subtitle_3.
   ///
-  /// In en_US, this message translates to:
-  /// **'Achieve your financial goals.'**
+  /// In en, this message translates to:
+  /// **'Discover new people and experiences.'**
   String get onboarding_subtitle_3;
 
   /// No description provided for @register.
   ///
-  /// In en_US, this message translates to:
-  /// **'Register'**
+  /// In en, this message translates to:
+  /// **'Sign Up'**
   String get register;
 
   /// No description provided for @login.
   ///
-  /// In en_US, this message translates to:
-  /// **'Login'**
+  /// In en, this message translates to:
+  /// **'Sign In'**
   String get login;
 
   /// No description provided for @cta_to_register_screen_text.
   ///
-  /// In en_US, this message translates to:
-  /// **'Ready to take control of your finances? Register now!'**
+  /// In en, this message translates to:
+  /// **'Join the Glassy community today!'**
   String get cta_to_register_screen_text;
 
   /// No description provided for @emailRequired.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'Email is required.'**
   String get emailRequired;
 
   /// No description provided for @invalidEmail.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'Please enter a valid email address.'**
   String get invalidEmail;
 
   /// No description provided for @passwordRequired.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'Password is required.'**
   String get passwordRequired;
 
   /// No description provided for @passwordLength.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'Password must be at least 6 characters long.'**
   String get passwordLength;
 
   /// No description provided for @fieldRequired.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'{fieldName} is required.'**
   String fieldRequired(Object fieldName);
 
   /// No description provided for @labelName.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'Name'**
   String get labelName;
 
   /// No description provided for @nameValue.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'Name'**
   String get nameValue;
 
   /// No description provided for @labelPhone.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'Phone'**
   String get labelPhone;
 
   /// No description provided for @phoneValue.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'Phone'**
   String get phoneValue;
 
   /// No description provided for @phoneRequired.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'Phone number is required.'**
   String get phoneRequired;
 
   /// No description provided for @invalidPhoneMatch.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'Please enter a valid phone number.'**
   String get invalidPhoneMatch;
 
   /// No description provided for @labelPhoneCode.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'Phone Code'**
   String get labelPhoneCode;
 
   /// No description provided for @registerNameTitle.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'What is your name?'**
   String get registerNameTitle;
 
   /// No description provided for @registerPhoneTitle.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'What is your phone number?'**
   String get registerPhoneTitle;
 
   /// No description provided for @registerPhoneCodeTitle.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'What is your phone code?'**
   String get registerPhoneCodeTitle;
 
   /// No description provided for @phoneCodeValue.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'Phone Code'**
   String get phoneCodeValue;
 
   /// No description provided for @phoneCodeRequired.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'Phone code is required.'**
   String get phoneCodeRequired;
 
   /// No description provided for @invalidPhoneCodeMatch.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'Please enter a valid 4-digit phone code.'**
   String get invalidPhoneCodeMatch;
 
   /// No description provided for @previous.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'Previous'**
   String get previous;
 
   /// No description provided for @next.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'Next'**
   String get next;
 
   /// No description provided for @submitRegister.
   ///
-  /// In en_US, this message translates to:
-  /// **'Submit Register'**
+  /// In en, this message translates to:
+  /// **'Sign Up'**
   String get submitRegister;
 
   /// No description provided for @selectCountryCode.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'Select country code'**
   String get selectCountryCode;
 
   /// No description provided for @registerSecurityCodeTitle.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'Security code verification'**
   String get registerSecurityCodeTitle;
 
   /// No description provided for @labelSecurityCode.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'Security code'**
   String get labelSecurityCode;
 
   /// No description provided for @verifyingCode.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'Verifying code...'**
   String get verifyingCode;
 
   /// No description provided for @codeVerifiedSuccess.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'Code verified successfully!'**
   String get codeVerifiedSuccess;
 
   /// No description provided for @codeInvalid.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'Invalid code.'**
   String get codeInvalid;
 
   /// No description provided for @errorVerifyingCode.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'Error verifying code.'**
   String get errorVerifyingCode;
 
   /// No description provided for @editarTelefoneTextMessage.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'Edit phone number'**
   String get editarTelefoneTextMessage;
 
   /// No description provided for @verifyPhoneNumberMessage.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'We sent a message to the number {phoneNumber}'**
   String verifyPhoneNumberMessage(Object phoneNumber);
 
   /// No description provided for @resendCode.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'Resend code'**
   String get resendCode;
 
   /// No description provided for @codeResendSuccess.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'Code resent successfully'**
   String get codeResendSuccess;
 
   /// No description provided for @errorResendingCode.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'Error sending code'**
   String get errorResendingCode;
 
   /// No description provided for @profileTooltip.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'View profile'**
   String get profileTooltip;
 
   /// No description provided for @profileTitle.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'Profile'**
   String get profileTitle;
 
   /// No description provided for @profileSubtitle.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'Manage your information and preferences.'**
   String get profileSubtitle;
 
   /// No description provided for @profileAccountSectionTitle.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'Account information'**
   String get profileAccountSectionTitle;
 
   /// No description provided for @profileContactSectionTitle.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'Contact information'**
   String get profileContactSectionTitle;
 
   /// No description provided for @profileIdLabel.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'Identifier'**
   String get profileIdLabel;
 
   /// No description provided for @profileEmailLabel.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'Email'**
   String get profileEmailLabel;
 
   /// No description provided for @profileStatusActive.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'Active account'**
   String get profileStatusActive;
 
   /// No description provided for @profileStatusInactive.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'Inactive account'**
   String get profileStatusInactive;
 
   /// No description provided for @profilePhoneVerified.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'Phone verified'**
   String get profilePhoneVerified;
 
   /// No description provided for @profilePhoneUnverified.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'Phone not verified'**
   String get profilePhoneUnverified;
 
   /// No description provided for @profileMissingData.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'Information unavailable'**
   String get profileMissingData;
 
   /// No description provided for @loginPageTitle.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'Welcome back'**
   String get loginPageTitle;
 
   /// No description provided for @loginPageSubtitle.
   ///
-  /// In en_US, this message translates to:
-  /// **'Sign in with your registered phone number to continue.'**
+  /// In en, this message translates to:
+  /// **'Sign in with your email and password.'**
   String get loginPageSubtitle;
 
   /// No description provided for @loginPageRegisterCta.
   ///
-  /// In en_US, this message translates to:
-  /// **'Don\'t have an account? Register'**
+  /// In en, this message translates to:
+  /// **'Don\'t have an account? Sign Up'**
   String get loginPageRegisterCta;
 
   /// No description provided for @loginUserNotFound.
   ///
-  /// In en_US, this message translates to:
-  /// **'We couldn\'t find an account with the provided phone number.'**
+  /// In en, this message translates to:
+  /// **'We couldn\'t find an account with the provided email.'**
   String get loginUserNotFound;
 
   /// No description provided for @loginGenericError.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'We couldn\'t complete your login. Please try again.'**
   String get loginGenericError;
 
   /// No description provided for @logout.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'Log out'**
   String get logout;
 
   /// No description provided for @logoutError.
   ///
-  /// In en_US, this message translates to:
+  /// In en, this message translates to:
   /// **'We couldn\'t complete your sign out. Please try again.'**
   String get logoutError;
+
+  /// No description provided for @registerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Create your account'**
+  String get registerTitle;
+
+  /// No description provided for @registerSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Join the Glassy community.'**
+  String get registerSubtitle;
+
+  /// No description provided for @registerGenericError.
+  ///
+  /// In en, this message translates to:
+  /// **'We couldn\'t complete your registration. Please try again.'**
+  String get registerGenericError;
+
+  /// No description provided for @labelEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get labelEmail;
+
+  /// No description provided for @labelPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get labelPassword;
+
+  /// No description provided for @errorRequiredField.
+  ///
+  /// In en, this message translates to:
+  /// **'Field is required.'**
+  String get errorRequiredField;
+
+  /// No description provided for @errorInvalidEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid email address.'**
+  String get errorInvalidEmail;
+
+  /// No description provided for @errorPasswordTooShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must be at least 6 characters long.'**
+  String get errorPasswordTooShort;
+
+  /// No description provided for @registerPageLoginCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Already have an account? Sign In'**
+  String get registerPageLoginCta;
 }
 
 class _AppLocalizationsDelegate

@@ -1,8 +1,4 @@
-import 'package:country_code_picker/country_code_picker.dart';
-import 'package:glassy/view/theme/glass_theme_extention.dart';
-
 import '../../../../utils/imports/common_libs.dart';
-import '../glassmorphism/glass_container.dart';
 import '../../../../components/glass_input.dart';
 
 class LoginForm extends StatefulWidget {
@@ -14,22 +10,16 @@ class LoginForm extends StatefulWidget {
 
 class _LoginFormState extends State<LoginForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _phoneController = TextEditingController();
-  CountryCode _selectedCountryCode = CountryCode.fromCountryCode('BR');
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   String? _submissionError;
 
   @override
   void dispose() {
-    _phoneController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
     super.dispose();
-  }
-
-  String _composeFullPhoneNumber() {
-    final dialCode = _selectedCountryCode.dialCode ?? '';
-    final trimmedPhone = _phoneController.text.trim();
-    final rawValue = '$dialCode$trimmedPhone';
-    return rawValue.replaceAll(RegExp(r'[^0-9+]'), '');
   }
 
   Future<void> _handleSubmit() async {
@@ -46,7 +36,10 @@ class _LoginFormState extends State<LoginForm> {
     final userProvider = context.read<UserDataProvider>();
     final l10n = context.l10n;
     try {
-      await userProvider.login(phone: _composeFullPhoneNumber());
+      await userProvider.login(
+        email: _emailController.text.trim(),
+        password: _passwordController.text,
+      );
       if (!mounted) return;
       context.go(Routes.home);
     } on StateError catch (_) {
@@ -66,11 +59,6 @@ class _LoginFormState extends State<LoginForm> {
     final textTheme = theme.textTheme;
     final l10n = context.l10n;
     final userProvider = context.watch<UserDataProvider>();
-    final glassTheme = theme.extension<GlassTheme>();
-    final glassDialogColor = glassTheme?.elevated.background ??
-        (theme.brightness == Brightness.dark
-            ? uiConstants.glassBlackMedium
-            : uiConstants.glassWhiteMedium);
 
     final bool isLoading = userProvider.isLoading;
     final String? providerError = userProvider.errorMessage;
@@ -83,92 +71,51 @@ class _LoginFormState extends State<LoginForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Wrap(
-            spacing: uiConstants.spacing2,
-            runSpacing: uiConstants.spacing2,
-            crossAxisAlignment: WrapCrossAlignment.center,
-            children: [
-              SizedBox(
-                width: 112,
-                height: uiConstants.glassInputHeightMedium,
-                child: GlassmorphismContainer(
-                  variant: GlassSurfaceVariant.control,
-                  borderRadius: BorderRadius.circular(
-                    uiConstants.glassInputBorderRadius,
-                  ),
-                  padding: EdgeInsets.symmetric(
-                    horizontal: uiConstants.spacing3,
-                    vertical: uiConstants.spacing2,
-                  ),
-                  child: Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: uiConstants.spacing2,
-                    ),
-                    child: Center(
-                      child: CountryCodePicker(
-                        dialogBackgroundColor: glassDialogColor,
-                        dialogTextStyle: textTheme.titleMedium,
-                        backgroundColor: glassDialogColor,
-                        boxDecoration: BoxDecoration(
-                          color: glassDialogColor,
-                          borderRadius: BorderRadius.circular(
-                            uiConstants.glassInputBorderRadius,
-                          ),
-                          border: Border.all(
-                            color: theme.dividerColor.withValues(alpha: 0.3),
-                          ),
-                        ),
-                        headerText: l10n.selectCountryCode,
-                        flagWidth: uiConstants.spacing8,
-                        margin: EdgeInsets.zero,
-                        padding: EdgeInsets.symmetric(
-                          horizontal: uiConstants.spacing2,
-                          vertical: uiConstants.spacing2,
-                        ),
-                        textStyle: textTheme.titleMedium,
-                        onChanged: (countryCode) {
-                          setState(() {
-                            _selectedCountryCode = countryCode;
-                          });
-                        },
-                        initialSelection: _selectedCountryCode.code,
-                        favorite: const ['BR', 'US'],
-                        showCountryOnly: false,
-                        showOnlyCountryWhenClosed: false,
-                        alignLeft: false,
-                        
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              ConstrainedBox(
-                constraints: BoxConstraints(
-                  minWidth: 200,
-                  maxWidth: MediaQuery.of(context).size.width - 144,
-                ),
-                child: GlassInput(
-                  controller: _phoneController,
-                  hintText: l10n.phoneValue,
-                  labelText: l10n.labelPhone,
-                  semanticsLabel: l10n.labelPhone,
-                  enabled: !isLoading,
-                  height: uiConstants.glassInputHeightMedium,
-                  borderRadius: uiConstants.glassInputBorderRadius,
-                  contentPadding: uiConstants.glassInputContentPadding,
-                  keyboardType: TextInputType.phone,
-                  autofillHints: const [
-                    AutofillHints.telephoneNumberNational,
-                    AutofillHints.telephoneNumber,
-                  ],
-                  textInputAction: TextInputAction.done,
-                  validator: (value) =>
-                      FormValidators.validatePhone(value, context),
-                  onSubmitted: (_) => _handleSubmit(),
-                  prefixIcon: const Icon(Icons.phone_outlined),
-                ),
-              ),
-            ],
+          GlassInput(
+            controller: _emailController,
+            hintText: 'email@example.com',
+            labelText: l10n.labelEmail,
+            semanticsLabel: l10n.labelEmail,
+            enabled: !isLoading,
+            height: uiConstants.glassInputHeightMedium,
+            borderRadius: uiConstants.glassInputBorderRadius,
+            contentPadding: uiConstants.glassInputContentPadding,
+            keyboardType: TextInputType.emailAddress,
+            autofillHints: const [AutofillHints.email],
+            textInputAction: TextInputAction.next,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return l10n.errorRequiredField;
+              }
+              if (!value.contains('@')) {
+                return l10n.errorInvalidEmail;
+              }
+              return null;
+            },
+            prefixIcon: const Icon(Icons.email_outlined),
+          ),
+          SizedBox(height: uiConstants.spacing4),
+          GlassInput(
+            controller: _passwordController,
+            hintText: '********',
+            labelText: l10n.labelPassword,
+            semanticsLabel: l10n.labelPassword,
+            enabled: !isLoading,
+            height: uiConstants.glassInputHeightMedium,
+            borderRadius: uiConstants.glassInputBorderRadius,
+            contentPadding: uiConstants.glassInputContentPadding,
+            keyboardType: TextInputType.visiblePassword,
+            obscureText: true,
+            autofillHints: const [AutofillHints.password],
+            textInputAction: TextInputAction.done,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return l10n.errorRequiredField;
+              }
+              return null;
+            },
+            onSubmitted: (_) => _handleSubmit(),
+            prefixIcon: const Icon(Icons.lock_outline),
           ),
           if (errorMessage != null) ...[
             SizedBox(height: uiConstants.spacing3),

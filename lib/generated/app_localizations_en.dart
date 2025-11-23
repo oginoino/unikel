@@ -18,7 +18,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get darkMode => 'Dark Mode';
 
   @override
-  String get proceed => 'Proceed';
+  String get proceed => 'Start Exploring';
 
   @override
   String get languageNamePortuguese => 'Portuguese';
@@ -39,26 +39,25 @@ class AppLocalizationsEn extends AppLocalizations {
   String get languageTooltipSpanishMexico => 'Spanish (Mexico)';
 
   @override
-  String get onboarding_subtitle => 'Your financial journey, simplified.';
+  String get onboarding_subtitle => 'Connect. Share. Discover.';
 
   @override
-  String get onboarding_subtitle_1 => 'Your financial journey, simplified.';
+  String get onboarding_subtitle_1 => 'Connect with friends and family.';
 
   @override
-  String get onboarding_subtitle_2 => 'Track your expenses with ease.';
+  String get onboarding_subtitle_2 => 'Share your moments with the world.';
 
   @override
-  String get onboarding_subtitle_3 => 'Achieve your financial goals.';
+  String get onboarding_subtitle_3 => 'Discover new people and experiences.';
 
   @override
-  String get register => 'Register';
+  String get register => 'Sign Up';
 
   @override
-  String get login => 'Login';
+  String get login => 'Sign In';
 
   @override
-  String get cta_to_register_screen_text =>
-      'Ready to take control of your finances? Register now!';
+  String get cta_to_register_screen_text => 'Join the Glassy community today!';
 
   @override
   String get emailRequired => 'Email is required.';
@@ -124,7 +123,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get next => 'Next';
 
   @override
-  String get submitRegister => 'Submit Register';
+  String get submitRegister => 'Sign Up';
 
   @override
   String get selectCountryCode => 'Select country code';
@@ -204,15 +203,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get loginPageTitle => 'Welcome back';
 
   @override
-  String get loginPageSubtitle =>
-      'Sign in with your registered phone number to continue.';
+  String get loginPageSubtitle => 'Sign in with your email and password.';
 
   @override
-  String get loginPageRegisterCta => 'Don\'t have an account? Register';
+  String get loginPageRegisterCta => 'Don\'t have an account? Sign Up';
 
   @override
   String get loginUserNotFound =>
-      'We couldn\'t find an account with the provided phone number.';
+      'We couldn\'t find an account with the provided email.';
 
   @override
   String get loginGenericError =>
@@ -224,6 +222,35 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get logoutError =>
       'We couldn\'t complete your sign out. Please try again.';
+
+  @override
+  String get registerTitle => 'Create your account';
+
+  @override
+  String get registerSubtitle => 'Join the Glassy community.';
+
+  @override
+  String get registerGenericError =>
+      'We couldn\'t complete your registration. Please try again.';
+
+  @override
+  String get labelEmail => 'Email';
+
+  @override
+  String get labelPassword => 'Password';
+
+  @override
+  String get errorRequiredField => 'Field is required.';
+
+  @override
+  String get errorInvalidEmail => 'Please enter a valid email address.';
+
+  @override
+  String get errorPasswordTooShort =>
+      'Password must be at least 6 characters long.';
+
+  @override
+  String get registerPageLoginCta => 'Already have an account? Sign In';
 }
 
 /// The translations for English, as used in the United States (`en_US`).

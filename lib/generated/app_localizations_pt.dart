@@ -18,7 +18,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get darkMode => 'Modo Escuro';
 
   @override
-  String get proceed => 'Prosseguir';
+  String get proceed => 'Começar a Explorar';
 
   @override
   String get languageNamePortuguese => 'Português';
@@ -39,16 +39,16 @@ class AppLocalizationsPt extends AppLocalizations {
   String get languageTooltipSpanishMexico => 'Espanhol (México)';
 
   @override
-  String get onboarding_subtitle => 'Sua jornada financeira, simplificada.';
+  String get onboarding_subtitle => 'Conecte-se. Compartilhe. Descubra.';
 
   @override
-  String get onboarding_subtitle_1 => 'Sua jornada financeira, simplificada.';
+  String get onboarding_subtitle_1 => 'Conecte-se com amigos e família.';
 
   @override
-  String get onboarding_subtitle_2 => 'Controle seus gastos com facilidade.';
+  String get onboarding_subtitle_2 => 'Compartilhe seus momentos com o mundo.';
 
   @override
-  String get onboarding_subtitle_3 => 'Alcance seus objetivos financeiros.';
+  String get onboarding_subtitle_3 => 'Descubra novas pessoas e experiências.';
 
   @override
   String get register => 'Cadastre-se';
@@ -58,7 +58,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get cta_to_register_screen_text =>
-      'Cadastre-se para começar a gerenciar suas finanças.';
+      'Junte-se à comunidade Glassy hoje!';
 
   @override
   String get emailRequired => 'Email é obrigatório.';
@@ -160,10 +160,10 @@ class AppLocalizationsPt extends AppLocalizations {
   String get resendCode => 'Enviar novamente';
 
   @override
-  String get codeResendSuccess => 'Code resent successfully';
+  String get codeResendSuccess => 'Código reenviado com sucesso';
 
   @override
-  String get errorResendingCode => 'Error sending code';
+  String get errorResendingCode => 'Erro ao enviar código';
 
   @override
   String get profileTooltip => 'Abrir perfil';
@@ -205,15 +205,14 @@ class AppLocalizationsPt extends AppLocalizations {
   String get loginPageTitle => 'Bem-vindo de volta';
 
   @override
-  String get loginPageSubtitle =>
-      'Entre com o telefone cadastrado para continuar.';
+  String get loginPageSubtitle => 'Entre com seu e-mail e senha.';
 
   @override
   String get loginPageRegisterCta => 'Não tem conta? Cadastre-se';
 
   @override
   String get loginUserNotFound =>
-      'Não encontramos uma conta associada ao telefone informado.';
+      'Não encontramos uma conta com o e-mail informado.';
 
   @override
   String get loginGenericError =>
@@ -225,6 +224,35 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get logoutError =>
       'Não foi possível encerrar a sessão. Tente novamente.';
+
+  @override
+  String get registerTitle => 'Crie sua conta';
+
+  @override
+  String get registerSubtitle => 'Junte-se à comunidade Glassy.';
+
+  @override
+  String get registerGenericError =>
+      'Não foi possível concluir seu cadastro. Tente novamente.';
+
+  @override
+  String get labelEmail => 'E-mail';
+
+  @override
+  String get labelPassword => 'Senha';
+
+  @override
+  String get errorRequiredField => 'Campo obrigatório.';
+
+  @override
+  String get errorInvalidEmail => 'Por favor, insira um e-mail válido.';
+
+  @override
+  String get errorPasswordTooShort =>
+      'A senha deve ter pelo menos 6 caracteres.';
+
+  @override
+  String get registerPageLoginCta => 'Já tem uma conta? Entre';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).

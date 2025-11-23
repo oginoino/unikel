@@ -228,6 +228,35 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get logoutError =>
       'No pudimos cerrar tu sesión. Inténtalo nuevamente.';
+
+  @override
+  String get registerTitle => 'Create your account';
+
+  @override
+  String get registerSubtitle => 'Join the Glassy community.';
+
+  @override
+  String get registerGenericError =>
+      'We couldn\'t complete your registration. Please try again.';
+
+  @override
+  String get labelEmail => 'Email';
+
+  @override
+  String get labelPassword => 'Password';
+
+  @override
+  String get errorRequiredField => 'Field is required.';
+
+  @override
+  String get errorInvalidEmail => 'Please enter a valid email address.';
+
+  @override
+  String get errorPasswordTooShort =>
+      'Password must be at least 6 characters long.';
+
+  @override
+  String get registerPageLoginCta => 'Already have an account? Sign In';
 }
 
 /// The translations for Spanish Castilian, as used in Mexico (`es_MX`).
