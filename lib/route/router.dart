@@ -4,7 +4,7 @@ import '../view/page/onboarding_page.dart';
 import '../view/page/register_user_page.dart';
 import '../view/page/profile_page.dart';
 import '../view/page/login_page.dart';
-import '../view/page/glass_flow.dart';
+import '../view/page/glass_scaffold.dart';
 
 final GoRouter appRouter = GoRouter(
   redirect: HandleRedirect().handleRedirect,
@@ -15,7 +15,7 @@ final GoRouter appRouter = GoRouter(
         return ScaffoldSliver(state: state, child: widget);
       },
       routes: [
-        AppRoute(Routes.home, (state) => const GlassFlow()),
+        AppRoute(Routes.home, (state) => const GlassScaffold()),
         AppRoute(Routes.onboarding, (state) => OnboardingPage()),
         AppRoute(
           Routes.firstAccessCtaToRegister,
