@@ -445,94 +445,93 @@ class _RegisterUserFormState extends State<RegisterUserForm> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    IntrinsicHeight(
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Flexible(
-                            flex: 3,
-                            fit: FlexFit.loose,
-                            child: SizedBox(
-                              height: uiConstants.glassInputHeightMedium,
-                              child: GlassmorphismContainer(
+                    Wrap(
+                      spacing: uiConstants.spacing3,
+                      runSpacing: uiConstants.spacing2,
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: 112,
+                          height: uiConstants.glassInputHeightMedium,
+                          child: GlassmorphismContainer(
+                            borderRadius: BorderRadius.circular(
+                              uiConstants.glassInputBorderRadius,
+                            ),
+                            child: CountryCodePicker(
+                              dialogTextStyle: textTheme.titleMedium,
+                              dialogBackgroundColor:
+                                  theme.scaffoldBackgroundColor,
+                              backgroundColor: theme.cardColor,
+                              headerText: l10n.selectCountryCode,
+                              boxDecoration: BoxDecoration(
+                                border: Border.all(
+                                  color: theme.dividerColor,
+                                ),
                                 borderRadius: BorderRadius.circular(
                                   uiConstants.glassInputBorderRadius,
                                 ),
-                                child: CountryCodePicker(
-                                  dialogTextStyle: textTheme.titleMedium,
-                                  dialogBackgroundColor:
-                                      theme.scaffoldBackgroundColor,
-                                  backgroundColor: theme.cardColor,
-                                  headerText: l10n.selectCountryCode,
-                                  boxDecoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: theme.dividerColor,
-                                    ),
-                                    borderRadius: BorderRadius.circular(
-                                      uiConstants.glassInputBorderRadius,
-                                    ),
-                                  ),
-                                  flagWidth: uiConstants.spacing8,
-                                  padding: EdgeInsets.symmetric(
-                                    vertical: uiConstants.spacing3,
-                                    horizontal: uiConstants.spacing1,
-                                  ),
-                                  margin: EdgeInsets.zero,
-                                  textStyle: textTheme.titleMedium,
-                                  onChanged: _updateSelectedCountryCode,
-                                  initialSelection: _selectedCountryCode.code,
-                                  favorite: const ['+55', 'BR'],
-                                  comparator: (a, b) =>
-                                      a.name?.compareTo(b.name ?? '') ?? 0,
-                                  pickerStyle: PickerStyle.dialog,
-                                  builder: (country) {
-                                    final flagUri = country?.flagUri;
-                                    return Padding(
-                                      padding: EdgeInsets.only(
-                                        left: uiConstants.spacing2,
-                                      ),
-                                      child: flagUri != null
-                                          ? Padding(
-                                              padding: EdgeInsets.only(
-                                                right: uiConstants.spacing1,
-                                              ),
-                                              child: Image.asset(
-                                                flagUri,
-                                                package: 'country_code_picker',
-                                                width: uiConstants.spacing6,
-                                                height: uiConstants.spacing6,
-                                                fit: BoxFit.contain,
-                                              ),
-                                            )
-                                          : const SizedBox.shrink(),
-                                    );
-                                  },
-                                ),
                               ),
+                              flagWidth: uiConstants.spacing8,
+                              padding: EdgeInsets.symmetric(
+                                vertical: uiConstants.spacing3,
+                                horizontal: uiConstants.spacing1,
+                              ),
+                              margin: EdgeInsets.zero,
+                              textStyle: textTheme.titleMedium,
+                              onChanged: _updateSelectedCountryCode,
+                              initialSelection: _selectedCountryCode.code,
+                              favorite: const ['+55', 'BR'],
+                              comparator: (a, b) =>
+                                  a.name?.compareTo(b.name ?? '') ?? 0,
+                              pickerStyle: PickerStyle.dialog,
+                              builder: (country) {
+                                final flagUri = country?.flagUri;
+                                return Padding(
+                                  padding: EdgeInsets.only(
+                                    left: uiConstants.spacing2,
+                                  ),
+                                  child: flagUri != null
+                                      ? Padding(
+                                          padding: EdgeInsets.only(
+                                            right: uiConstants.spacing1,
+                                          ),
+                                          child: Image.asset(
+                                            flagUri,
+                                            package: 'country_code_picker',
+                                            width: uiConstants.spacing6,
+                                            height: uiConstants.spacing6,
+                                            fit: BoxFit.contain,
+                                          ),
+                                        )
+                                      : const SizedBox.shrink(),
+                                );
+                              },
                             ),
                           ),
-                          SizedBox(width: uiConstants.spacing3),
-                          Expanded(
-                            flex: 20,
-                            child: GlassInput(
-                              controller: _phoneController,
-                              hintText: l10n.phoneValue,
-                              labelText: l10n.labelPhone,
-                              height: uiConstants.glassInputHeightMedium,
-                              borderRadius: uiConstants.glassInputBorderRadius,
-                              borderWidth: uiConstants.glassInputBorderWidth,
-                              blurAmount: uiConstants.glassInputBlurAmount,
-                              contentPadding:
-                                  uiConstants.glassInputContentPadding,
-                              keyboardType: TextInputType.phone,
-                              textStyle: textTheme.titleLarge,
-                              validator: (value) =>
-                                  FormValidators.validatePhone(value, context),
-                              prefixIcon: const Icon(Icons.phone_outlined),
-                            ),
+                        ),
+                        ConstrainedBox(
+                          constraints: BoxConstraints(
+                            minWidth: 200,
+                            maxWidth: MediaQuery.of(context).size.width - 144,
                           ),
-                        ],
-                      ),
+                          child: GlassInput(
+                            controller: _phoneController,
+                            hintText: l10n.phoneValue,
+                            labelText: l10n.labelPhone,
+                            height: uiConstants.glassInputHeightMedium,
+                            borderRadius: uiConstants.glassInputBorderRadius,
+                            borderWidth: uiConstants.glassInputBorderWidth,
+                            blurAmount: uiConstants.glassInputBlurAmount,
+                            contentPadding:
+                                uiConstants.glassInputContentPadding,
+                            keyboardType: TextInputType.phone,
+                            textStyle: textTheme.titleLarge,
+                            validator: (value) =>
+                                FormValidators.validatePhone(value, context),
+                            prefixIcon: const Icon(Icons.phone_outlined),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),

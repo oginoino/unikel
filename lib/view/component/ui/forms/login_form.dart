@@ -91,7 +91,10 @@ class _LoginFormState extends State<LoginForm> {
             ),
           ),
           SizedBox(height: uiConstants.spacing6),
-          Row(
+          Wrap(
+            spacing: uiConstants.spacing2,
+            runSpacing: uiConstants.spacing2,
+            crossAxisAlignment: WrapCrossAlignment.center,
             children: [
               SizedBox(
                 width: 112,
@@ -123,8 +126,11 @@ class _LoginFormState extends State<LoginForm> {
                   ),
                 ),
               ),
-              SizedBox(width: uiConstants.spacing2),
-              Expanded(
+              ConstrainedBox(
+                constraints: BoxConstraints(
+                  minWidth: 200,
+                  maxWidth: MediaQuery.of(context).size.width - 144,
+                ),
                 child: GlassInput(
                   controller: _phoneController,
                   hintText: l10n.phoneValue,
